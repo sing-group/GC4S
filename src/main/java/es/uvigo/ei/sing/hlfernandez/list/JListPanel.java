@@ -54,18 +54,24 @@ public class JListPanel<E> extends JPanel {
 	private boolean buttons;
 
 	/**
-	 * Constructs an  {@link JListPanel}.
+	 * Constructs an {@link JListPanel} within the button actions visible.
+	 * 
 	 * @param list
-	 * @throws InvalidClassException 
+	 *            a JList that uses a {@link ExtendedDefaultListModel}.
+	 * @throws InvalidClassException
 	 */
 	public JListPanel(JList<E> list) throws InvalidClassException{
 		this(list, true);
 	}
 
 	/**
-	 * Constructs an  {@link JListPanel}.
+	 * Constructs an {@link JListPanel}.
+	 * 
 	 * @param list
-	 * @throws InvalidClassException 
+	 *            a JList that uses a {@link ExtendedDefaultListModel}.
+	 * @param buttons
+	 *            if true, the action buttons are showed.
+	 * @throws InvalidClassException
 	 */
 	public JListPanel(JList<E> list, boolean buttons) throws InvalidClassException{
 		super();
