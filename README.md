@@ -14,3 +14,9 @@ JFileChooserPanel
 A component with a button to select a file (using a JFileChooser) and a text field that show the selected file.
 
 ![JFileChooserPanel](https://raw.githubusercontent.com/hlfernandez/GC4S/master/screenshots/JFileChooserPanel.png)
+
+JLimitedTextField
+------------
+An extension of JTextField to limit the length of the text.
+
+![JLimitedTextField](https://raw.githubusercontent.com/hlfernandez/GC4S/master/screenshots/JLimitedTextField.png)
