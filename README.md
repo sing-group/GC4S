@@ -30,3 +30,9 @@ AbstractInputJDialog
 An extension of JDialog to ease the creation of new input dialogs by providing common functionalities such as buttons pane, description or key bindings.
 
 ![AbstractInputJDialog](https://raw.githubusercontent.com/hlfernandez/GC4S/master/screenshots/AbstractInputJDialog.png)
+
+ExtendedJXTable
+------------
+An extension of JXTable that allows to hide/show the column visibility actions and also facilitates adding own actions to the ColumnControlButton.
+
+![ExtendedJXTable](https://raw.githubusercontent.com/hlfernandez/GC4S/master/screenshots/ExtendedJXTable.png)
