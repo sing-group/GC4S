@@ -1,7 +1,9 @@
 package es.uvigo.ei.sing.hlfernandez;
 
 import javax.swing.AbstractAction;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JToggleButton;
 
 /**
  * Utility class that contains methods to create GUI components.
@@ -32,5 +34,30 @@ public final class ComponentFactory {
 			button.setText("");
 		}
 		return button;
+	}
+	
+	/**
+	 * @param icon
+	 *            default icon of the toggle button.
+	 * @param iconSelected
+	 *            selected icon of the toggle button.
+	 * @param selected
+	 *            whether the toggle button is selected.
+	 * @param action
+	 *            the button action
+	 * @return a new configured toggle button.
+	 */
+	public static JToggleButton createToggleButton(
+		final ImageIcon icon,
+		final ImageIcon iconSelected,
+		final boolean selected,
+		final AbstractAction action
+	) {
+		final JToggleButton toggleButton = new JToggleButton(action);
+		toggleButton.setFocusPainted(false);
+		toggleButton.setSelectedIcon(iconSelected);
+		toggleButton.setSelected(selected);
+		
+		return toggleButton;
 	}
 }
