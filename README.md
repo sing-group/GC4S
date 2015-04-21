@@ -9,6 +9,10 @@ A component that wraps a JList to add common actions.
 
 ![JListPanel](https://raw.githubusercontent.com/hlfernandez/GC4S/master/screenshots/JListPanel.png)
 
+This component can also show a text field that allows filtering the elements shown.
+
+![JListPanel filtering demo](https://raw.githubusercontent.com/hlfernandez/GC4S/master/screenshots/JListPanel-FilterDemo.gif)
+
 JFileChooserPanel
 ------------
 A component with a button to select a file (using a JFileChooser) and a text field that show the selected file.

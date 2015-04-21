@@ -1,7 +1,9 @@
 package es.uvigo.ei.sing.hlfernandez.list;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.io.InvalidClassException;
 
@@ -13,17 +15,23 @@ import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.JToggleButton;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
+import org.jdesktop.swingx.JXTextField;
 
 import es.uvigo.ei.sing.hlfernandez.ComponentFactory;
 
 /**
  * This class encloses a {@link JList} based on a
  * {@link ExtendedDefaultListModel} to provide common list functionalities
- * (moving elements, select all or clear selection).
+ * (moving elements, select all, clear selection, filtering elements).
  * 
  * @author hlfernandez
  *
@@ -42,53 +50,64 @@ public class JListPanel<E> extends JPanel {
 	
 	private JList<E> list;
 	private ExtendedDefaultListModel<E> listModel;
+	private FilteredListModel<E> filteredListModel;
 	private JButton btnMoveDown;
 	private JButton btnMoveUp;
 	private JButton btnClearSelection;
 	private JButton btnSelectAll;
+	private JToggleButton regexButton;
+	private JPanel northPanel;
 	private JPanel buttonsPanel;
+	private JPanel filterPanel;
+	private JTextField filterTextField;
 	private AbstractAction actionMoveDown;
 	private AbstractAction actionMoveUp;
 	private AbstractAction actionSelectAll;
 	private AbstractAction actionClearSelection;
 	private boolean buttons;
+	private boolean filter;
 
 	/**
-	 * Constructs an {@link JListPanel} within the button actions visible.
+	 * Constructs a {@code JListPanel} within the button actions and the 
+	 * filter visible.
 	 * 
 	 * @param list
 	 *            a JList that uses a {@link ExtendedDefaultListModel}.
 	 * @throws InvalidClassException
 	 */
 	public JListPanel(JList<E> list) throws InvalidClassException{
-		this(list, true);
+		this(list, true, true);
 	}
 
 	/**
-	 * Constructs an {@link JListPanel}.
+	 * Constructs a {@code JListPanel}.
 	 * 
 	 * @param list
 	 *            a JList that uses a {@link ExtendedDefaultListModel}.
 	 * @param buttons
 	 *            if true, the action buttons are showed.
+	 * @param filter
+	 *            if true, the list filter is shown.
+	 *            
 	 * @throws InvalidClassException
 	 */
-	public JListPanel(JList<E> list, boolean buttons) throws InvalidClassException{
+	public JListPanel(JList<E> list, boolean buttons, boolean filter) throws InvalidClassException{
 		super();
 		this.list = list;
 		if(!(list.getModel() instanceof ExtendedDefaultListModel)){
 			throw new InvalidClassException("List should have a ExtendedDefaultModel");
 		}
 		this.listModel = (ExtendedDefaultListModel<E>) list.getModel();
+		this.filteredListModel = new FilteredListModel<E>(this.listModel);
+		this.list.setModel(this.filteredListModel);
 		this.buttons = buttons;
+		this.filter = filter;
 		initComponent();
 	}
 
 	private void initComponent() {
 		this.setLayout(new BorderLayout());
-		if (buttons) {
-			this.add(getButtonsPane(), BorderLayout.NORTH);
-		}
+		this.add(this.getNorthPane(), BorderLayout.NORTH);
 		this.add(new JScrollPane(list), BorderLayout.CENTER);
 		this.list.addListSelectionListener(new ListSelectionListener() {
 			
@@ -114,6 +133,88 @@ public class JListPanel<E> extends JPanel {
 				checkActionButtons();
 			}
 		});
+	}
+
+	private Component getNorthPane() {
+		if(this.northPanel == null){
+			this.northPanel = new JPanel();
+			this.northPanel.setLayout(new GridLayout(0,1));
+			getButtonsPane();
+			if (buttons) {
+				this.northPanel.add(getButtonsPane());
+			}
+			if (filter) {
+				this.northPanel.add(getFilterPane());
+			}
+		}
+		return this.northPanel;
+	}
+
+	private Component getFilterPane() {
+		if(this.filterPanel == null){
+			this.filterPanel = new JPanel(new BorderLayout());
+			
+			filterTextField = new JXTextField("Filter", Color.LIGHT_GRAY);
+			this.filterPanel.add(filterTextField, BorderLayout.CENTER);
+			filterTextField.getDocument().addDocumentListener(new DocumentListener() {
+				@Override
+				public void changedUpdate(DocumentEvent arg0) {
+				}
+
+				@Override
+				public void insertUpdate(DocumentEvent arg0) {
+					filterChanged();
+				}
+
+				@Override
+				public void removeUpdate(DocumentEvent arg0) {
+					filterChanged();
+				}
+			});
+			
+			regexButton = ComponentFactory
+					.createToggleButton(null, null, false, new AbstractAction(
+							"(.*)") {
+
+						/**
+				 * 
+				 */
+						private static final long serialVersionUID = 1L;
+
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							filterChanged();
+						}
+					});
+			regexButton.setToolTipText("Select this option to apply the filter as a regular expression");
+			this.filterPanel.add(regexButton, BorderLayout.EAST);
+			
+		}
+		return this.filterPanel;
+	}
+
+	protected void filterChanged() {
+		filteredListModel.setFilter(new FilteredListModel.Filter() {
+	        public boolean accept(Object element) {
+	        	
+	        	String string = element.toString();
+	        	String filter = filterTextField.getText();
+	        	
+				if(!regexButton.isSelected()){
+		        	if (string.contains(filter))
+		        		return true; 
+				} else{
+					try{
+						if(string.matches(".*"+filter+".*"))
+							return true;
+					} catch (java.util.regex.PatternSyntaxException ex){
+						return false;
+					}
+				}
+	        	
+	        	return false;
+	        }
+	    });
 	}
 
 	private Component getButtonsPane() {
