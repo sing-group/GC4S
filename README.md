@@ -36,3 +36,9 @@ ExtendedJXTable
 An extension of JXTable that allows to hide/show the column visibility actions and also facilitates adding own actions to the ColumnControlButton.
 
 ![ExtendedJXTable](https://raw.githubusercontent.com/hlfernandez/GC4S/master/screenshots/ExtendedJXTable.png)
+
+CloseableJTabbedPane
+------------
+An extension of JTabbedPane that adds a close button to tabs.
+
+![CloseableJTabbedPane](https://raw.githubusercontent.com/hlfernandez/GC4S/master/screenshots/CloseableJTabbedPane.gif)
