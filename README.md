@@ -42,3 +42,9 @@ CloseableJTabbedPane
 An extension of JTabbedPane that adds a close button to tabs.
 
 ![CloseableJTabbedPane](https://raw.githubusercontent.com/hlfernandez/GC4S/master/screenshots/CloseableJTabbedPane.gif)
+
+JProgressDialog
+------------
+An extension of JDialog to ease the creation of simple progress dialogs based on a task list.
+
+![JProgressDialog](https://raw.githubusercontent.com/hlfernandez/GC4S/master/screenshots/JProgressDialog.gif)
