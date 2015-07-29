@@ -143,6 +143,7 @@ public class JFileChooserPanel extends JPanel {
 					+ "." + requiredFileExtension);
 		}
 		fileName.setText(selectedFile.getAbsolutePath());
+		fileName.setToolTipText(selectedFile.getAbsolutePath());
 	}
 	
 	/**
