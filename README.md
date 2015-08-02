@@ -48,3 +48,9 @@ JProgressDialog
 An extension of JDialog to ease the creation of simple progress dialogs based on a task list.
 
 ![JProgressDialog](https://raw.githubusercontent.com/hlfernandez/GC4S/master/screenshots/JProgressDialog.gif)
+
+ExtendedJComboBox
+------------
+An extension of JComboBox that adjust its width to the maximum item width when the drop down list is being displayed.
+
+![JProgressDialog](https://raw.githubusercontent.com/hlfernandez/GC4S/master/screenshots/ExtendedJComboBox.png)

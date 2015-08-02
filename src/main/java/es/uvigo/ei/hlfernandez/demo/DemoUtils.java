@@ -1,7 +1,10 @@
 package es.uvigo.ei.hlfernandez.demo;
 
+import java.awt.BorderLayout;
+
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  * Utility methods for demo classes.
@@ -34,5 +37,22 @@ public class DemoUtils {
 	 */
 	public static final void showComponent(JComponent component) {
 		showComponent(component, "Demo dialog");
+	}
+	
+	/**
+	 * Returns a new {@code JPanel} with {@code component} in the center.
+	 * @param component the component to add to the {@code JPanel}.
+	 * @return a new {@code JPanel} with {@code component} in the center.
+	 */
+	public static final JPanel createPanelAndCenterComponent(
+		JComponent component
+	) {
+		JPanel toret = new JPanel(new BorderLayout());
+		toret.add(new JPanel(), BorderLayout.NORTH);
+		toret.add(new JPanel(), BorderLayout.WEST);
+		toret.add(new JPanel(), BorderLayout.EAST);
+		toret.add(new JPanel(), BorderLayout.SOUTH);
+		toret.add(component, BorderLayout.CENTER);
+		return toret;
 	}
 }
