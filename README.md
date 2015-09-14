@@ -54,3 +54,9 @@ ExtendedJComboBox
 An extension of JComboBox that adjust its width to the maximum item width when the drop down list is being displayed.
 
 ![JProgressDialog](https://raw.githubusercontent.com/hlfernandez/GC4S/master/screenshots/ExtendedJComboBox.png)
+
+ExtendedJTabbedPaneDemo
+------------
+An extension of JTabbedPane that allows setting wether the tab bar must be hidden if there is only one tab.
+
+![JProgressDialog](https://raw.githubusercontent.com/hlfernandez/GC4S/master/screenshots/ExtendedJTabbedPaneDemo.gif)
