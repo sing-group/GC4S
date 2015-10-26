@@ -13,11 +13,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.AbstractAction;
 import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JTabbedPane;
 import javax.swing.plaf.basic.BasicButtonUI;
 
@@ -77,7 +79,7 @@ public class ButtonTabComponent extends JPanel {
 		setBorder(BorderFactory.createEmptyBorder(2, 0, 0, 0));
 	}
 
-    private class TabButton extends JButton implements ActionListener {
+	private class TabButton extends JButton implements ActionListener {
 		private static final long serialVersionUID = 1L;
 
 		public TabButton() {
@@ -114,13 +116,11 @@ public class ButtonTabComponent extends JPanel {
              * Close the proper tab by clicking the button
              */
             addActionListener(this);
+            setComponentPopupMenu(new JPopupMenu());
         }
 
         public void actionPerformed(ActionEvent e) {
-            int i = pane.indexOfTabComponent(ButtonTabComponent.this);
-            if (i != -1) {
-                pane.remove(i);
-            }
+            closeTab();
         }
 
 		/*
@@ -158,6 +158,40 @@ public class ButtonTabComponent extends JPanel {
 					- delta - 1);
 			g2.dispose();
 		}
+		
+		public JPopupMenu getComponentPopupMenu() {
+			JPopupMenu toret = new JPopupMenu();
+			toret.add(new AbstractAction("Close all tabs") {
+				private static final long serialVersionUID = 1L;
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					closeAllTabs();
+				}
+			});
+			toret.add(new AbstractAction("Close this tab") {
+				private static final long serialVersionUID = 1L;
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					closeTab();
+				}
+			});
+			toret.add(new AbstractAction("Close other tabs") {
+				private static final long serialVersionUID = 1L;
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					closeOtherTabs();
+				}
+				
+				@Override
+				public boolean isEnabled() {
+					return pane.getTabCount() > 1;
+				}
+			});
+			return toret;
+		};
 	}
 
 	private final static MouseListener buttonMouseListener = new MouseAdapter() {
@@ -177,4 +211,27 @@ public class ButtonTabComponent extends JPanel {
 			}
 		}
 	};
+	
+	
+	private void closeAllTabs() {
+		pane.removeAll();
+	}
+
+	private void closeTab() {
+		int index = pane.indexOfTabComponent(ButtonTabComponent.this);
+		if (index != -1) {
+			pane.remove(index);
+		}
+	}
+
+	private void closeOtherTabs() {
+		int index = pane.indexOfTabComponent(ButtonTabComponent.this);
+		if (index != -1) {
+			for (int toRemove = pane.getTabCount() - 1; toRemove >= 0; toRemove--) {
+				if (toRemove != index) {
+					pane.remove(toRemove);
+				}
+			}
+		}
+	}
 }
