@@ -1,11 +1,11 @@
-package es.uvigo.ei.hlfernandez.demo;
+package es.uvigo.ei.sing.hlfernandez.demo;
 
 import java.awt.Dimension;
 import java.io.InvalidClassException;
 
 import javax.swing.JPanel;
 
-import es.uvigo.ei.hlfernandez.combobox.ExtendedJComboBox;
+import es.uvigo.ei.sing.hlfernandez.combobox.ExtendedJComboBox;
 
 /**
  * An example showing the use of {@link ExtendedJComboBox}.

@@ -1,4 +1,4 @@
-package es.uvigo.ei.hlfernandez.demo;
+package es.uvigo.ei.sing.hlfernandez.demo;
 
 import java.util.Arrays;
 import java.util.List;

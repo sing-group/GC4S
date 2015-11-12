@@ -1,4 +1,4 @@
-package es.uvigo.ei.hlfernandez.combobox;
+package es.uvigo.ei.sing.hlfernandez.combobox;
 
 import java.awt.Dimension;
 import java.awt.Font;

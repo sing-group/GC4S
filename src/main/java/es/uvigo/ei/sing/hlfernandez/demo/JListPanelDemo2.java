@@ -1,4 +1,4 @@
-package es.uvigo.ei.hlfernandez.demo;
+package es.uvigo.ei.sing.hlfernandez.demo;
 
 import java.io.InvalidClassException;
 import java.util.Arrays;
@@ -16,19 +16,19 @@ import es.uvigo.ei.sing.hlfernandez.list.JListPanel;
  * @author hlfernandez
  *
  */
-public class JListPanelDemo {
+public class JListPanelDemo2 {
 
 	public static void main(String[] args) throws InvalidClassException {
-		List<String> data = Arrays.asList(new String[] { "a", "b", "c", "d",
-				"e" });
+		List<String> data = Arrays.asList(new String[] { 
+				"a", "ab", "abc", "abcd", "abcde" });
 
 		ExtendedDefaultListModel<String> listModel = new ExtendedDefaultListModel<String>();
 		listModel.addElements(data);
 
 		JList<String> list = new JList<String>(listModel);
 
-		JListPanel<String> listPanel = new JListPanel<String>(list);
+		JListPanel<String> listPanel = new JListPanel<String>(list, false, true);
 
-		DemoUtils.showComponent(listPanel);
+		DemoUtils.showComponent(listPanel, "JList filter demo");
 	}
 }

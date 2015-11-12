@@ -1,4 +1,4 @@
-package es.uvigo.ei.hlfernandez.demo;
+package es.uvigo.ei.sing.hlfernandez.demo;
 
 import es.uvigo.ei.sing.hlfernandez.filechooser.JFileChooserPanel;
 
