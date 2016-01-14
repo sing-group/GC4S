@@ -71,7 +71,7 @@ public class JFileChooserPanel extends JPanel {
 	 * @param mode
 	 *            the {@code JFileChooser} mode.
 	 * @param filechooser
-	 *            the {@llink JFileChooser} that will be opened.
+	 *            the {@link JFileChooser} that will be opened.
 	 */
 	public JFileChooserPanel(Mode  mode, JFileChooser filechooser){
 		this(mode, filechooser, ICON_BROWSE, "File: ", null);
@@ -85,9 +85,9 @@ public class JFileChooserPanel extends JPanel {
 	 * @param mode
 	 *            the {@code JFileChooser} mode.
 	 * @param filechooser
-	 *            the {@llink JFileChooser} that will be opened.
+	 *            the {@link JFileChooser} that will be opened.
 	 * @param browseIcon
-	 *            the {@llink ImageIcon} for the browse button.
+	 *            the {@link ImageIcon} for the browse button.
 	 * @param labelFileText
 	 *            the text for the label file.
 	 * @param requiredFileExtension

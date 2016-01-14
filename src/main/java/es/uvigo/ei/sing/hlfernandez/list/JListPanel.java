@@ -73,7 +73,9 @@ public class JListPanel<E> extends JPanel {
 	 * 
 	 * @param list
 	 *            a JList that uses a {@link ExtendedDefaultListModel}.
-	 * @throws InvalidClassException
+	 *            
+	 * @throws InvalidClassException            
+	 *             if list's model is not an {@code ExtendedDefaultModel}.
 	 */
 	public JListPanel(JList<E> list) throws InvalidClassException{
 		this(list, true, true);
@@ -88,10 +90,13 @@ public class JListPanel<E> extends JPanel {
 	 *            if true, the action buttons are showed.
 	 * @param filter
 	 *            if true, the list filter is shown.
-	 *            
+	 * 
 	 * @throws InvalidClassException
+	 *             if list's model is not an {@code ExtendedDefaultModel}.
 	 */
-	public JListPanel(JList<E> list, boolean buttons, boolean filter) throws InvalidClassException{
+	public JListPanel(JList<E> list, boolean buttons, boolean filter) 
+		throws InvalidClassException
+	{
 		super();
 		this.list = list;
 		if(!(list.getModel() instanceof ExtendedDefaultListModel)){

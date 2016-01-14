@@ -16,7 +16,7 @@ import javax.swing.event.ListDataListener;
  * 
  * @author hlfernandez
  *
- * @param <E>
+ * @param <E> the type of elements in this model
  */
 public class FilteredListModel<E> extends AbstractListModel<E> {
 	private static final long serialVersionUID = 1L;

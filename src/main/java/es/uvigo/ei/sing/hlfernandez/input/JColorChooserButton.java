@@ -21,8 +21,10 @@ public class JColorChooserButton extends JButton {
 	}
 	
 	/**
-	 * Constructs a new {@code JColorChooserButton} with the specified 
-	 * {code @color}.
+	 * Constructs a new {@code JColorChooserButton} with the specified {@code
+	 * color}.
+	 * 
+	 * @param color the selected color.
 	 */
 	public JColorChooserButton(Color color) {
 		this.currentColor = color;
@@ -57,7 +59,9 @@ public class JColorChooserButton extends JButton {
 	
 	/**
 	 * Sets the component selected color.
-	 * @param color the new color.
+	 * 
+	 * @param color
+	 *            the new color.
 	 */
 	public void setColor(Color color){
 		updateCurrentColor(color);
@@ -70,6 +74,7 @@ public class JColorChooserButton extends JButton {
 
 	/**
 	 * Returns the current selected color.
+	 * 
 	 * @return the current selected color.
 	 */
 	public Color getColor() {

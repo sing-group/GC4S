@@ -20,6 +20,8 @@ public class DemoUtils {
 	 * 
 	 * @param component
 	 *            JComponent to show
+	 * @param title
+	 *            the title for the window
 	 */
 	public static final void showComponent(JComponent component, String title) {
 		JFrame frame = new JFrame(title);

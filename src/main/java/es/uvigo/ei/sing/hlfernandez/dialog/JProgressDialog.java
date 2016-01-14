@@ -33,6 +33,7 @@ public class JProgressDialog extends JDialog {
 	 * Constructs a new {@code ProgressDialog} instance.
 	 * 
 	 * @param parent the parent frame to show the dialog.
+	 * @param title the dialog title.
 	 * @param tasks the list of tasks.
 	 */
 	public JProgressDialog(JFrame parent, String title, List<String> tasks) {

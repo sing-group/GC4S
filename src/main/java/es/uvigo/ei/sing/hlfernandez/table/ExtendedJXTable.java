@@ -46,6 +46,7 @@ public class ExtendedJXTable extends JXTable {
      * Instantiates an ExtendedJXTable with a specific table model.
      * 
      * @param dm The model to use.
+     * @param cm The column model to use.
      */
     public ExtendedJXTable(TableModel dm, TableColumnModel cm) {
         super(dm, cm);
@@ -60,7 +61,9 @@ public class ExtendedJXTable extends JXTable {
      * @param cm The column model to use.
      * @param sm The list selection model to use.
      */
-    public ExtendedJXTable(TableModel dm, TableColumnModel cm, ListSelectionModel sm) {
+    public ExtendedJXTable(TableModel dm, TableColumnModel cm, 
+    	ListSelectionModel sm
+    ) {
         super(dm, cm, sm);
         init();
     }

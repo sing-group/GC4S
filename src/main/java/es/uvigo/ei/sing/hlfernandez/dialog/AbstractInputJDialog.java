@@ -42,7 +42,10 @@ private static final long serialVersionUID = 1L;
 	private JTextArea textArea;
 	
 	/**
-	 * Constructs an AbstractInputJDialog
+	 * Constructs an {@code AbstractInputJDialog}.
+	 * 
+	 * @param parent
+	 *            the parent {@code JFrame}.
 	 */
 	protected AbstractInputJDialog(JFrame parent) {
 		super(parent);
