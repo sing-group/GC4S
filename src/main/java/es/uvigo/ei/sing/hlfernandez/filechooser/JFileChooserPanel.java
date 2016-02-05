@@ -2,6 +2,8 @@ package es.uvigo.ei.sing.hlfernandez.filechooser;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 
 import javax.swing.AbstractAction;
@@ -112,27 +114,39 @@ public class JFileChooserPanel extends JPanel {
 		lblFile = new JLabel(this.lblFileText);
 		fileName = new JTextField("", 20);
 		fileName.setEditable(false);
+		fileName.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (e.getButton() != MouseEvent.BUTTON3) {
+					onBrowse();
+				}
+			}
+		});
 		browseAction = new AbstractAction("Browse", ICON_BROWSE) {
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JFileChooser fileChooser = getFilechooser();
-				int returnVal = mode.equals(Mode.SAVE) ? 
-					fileChooser.showSaveDialog(JFileChooserPanel.this) : 
-					fileChooser.showOpenDialog(JFileChooserPanel.this);
-				if (returnVal == JFileChooser.APPROVE_OPTION) {
-					setSelectedFile(fileChooser.getSelectedFile());
-				}
+				onBrowse();
 			}
 		};
 		btnBrowse = ComponentFactory.createButton(browseAction,
-				true, "Browse file", false);
+			true, "Browse file", false);
 
 		this.add(lblFile, BorderLayout.WEST);
 		this.add(fileName, BorderLayout.CENTER);
 		this.add(btnBrowse, BorderLayout.EAST);
 	}
+
+	private void onBrowse() {
+		JFileChooser fileChooser = getFilechooser();
+		int returnVal = mode.equals(Mode.SAVE) ? 
+			fileChooser.showSaveDialog(JFileChooserPanel.this) : 
+			fileChooser.showOpenDialog(JFileChooserPanel.this);
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			setSelectedFile(fileChooser.getSelectedFile());
+		}
+	}	
 
 	private void setSelectedFile(File newFile){
 		selectedFile = newFile;
