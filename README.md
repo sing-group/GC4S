@@ -60,3 +60,9 @@ ExtendedJTabbedPaneDemo
 An extension of JTabbedPane that allows setting wether the tab bar must be hidden if there is only one tab.
 
 ![JProgressDialog](https://raw.githubusercontent.com/hlfernandez/GC4S/master/screenshots/ExtendedJTabbedPaneDemo.gif)
+
+JParallelListsPanel
+------------
+A component that that wraps two JListPanel and allows moving elements between them.
+
+![JParallelListsPanel](https://raw.githubusercontent.com/hlfernandez/GC4S/master/screenshots/JParallelLists.gif)

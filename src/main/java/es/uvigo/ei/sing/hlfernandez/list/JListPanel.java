@@ -380,6 +380,15 @@ public class JListPanel<E> extends JPanel {
 	public AbstractAction getActionSelectAll() {
 		return actionSelectAll;
 	}
+	
+	/**
+	 * Returns the wrapped {@code JList}.
+	 * 
+	 * @return the wrapped {@code JList}.
+	 */
+	public JList<E> getList() {
+		return list;
+	}
 }
 
 
