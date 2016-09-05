@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import es.uvigo.ei.sing.hlfernandez.ComponentFactory;
+import es.uvigo.ei.sing.hlfernandez.utilities.FileDrop;
 
 public class JFileChooserPanel extends JPanel {
 	
@@ -24,7 +25,7 @@ public class JFileChooserPanel extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
 	private static final ImageIcon ICON_BROWSE = new ImageIcon(
-			JFileChooserPanel.class.getResource("icons/browse.png"));
+		JFileChooserPanel.class.getResource("icons/browse.png"));
 	
 	private JFileChooser filechooser;
 	private Mode mode;
@@ -122,6 +123,13 @@ public class JFileChooserPanel extends JPanel {
 				}
 			}
 		});
+		new FileDrop(this.fileName, new FileDrop.Listener() {
+			public void filesDropped(java.io.File[] files) {
+				if (files.length > 0) {
+					setSelectedFile(files[0]);
+				}
+			}
+		});
 		browseAction = new AbstractAction("Browse", ICON_BROWSE) {
 			private static final long serialVersionUID = 1L;
 
@@ -158,6 +166,7 @@ public class JFileChooserPanel extends JPanel {
 		}
 		fileName.setText(selectedFile.getAbsolutePath());
 		fileName.setToolTipText(selectedFile.getAbsolutePath());
+		filechooser.setSelectedFile(newFile);
 	}
 	
 	/**
