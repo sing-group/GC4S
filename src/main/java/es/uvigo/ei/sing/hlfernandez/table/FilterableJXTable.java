@@ -21,9 +21,9 @@ public class FilterableJXTable extends ExtendedJXTable {
      * Instantiates an FilterableJXTable with data in a array or rows and column
      *  names.
      * 
-     * @param rowData Row data, as a two-dimensional Array of Objects (by row,
+     * @param datavalues row data, as a two-dimensional Array of Objects (by row,
      * 	for column).
-     * @param columnNames Column names, as a Array of Strings.
+     * @param columnnames column names, as a Array of Strings.
      */
 	public FilterableJXTable(String[][] datavalues, String[] columnnames) {
 		super(datavalues, columnnames);
