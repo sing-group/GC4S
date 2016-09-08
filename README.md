@@ -3,6 +3,12 @@ GC4S [![Build Status](https://travis-ci.org/hlfernandez/GC4S.svg?branch=master)]
 
 GUI Components for (Java) Swing.
 
+JHeatMap
+------------
+A component that shows a heatmap from a given double matrix. It allows zooming and changing gradient's colors.
+
+![JHeatMap](https://raw.githubusercontent.com/hlfernandez/GC4S/master/screenshots/JHeatMap.gif)
+
 JListPanel
 ------------
 A component that wraps a JList to add common actions.
