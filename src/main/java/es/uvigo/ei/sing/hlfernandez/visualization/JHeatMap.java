@@ -38,7 +38,8 @@ import es.uvigo.ei.sing.hlfernandez.utilities.ImageIOUtils;
  * <p>
  * Gradient colors can be changed by calling {@link #setLowColor(Color)} and
  * {@link #setHighColor(Color)} methods. The color gradient is created by
- * {@link Gradient} class.
+ * {@link Gradient} class. Missing values (represented by {@code Double.NaN})
+ * are represented in a different color.
  * </p>
  * 
  * <p>
@@ -51,10 +52,11 @@ import es.uvigo.ei.sing.hlfernandez.utilities.ImageIOUtils;
  *
  */
 public class JHeatMap extends JPanel {
-	private static final double DEFAULT_ZOOM_OUT = 0.75d;
-	private static final double DEFAULT_ZOOM_IN = 1.25d;
 	private static final long serialVersionUID = 1L;
+	
+	private static final double DEFAULT_ZOOM_SCALE 	= 1.25d;
 	private static final int 	DEFAULT_SIZE 		= 65;
+	private static final Color 	DEFAULT_NAN_COLOR 	= Color.LIGHT_GRAY;
 	private static final Color 	DEFAULT_LOW_COLOR 	= Color.GREEN;
 	private static final Color 	DEFAULT_HIGH_COLOR 	= Color.RED;
 	private static final int 	DEFAULT_STEPS 		= 100;
@@ -62,6 +64,7 @@ public class JHeatMap extends JPanel {
 	private int 	cellSize 	= DEFAULT_SIZE;
 	private Color 	lowColor 	= DEFAULT_LOW_COLOR;
 	private Color 	highColor 	= DEFAULT_HIGH_COLOR;
+	private Color 	nanColor 	= DEFAULT_NAN_COLOR;
 	
 	private double[][] 	data;
 	private String[] 	columnNames;
@@ -103,11 +106,15 @@ public class JHeatMap extends JPanel {
 			
 			@Override
 			public Color apply(Double t) {
-				double normalized = normalize(t, max, min);
-				int colorIndex = (int) ((normalized * (DEFAULT_STEPS-1)));
-				return colorGradient[colorIndex];
+				if (Double.isNaN(t)) {
+					return nanColor;
+				} else {
+					double normalized = normalize(t, max, min);
+					int colorIndex = (int) ((normalized * (DEFAULT_STEPS - 1)));
+					return colorGradient[colorIndex];
+				}
 			}
-			
+
 			private double normalize(double d, double max, double min) {
 				return (d - min) / (max - min);
 			}
@@ -181,7 +188,7 @@ public class JHeatMap extends JPanel {
 	}
 	
 	private void zoomIn() {
-		zoomIn(DEFAULT_ZOOM_IN);
+		zoomIn(DEFAULT_ZOOM_SCALE);
 	}
 	
 	/**
@@ -194,7 +201,7 @@ public class JHeatMap extends JPanel {
 	}
 	
 	private void zoomOut() {
-		zoomOut(DEFAULT_ZOOM_OUT);
+		zoomOut((double) 1 / DEFAULT_ZOOM_SCALE);
 	}
 	
 	private void scaleCellSize(double scale) {
@@ -230,6 +237,16 @@ public class JHeatMap extends JPanel {
 	public void setHighColor(Color color) {
 		this.highColor = color;
 		this.initializeColors();
+	}
+	
+	/**
+	 * Establishes the color for missing values ({@code Double.NaN}).
+	 * 
+	 * @param color the color for missing values.
+	 */
+	public void setNanColor(Color color) {
+		this.nanColor = color;
+		this.updateUI();
 	}
 	
 	class HeatMapTableModel extends AbstractTableModel {
@@ -290,12 +307,16 @@ public class JHeatMap extends JPanel {
 		}
 		
 		@Override
-		public Component getTableCellRendererComponent(JTable table, Object value,
-				boolean isSelected, boolean hasFocus, int row, int column) {
+		public Component getTableCellRendererComponent(JTable table,
+			Object value, boolean isSelected, boolean hasFocus, int row,
+			int column
+		) {
 			
-			if(value instanceof CellValue) {
+			if (value instanceof CellValue) {
+				double cellValue = ((CellValue) value).getValue();
+				
+				this.setBackground(doubleToColor.apply(cellValue));
 				this.setText("");
-				this.setBackground(doubleToColor.apply(((CellValue)value).getValue()));
 				this.setToolTipText(value.toString());
 			} else {
 				this.setText(value.toString());
@@ -303,8 +324,8 @@ public class JHeatMap extends JPanel {
 				this.setHorizontalAlignment(JLabel.CENTER);
 				this.setToolTipText("");
 			}
-			
-			if(table.convertRowIndexToModel(row) == 0) {
+
+			if (table.convertRowIndexToModel(row) == 0) {
 				this.setUI(new VerticalLabelUI(false));
 			} else {
 				this.setUI(new BasicLabelUI());

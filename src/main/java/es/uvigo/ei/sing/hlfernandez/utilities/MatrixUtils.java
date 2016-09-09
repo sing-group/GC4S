@@ -11,17 +11,59 @@ import java.util.stream.Stream;
  */
 public class MatrixUtils {
 
-	public static double max(double[][] data) {
-		return 	Stream.of(data)
-				.map(a -> Arrays.stream(a).max())
-				.mapToDouble(o -> o.getAsDouble())
+	/**
+	 * Return the maximum value in {@code data} ignoring missing values 
+	 * ({@code Double.NaN}).
+	 * 
+	 * @param matrix a {@code double[][]).
+	 * @return the maximum value in {@code data} ignoring missing values 
+	 * 	({@code Double.NaN}).
+	 */
+	public static double max(double[][] matrix) {
+		return 	Stream.of(matrix)
+				.mapToDouble(MatrixUtils::max)
 				.max().getAsDouble();
 	}
 	
-	public static double min(double[][] data) {
-		return 	Stream.of(data)
-				.map(a -> Arrays.stream(a).min())
-				.mapToDouble(o -> o.getAsDouble())
+	/**
+	 * Return the maximum value in {@code data} ignoring missing values 
+	 * ({@code Double.NaN}).
+	 * 
+	 * @param array a {@code double[]).
+	 * @return the maximum value in {@code data} ignoring missing values 
+	 * 	({@code Double.NaN}).
+	 */
+	public static double max(double[] array) {
+		return 	Arrays.stream(array)
+				.filter(d -> !Double.isNaN(d))
+				.max().getAsDouble();
+	}
+	
+	/**
+	 * Return the minimum value in {@code data} ignoring missing values 
+	 * ({@code Double.NaN}).
+	 * 
+	 * @param matrix a {@code double[][]).
+	 * @return the minimum value in {@code data} ignoring missing values 
+	 * 	({@code Double.NaN}).
+	 */
+	public static double min(double[][] matrix) {
+		return 	Stream.of(matrix)
+				.mapToDouble(MatrixUtils::min)
+				.min().getAsDouble();
+	}
+	
+	/**
+	 * Return the minimum value in {@code data} ignoring missing values 
+	 * ({@code Double.NaN}).
+	 * 
+	 * @param array a {@code double[]).
+	 * @return the minimum value in {@code data} ignoring missing values 
+	 * 	({@code Double.NaN}).
+	 */
+	public static double min(double[] array) {
+		return 	Arrays.stream(array)
+				.filter(d -> !Double.isNaN(d))
 				.min().getAsDouble();
 	}
 }

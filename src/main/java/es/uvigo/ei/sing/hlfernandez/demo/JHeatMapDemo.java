@@ -52,7 +52,7 @@ public class JHeatMapDemo {
 
 	public static void main(String[] args) {
 		double[][] data = new double[][] {
-				new double[] { 1.0d, 2.0d, 3.0d, 4.0d, 5.0d },
+				new double[] { 1.0d, 2.0d, 3.0d, 4.0d, Double.NaN },
 				new double[] { 1.1d, 2.1d, 3.1d, 4.1d, 5.1d },
 				new double[] { 1.2d, 2.2d, 3.2d, 4.2d, 5.2d },
 				new double[] { 1.3d, 2.3d, 3.3d, 4.3d, 5.3d },
