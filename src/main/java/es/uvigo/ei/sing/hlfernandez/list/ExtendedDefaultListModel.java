@@ -62,5 +62,4 @@ public class ExtendedDefaultListModel<E> extends DefaultListModel<E> {
 			addElement(element);
 		}
 	}
-	
 }

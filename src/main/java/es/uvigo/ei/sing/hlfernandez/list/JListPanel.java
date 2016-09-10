@@ -37,22 +37,25 @@ import es.uvigo.ei.sing.hlfernandez.ComponentFactory;
  *
  */
 public class JListPanel<E> extends JPanel {
-	
 	private static final long serialVersionUID = 1L;
+	
 	protected static final ImageIcon ICON_ARROW_DOWN = new ImageIcon(
-			JListPanel.class.getResource("icons/down.png"));
+		JListPanel.class.getResource("icons/down.png"));
 	protected static final ImageIcon ICON_ARROW_UP = new ImageIcon(
-			JListPanel.class.getResource("icons/up.png"));
+		JListPanel.class.getResource("icons/up.png"));
+	protected static final ImageIcon ICON_REMOVE = new ImageIcon(
+		JListPanel.class.getResource("icons/remove.png"));
 	protected static final ImageIcon ICON_CLEAR = new ImageIcon(
-			JListPanel.class.getResource("icons/clear.png"));
+		JListPanel.class.getResource("icons/clear.png"));
 	protected static final ImageIcon ICON_SELECT_ALL = new ImageIcon(
-			JListPanel.class.getResource("icons/check.png"));
+		JListPanel.class.getResource("icons/check.png"));
 	
 	private JList<E> list;
 	private ExtendedDefaultListModel<E> listModel;
 	private FilteredListModel<E> filteredListModel;
 	private JButton btnMoveDown;
 	private JButton btnMoveUp;
+	private JButton btnRemove;
 	private JButton btnClearSelection;
 	private JButton btnSelectAll;
 	private JToggleButton regexButton;
@@ -62,6 +65,7 @@ public class JListPanel<E> extends JPanel {
 	private JTextField filterTextField;
 	private AbstractAction actionMoveDown;
 	private AbstractAction actionMoveUp;
+	private AbstractAction actionRemoveElements;
 	private AbstractAction actionSelectAll;
 	private AbstractAction actionClearSelection;
 	private boolean buttons;
@@ -178,12 +182,8 @@ public class JListPanel<E> extends JPanel {
 			});
 			
 			regexButton = ComponentFactory
-					.createToggleButton(null, null, false, new AbstractAction(
-							"(.*)") {
-
-						/**
-				 * 
-				 */
+				.createToggleButton(null, null, false, new AbstractAction(
+					"(.*)") {
 						private static final long serialVersionUID = 1L;
 
 						@Override
@@ -242,6 +242,13 @@ public class JListPanel<E> extends JPanel {
 					moveUpSelectedElement();
 				}
 			};
+			actionRemoveElements = new AbstractAction("Remove", ICON_REMOVE) {
+				private static final long serialVersionUID = 1L;
+				
+				public void actionPerformed(ActionEvent e) {
+					removeSelectedElements();
+				}
+			};
 			actionClearSelection = new AbstractAction("Clear selection", ICON_CLEAR) {
 				private static final long serialVersionUID = 1L;
 				
@@ -258,22 +265,26 @@ public class JListPanel<E> extends JPanel {
 			};
 			
 			btnMoveDown = ComponentFactory.createButton(actionMoveDown, false,
-					"Moves down the selected element", false);
+				"Moves down the selected element", false);
 
 			btnMoveUp = ComponentFactory.createButton(actionMoveUp, false,
-					"Moves up the selected element", false);
+				"Moves up the selected element", false);
+
+			btnRemove = ComponentFactory.createButton(actionRemoveElements, false,
+				"Removes the selected elements", false);
 
 			btnSelectAll = ComponentFactory.createButton(actionSelectAll,
-					this.listModel.getSize() > 0, "Select all the elements",
-					false);
+				this.listModel.getSize() > 0, "Select all the elements",
+				false);
 
 			btnClearSelection = ComponentFactory.createButton(
-					actionClearSelection, false, "Clear the current selection",
-					false);
+				actionClearSelection, false, "Clear the current selection",
+				false);
 
 			buttonsPanel.add(Box.createHorizontalGlue());
 			buttonsPanel.add(btnMoveDown);
 			buttonsPanel.add(btnMoveUp);
+			buttonsPanel.add(btnRemove);
 			buttonsPanel.add(btnSelectAll);
 			buttonsPanel.add(btnClearSelection);
 			buttonsPanel.add(Box.createHorizontalGlue());
@@ -293,6 +304,14 @@ public class JListPanel<E> extends JPanel {
 		}
 	}
 	
+	private void removeSelectedElements() {
+		list.getSelectedValuesList().forEach(e -> {
+			this.listModel.removeElement(e);
+		});
+		this.list.clearSelection();
+		this.list.updateUI();
+	}
+	
 	private void checkActionButtons() {
 		int selectedIndexesCount = this.list.getSelectedIndices().length;
 		boolean moveEnabled = selectedIndexesCount == 1
@@ -300,8 +319,11 @@ public class JListPanel<E> extends JPanel {
 		btnMoveUp.setEnabled(moveEnabled);
 		btnMoveDown.setEnabled(moveEnabled);
 		btnClearSelection.setEnabled(selectedIndexesCount > 0);
-		btnSelectAll.setEnabled(selectedIndexesCount < this.listModel
-				.getSize() && this.listModel.getSize() > 0);
+		btnRemove.setEnabled(selectedIndexesCount > 0);
+		btnSelectAll.setEnabled(
+			selectedIndexesCount < this.listModel.getSize() && 
+			this.listModel.getSize() > 0
+		);
 	}
 	
 	private void clearSelection() {
@@ -319,6 +341,7 @@ public class JListPanel<E> extends JPanel {
 
 	/**
 	 * Returns the move up button.
+	 * 
 	 * @return the move up button.
 	 */
 	public JButton getBtnMoveUp() {
@@ -327,6 +350,7 @@ public class JListPanel<E> extends JPanel {
 	
 	/**
 	 * Returns the move down button.
+	 * 
 	 * @return the move down button.
 	 */
 	public JButton getBtnMoveDown() {
@@ -334,15 +358,26 @@ public class JListPanel<E> extends JPanel {
 	}
 	
 	/**
+	 * Returns the remove elements button.
+	 * 
+	 * @return the remove elements button.
+	 */
+	public JButton getBtnRemoveElements() {
+		return btnMoveDown;
+	}
+	
+	/**
 	 * Returns the clear selection button.
+	 * 
 	 * @return the clear selection button.
 	 */
 	public JButton getBtnClearSelection() {
 		return btnClearSelection;
 	}
-	
+
 	/**
 	 * Returns the select all button.
+	 * 
 	 * @return the select all button.
 	 */
 	public JButton getBtnSelectAll() {
@@ -351,14 +386,16 @@ public class JListPanel<E> extends JPanel {
 	
 	/**
 	 * Returns the move down action.
+	 * 
 	 * @return the move down action.
 	 */
 	public AbstractAction getActionMoveUp() {
 		return actionMoveUp;
 	}
-	
+
 	/**
 	 * Returns the move down action.
+	 * 
 	 * @return the move down action.
 	 */
 	public AbstractAction getActionMoveDown() {
@@ -366,7 +403,17 @@ public class JListPanel<E> extends JPanel {
 	}
 	
 	/**
+	 * Returns the remove elements action.
+	 * 
+	 * @return the remove elements action.
+	 */
+	public AbstractAction getActionRemoveElements() {
+		return actionRemoveElements;
+	}
+
+	/**
 	 * Returns the clear selection action.
+	 * 
 	 * @return the clear selection action.
 	 */
 	public AbstractAction getActionClearSelection() {
@@ -375,6 +422,7 @@ public class JListPanel<E> extends JPanel {
 	
 	/**
 	 * Returns the select all action.
+	 * 
 	 * @return the select all action.
 	 */
 	public AbstractAction getActionSelectAll() {
@@ -390,5 +438,3 @@ public class JListPanel<E> extends JPanel {
 		return list;
 	}
 }
-
-
