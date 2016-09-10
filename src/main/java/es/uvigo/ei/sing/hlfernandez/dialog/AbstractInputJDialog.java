@@ -27,16 +27,17 @@ import javax.swing.KeyStroke;
  *
  */
 public abstract class AbstractInputJDialog extends JDialog {
-private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 	
 	protected static final ImageIcon ICON_ACCEPT = new ImageIcon(
-			AbstractInputJDialog.class.getResource("icons/ok.png"));
+		AbstractInputJDialog.class.getResource("icons/ok.png"));
 	protected static final ImageIcon ICON_CANCEL = new ImageIcon(
-			AbstractInputJDialog.class.getResource("icons/cancel.png"));
+		AbstractInputJDialog.class.getResource("icons/cancel.png"));
 	
 	protected boolean canceled = true;
 	protected JButton okButton;
 	protected JFrame parent;
+	
 	private static final JFileChooser fileChooser = new JFileChooser();
 	
 	private JTextArea textArea;
@@ -153,6 +154,16 @@ private static final long serialVersionUID = 1L;
 		return fileChooser;
 	}
 	
+	/**
+	 * Returns whether the dialog has been canceled.
+	 * 
+	 * @return {@code true} if user canceled the dialog and {@code false} if
+	 *         user clicked the ok button.
+	 */
+	public boolean isCanceled() {
+		return canceled;
+	}
+
 	protected abstract String getDialogTitle();
 
 	protected abstract String getDescription();

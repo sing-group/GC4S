@@ -18,11 +18,11 @@ import es.uvigo.ei.sing.hlfernandez.filechooser.JFileChooserPanel;
 public class AbstractInputJDialogDemo {
 	public static void main(String[] args) {
 		class InputJDialog extends AbstractInputJDialog {
+			private static final long serialVersionUID = 1L;
+
 			protected InputJDialog(JFrame parent) {
 				super(parent);
 			}
-
-			private static final long serialVersionUID = 1L;
 
 			protected String getDialogTitle() {
 				return "Demo dialog";
@@ -35,13 +35,14 @@ public class AbstractInputJDialogDemo {
 			protected JPanel getInputComponentsPane() {
 				JPanel toret = new JPanel();
 				toret.setLayout(new GridLayout(0, 1));
-				toret.add(new JFileChooserPanel(JFileChooserPanel.Mode.OPEN,
-						"Select a file:"));
+				toret.add(new JFileChooserPanel(
+					JFileChooserPanel.Mode.OPEN, "Select a file:")
+				);
 				toret.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 				return toret;
 			}
 		}
-		;
+
 		InputJDialog dialog = new InputJDialog(new JFrame());
 		dialog.setVisible(true);
 	}
