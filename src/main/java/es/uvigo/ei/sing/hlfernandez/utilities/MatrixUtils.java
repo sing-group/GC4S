@@ -15,7 +15,7 @@ public class MatrixUtils {
 	 * Return the maximum value in {@code data} ignoring missing values 
 	 * ({@code Double.NaN}).
 	 * 
-	 * @param matrix a {@code double[][]).
+	 * @param matrix a {@code double[][]}.
 	 * @return the maximum value in {@code data} ignoring missing values 
 	 * 	({@code Double.NaN}).
 	 */
@@ -29,7 +29,7 @@ public class MatrixUtils {
 	 * Return the maximum value in {@code data} ignoring missing values 
 	 * ({@code Double.NaN}).
 	 * 
-	 * @param array a {@code double[]).
+	 * @param array a {@code double[]}.
 	 * @return the maximum value in {@code data} ignoring missing values 
 	 * 	({@code Double.NaN}).
 	 */
@@ -43,7 +43,7 @@ public class MatrixUtils {
 	 * Return the minimum value in {@code data} ignoring missing values 
 	 * ({@code Double.NaN}).
 	 * 
-	 * @param matrix a {@code double[][]).
+	 * @param matrix a {@code double[][]}.
 	 * @return the minimum value in {@code data} ignoring missing values 
 	 * 	({@code Double.NaN}).
 	 */
@@ -57,7 +57,7 @@ public class MatrixUtils {
 	 * Return the minimum value in {@code data} ignoring missing values 
 	 * ({@code Double.NaN}).
 	 * 
-	 * @param array a {@code double[]).
+	 * @param array a {@code double[]}.
 	 * @return the minimum value in {@code data} ignoring missing values 
 	 * 	({@code Double.NaN}).
 	 */
