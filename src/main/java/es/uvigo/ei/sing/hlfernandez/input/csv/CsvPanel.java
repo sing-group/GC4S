@@ -40,7 +40,7 @@ import es.uvigo.ei.sing.hlfernandez.utilities.TextFieldSelectionFocusListener;
 
 /**
  * A panel that allows user to configure a CSV format. The configured format may
- * be obtained by calling {@link CsvPanel#getCSVFormat()}.
+ * be obtained by calling {@link CsvPanel#getCsvFormat()}.
  * 
  * @author hlfernandez
  *
@@ -135,6 +135,9 @@ public class CsvPanel extends JPanel {
 		customFormatOptionsTaskPane = new JXTaskPane();
 		customFormatOptionsTaskPane.setTitle("Custom format");
 		customFormatOptionsTaskPane.setCollapsed(true);
+		customFormatOptionsTaskPane.addPropertyChangeListener("collapsed", e -> {
+			formatCustomized();
+		});
 		
 		JPanel customOptionsPane = new JPanel();
 		final GroupLayout customOptionsGroupLayout =
@@ -455,13 +458,13 @@ public class CsvPanel extends JPanel {
 	}
 
 	/**
-	 * Return the {@code CSVFormat} based on the configuration selected by the
+	 * Return the {@code CsvFormat} based on the configuration selected by the
 	 * user.
 	 * 
-	 * @return Return the {@code CSVFormat} based on the configuration selected
+	 * @return Return the {@code CsvFormat} based on the configuration selected
 	 *         by the user.
 	 */
-	public CsvFormat getCSVFormat() {
+	public CsvFormat getCsvFormat() {
 		CsvFormat toret;
 
 		final FileFormat selectedFormat = (FileFormat) 
