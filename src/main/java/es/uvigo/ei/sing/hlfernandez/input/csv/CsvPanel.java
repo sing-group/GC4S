@@ -25,6 +25,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.DocumentEvent;
@@ -386,8 +387,10 @@ public class CsvPanel extends JPanel {
 	}
 	
 	private void textFieldChanged() {
-		checkSeparators();
-		csvFormatEdited();
+		SwingUtilities.invokeLater(() -> {
+			checkSeparators();
+			csvFormatEdited();
+		});
 	}
 
 	private boolean checkSeparators() {
