@@ -99,6 +99,9 @@ public class JInputList extends JPanel {
 			this.inputPanel = new JPanel(new BorderLayout());
 
 			elementTextField = new JXTextField("Element", Color.LIGHT_GRAY);
+			elementTextField.addActionListener(e -> {
+				addElementButton.doClick();
+			});
 			elementTextField.getDocument().addDocumentListener(
 				new DocumentListener() {
 					@Override
