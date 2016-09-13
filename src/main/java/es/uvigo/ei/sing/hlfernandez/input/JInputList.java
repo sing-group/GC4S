@@ -6,6 +6,7 @@ import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.io.InvalidClassException;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -181,6 +182,15 @@ public class JInputList extends JPanel {
 		this.itemsList.updateUI();
 	}
 	
+	/**
+	 * Adds {@code elements} to the input list.
+	 * 
+	 * @param elements one or several elements to add.
+	 */
+	public void addElements(String ...elements) {
+		itemsListModel.addElements(Arrays.asList(elements));
+		this.itemsList.updateUI();
+	}
 
     /**
 	 * Adds a listener to the list that's notified each time a change to the
