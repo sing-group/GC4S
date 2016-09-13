@@ -5,7 +5,7 @@ import java.text.DecimalFormatSymbols;
 import java.util.Locale;
 
 /**
- * A {@code CSVFormat} specifies the format of a CSV file.
+ * A {@code CsvFormat} specifies the format of a CSV file.
  * 
  * @author hlfernandez
  *
@@ -43,7 +43,7 @@ public class CsvFormat {
 		new DecimalFormatSymbols(Locale.getDefault());
 	
 	/**
-	 * Constructs a new {@code CSVFormat} instance.
+	 * Constructs a new {@code CsvFormat} instance.
 	 * 
 	 * @param format the {@code FileFormat} to initialize the CSV format.
 	 * @throws IllegalArgumentException if format is {@code CUSTOM}.
@@ -76,7 +76,7 @@ public class CsvFormat {
 	}
 	
 	/**
-	 * * Constructs a new {@code CSVFormat} instance.
+	 * Constructs a new {@code CsvFormat} instance.
 	 * 
 	 * @param columnSeparator the column separator.
 	 * @param decimalSeparator the decimal separator.
@@ -130,9 +130,18 @@ public class CsvFormat {
 	/**
 	 * Returns the decimal formatter.
 	 * 
-	 * @return the deciaml formatter.
+	 * @return the decimal formatter.
 	 */
 	public DecimalFormat getDecimalFormatter() {
 		return decimalFormatter;
+	}
+
+	/**
+	 * Returns the decimal separator character.
+	 * 
+	 * @return the decimal separator character.
+	 */
+	public char getDecimalSeparator() {
+		return this.decimalSeparator;
 	}
 }
