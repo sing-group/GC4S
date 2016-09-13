@@ -47,7 +47,7 @@ public class ExportCsvDialog extends AbstractInputJDialog {
 	@Override
 	protected JPanel getInputComponentsPane() {
 		csvPanel = new CsvPanel();
-		csvPanel.addCsvListener(this::onCsvEvent);
+		csvPanel.addCsvListener(this::onChangeEvent);
 		
 		JPanel inputComponents = new JPanel(new BorderLayout());
 		inputComponents.setBorder(createEmptyBorder(5, 0, 0, 0));
@@ -63,6 +63,7 @@ public class ExportCsvDialog extends AbstractInputJDialog {
 		fileChooserPanel = new JFileChooserPanel(
 			JFileChooserPanel.Mode.SAVE, getFileChooser()
 		);
+		fileChooserPanel.addFileChooserListener(this::onChangeEvent);
 		JLabel help = new JLabel(ICON_HELP);
 		help.setToolTipText("The file to save the data");
 		help.setBorder(createEmptyBorder(0, 14, 0, 7));
@@ -72,11 +73,23 @@ public class ExportCsvDialog extends AbstractInputJDialog {
 		return fileChooserComponent;
 	}
 
-	private void onCsvEvent(ChangeEvent e) {
-		this.okButton.setEnabled(csvPanel.isValidFormat());
+	private void onChangeEvent(ChangeEvent e) {
+		checkOkButton();
+	}
+	
+	private void checkOkButton() {
+		this.okButton.setEnabled(
+			csvPanel.isValidFormat() && 
+			isSelectedFileValid()
+		);
 		this.pack();
 	}
 	
+	private boolean isSelectedFileValid() {
+		return 		this.fileChooserPanel.getSelectedFile() != null
+				&& 	!this.fileChooserPanel.getSelectedFile().equals("");
+	}
+
 	/**
 	 * Returns the selected file.
 	 * 

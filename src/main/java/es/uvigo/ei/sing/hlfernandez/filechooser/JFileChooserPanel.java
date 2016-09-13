@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.util.Arrays;
+
 
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
@@ -13,6 +15,10 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+
 
 import es.uvigo.ei.sing.hlfernandez.ComponentFactory;
 import es.uvigo.ei.sing.hlfernandez.utilities.FileDrop;
@@ -115,6 +121,21 @@ public class JFileChooserPanel extends JPanel {
 		lblFile = new JLabel(this.lblFileText);
 		fileName = new JTextField("", 20);
 		fileName.setEditable(false);
+		fileName.getDocument().addDocumentListener(new DocumentListener() {
+			
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+			}
+			
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				fileNameUpdated();
+			}
+			
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+			}
+		});
 		fileName.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -144,6 +165,16 @@ public class JFileChooserPanel extends JPanel {
 		this.add(lblFile, BorderLayout.WEST);
 		this.add(fileName, BorderLayout.CENTER);
 		this.add(btnBrowse, BorderLayout.EAST);
+	}
+	
+	private void fileNameUpdated() {
+		fireFileChoosedEvent();
+	}
+
+	private void fireFileChoosedEvent() {
+		Arrays.asList(getFileChooserListeners()).forEach(l -> {
+			l.onFileChoosed(new ChangeEvent(this));
+		});
 	}
 
 	private void onBrowse() {
@@ -215,5 +246,28 @@ public class JFileChooserPanel extends JPanel {
 	 */
 	public File getSelectedFile() {
 		return selectedFile;
+	}
+	
+	/**
+	 * Adds the specified file chooser listener to receive component events from
+	 * this component. If listener {@code l} is {@code null}, no exception is
+	 * thrown and no action is performed.
+	 *
+	 * @param l
+	 *            the {@code FileChooserListener}.
+	 */
+	public synchronized void addFileChooserListener(FileChooserListener l) {
+		this.listenerList.add(FileChooserListener .class, l);
+	}
+
+	/**
+	 * Returns an array of all the file chooser listeners registered on this
+	 * component.
+	 *
+	 * @return all {@code FileChooserListener}s of this component or an empty
+	 *         array if no component listeners are currently registered
+	 */
+	public synchronized FileChooserListener[] getFileChooserListeners() {
+		return this.listenerList.getListeners(FileChooserListener.class);
 	}
 }
