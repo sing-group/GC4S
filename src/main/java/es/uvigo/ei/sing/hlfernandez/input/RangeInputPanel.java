@@ -31,11 +31,19 @@ import javax.swing.event.ChangeListener;
  */
 public class RangeInputPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
+
+	private static final String MINIMUM_VALUE = "Minimum value";
+	private static final String MAXIMUM_VALUE = "Maximum value";
+	
 	private int min;
 	private int max;
+	
 	private JLabel minValueLabel;
+	private String minValueLabelText;
 	private JSlider minValueSlider;
+	
 	private JLabel maxValueLabel;
+	private String maxValueLabelText;
 	private JSlider maxValueSlider;
 
 	/**
@@ -46,8 +54,23 @@ public class RangeInputPanel extends JPanel {
 	 * @param max maximum value.
 	 */
 	public RangeInputPanel(int min, int max) {
+		this(min, max, MINIMUM_VALUE, MAXIMUM_VALUE);
+	}
+	
+	/**
+	 * Constructs a new {@code RangeInputPanel} instance using {@code min} and 
+	 * {@code max} as minimum and maximum values for the input sliders.
+	 * 
+	 * @param min minimum value.
+	 * @param max maximum value.
+	 * @param minLabel minimum range label.
+	 * @param maxLabel maximum range label.
+	 */
+	public RangeInputPanel(int min, int max, String minLabel, String maxLabel) {
 		this.min = min;
 		this.max = max;
+		this.minValueLabelText = minLabel;
+		this.maxValueLabelText = maxLabel;
 		
 		this.initComponent();
 	}
@@ -61,7 +84,7 @@ public class RangeInputPanel extends JPanel {
 
 	private Component getMinPanel() {
 		JPanel minPanel = new JPanel(new BorderLayout());
-		minValueLabel = new JLabel("Minimum value");
+		minValueLabel = new JLabel(minValueLabelText);
 		minValueSlider = new JSlider(min, max, min);
 		
 		minPanel.add(minValueLabel, BorderLayout.NORTH);
@@ -71,7 +94,7 @@ public class RangeInputPanel extends JPanel {
 	
 	private Component getMaxPanel() {
 		JPanel maxPanel = new JPanel(new BorderLayout());
-		maxValueLabel = new JLabel("Maximum value");
+		maxValueLabel = new JLabel(maxValueLabelText);
 		maxValueSlider = new JSlider(min, max, max);
 		
 		maxPanel.add(maxValueLabel, BorderLayout.NORTH);
