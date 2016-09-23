@@ -109,4 +109,13 @@ public class ExportCsvDialog extends AbstractInputJDialog {
 	public CsvFormat getSelectedCsvFormat() {
 		return csvPanel.getCsvFormat();
 	}
+	
+	/**
+	 * Establishes the selected {@code CsvFormat.FileFormat}.
+	 * 
+	 * @param format a {@code CsvFormat.FileFormat}.
+	 */
+	public void setSelectedCsvFileFormat(CsvFormat.FileFormat format) {
+		csvPanel.setSelectedCsvFileFormat(format);
+	}
 }

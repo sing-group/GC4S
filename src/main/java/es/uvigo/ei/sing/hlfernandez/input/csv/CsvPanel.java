@@ -459,6 +459,15 @@ public class CsvPanel extends JPanel {
 	public boolean isValidFormat() {
 		return checkSeparators();
 	}
+	
+	/**
+	 * Establishes the selected {@code CsvFormat.FileFormat}.
+	 * 
+	 * @param format a {@code CsvFormat.FileFormat}.
+	 */
+	public void setSelectedCsvFileFormat(CsvFormat.FileFormat format) {
+		this.fileFormatCB.setSelectedItem(format);
+	}
 
 	/**
 	 * Return the {@code CsvFormat} based on the configuration selected by the
