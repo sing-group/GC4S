@@ -20,6 +20,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 
+import es.uvigo.ei.sing.hlfernandez.utilities.Icons;
+
 /**
  * Abstract class for creating input dialogs.
  * 
@@ -33,8 +35,7 @@ public abstract class AbstractInputJDialog extends JDialog {
 		AbstractInputJDialog.class.getResource("icons/ok.png"));
 	protected static final ImageIcon ICON_CANCEL = new ImageIcon(
 		AbstractInputJDialog.class.getResource("icons/cancel.png"));
-	protected static final ImageIcon ICON_HELP = new ImageIcon(
-		AbstractInputJDialog.class.getResource("icons/help.png"));
+	protected static final ImageIcon ICON_HELP = Icons.ICON_HELP;
 	
 	protected boolean canceled = true;
 	protected JButton okButton;
