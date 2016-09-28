@@ -39,6 +39,7 @@ public abstract class AbstractInputJDialog extends JDialog {
 	
 	protected boolean canceled = true;
 	protected JButton okButton;
+	protected JButton cancelButton;
 	protected JFrame parent;
 	
 	private static final JFileChooser fileChooser = new JFileChooser();
@@ -71,7 +72,7 @@ public abstract class AbstractInputJDialog extends JDialog {
 		addKeyBindings();
 	}
 	
-	private JTextArea getDescriptionPane() {
+	protected JTextArea getDescriptionPane() {
 		if (this.textArea == null) {
 			this.textArea = new JTextArea(
 				getDescription());
@@ -103,7 +104,7 @@ public abstract class AbstractInputJDialog extends JDialog {
 			dispose();
 		});
 		
-		final JButton cancelButton = new JButton("Cancel", ICON_CANCEL);
+		cancelButton = new JButton("Cancel", ICON_CANCEL);
 		cancelButton.setToolTipText("Cancel");
 		cancelButton.addActionListener(event -> {
 			canceled = true;
