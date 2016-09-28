@@ -4,8 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.text.DecimalFormatSymbols;
 import java.util.Arrays;
 import java.util.Locale;
@@ -74,6 +74,8 @@ public class CsvPanel extends JPanel {
 	private JRadioButton rbtnLineSepLinux;
 	private AbstractButton rbtnLineSepMacOS;
 
+	private boolean updateWithoutEvents = false;
+
 	/**
 	 * Creates a new {@code CsvPanel} instance.
 	 */
@@ -103,7 +105,7 @@ public class CsvPanel extends JPanel {
 		fileFormatCB.setModel(new DefaultComboBoxModel<>(FileFormat.values()));
 		fileFormatCB.setSelectedItem(DEFAULT_FILE_FORMAT);
 		fileFormatCB.addItemListener(e -> {
-			if (e.getStateChange() == ItemEvent.SELECTED)
+			if (e.getStateChange() == ItemEvent.DESELECTED)
 				fileFormatSelectionChanged();
 		});
 
@@ -151,12 +153,20 @@ public class CsvPanel extends JPanel {
 			BorderLayout.CENTER);
 		customOptionsTaskPaneContainer.add(customFormatOptionsTaskPane);
 		
-		final ActionListener columnSeparatorListener = e -> {
-			checkCustomSeparatorButtons();	
+		final ItemListener columnSeparatorListener = e -> {
+			if (e.getStateChange() == ItemEvent.SELECTED
+				&& !this.updateWithoutEvents
+			) {
+				checkCustomSeparatorButtons();
+			}
 		};
 		
-		final ActionListener actionListener = e -> {
-			formatCustomized();				
+		final ItemListener itemListener = e -> {
+			if (e.getStateChange() == ItemEvent.SELECTED
+				&& !this.updateWithoutEvents
+			) {
+				formatCustomized();				
+			}
 		};
 		
 		final JLabel lblQuoteHeaders = new JLabel("Quote headers");
@@ -165,23 +175,25 @@ public class CsvPanel extends JPanel {
 			"Sets wether table headers should be quoted");
 		JPanel quotePanel = new JPanel(new GridLayout(1,1));
 		quoteHeaders = new JCheckBox("", false);
-		quoteHeaders.addActionListener(actionListener);
+		quoteHeaders.addItemListener(itemListener);
 		quotePanel.add(quoteHeaders);
 		
 		final DocumentListener documentListener = new DocumentListener() {
 			@Override
-			public void removeUpdate(DocumentEvent e) {
-				textFieldChanged();
-			}
+			public void removeUpdate(DocumentEvent e) {	}
 
 			@Override
 			public void insertUpdate(DocumentEvent e) {
-				textFieldChanged();
+				notifyUpdate();
 			}
 
 			@Override
-			public void changedUpdate(DocumentEvent e) {
-				textFieldChanged();
+			public void changedUpdate(DocumentEvent e) { }
+			
+			private void notifyUpdate() {
+				if (!updateWithoutEvents) {
+					textFieldChanged();
+				}
 			}
 		};
 
@@ -216,10 +228,10 @@ public class CsvPanel extends JPanel {
 		separatorGroup.add(rbtnSepTab);
 		separatorGroup.add(rbtnSepCustom);
 		
-		rbtnSepTab.addActionListener(columnSeparatorListener);
-		rbtnSepCustom.addActionListener(columnSeparatorListener);
-		rbtnSepTab.addActionListener(actionListener);
-		rbtnSepCustom.addActionListener(actionListener);
+		rbtnSepTab.addItemListener(columnSeparatorListener);
+		rbtnSepCustom.addItemListener(columnSeparatorListener);
+		rbtnSepTab.addItemListener(itemListener);
+		rbtnSepCustom.addItemListener(itemListener);
 		
 		final JLabel lblDecimalSeparator = new JLabel("Decimal separator");
 		final JLabel lblDecimalSeparatorHelp = new JLabel(ICON_INFO);
@@ -228,13 +240,13 @@ public class CsvPanel extends JPanel {
 		final JPanel decimalSeparatorPanel = new JPanel(new GridLayout(1,4));
 		rbtnDecimalSepPoint = new JRadioButton("Point");
 		rbtnDecimalSepPoint.setSelected(true);
-		rbtnDecimalSepPoint.addActionListener(actionListener);
+		rbtnDecimalSepPoint.addItemListener(itemListener);
 		rbtnDecimalSepComma = new JRadioButton("Comma");
 		rbtnDecimalSepComma.setSelected(false);
-		rbtnDecimalSepComma.addActionListener(actionListener);
+		rbtnDecimalSepComma.addItemListener(itemListener);
 		rbtnDecimalSepCustom = new JRadioButton("CUSTOM");
 		rbtnDecimalSepCustom.setSelected(false);
-		rbtnDecimalSepCustom.addActionListener(actionListener);
+		rbtnDecimalSepCustom.addItemListener(itemListener);
 		txtFieldCustomDecimalPoint = new JLimitedTextField(".", 1, 3);
 		txtFieldCustomDecimalPoint.getDocument().addDocumentListener(
 			documentListener);
@@ -259,12 +271,16 @@ public class CsvPanel extends JPanel {
 		decimalPointGroup.add(rbtnDecimalSepComma);
 		decimalPointGroup.add(rbtnDecimalSepCustom);
 		
-		final ActionListener decimalPointListener = e -> {
-			checkDecimalPointButtons();				
+		final ItemListener decimalPointListener = e -> {
+			if (e.getStateChange() == ItemEvent.SELECTED
+				&& !this.updateWithoutEvents
+			) {
+				checkDecimalPointButtons();				
+			}
 		};
-		rbtnDecimalSepPoint.addActionListener(decimalPointListener);
-		rbtnDecimalSepComma.addActionListener(decimalPointListener);
-		rbtnDecimalSepCustom.addActionListener(decimalPointListener);
+		rbtnDecimalSepPoint.addItemListener(decimalPointListener);
+		rbtnDecimalSepComma.addItemListener(decimalPointListener);
+		rbtnDecimalSepCustom.addItemListener(decimalPointListener);
 		
 		final JLabel lblLineSeparator = new JLabel("Line break");
 		final JLabel lblLineSeparatorHelp = new JLabel(ICON_INFO);
@@ -272,13 +288,13 @@ public class CsvPanel extends JPanel {
 		final JPanel lineSeparatorPanel = new JPanel(new GridLayout(1,3));
 		rbtnLineSepWindows = new JRadioButton("Windows");
 		rbtnLineSepWindows.setSelected(true);
-		rbtnLineSepWindows.addActionListener(actionListener);
+		rbtnLineSepWindows.addItemListener(itemListener);
 		rbtnLineSepLinux = new JRadioButton("Linux");
 		rbtnLineSepLinux.setSelected(false);
-		rbtnLineSepLinux.addActionListener(actionListener);
+		rbtnLineSepLinux.addItemListener(itemListener);
 		rbtnLineSepMacOS = new JRadioButton("Mac OS X");
 		rbtnLineSepMacOS.setSelected(false);
-		rbtnLineSepMacOS.addActionListener(actionListener);
+		rbtnLineSepMacOS.addItemListener(itemListener);
 		lineSeparatorPanel.add(rbtnLineSepWindows);
 		lineSeparatorPanel.add(rbtnLineSepLinux);
 		lineSeparatorPanel.add(rbtnLineSepMacOS);
@@ -339,6 +355,8 @@ public class CsvPanel extends JPanel {
 	private void formatCustomized() {
 		if (!this.fileFormatCB.getSelectedItem().equals(FileFormat.CUSTOM)) {
 			this.fileFormatCB.setSelectedItem(FileFormat.CUSTOM);
+		} else {
+			checkSeparators(true);
 		}
 		csvFormatEdited();
 	}
@@ -351,7 +369,9 @@ public class CsvPanel extends JPanel {
 			!selectedItem.equals(FileFormat.CUSTOM));
 
 		if (!selectedItem.equals(FileFormat.CUSTOM)) {
+			this.updateWithoutEvents = true;
 			updateCustomValues(selectedItem);
+			this.updateWithoutEvents = false;
 		}
 		csvFormatEdited();
 	}
@@ -377,33 +397,33 @@ public class CsvPanel extends JPanel {
 
 	private void checkCustomSeparatorButtons() {
 		txtFieldCustomColumnSeparator.setEditable(rbtnSepCustom.isSelected());
-		csvFormatEdited();
 	}
 
 	private void checkDecimalPointButtons() {
 		txtFieldCustomDecimalPoint.setEditable(
 			rbtnDecimalSepCustom.isSelected());
-		csvFormatEdited();
 	}
 	
 	private void textFieldChanged() {
 		SwingUtilities.invokeLater(() -> {
-			checkSeparators();
+			checkSeparators(true);
 			csvFormatEdited();
 		});
 	}
 
-	private boolean checkSeparators() {
+	private boolean checkSeparators(boolean gui) {
 		if (fileFormatCB.getSelectedItem().equals(FileFormat.CUSTOM)
 			&& !getColumnSeparator().equals("")
 			&& getColumnSeparator().charAt(0) == getDecimalSeparator()) {
-			JOptionPane.showMessageDialog(
-				this,
-				"You have selected the same column and decimal separator, "
-				+ "which may result in an unreadable file.",
-				"Invalid configuration",
-				JOptionPane.WARNING_MESSAGE
-			);
+			if(gui) {
+				JOptionPane.showMessageDialog(
+					this,
+					"You have selected the same column and decimal separator, "
+					+ "which may result in an unreadable file.",
+					"Invalid configuration",
+					JOptionPane.WARNING_MESSAGE
+				);
+			}
 			return false;
 		}
 		return true;
@@ -457,7 +477,7 @@ public class CsvPanel extends JPanel {
 	 *         otherwise.
 	 */
 	public boolean isValidFormat() {
-		return checkSeparators();
+		return checkSeparators(false);
 	}
 	
 	/**
