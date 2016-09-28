@@ -61,7 +61,7 @@ public class ExportCsvDialog extends AbstractInputJDialog {
 		JPanel fileChooserComponent = new JPanel(new BorderLayout());
 		fileChooserComponent.setBorder(createEmptyBorder(0, 12, 0, 5));
 		fileChooserPanel = new JFileChooserPanel(
-			JFileChooserPanel.Mode.SAVE, getFileChooser()
+			JFileChooserPanel.Mode.SAVE, getFileChooser(), "csv"
 		);
 		fileChooserPanel.addFileChooserListener(this::onChangeEvent);
 		JLabel help = new JLabel(ICON_HELP);

@@ -81,6 +81,25 @@ public class JFileChooserPanel extends JPanel {
 	 *            the {@code JFileChooser} mode.
 	 * @param filechooser
 	 *            the {@link JFileChooser} that will be opened.
+	 * @param requiredFileExtension
+	 *            only for Mode.SAVE, the extension that file must have (e.g.:
+	 *            "txt")
+	 */
+	public JFileChooserPanel(Mode  mode, JFileChooser filechooser, 
+		String requiredFileExtension
+	){
+		this(mode, filechooser, ICON_BROWSE, "File: ", requiredFileExtension);
+	}
+	
+	/**
+	 * Constructs a {@link JFileChooserPanel} with the specified {@code} mode}
+	 * and {@code filechooser}. For the rest, the default configuration (default
+	 * browse icon, file label text and no required extension) is taken.
+	 * 
+	 * @param mode
+	 *            the {@code JFileChooser} mode.
+	 * @param filechooser
+	 *            the {@link JFileChooser} that will be opened.
 	 */
 	public JFileChooserPanel(Mode  mode, JFileChooser filechooser){
 		this(mode, filechooser, ICON_BROWSE, "File: ", null);
