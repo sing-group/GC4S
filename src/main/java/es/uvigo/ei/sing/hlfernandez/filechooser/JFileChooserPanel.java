@@ -206,17 +206,22 @@ public class JFileChooserPanel extends JPanel {
 		}
 	}	
 
-	private void setSelectedFile(File newFile){
-		selectedFile = newFile;
+	/**
+	 * Sets the selected file.
+	 * 
+	 * @param file the selected {@code File}.
+	 */
+	public void setSelectedFile(File file){
+		selectedFile = file;
 		if (requiredFileExtension != null
-				&& !newFile.getName().toLowerCase()
+				&& !file.getName().toLowerCase()
 						.endsWith("." + requiredFileExtension)) {
-			selectedFile = new File(newFile.getAbsolutePath()
+			selectedFile = new File(file.getAbsolutePath()
 					+ "." + requiredFileExtension);
 		}
 		fileName.setText(selectedFile.getAbsolutePath());
 		fileName.setToolTipText(selectedFile.getAbsolutePath());
-		filechooser.setSelectedFile(newFile);
+		filechooser.setSelectedFile(file);
 	}
 	
 	/**
