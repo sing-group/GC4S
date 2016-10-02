@@ -1,5 +1,7 @@
 package es.uvigo.ei.sing.hlfernandez.table;
 
+import static org.jdesktop.swingx.table.ColumnControlButton.COLUMN_CONTROL_MARKER;
+
 import java.util.Vector;
 
 import javax.swing.Action;
@@ -114,11 +116,14 @@ public class ExtendedJXTable extends JXTable {
 	 * @param a The action to add.
 	 */
 	public void addAction(Action a) {
-		this.getActionMap().put(ColumnControlButton.COLUMN_CONTROL_MARKER+a.getValue(Action.NAME), a);
+		this.getActionMap().put(getActionName(a), a);
 		this.columnControlButton.update();
 	}
 	
-	
+	private String getActionName(Action a) {
+		return COLUMN_CONTROL_MARKER + a.getValue(Action.NAME);
+	}
+
 	/**
 	 * Sets the visibility of the column visibility actions at the {@code ColumnControlButton}.
 	 * 
