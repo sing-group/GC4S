@@ -1,23 +1,12 @@
 package es.uvigo.ei.sing.hlfernandez.demo;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import javax.swing.AbstractAction;
-import javax.swing.Box;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JFileChooser;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JToolBar;
-
 import es.uvigo.ei.sing.hlfernandez.visualization.JHeatMap;
+import es.uvigo.ei.sing.hlfernandez.visualization.JHeatMapModel;
+import es.uvigo.ei.sing.hlfernandez.visualization.JHeatMapPanel;
 
 /**
  * An example showing the use of {@link JHeatMap}.
@@ -27,29 +16,6 @@ import es.uvigo.ei.sing.hlfernandez.visualization.JHeatMap;
  */
 public class JHeatMapDemo {
 	
-	private enum ComboColor {
-		RED 	(Color.RED, 	"Red"),
-		GREEN 	(Color.GREEN, 	"Green"),
-		BLUE 	(Color.BLUE, 	"Blue");
-		
-		private Color color;
-		private String name;
-
-		ComboColor(Color color, String name) {
-			this.color = color;
-			this.name = name;
-		}
-		
-		public Color getColor() {
-			return color;
-		}
-		
-		@Override
-		public String toString() {
-			return this.name;
-		}
-	}
-
 	public static void main(String[] args) {
 		double[][] data = new double[][] {
 				new double[] { 1.0d, 2.0d, 3.0d, 4.0d, Double.NaN },
@@ -60,12 +26,14 @@ public class JHeatMapDemo {
 		};
 
 		JHeatMap heatmap = new JHeatMap(
-			data, 
-			generateRowNames(data), 
-			generateColumnNames(data)
+			new JHeatMapModel(
+				data, 
+				generateRowNames(data), 
+				generateColumnNames(data)
+			)
 		);
 		
-		DemoUtils.showComponent(createDemoPanel(heatmap), "JHeatMap demo");
+		DemoUtils.showComponent(new JHeatMapPanel(heatmap), "JHeatMap demo");
 	}
 	
 	private static String[] generateRowNames(double[][] data) {
@@ -82,56 +50,5 @@ public class JHeatMapDemo {
 			.collect(Collectors.toList());
 		
 		return colnames.toArray(new String[colnames.size()]);
-	}
-
-	private static JComponent createDemoPanel(JHeatMap heatmap) {
-		JPanel demoPanel = new JPanel(new BorderLayout());
-		JToolBar toolbar = new JToolBar();
-		
-		toolbar.add(new AbstractAction("Export heatmap as image") {
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				JFileChooser fc = new JFileChooser();
-				int result = fc.showSaveDialog(demoPanel);
-				if (result == JFileChooser.APPROVE_OPTION) {
-					try {
-						heatmap.toPngImage(fc.getSelectedFile());
-					} catch (IOException e1) {
-						e1.printStackTrace();
-					}
-				}
-			}
-		});
-		
-		JComboBox<ComboColor> lowColorCB = new JComboBox<ComboColor>(ComboColor.values());
-		lowColorCB.setSelectedItem(ComboColor.GREEN);
-		lowColorCB.addItemListener(e -> {
-			heatmap.setLowColor(
-				((ComboColor)lowColorCB.getSelectedItem()).getColor()
-			);
-		});
-		
-		toolbar.add(Box.createHorizontalStrut(10));
-		toolbar.add(new JLabel("Low: "));
-		toolbar.add(lowColorCB);
-		
-		JComboBox<ComboColor> highColorCB = new JComboBox<ComboColor>(ComboColor.values());
-		highColorCB.setSelectedItem(ComboColor.RED);
-		highColorCB.addItemListener(e -> {
-			heatmap.setHighColor(
-				((ComboColor)highColorCB.getSelectedItem()).getColor()
-			);
-		});
-		
-		toolbar.add(Box.createHorizontalStrut(10));
-		toolbar.add(new JLabel("High: "));
-		toolbar.add(highColorCB);
-		
-		demoPanel.add(toolbar, BorderLayout.NORTH);
-		demoPanel.add(heatmap, BorderLayout.CENTER);
-		
-		return demoPanel;
 	}
 }

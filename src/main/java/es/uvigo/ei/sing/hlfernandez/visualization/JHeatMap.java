@@ -13,6 +13,7 @@ import java.util.function.Function;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -75,6 +76,16 @@ public class JHeatMap extends JPanel {
 	
 	private Function<Double, Color> doubleToColor;
 
+	/**
+	 * Constructs a new {@code JHeatMap} taking {@code model} as data source.
+	 * 
+	 * @param model
+	 *            the {@code JHeatMapModel}.
+	 */
+	public JHeatMap(JHeatMapModel model) {
+		this(model.getData(), model.getRowNames(), model.getColumnNames());
+	}
+	
 	/**
 	 * Constructs a new {@code JHeatMap} taking {@code data} as input data matrix
 	 * 	and {@code rowNames}/{@code columNames} as names for rows and columns.
@@ -162,12 +173,23 @@ public class JHeatMap extends JPanel {
 		IntStream.range(1, this.heatmapTM.getRowCount()).forEach(row -> {
 			this.heatmap.setRowHeight(row, this.cellSize);
 		});
+		
 		for(int i = 0; i < this.heatmap.getColumnModel().getColumnCount(); i++) {
 			TableColumn c = this.heatmap.getColumnModel().getColumn(i);
 			c.setMinWidth(this.cellSize);
 			c.setMaxWidth(this.cellSize);
 			c.setPreferredWidth(this.cellSize);
 		}
+		
+		int maxRowWidth = getMaxRowNameLength();
+		TableColumn rowNamesColumn = this.heatmap.getColumnModel().getColumn(0);
+		rowNamesColumn.setMinWidth(maxRowWidth);
+		rowNamesColumn.setMaxWidth(maxRowWidth);
+		rowNamesColumn.setPreferredWidth(maxRowWidth);
+	}
+	
+	private int getMaxRowNameLength() {
+		return Stream.of(this.rowNames).mapToInt(this::requiredLength).max().getAsInt();
 	}
 	
 	private int getMaxColumnNameLength() {
@@ -327,11 +349,14 @@ public class JHeatMap extends JPanel {
 
 			if (table.convertRowIndexToModel(row) == 0) {
 				this.setUI(new VerticalLabelUI(false));
+				this.setHorizontalAlignment(JLabel.LEFT);
+				this.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 0));
 			} else {
 				this.setUI(new BasicLabelUI());
+				this.setHorizontalAlignment(JLabel.RIGHT);
+				this.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5));
 			}
 			return this;
 		}
 	}
-
 }
