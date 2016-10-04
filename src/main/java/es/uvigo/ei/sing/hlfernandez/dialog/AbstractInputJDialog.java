@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.Insets;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
@@ -14,7 +15,6 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -40,7 +40,7 @@ public abstract class AbstractInputJDialog extends JDialog {
 	protected boolean canceled = true;
 	protected JButton okButton;
 	protected JButton cancelButton;
-	protected JFrame parent;
+	protected Window parent;
 	
 	private static final JFileChooser fileChooser = new JFileChooser();
 	
@@ -50,10 +50,11 @@ public abstract class AbstractInputJDialog extends JDialog {
 	 * Constructs an {@code AbstractInputJDialog}.
 	 * 
 	 * @param parent
-	 *            the parent {@code JFrame}.
+	 *            the parent {@code Window}.
 	 */
-	protected AbstractInputJDialog(JFrame parent) {
+	protected AbstractInputJDialog(Window parent) {
 		super(parent);
+		
 		this.parent = parent;
 		initComponent();
 	}
