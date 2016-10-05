@@ -1,5 +1,9 @@
 package es.uvigo.ei.sing.hlfernandez.visualization;
 
+import static javax.swing.SwingUtilities.getWindowAncestor;
+import static es.uvigo.ei.sing.hlfernandez.visualization.JHeatMapOperations.center;
+import static es.uvigo.ei.sing.hlfernandez.visualization.JHeatMapOperations.transform;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -15,6 +19,9 @@ import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import es.uvigo.ei.sing.hlfernandez.visualization.JHeatMapOperations.Centering;
+import es.uvigo.ei.sing.hlfernandez.visualization.JHeatMapOperations.Transform;
 
 /**
  * A {@code JHeatMapPanel} wraps a {@code JHeatMap}, adding a toolbar with
@@ -114,6 +121,18 @@ public class JHeatMapPanel extends JPanel {
 		toolbar.add(Box.createHorizontalStrut(10));
 		toolbar.add(new JLabel("High: "));
 		toolbar.add(highColorCB);
+		
+		toolbar.add(Box.createHorizontalStrut(10));
+		toolbar.add(new JButton(
+			new AbstractAction("Transform data") {
+				private static final long serialVersionUID = 1L;
+	
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					transformDataMatrix();
+				}
+			}
+		));
 
 		this.add(toolbar, BorderLayout.NORTH);
 		this.add(heatmap, BorderLayout.CENTER);
@@ -124,6 +143,22 @@ public class JHeatMapPanel extends JPanel {
 		lowColorCB.setSize(d);
 		lowColorCB.setMaximumSize(d);
 		lowColorCB.setPreferredSize(d);
+	}
+	
+	private void transformDataMatrix() {
+		JHeatMapDataOperationsDialog dialog = 
+			new JHeatMapDataOperationsDialog(getWindowAncestor(this));
+		dialog.setVisible(true);
+		if(!dialog.isCanceled()) {
+			applyTransformations(dialog.getTransform(), dialog.getCentering());
+		}
+	}
+	
+	private void applyTransformations(Transform transform, Centering centering) {
+		this.heatmap.setData(
+			center(
+				transform(this.heatmap.getData(), transform), centering, true)
+		);
 		
 	}
 }

@@ -18,11 +18,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.plaf.basic.BasicLabelUI;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
-import javax.swing.table.TableModel;
 
 import org.jdesktop.swingx.JXTable;
 
@@ -72,7 +72,7 @@ public class JHeatMap extends JPanel {
 	private String[] 	rowNames;
 	
 	private JXTable heatmap;
-	private TableModel heatmapTM;
+	private HeatMapTableModel heatmapTM;
 	
 	private Function<Double, Color> doubleToColor;
 
@@ -269,6 +269,30 @@ public class JHeatMap extends JPanel {
 	public void setNanColor(Color color) {
 		this.nanColor = color;
 		this.updateUI();
+	}
+	
+	/**
+	 * Returns the data matrix.
+	 * 
+	 * @return the data matrix.
+	 */
+	public double[][] getData() {
+		return data;
+	}
+	
+	/**
+	 * Establishes the data matrix of the heatmap.
+	 * 
+	 * @param data a {@code double[][]}.
+	 */
+	public void setData(double[][] data) {
+		this.data = data;
+		this.initializeColors();
+		SwingUtilities.invokeLater(() -> {
+			this.heatmapTM.fireTableDataChanged();
+			this.fixCellSize();
+		});
+			
 	}
 	
 	class HeatMapTableModel extends AbstractTableModel {
