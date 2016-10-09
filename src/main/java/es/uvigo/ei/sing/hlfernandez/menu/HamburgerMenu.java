@@ -1,6 +1,7 @@
 package es.uvigo.ei.sing.hlfernandez.menu;
 
 import java.awt.Component;
+import java.awt.Insets;
 
 import javax.swing.Action;
 import javax.swing.ImageIcon;
@@ -12,20 +13,20 @@ import javax.swing.event.PopupMenuEvent;
 import es.uvigo.ei.sing.hlfernandez.event.PopupMenuAdapter;
 
 /**
- * A hamburguer button to display a menu.
+ * A hamburger button to display a menu.
  * 
  * @author hlfernandez
  *
  */
-public class HamburguerMenu extends JToggleButton {
+public class HamburgerMenu extends JToggleButton {
 	private static final long serialVersionUID = 1L;
 	
 	private static final ImageIcon ICON_32 = new ImageIcon(
-		HamburguerMenu.class.getResource("icons/hamburguer32.png"));
+		HamburgerMenu.class.getResource("icons/hamburguer32.png"));
 	private static final ImageIcon ICON_24 = new ImageIcon(
-		HamburguerMenu.class.getResource("icons/hamburguer24.png"));
+		HamburgerMenu.class.getResource("icons/hamburguer24.png"));
 	private static final ImageIcon ICON_16 = new ImageIcon(
-		HamburguerMenu.class.getResource("icons/hamburguer16.png"));
+		HamburgerMenu.class.getResource("icons/hamburguer16.png"));
 	
 	/**
 	 * The possible sizes of the hamburguer icon.
@@ -54,7 +55,7 @@ public class HamburguerMenu extends JToggleButton {
 	/**
 	 * Creates a new {@code HamburgerMenu} using the 24 pixel icon.
 	 */
-	public HamburguerMenu() {
+	public HamburgerMenu() {
 		this(Size.SIZE24);
 	}
 
@@ -64,12 +65,13 @@ public class HamburguerMenu extends JToggleButton {
 	 * @param size
 	 *            the {@code Size} of the icon.
 	 */
-	public HamburguerMenu(Size size) {
+	public HamburgerMenu(Size size) {
 		super();
 		this.setIcon(size.getIcon());
+		this.setMargin(new Insets(1, 1, 1, 1));
 
 		this.addActionListener(ev -> {
-			JToggleButton b = HamburguerMenu.this;
+			JToggleButton b = HamburgerMenu.this;
 			if (b.isSelected()) {
 				popup.show(b, 0, b.getBounds().height);
 			} else {
@@ -80,7 +82,7 @@ public class HamburguerMenu extends JToggleButton {
 		this.popup.addPopupMenuListener(new PopupMenuAdapter() {
 			@Override
 			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
-				HamburguerMenu.this.setSelected(false);
+				HamburgerMenu.this.setSelected(false);
 			}
 		});
 	}
