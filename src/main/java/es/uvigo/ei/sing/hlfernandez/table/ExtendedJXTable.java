@@ -1,7 +1,10 @@
 package es.uvigo.ei.sing.hlfernandez.table;
 
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.IntStream.range;
 import static org.jdesktop.swingx.table.ColumnControlButton.COLUMN_CONTROL_MARKER;
 
+import java.util.List;
 import java.util.Vector;
 
 import javax.swing.Action;
@@ -150,5 +153,25 @@ public class ExtendedJXTable extends JXTable {
 		public void update() {
 			super.populatePopup();
 		}
+	}
+	
+	public List<String> getColumnNames() {
+		return 	range(0, this.getModel().getColumnCount())
+				.boxed().map(this.getModel()::getColumnName)
+				.collect(toList());
+	}
+	
+	public Object[][] getData() {
+		TableModel model = this.getModel();
+		Object[][] data = new Object[model.getRowCount()][model.getColumnCount()];
+		
+		for (int i = 0; i < model.getRowCount(); i++) {
+			for (int j = 0; j < model.getColumnCount(); j++) {
+				Object value = model.getValueAt(i, j);
+				data[i][j] = value == null? "" : value;
+			}
+		}
+		
+		return data;
 	}
 }
