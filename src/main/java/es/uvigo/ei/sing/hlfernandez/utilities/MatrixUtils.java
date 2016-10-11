@@ -180,4 +180,43 @@ public class MatrixUtils {
 		return 	DoubleStream.of(data)
 				.filter(d -> !Double.isNaN(d)).toArray();
 	}
+
+	/**
+	 * Removes column at the specified index from {@code data} matrix.
+	 *
+	 * @param column the column index to remove.
+	 * @param data the data matrix.
+	 * @return a new data matrix without the specified column.
+	 */
+	public static Object[][] removeColumn(int column, Object[][] data) {
+		if(column < 0 || column > data[0].length) {
+			throw new IllegalArgumentException("Invalid column " + column);
+		}
+
+		Object[][] toret = new Object[data.length][data[0].length-1];
+		for (int i = 0; i < data.length; i++) {
+			for (int j = 0, destCol = 0; j < data[i].length; j++) {
+				if (j != column) {
+					toret[i][destCol++] = data[i][j];
+				}
+			}
+		}
+
+		return toret;
+	}
+
+	/**
+	 * Converts {@code matrix} into a {@code String[][]}.
+	 *
+	 * @param matrix a {@code Object[][]} matrix.
+	 * @return a {@code String[][]} matrix.
+	 */
+	public static String[][] asStringMatrix(Object[][] matrix) {
+		String[][] toret = new String[matrix.length][matrix[0].length];
+		for(int i = 0; i < matrix.length; i++) {
+			toret[i] = Arrays.stream(matrix[i]).map(Object::toString).toArray(String[]::new);
+		}
+
+		return toret;
+	}
 }
