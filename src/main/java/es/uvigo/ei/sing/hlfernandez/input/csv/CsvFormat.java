@@ -35,7 +35,7 @@ public class CsvFormat {
 	
 	private String lineBreak;
 	private String columnSeparator;
-	private boolean quoteHeaders;
+	private boolean quoteFields;
 	private char decimalSeparator = '.';
 	private final DecimalFormat decimalFormatter =
 		new DecimalFormat("0.0000");
@@ -53,7 +53,7 @@ public class CsvFormat {
 		case EXCEL:
 			this.columnSeparator = ";";
 			this.lineBreak = "\r\n";
-			this.quoteHeaders = false;
+			this.quoteFields = false;
 			break;
 		case LIBRE_OFFICE:
 			if (symbols.getDecimalSeparator() == ',') {
@@ -62,7 +62,7 @@ public class CsvFormat {
 				this.columnSeparator = ",";
 			}
 			this.lineBreak = "\n";
-			this.quoteHeaders = false;
+			this.quoteFields = false;
 			break;
 		case CUSTOM:
 			throw new IllegalArgumentException(
@@ -80,14 +80,14 @@ public class CsvFormat {
 	 * 
 	 * @param columnSeparator the column separator.
 	 * @param decimalSeparator the decimal separator.
-	 * @param quoteHeaders true if headers must be quote.
+	 * @param quoteFields true if fields must be delimited by double quotes.
 	 * @param lineBreak the line break.
 	 */
 	public CsvFormat(String columnSeparator, char decimalSeparator,
-			boolean quoteHeaders, String lineBreak) {
+			boolean quoteFields, String lineBreak) {
 		this.columnSeparator = columnSeparator;
 		this.lineBreak = lineBreak;
-		this.quoteHeaders = quoteHeaders;
+		this.quoteFields = quoteFields;
 		this.decimalSeparator = decimalSeparator;
 
 		configureFormaters();
@@ -119,12 +119,12 @@ public class CsvFormat {
 	}
 	
 	/**
-	 * Returns true if headers must be quote.
+	 * Returns true if fields must be delimited by duoble quotes.
 	 * 
-	 * @return true if headers must be quote.
+	 * @return true if fields must be delimited by duoble quotes.
 	 */
-	public boolean isQuoteHeaders() {
-		return quoteHeaders;
+	public boolean isQuoteFields() {
+		return quoteFields;
 	}
 	
 	/**

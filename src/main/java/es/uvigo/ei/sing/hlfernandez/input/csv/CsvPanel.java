@@ -62,7 +62,7 @@ public class CsvPanel extends JPanel {
 	
 	private JComboBox<FileFormat> fileFormatCB;
 	private JXTaskPane customFormatOptionsTaskPane;
-	private JCheckBox quoteHeaders;
+	private JCheckBox quoteFields;
 	private JRadioButton rbtnSepTab;
 	private AbstractButton rbtnSepCustom;
 	private JTextComponent txtFieldCustomColumnSeparator;
@@ -169,14 +169,14 @@ public class CsvPanel extends JPanel {
 			}
 		};
 		
-		final JLabel lblQuoteHeaders = new JLabel("Quote headers");
-		final JLabel lblQuoteHeadersHelp = new JLabel(ICON_INFO);
-		lblQuoteHeadersHelp.setToolTipText(
-			"Sets wether table headers should be quoted");
+		final JLabel lblQuoteFields = new JLabel("Quote fields");
+		final JLabel lblQuoteFieldsHelp = new JLabel(ICON_INFO);
+		lblQuoteFieldsHelp.setToolTipText(
+			"Sets wether fields must be delimited by double quotes");
 		JPanel quotePanel = new JPanel(new GridLayout(1,1));
-		quoteHeaders = new JCheckBox("", false);
-		quoteHeaders.addItemListener(itemListener);
-		quotePanel.add(quoteHeaders);
+		quoteFields = new JCheckBox("", false);
+		quoteFields.addItemListener(itemListener);
+		quotePanel.add(quoteFields);
 		
 		final DocumentListener documentListener = new DocumentListener() {
 			@Override
@@ -307,7 +307,7 @@ public class CsvPanel extends JPanel {
 		customOptionsGroupLayout.setHorizontalGroup(customOptionsGroupLayout
 			.createSequentialGroup()
 			.addGroup(customOptionsGroupLayout.createParallelGroup()
-				.addComponent(lblQuoteHeaders, Alignment.TRAILING)
+				.addComponent(lblQuoteFields, Alignment.TRAILING)
 				.addComponent(lblColumnSeparator, Alignment.TRAILING)
 				.addComponent(lblDecimalSeparator, Alignment.TRAILING)
 				.addComponent(lblLineSeparator, Alignment.TRAILING)
@@ -319,7 +319,7 @@ public class CsvPanel extends JPanel {
 				.addComponent(lineSeparatorPanel)
 			)
 			.addGroup(customOptionsGroupLayout.createParallelGroup()
-				.addComponent(lblQuoteHeadersHelp)
+				.addComponent(lblQuoteFieldsHelp)
 				.addComponent(lblColumnSeparatorHelp)
 				.addComponent(lblDecimalSeparatorHelp)
 				.addComponent(lblLineSeparatorHelp)
@@ -328,9 +328,9 @@ public class CsvPanel extends JPanel {
 		customOptionsGroupLayout.setVerticalGroup(customOptionsGroupLayout
 			.createSequentialGroup()
 			.addGroup(customOptionsGroupLayout.createParallelGroup()
-				.addComponent(lblQuoteHeaders, Alignment.CENTER)
+				.addComponent(lblQuoteFields, Alignment.CENTER)
 				.addComponent(quotePanel, Alignment.CENTER)
-				.addComponent(lblQuoteHeadersHelp, Alignment.CENTER)
+				.addComponent(lblQuoteFieldsHelp, Alignment.CENTER)
 			)
 			.addGroup(customOptionsGroupLayout.createParallelGroup()
 				.addComponent(lblColumnSeparator, Alignment.CENTER)
@@ -379,7 +379,7 @@ public class CsvPanel extends JPanel {
 	private void updateCustomValues(FileFormat format) {
 		this.rbtnDecimalSepCustom.setSelected(true);
 		this.rbtnSepCustom.setSelected(true);
-		this.quoteHeaders.setSelected(false);
+		this.quoteFields.setSelected(false);
 		this.txtFieldCustomDecimalPoint.setText(
 			String.valueOf(symbols.getDecimalSeparator()));
 		if (format.equals(FileFormat.EXCEL)) {
@@ -514,7 +514,7 @@ public class CsvPanel extends JPanel {
 			toret = new CsvFormat(
 				getColumnSeparator(), 
 				getDecimalSeparator(),
-				quoteHeaders.isSelected(), 
+				quoteFields.isSelected(), 
 				getLineBreak()
 			);
 		}
