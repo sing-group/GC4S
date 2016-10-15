@@ -1,5 +1,7 @@
 package es.uvigo.ei.sing.hlfernandez.dialog;
 
+import static java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -20,7 +22,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 
-import es.uvigo.ei.sing.hlfernandez.utilities.Icons;
+import es.uvigo.ei.sing.hlfernandez.ui.icons.Icons;
 
 /**
  * Abstract class for creating input dialogs.
@@ -167,6 +169,13 @@ public abstract class AbstractInputJDialog extends JDialog {
 	 */
 	public boolean isCanceled() {
 		return canceled;
+	}
+	
+	/**
+	 * Maximizes the dialog.
+	 */
+	public void maximize() {
+		this.setBounds(getLocalGraphicsEnvironment().getMaximumWindowBounds());
 	}
 
 	protected abstract String getDialogTitle();

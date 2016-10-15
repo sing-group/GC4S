@@ -13,7 +13,7 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import es.uvigo.ei.sing.hlfernandez.utilities.Icons;
+import es.uvigo.ei.sing.hlfernandez.ui.icons.Icons;
 
 /**
  * An {@code InputParametersPanel} takes one or more {@link InputParameter} and
