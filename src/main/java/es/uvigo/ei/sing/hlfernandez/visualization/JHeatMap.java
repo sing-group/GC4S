@@ -2,13 +2,17 @@ package es.uvigo.ei.sing.hlfernandez.visualization;
 
 import static es.uvigo.ei.sing.hlfernandez.utilities.MatrixUtils.max;
 import static es.uvigo.ei.sing.hlfernandez.utilities.MatrixUtils.min;
+import static javax.swing.BorderFactory.createEmptyBorder;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -54,23 +58,27 @@ import es.uvigo.ei.sing.hlfernandez.utilities.ImageIOUtils;
  */
 public class JHeatMap extends JPanel {
 	private static final long serialVersionUID = 1L;
-	
+
 	private static final double DEFAULT_ZOOM_SCALE 	= 1.25d;
 	private static final int 	DEFAULT_SIZE 		= 65;
 	private static final Color 	DEFAULT_NAN_COLOR 	= Color.LIGHT_GRAY;
 	private static final Color 	DEFAULT_LOW_COLOR 	= Color.GREEN;
 	private static final Color 	DEFAULT_HIGH_COLOR 	= Color.RED;
 	private static final int 	DEFAULT_STEPS 		= 100;
-	
-	private int 	cellSize 	= DEFAULT_SIZE;
+
+ 	private int 	cellSize 	= DEFAULT_SIZE;
 	private Color 	lowColor 	= DEFAULT_LOW_COLOR;
 	private Color 	highColor 	= DEFAULT_HIGH_COLOR;
 	private Color 	nanColor 	= DEFAULT_NAN_COLOR;
+
+	private DecimalFormat 	decimalFormat 	= new DecimalFormat();
+	private Optional<Font> 	font			= Optional.empty();
 	
 	private double[][] 	data;
 	private String[] 	columnNames;
 	private String[] 	rowNames;
 	
+	private ColorKeyLegend colorKey;
 	private JXTable heatmap;
 	private HeatMapTableModel heatmapTM;
 	
@@ -106,9 +114,10 @@ public class JHeatMap extends JPanel {
 		this.initializeColors();
 		
 		this.setLayout(new BorderLayout());
+		this.add(getColorKey(), BorderLayout.NORTH);
 		this.add(getHeatMap(), BorderLayout.CENTER);
 	}
-	
+
 	private void initializeColors() {
 		double max = max(this.data);
 		double min = min(this.data);
@@ -135,7 +144,18 @@ public class JHeatMap extends JPanel {
 	
 	private Color[] getColorGradient() {
 		return Gradient.createGradient(lowColor, highColor, DEFAULT_STEPS);
-	}	
+	}
+
+	private Component getColorKey() {
+		JPanel colorKeyPanel = new JPanel();
+		colorKeyPanel.setBorder(createEmptyBorder(5, 5, 5, 5));
+		colorKey = new ColorKeyLegend(
+			this.lowColor, this.highColor, 
+			min(this.data), max(this.data)
+		);
+		colorKeyPanel.add(colorKey);
+		return colorKeyPanel;
+	}
 
 	private Component getHeatMap() {
 		this.heatmapTM = new HeatMapTableModel();
@@ -197,7 +217,8 @@ public class JHeatMap extends JPanel {
 	}
 	
 	private int requiredLength(String s) {
-		return new JLabel().getFontMetrics(new JLabel().getFont()).stringWidth(s) + 10;
+		Font heatmapFont = this.font.orElse(new JLabel().getFont());
+		return new JLabel().getFontMetrics(heatmapFont).stringWidth(s) + 10;
 	}
 	
 	/**
@@ -248,6 +269,7 @@ public class JHeatMap extends JPanel {
 	 */
 	public void setLowColor(Color color) {
 		this.lowColor = color;
+		this.colorKey.setLowColor(color);
 		this.initializeColors();
 	}
 	
@@ -258,6 +280,7 @@ public class JHeatMap extends JPanel {
 	 */
 	public void setHighColor(Color color) {
 		this.highColor = color;
+		this.colorKey.setHighColor(color);
 		this.initializeColors();
 	}
 	
@@ -269,6 +292,16 @@ public class JHeatMap extends JPanel {
 	public void setNanColor(Color color) {
 		this.nanColor = color;
 		this.updateUI();
+	}
+	
+	/**
+	 * Sets the decimal format.
+	 * 
+	 * @param decimalFormat the decimal format.
+	 */
+	public void setDecimalFormat(DecimalFormat decimalFormat) {
+		this.decimalFormat = decimalFormat;
+		this.colorKey.setDecimalFormat(decimalFormat);
 	}
 	
 	/**
@@ -287,6 +320,8 @@ public class JHeatMap extends JPanel {
 	 */
 	public void setData(double[][] data) {
 		this.data = data;
+		this.colorKey.setLowValue(min(data));
+		this.colorKey.setHighValue(max(data));
 		this.initializeColors();
 		SwingUtilities.invokeLater(() -> {
 			this.heatmapTM.fireTableDataChanged();
@@ -363,7 +398,7 @@ public class JHeatMap extends JPanel {
 				
 				this.setBackground(doubleToColor.apply(cellValue));
 				this.setText("");
-				this.setToolTipText(value.toString());
+				this.setToolTipText(format(cellValue));
 			} else {
 				this.setText(value.toString());
 				this.setBackground(Color.WHITE);
@@ -375,12 +410,41 @@ public class JHeatMap extends JPanel {
 				this.setUI(new VerticalLabelUI(false));
 				this.setHorizontalAlignment(JLabel.LEFT);
 				this.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 0));
+				this.setFont(getHeatmapFont().deriveFont(20));
 			} else {
 				this.setUI(new BasicLabelUI());
 				this.setHorizontalAlignment(JLabel.RIGHT);
 				this.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5));
+				this.setFont(getHeatmapFont().deriveFont(20));
 			}
+			
 			return this;
 		}
+
+		private String format(double cellValue) {
+			return 	Double.isNaN(cellValue) ? 
+					"N/A" : decimalFormat.format(cellValue);
+		}
+	}
+
+	/**
+	 * Sets the heat map font.
+	 * 
+	 * @param font the heat map font.
+	 */
+	public void setHeatmapFont(Font font) {
+		this.font = Optional.ofNullable(font);
+		this.colorKey.setFont(font);
+		this.fixCellSize();
+		this.updateUI();
+	}
+	
+	/**
+	 * Returns the heat map font.
+	 * 
+	 * @return the heat map font.
+	 */
+	public Font getHeatmapFont() {
+		return this.font.orElse(super.getFont());
 	}
 }
