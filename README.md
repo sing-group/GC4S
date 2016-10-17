@@ -72,3 +72,9 @@ JParallelListsPanel
 A component that that wraps two JListPanel and allows moving elements between them.
 
 ![JParallelListsPanel](https://raw.githubusercontent.com/hlfernandez/GC4S/master/screenshots/JParallelLists.gif)
+
+ColorKeyLegend
+------------
+A component for displaying color key legends.
+
+![ColorKeyLegend](https://raw.githubusercontent.com/hlfernandez/GC4S/master/screenshots/ColorKeyLegend.png)

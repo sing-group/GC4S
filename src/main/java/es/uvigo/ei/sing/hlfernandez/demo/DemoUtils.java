@@ -1,6 +1,7 @@
 package es.uvigo.ei.sing.hlfernandez.demo;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 
 import javax.swing.JComponent;
 import javax.swing.JDialog;
@@ -15,14 +16,13 @@ import javax.swing.JPanel;
  */
 public class DemoUtils {
 	
-	
 	/**
 	 * Shows a JFrame containing the specified <code>component</code>.
 	 * 
-	 * @param component the {@code JComponent} to show
+	 * @param component the {@code Component} to show
 	 * @param title the title for the window
 	 */
-	public static final void showComponent(JComponent component, String title) {
+	public static final void showComponent(Component component, String title) {
 		JFrame frame = new JFrame(title);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.add(component);
