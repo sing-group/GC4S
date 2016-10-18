@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import es.uvigo.ei.sing.hlfernandez.input.DoubleRange;
 import es.uvigo.ei.sing.hlfernandez.visualization.JHeatMap;
 import es.uvigo.ei.sing.hlfernandez.visualization.JHeatMapModel;
 import es.uvigo.ei.sing.hlfernandez.visualization.JHeatMapPanel;
@@ -32,7 +33,9 @@ public class JHeatMapDemo {
 				generateColumnNames(data)
 			)
 		);
-		
+
+		heatmap.setValuesRange(new DoubleRange(0d, 7d));
+
 		DemoUtils.showComponent(new JHeatMapPanel(heatmap), "JHeatMap demo");
 	}
 	

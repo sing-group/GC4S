@@ -30,6 +30,7 @@ import javax.swing.table.TableColumn;
 
 import org.jdesktop.swingx.JXTable;
 
+import es.uvigo.ei.sing.hlfernandez.input.DoubleRange;
 import es.uvigo.ei.sing.hlfernandez.ui.VerticalLabelUI;
 import es.uvigo.ei.sing.hlfernandez.utilities.Gradient;
 import es.uvigo.ei.sing.hlfernandez.utilities.ImageIOUtils;
@@ -84,6 +85,9 @@ public class JHeatMap extends JPanel {
 	
 	private Function<Double, Color> doubleToColor;
 
+	private double lowValue = Double.NaN;
+	private double highValue = Double.NaN;
+
 	/**
 	 * Constructs a new {@code JHeatMap} taking {@code model} as data source.
 	 * 
@@ -112,26 +116,37 @@ public class JHeatMap extends JPanel {
 
 	private void initComponent() {
 		this.initializeColors();
-		
+
 		this.setLayout(new BorderLayout());
 		this.add(getColorKey(), BorderLayout.NORTH);
 		this.add(getHeatMap(), BorderLayout.CENTER);
 	}
 
 	private void initializeColors() {
-		double max = max(this.data);
-		double min = min(this.data);
+		double min = getLowValue();
+		double max = getHighValue();
 		Color[] colorGradient = getColorGradient();
+
 		doubleToColor = new Function<Double, Color>() {
-			
+
 			@Override
 			public Color apply(Double t) {
 				if (Double.isNaN(t)) {
 					return nanColor;
 				} else {
-					double normalized = normalize(t, max, min);
+					double normalized = normalize(checkRange(t), max, min);
 					int colorIndex = (int) ((normalized * (DEFAULT_STEPS - 1)));
 					return colorGradient[colorIndex];
+				}
+			}
+
+			private double checkRange(Double t) {
+				if (t > max) {
+					return max;
+				} else if (t < min) {
+					return min;
+				} else {
+					return t;
 				}
 			}
 
@@ -139,6 +154,7 @@ public class JHeatMap extends JPanel {
 				return (d - min) / (max - min);
 			}
 		};
+
 		this.updateUI();
 	}
 	
@@ -170,7 +186,7 @@ public class JHeatMap extends JPanel {
 				zoomOut();
 			}
 		});
-		
+
 		this.heatmap.setFont(this.heatmap.getFont().deriveFont(
 			(float) this.cellSize));
 		this.heatmap.setColumnControlVisible(false);
@@ -209,11 +225,13 @@ public class JHeatMap extends JPanel {
 	}
 	
 	private int getMaxRowNameLength() {
-		return Stream.of(this.rowNames).mapToInt(this::requiredLength).max().getAsInt();
+		return 	Stream.of(this.rowNames)
+				.mapToInt(this::requiredLength).max().getAsInt();
 	}
 	
 	private int getMaxColumnNameLength() {
-		return Stream.of(this.columnNames).mapToInt(this::requiredLength).max().getAsInt();
+		return 	Stream.of(this.columnNames)
+				.mapToInt(this::requiredLength).max().getAsInt();
 	}
 	
 	private int requiredLength(String s) {
@@ -327,7 +345,6 @@ public class JHeatMap extends JPanel {
 			this.heatmapTM.fireTableDataChanged();
 			this.fixCellSize();
 		});
-			
 	}
 	
 	class HeatMapTableModel extends AbstractTableModel {
@@ -446,5 +463,44 @@ public class JHeatMap extends JPanel {
 	 */
 	public Font getHeatmapFont() {
 		return this.font.orElse(super.getFont());
+	}
+	
+	
+	/**
+	 * Returns the low value of the heatmap.
+	 * @return the low value of the heatmap.
+	 */
+	public double getLowValue() {
+		if (Double.isNaN(lowValue)) {
+			return min(this.data);
+		} else {
+			return lowValue;
+		}
+	}
+
+	/**
+	 * Returns the high value of the heatmap. 
+	 * @return the high value of the heatmap.
+	 */
+	public double getHighValue() {
+		if (Double.isNaN(highValue)) {
+			return max(this.data);
+		} else {
+			return highValue;
+		}
+	}
+
+	/**
+	 * Sets the range of values used to draw the heatmap.
+	 * @param range a {@code DoubleRange}.
+	 */
+	public void setValuesRange(DoubleRange range) {
+		this.lowValue = range.getMin();
+		this.highValue = range.getMax();
+		
+		this.colorKey.setLowValue(this.lowValue);
+		this.colorKey.setHighValue(this.highValue);
+		
+		this.initializeColors();
 	}
 }
