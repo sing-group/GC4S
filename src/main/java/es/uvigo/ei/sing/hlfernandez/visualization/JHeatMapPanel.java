@@ -21,6 +21,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import es.uvigo.ei.sing.hlfernandez.dialog.FontConfigurationDialog;
+import es.uvigo.ei.sing.hlfernandez.input.DoubleRange;
+import es.uvigo.ei.sing.hlfernandez.input.DoubleRangeInputDialog;
 import es.uvigo.ei.sing.hlfernandez.menu.HamburgerMenu;
 import es.uvigo.ei.sing.hlfernandez.utilities.ExtendedAbstractAction;
 import es.uvigo.ei.sing.hlfernandez.visualization.JHeatMapOperations.Centering;
@@ -121,6 +123,10 @@ public class JHeatMapPanel extends JPanel {
 		HamburgerMenu menu = new HamburgerMenu(HamburgerMenu.Size.SIZE16);
 
 		menu.add(new ExtendedAbstractAction(
+			"Set range", this::setHeatmapRange
+		));
+
+		menu.add(new ExtendedAbstractAction(
 			"Transform data", this::transformDataMatrix
 		));
 
@@ -134,7 +140,19 @@ public class JHeatMapPanel extends JPanel {
 
 		return menu;
 	}
-	
+
+	protected void setHeatmapRange() {
+		DoubleRangeInputDialog dialog = new DoubleRangeInputDialog(
+			getWindowAncestor(this),
+			new DoubleRange(heatmap.getLowValue(), heatmap.getHighValue())
+		);
+		dialog.setVisible(true);
+
+		if(!dialog.isCanceled()) {
+			heatmap.setValuesRange(dialog.getSelectedRange());
+		}
+	}
+
 	protected void exportAsImage() {
 		JFileChooser fc = new JFileChooser();
 		int result = fc.showSaveDialog(JHeatMapPanel.this);
