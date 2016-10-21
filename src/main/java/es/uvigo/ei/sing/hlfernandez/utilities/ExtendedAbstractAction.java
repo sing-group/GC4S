@@ -3,6 +3,7 @@ package es.uvigo.ei.sing.hlfernandez.utilities;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
+import javax.swing.Icon;
 
 /**
  * <p>
@@ -43,9 +44,14 @@ public class ExtendedAbstractAction extends AbstractAction {
 		super();
 		this.action = action;
 	}
-	
+
 	public ExtendedAbstractAction(String name, Action action) {
 		super(name);
+		this.action = action;
+	}
+
+	public ExtendedAbstractAction(String name, Icon icon, Action action) {
+		super(name, icon);
 		this.action = action;
 	}
 
