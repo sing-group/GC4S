@@ -102,10 +102,7 @@ public abstract class AbstractInputJDialog extends JDialog {
 		okButton = new JButton("Ok", ICON_ACCEPT);
 		okButton.setEnabled(false);
 		okButton.setToolTipText("Accept");
-		okButton.addActionListener(event -> {
-			canceled = false;
-			dispose();
-		});
+		okButton.addActionListener(this::onOkButtonEvent);
 		
 		cancelButton = new JButton("Cancel", ICON_CANCEL);
 		cancelButton.setToolTipText("Cancel");
@@ -124,7 +121,12 @@ public abstract class AbstractInputJDialog extends JDialog {
 		
 		return buttonsPanel;
 	}
-	
+
+	protected void onOkButtonEvent(ActionEvent event) {
+		canceled = false;
+		dispose();
+	}
+
 	/**
 	 * Establishes the dialog key bindings.
 	 */
