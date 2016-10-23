@@ -18,6 +18,8 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -164,12 +166,15 @@ public class JHeatMap extends JPanel {
 
 	private Component getColorKey() {
 		JPanel colorKeyPanel = new JPanel();
+		colorKeyPanel.setLayout(new BoxLayout(colorKeyPanel, BoxLayout.X_AXIS));
 		colorKeyPanel.setBorder(createEmptyBorder(5, 5, 5, 5));
 		colorKey = new ColorKeyLegend(
 			this.lowColor, this.highColor, 
 			min(this.data), max(this.data)
 		);
+		colorKeyPanel.add(Box.createHorizontalGlue());
 		colorKeyPanel.add(colorKey);
+		colorKeyPanel.add(Box.createHorizontalGlue());
 		return colorKeyPanel;
 	}
 
