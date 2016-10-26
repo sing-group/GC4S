@@ -3,6 +3,7 @@ package es.uvigo.ei.sing.hlfernandez.utilities;
 import static java.util.stream.DoubleStream.of;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.stream.DoubleStream;
@@ -217,6 +218,21 @@ public class MatrixUtils {
 			toret[i] = Arrays.stream(matrix[i]).map(Object::toString).toArray(String[]::new);
 		}
 
+		return toret;
+	}
+
+	/**
+	 * Converts a list of {@code Double} into a primitive array of
+	 * {@code double}.
+	 * 
+	 * @param list a list of {@code Double}
+	 * @return a primitive array with the contents of the list.
+	 */
+	public static double[] asPrimitiveArray(List<Double> list) {
+		double[] toret = new double[list.size()];
+		for (int i = 0; i < toret.length; i++) {
+			toret[i] = list.get(i);
+		}
 		return toret;
 	}
 }
