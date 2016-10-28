@@ -85,7 +85,7 @@ public class InputParametersPanel extends JPanel {
 			descriptionLabels.put(c, new JLabel(c.getLabel()));
 			inputComponents.put(c, c.getInput());
 			
-			JLabel helpLabel = new JLabel(Icons.ICON_HELP);
+			JLabel helpLabel = new JLabel(Icons.ICON_INFO_2_16);
 			helpLabel.setToolTipText(c.getHelpLabel());
 			helpLabels.put(c, helpLabel);
 		});

@@ -3,7 +3,6 @@ package es.uvigo.ei.sing.hlfernandez.ui.icons;
 import javax.swing.ImageIcon;
 
 public class Icons {
-	public static final ImageIcon ICON_HELP = getResource("icons/help.png");
 	
 	public static final ImageIcon ICON_ADD_32 = getResource("icons/add32.png");
 	public static final ImageIcon ICON_ADD_24 = getResource("icons/add24.png");
@@ -32,6 +31,10 @@ public class Icons {
 	public static final ImageIcon ICON_INFO_32 = getResource("icons/info32.png");
 	public static final ImageIcon ICON_INFO_24 = getResource("icons/info24.png");
 	public static final ImageIcon ICON_INFO_16 = getResource("icons/info16.png");
+
+	public static final ImageIcon ICON_INFO_2_32 = getResource("icons/info232.png");
+	public static final ImageIcon ICON_INFO_2_24 = getResource("icons/info224.png");
+	public static final ImageIcon ICON_INFO_2_16 = getResource("icons/info216.png");
 	
 	public static final ImageIcon ICON_LOOKUP_32 = getResource("icons/lookup32.png");
 	public static final ImageIcon ICON_LOOKUP_24 = getResource("icons/lookup24.png");

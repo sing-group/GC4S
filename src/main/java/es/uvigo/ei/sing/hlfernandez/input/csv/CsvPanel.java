@@ -1,5 +1,7 @@
 package es.uvigo.ei.sing.hlfernandez.input.csv;
 
+import static es.uvigo.ei.sing.hlfernandez.ui.icons.Icons.ICON_INFO_2_16;
+
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -18,7 +20,6 @@ import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -48,9 +49,6 @@ import es.uvigo.ei.sing.hlfernandez.utilities.TextFieldSelectionFocusListener;
  */
 public class CsvPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
-	
-	private static final ImageIcon ICON_INFO = new ImageIcon(
-		CsvPanel.class.getResource("icons/info.png"));
 	
 	private static final TextFieldSelectionFocusListener FOCUS_LISTENER = 
 		new TextFieldSelectionFocusListener();
@@ -99,7 +97,7 @@ public class CsvPanel extends JPanel {
 		northPane.setLayout(groupLayout);
 		
 		final JLabel lblFormat = new JLabel("Format");
-		JLabel lblFormatHelp = new JLabel(ICON_INFO);
+		JLabel lblFormatHelp = new JLabel(ICON_INFO_2_16);
 		lblFormatHelp.setToolTipText("The file format");
 		fileFormatCB = new JComboBox<FileFormat>();
 		fileFormatCB.setModel(new DefaultComboBoxModel<>(FileFormat.values()));
@@ -170,7 +168,7 @@ public class CsvPanel extends JPanel {
 		};
 		
 		final JLabel lblQuoteFields = new JLabel("Quote fields");
-		final JLabel lblQuoteFieldsHelp = new JLabel(ICON_INFO);
+		final JLabel lblQuoteFieldsHelp = new JLabel(ICON_INFO_2_16);
 		lblQuoteFieldsHelp.setToolTipText(
 			"Sets wether fields must be delimited by double quotes");
 		JPanel quotePanel = new JPanel(new GridLayout(1,1));
@@ -198,7 +196,7 @@ public class CsvPanel extends JPanel {
 		};
 
 		final JLabel lblColumnSeparator = new JLabel("Column separator");
-		final JLabel lblColumnSeparatorHelp = new JLabel(ICON_INFO);
+		final JLabel lblColumnSeparatorHelp = new JLabel(ICON_INFO_2_16);
 		lblColumnSeparatorHelp.setToolTipText(
 			"Sets the column separator");
 		final JPanel columnSeparatorPanel = new JPanel(new GridLayout(1,3));
@@ -234,7 +232,7 @@ public class CsvPanel extends JPanel {
 		rbtnSepCustom.addItemListener(itemListener);
 		
 		final JLabel lblDecimalSeparator = new JLabel("Decimal separator");
-		final JLabel lblDecimalSeparatorHelp = new JLabel(ICON_INFO);
+		final JLabel lblDecimalSeparatorHelp = new JLabel(ICON_INFO_2_16);
 		lblDecimalSeparatorHelp.setToolTipText(
 			"Sets the decimal separator");
 		final JPanel decimalSeparatorPanel = new JPanel(new GridLayout(1,4));
@@ -283,7 +281,7 @@ public class CsvPanel extends JPanel {
 		rbtnDecimalSepCustom.addItemListener(decimalPointListener);
 		
 		final JLabel lblLineSeparator = new JLabel("Line break");
-		final JLabel lblLineSeparatorHelp = new JLabel(ICON_INFO);
+		final JLabel lblLineSeparatorHelp = new JLabel(ICON_INFO_2_16);
 		lblLineSeparatorHelp.setToolTipText("Sets the line break");
 		final JPanel lineSeparatorPanel = new JPanel(new GridLayout(1,3));
 		rbtnLineSepWindows = new JRadioButton("Windows");

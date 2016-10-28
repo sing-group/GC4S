@@ -37,7 +37,7 @@ public abstract class AbstractInputJDialog extends JDialog {
 		AbstractInputJDialog.class.getResource("icons/ok.png"));
 	protected static final ImageIcon ICON_CANCEL = new ImageIcon(
 		AbstractInputJDialog.class.getResource("icons/cancel.png"));
-	protected static final ImageIcon ICON_HELP = Icons.ICON_HELP;
+	protected static final ImageIcon ICON_HELP = Icons.ICON_INFO_2_16;
 	
 	protected boolean canceled = true;
 	protected JButton okButton;

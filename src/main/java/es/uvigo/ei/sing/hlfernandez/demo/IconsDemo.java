@@ -1,5 +1,7 @@
 package es.uvigo.ei.sing.hlfernandez.demo;
 
+import static es.uvigo.ei.sing.hlfernandez.demo.DemoUtils.showComponent;
+
 import java.io.InvalidClassException;
 
 import es.uvigo.ei.sing.hlfernandez.input.csv.CsvPanel;
@@ -14,6 +16,6 @@ import es.uvigo.ei.sing.hlfernandez.ui.icons.IconsPanel;
 public class IconsDemo {
 
 	public static void main(String[] args) throws InvalidClassException {
-		DemoUtils.showComponent(new IconsPanel());
+		showComponent(new IconsPanel(), "GC4S icons");
 	}
 }
