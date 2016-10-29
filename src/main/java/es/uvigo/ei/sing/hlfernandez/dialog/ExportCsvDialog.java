@@ -4,9 +4,9 @@ import static javax.swing.BorderFactory.createEmptyBorder;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Window;
 import java.io.File;
 
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.event.ChangeEvent;
@@ -28,7 +28,7 @@ public class ExportCsvDialog extends AbstractInputJDialog {
 
 	private JFileChooserPanel fileChooserPanel;
 	
-	public ExportCsvDialog(JFrame parent) {
+	public ExportCsvDialog(Window parent) {
 		super(parent);
 		this.pack();
 	}
