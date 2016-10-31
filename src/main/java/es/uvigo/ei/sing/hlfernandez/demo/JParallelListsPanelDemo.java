@@ -1,7 +1,8 @@
 package es.uvigo.ei.sing.hlfernandez.demo;
 
+import static java.util.Arrays.asList;
+
 import java.io.InvalidClassException;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.JList;
@@ -18,19 +19,25 @@ import es.uvigo.ei.sing.hlfernandez.list.JParallelListsPanel;
 public class JParallelListsPanelDemo {
 
 	public static void main(String[] args) throws InvalidClassException {
-		List<String> data = Arrays.asList(new String[] { "a", "b", "c", "d"});
+		JParallelListsPanel<String> parallelLists = new JParallelListsPanel<>(
+			createLeftList(), createRightList(), "Left", "Right", true, false);
 
+		DemoUtils.showComponent(parallelLists);
+	}
+
+	private static JList<String> createLeftList() {
+		return createList(asList("a", "b", "c", "d"));
+	}
+
+	private static JList<String> createRightList() {
+		return createList(asList("e", "f", "g", "h", "i", "j", "k", "l", "m"));
+	}
+
+	private static JList<String> createList(List<String> data) {
 		ExtendedDefaultListModel<String> listModel = 
 			new ExtendedDefaultListModel<String>();
 		listModel.addElements(data);
 
-		JList<String> left = new JList<String>(listModel);
-		JList<String> right = new JList<String>(
-			new ExtendedDefaultListModel<String>());
-
-		JParallelListsPanel<String> parallelLists = 
-			new JParallelListsPanel<>(left, right);
-
-		DemoUtils.showComponent(parallelLists);
+		return new JList<String>(listModel);
 	}
 }

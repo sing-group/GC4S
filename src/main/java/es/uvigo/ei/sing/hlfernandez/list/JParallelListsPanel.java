@@ -1,5 +1,8 @@
 package es.uvigo.ei.sing.hlfernandez.list;
 
+import static javax.swing.BorderFactory.createEmptyBorder;
+import static javax.swing.BorderFactory.createTitledBorder;
+
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -31,21 +34,53 @@ public class JParallelListsPanel<E> extends JPanel {
 	private AbstractAction actionMoveRight;
 	private JButton btnMoveRight;
 	private JButton btnMoveLeft;
+	private String leftTitle;
+	private String rightTitle;
 	
 	public JParallelListsPanel(JList<E> left, JList<E> right) 
 		throws InvalidClassException 
 	{
-		this.left = new JListPanel<E>(left, true, false);
-		this.right = new JListPanel<E>(right, true, false);
+		this(left, right, true, false);
+	}
+
+	public JParallelListsPanel(JList<E> left, JList<E> right, boolean buttons,
+			boolean filter ) 
+		throws InvalidClassException
+	{
+		this(left, right, "", "", buttons, filter);
+	}
+
+	public JParallelListsPanel(JList<E> left, JList<E> right, String leftTitle,
+			String rightTitle, boolean buttons, boolean filter)
+		throws InvalidClassException
+	{
+		this.leftTitle = leftTitle;
+		this.rightTitle = rightTitle;
+		this.left 	= new JListPanel<E>(left, buttons, filter);
+		this.right 	= new JListPanel<E>(right, buttons, filter);
 		init();
 	}
 
 	private void init() {
 		this.setLayout(new BorderLayout());
-		this.add(this.left, BorderLayout.WEST);
+		this.add(getLeftList(), BorderLayout.WEST);
 		this.add(this.getCenterComponent(), BorderLayout.CENTER);
-		this.add(this.right, BorderLayout.EAST);
+		this.add(getRightList(), BorderLayout.EAST);
 		this.addListeners();
+	}
+
+	private Component getLeftList() {
+		if (leftTitle != null && !leftTitle.equals("")) {
+			left.setBorder(createTitledBorder(createEmptyBorder(), leftTitle));
+		}
+		return left;
+	}
+
+	private Component getRightList() {
+		if (rightTitle != null && !rightTitle.equals("")) {
+			right.setBorder(createTitledBorder(createEmptyBorder(), rightTitle));
+		}
+		return right;
 	}
 
 	private Component getCenterComponent() {
