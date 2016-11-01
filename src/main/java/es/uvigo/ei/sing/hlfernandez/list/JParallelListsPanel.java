@@ -20,9 +20,17 @@ import javax.swing.event.ListSelectionListener;
 
 import es.uvigo.ei.sing.hlfernandez.ComponentFactory;
 
+/**
+ * A {@code JParallelListsPanel} displays two parallel {@code JListPanel}s,
+ * allowing to move elements between them.
+ * 
+ * @author hlfernandez
+ *
+ * @param <E> the type of the elements in the lists.
+ */
 public class JParallelListsPanel<E> extends JPanel {
-	
 	private static final long serialVersionUID = 1L;
+
 	protected static final ImageIcon ICON_ARROW_RIGHT = new ImageIcon(
 		JParallelListsPanel.class.getResource("icons/right.png"));
 	protected static final ImageIcon ICON_ARROW_LEFT = new ImageIcon(
@@ -36,13 +44,33 @@ public class JParallelListsPanel<E> extends JPanel {
 	private JButton btnMoveLeft;
 	private String leftTitle;
 	private String rightTitle;
-	
+
+	/**
+	 * Creates a new {@code JParallelListsPanel} with {@code left} and
+	 * {@code right} lists.
+	 * 
+	 * @param left the left {@code JList}.
+	 * @param right the right {@code JList}.
+	 * @throws InvalidClassException if list's model is not an 
+	 * 	{@code ExtendedDefaultModel}.
+	 */
 	public JParallelListsPanel(JList<E> left, JList<E> right) 
 		throws InvalidClassException 
 	{
 		this(left, right, true, false);
 	}
 
+	/**
+	 * Creates a new {@code JParallelListsPanel} with {@code left} and
+	 * {@code right} lists.
+	 * 
+	 * @param left the left {@code JList}.
+	 * @param right the right {@code JList}.
+	 * @param buttons if {@code true}, the action buttons are shown.
+	 * @param filter if {@code true}, list filters are shown.
+	 * @throws InvalidClassException if list's model is not an 
+	 * 	{@code ExtendedDefaultModel}.
+	 */
 	public JParallelListsPanel(JList<E> left, JList<E> right, boolean buttons,
 			boolean filter ) 
 		throws InvalidClassException
@@ -50,6 +78,19 @@ public class JParallelListsPanel<E> extends JPanel {
 		this(left, right, "", "", buttons, filter);
 	}
 
+	/**
+	 * Creates a new {@code JParallelListsPanel} with {@code left} and
+	 * {@code right} lists.
+	 * 
+	 * @param left the left {@code JList}.
+	 * @param right the right {@code JList}.
+	 * @param leftTitle the title for the left list.
+	 * @param rightTitle the title for the right list.
+	 * @param buttons if {@code true}, the action buttons are shown.
+	 * @param filter if {@code true}, list filters are shown.
+	 * @throws InvalidClassException if list's model is not an 
+	 * 	{@code ExtendedDefaultModel}.
+	 */
 	public JParallelListsPanel(JList<E> left, JList<E> right, String leftTitle,
 			String rightTitle, boolean buttons, boolean filter)
 		throws InvalidClassException
@@ -123,7 +164,7 @@ public class JParallelListsPanel<E> extends JPanel {
 		moveSelectedElements(this.right.getList(), this.left.getList());
 		checkRightListSelection();
 	}
-	
+
 	private void moveSelectedElements(JList<E> source, JList<E> dest) {
 		FilteredListModel<E> sFLM = (FilteredListModel<E>) source.getModel();
 		ExtendedDefaultListModel<E> sEDLM = 
@@ -143,7 +184,6 @@ public class JParallelListsPanel<E> extends JPanel {
 		dest.updateUI();
 	}
 
-	
 	private void addListeners() {
 		this.left.getList().addListSelectionListener(new ListSelectionListener() {
 			
