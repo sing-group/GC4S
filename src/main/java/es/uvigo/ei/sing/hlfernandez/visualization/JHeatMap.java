@@ -2,6 +2,7 @@ package es.uvigo.ei.sing.hlfernandez.visualization;
 
 import static es.uvigo.ei.sing.hlfernandez.utilities.MatrixUtils.max;
 import static es.uvigo.ei.sing.hlfernandez.utilities.MatrixUtils.min;
+import static java.util.Arrays.asList;
 import static javax.swing.BorderFactory.createEmptyBorder;
 
 import java.awt.BorderLayout;
@@ -12,6 +13,8 @@ import java.awt.Font;
 import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.IntStream;
@@ -24,6 +27,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.RowFilter;
 import javax.swing.SwingUtilities;
 import javax.swing.plaf.basic.BasicLabelUI;
 import javax.swing.table.AbstractTableModel;
@@ -31,6 +35,7 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 
 import org.jdesktop.swingx.JXTable;
+import org.jdesktop.swingx.table.TableColumnExt;
 
 import es.uvigo.ei.sing.hlfernandez.input.DoubleRange;
 import es.uvigo.ei.sing.hlfernandez.ui.VerticalLabelUI;
@@ -80,6 +85,8 @@ public class JHeatMap extends JPanel {
 	private double[][] 	data;
 	private String[] 	columnNames;
 	private String[] 	rowNames;
+	private Optional<List<String>> visibleRows = Optional.empty();;
+	private Optional<List<String>> visibleColumns = Optional.empty();;
 	
 	private ColorKeyLegend colorKey;
 	private JXTable heatmap;
@@ -211,11 +218,11 @@ public class JHeatMap extends JPanel {
 
 	private void fixCellSize() {
 		this.heatmap.setRowHeight(0, getMaxColumnNameLength());
-		IntStream.range(1, this.heatmapTM.getRowCount()).forEach(row -> {
+		IntStream.range(1, getVisibleRowNames().size()+1).forEach(row -> {
 			this.heatmap.setRowHeight(row, this.cellSize);
 		});
 		
-		for(int i = 0; i < this.heatmap.getColumnModel().getColumnCount(); i++) {
+		for (int i = 0; i < this.heatmap.getColumnModel().getColumnCount(); i++) {
 			TableColumn c = this.heatmap.getColumnModel().getColumn(i);
 			c.setMinWidth(this.cellSize);
 			c.setMaxWidth(this.cellSize);
@@ -507,5 +514,114 @@ public class JHeatMap extends JPanel {
 		this.colorKey.setHighValue(this.highValue);
 		
 		this.initializeColors();
+	}
+
+	/**
+	 * Returns a list with the row names.
+	 * 
+	 * @return a list with the row names.
+	 */
+	public List<String> getRowNames() {
+		return new LinkedList<String>(asList(rowNames));
+	}
+
+	/**
+	 * Returns a list with the column names.
+	 * 
+	 * @return a list with the column names.
+	 */	
+	public List<String> getColumnNames() {
+		return new LinkedList<String>(asList(columnNames));
+	}
+
+	/**
+	 * Returns a list with the row names that are currently visible.
+	 * 
+	 * @return a list with the row names that are currently visible.
+	 */
+	public List<String> getVisibleRowNames() {
+		if (visibleRows.isPresent()) {
+			return visibleRows.get();
+		} else {
+			return getRowNames();
+		}
+	}
+
+	/**
+	 * Returns a list with the column names that are currently visible.
+	 * 
+	 * @return a list with the column names that are currently visible.
+	 */
+	public List<String> getVisibleColumnNames() {
+		if (visibleColumns.isPresent()) {
+			return visibleColumns.get();
+		} else {
+			return getColumnNames();
+		}
+	}
+
+	/**
+	 * Sets the visible row names.
+	 * 
+	 * @param rowNames a {@code List} containing the visible row names.
+	 */
+	public void setVisibleRowNames(List<String> rowNames) {
+		if (rowNames != null && !rowNames.isEmpty()) {
+			this.visibleRows = Optional.of(rowNames);
+		} else {
+			this.visibleRows = Optional.empty();
+		}
+		updateVisibleRows();
+	}
+
+	private void updateVisibleRows() {
+		updateRowFilter();
+	}
+
+	/**
+	 * Sets the visible column names.
+	 * 
+	 * @param columnNames a {@code List} containing the visible column names.
+	 */
+	public void setVisibleColumnNames(List<String> columnNames) {
+		if (columnNames != null && !columnNames.isEmpty()) {
+			this.visibleColumns = Optional.of(columnNames);
+		} else {
+			this.visibleColumns = Optional.empty();
+		}
+		updateVisibleColumns();
+	}
+
+	private void updateVisibleColumns() {
+		List<String> visibleColumnNames = getVisibleColumnNames();
+		List<String> columnNames = getColumnNames();
+		for (int i = 0; i < columnNames.size(); i++) {
+			String colName = columnNames.get(i);
+			boolean visible = visibleColumnNames.contains(colName);
+			getTableColumnExt(i + 1).setVisible(visible);
+		}
+	}
+
+	private TableColumnExt getTableColumnExt(int modelIndex) {
+		return (TableColumnExt) this.heatmap.getColumns(true).get(modelIndex);
+	}
+
+	private void updateRowFilter() {
+		this.heatmap.setRowFilter(getRowFilter());
+	}
+
+	private TestRowFilter<Object, Object> getRowFilter() {
+		return new TestRowFilter<>();
+	}
+
+	private class TestRowFilter<M, I> extends RowFilter<M, I> {
+		@Override
+		public boolean include(RowFilter.Entry<? extends M, ? extends I> entry) {
+			if (entry.getIdentifier().equals(0)) {
+				return true;
+			} else {
+				return getVisibleRowNames().contains(entry.getStringValue(0));
+			}
+		}
 	}
 }

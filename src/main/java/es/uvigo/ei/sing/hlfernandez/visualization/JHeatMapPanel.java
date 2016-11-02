@@ -9,7 +9,10 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Window;
 import java.io.IOException;
+import java.io.InvalidClassException;
+import java.util.List;
 import java.util.Optional;
 
 import javax.swing.BorderFactory;
@@ -21,6 +24,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import es.uvigo.ei.sing.hlfernandez.dialog.FontConfigurationDialog;
+import es.uvigo.ei.sing.hlfernandez.dialog.ListSelectionDialog;
 import es.uvigo.ei.sing.hlfernandez.input.DoubleRange;
 import es.uvigo.ei.sing.hlfernandez.input.DoubleRangeInputDialog;
 import es.uvigo.ei.sing.hlfernandez.menu.HamburgerMenu;
@@ -131,6 +135,14 @@ public class JHeatMapPanel extends JPanel {
 		));
 
 		menu.add(new ExtendedAbstractAction(
+			"Visible rows", this::editVisibleRows
+		));
+
+		menu.add(new ExtendedAbstractAction(
+			"Visible columns", this::editVisibleColumns
+		));
+
+		menu.add(new ExtendedAbstractAction(
 			"Configure font", this::configureFont
 		));
 
@@ -141,9 +153,56 @@ public class JHeatMapPanel extends JPanel {
 		return menu;
 	}
 
+	protected void editVisibleRows() {
+		List<String> visible 	= this.heatmap.getVisibleRowNames();
+		List<String> notVisible = this.heatmap.getRowNames();
+		notVisible.removeAll(visible);
+
+		ListSelectionDialog<String> dialog;
+		try {
+			dialog = new ListSelectionDialog<>(
+				getDialogParent(), visible, notVisible, "Visible rows", 
+				"Not visible rows"
+			);
+			dialog.setVisible(true);
+
+			if (!dialog.isCanceled()) {
+				this.heatmap.setVisibleRowNames(dialog.getSelectedItems());
+			}
+		} catch (InvalidClassException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	private Window getDialogParent() {
+		return getWindowAncestor(this);
+	}
+
+	protected void editVisibleColumns() {
+		List<String> visible 	= this.heatmap.getVisibleColumnNames();
+		List<String> notVisible = this.heatmap.getColumnNames();
+		notVisible.removeAll(visible);
+
+		ListSelectionDialog<String> dialog;
+		try {
+			dialog = new ListSelectionDialog<>(
+				getDialogParent(), visible, notVisible, "Visible columns", 
+				"Not visible columns"
+			);
+
+			dialog.setVisible(true);
+
+			if (!dialog.isCanceled()) {
+				this.heatmap.setVisibleColumnNames(dialog.getSelectedItems());
+			}
+		} catch (InvalidClassException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 	protected void setHeatmapRange() {
 		DoubleRangeInputDialog dialog = new DoubleRangeInputDialog(
-			getWindowAncestor(this),
+			getDialogParent(),
 			new DoubleRange(heatmap.getLowValue(), heatmap.getHighValue())
 		);
 		dialog.setVisible(true);
@@ -167,7 +226,7 @@ public class JHeatMapPanel extends JPanel {
 	
 	protected void configureFont() {
 		FontConfigurationDialog dialog = new FontConfigurationDialog(
-			getWindowAncestor(this), getHeatmapFont()
+			getDialogParent(), getHeatmapFont()
 		);
 		dialog.setVisible(true);
 		
@@ -199,7 +258,7 @@ public class JHeatMapPanel extends JPanel {
 	
 	private void transformDataMatrix() {
 		JHeatMapDataOperationsDialog dialog = 
-			new JHeatMapDataOperationsDialog(getWindowAncestor(this));
+			new JHeatMapDataOperationsDialog(getDialogParent());
 		dialog.setVisible(true);
 		
 		if(!dialog.isCanceled()) {
