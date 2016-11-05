@@ -56,6 +56,18 @@ public class Icons {
 	public static final ImageIcon ICON_QUESTION_24 = getResource("icons/question24.png");
 	public static final ImageIcon ICON_QUESTION_16 = getResource("icons/question16.png");
 
+	public static final ImageIcon ICON_ROW_32 = getResource("icons/row32.png");
+	public static final ImageIcon ICON_ROW_24 = getResource("icons/row24.png");
+	public static final ImageIcon ICON_ROW_16 = getResource("icons/row16.png");
+
+	public static final ImageIcon ICON_COLUMN_32 = getResource("icons/column32.png");
+	public static final ImageIcon ICON_COLUMN_24 = getResource("icons/column24.png");
+	public static final ImageIcon ICON_COLUMN_16 = getResource("icons/column16.png");
+
+	public static final ImageIcon ICON_RANGE_32 = getResource("icons/range32.png");
+	public static final ImageIcon ICON_RANGE_24 = getResource("icons/range24.png");
+	public static final ImageIcon ICON_RANGE_16 = getResource("icons/range16.png");
+
 	public static ImageIcon getResource(String resource) {
 		return new ImageIcon(Icons.class.getResource(resource));
 	}
