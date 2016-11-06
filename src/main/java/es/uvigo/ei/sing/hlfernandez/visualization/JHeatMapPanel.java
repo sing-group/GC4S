@@ -1,5 +1,6 @@
 package es.uvigo.ei.sing.hlfernandez.visualization;
 
+import static es.uvigo.ei.sing.hlfernandez.ui.icons.Icons.*;
 import static es.uvigo.ei.sing.hlfernandez.visualization.JHeatMapOperations.center;
 import static es.uvigo.ei.sing.hlfernandez.visualization.JHeatMapOperations.transform;
 import static javax.swing.SwingUtilities.getWindowAncestor;
@@ -127,27 +128,27 @@ public class JHeatMapPanel extends JPanel {
 		HamburgerMenu menu = new HamburgerMenu(HamburgerMenu.Size.SIZE16);
 
 		menu.add(new ExtendedAbstractAction(
-			"Set range", this::setHeatmapRange
+			"Set range", ICON_RANGE_16, this::setHeatmapRange
 		));
 
 		menu.add(new ExtendedAbstractAction(
-			"Transform data", this::transformDataMatrix
+			"Transform data", ICON_EDIT_16, this::transformDataMatrix
 		));
 
 		menu.add(new ExtendedAbstractAction(
-			"Visible rows", this::editVisibleRows
+			"Visible rows", ICON_ROW_16, this::editVisibleRows
 		));
 
 		menu.add(new ExtendedAbstractAction(
-			"Visible columns", this::editVisibleColumns
+			"Visible columns", ICON_COLUMN_16, this::editVisibleColumns
 		));
 
 		menu.add(new ExtendedAbstractAction(
-			"Configure font", this::configureFont
+			"Configure font", ICON_FONT_16, this::configureFont
 		));
 
 		menu.add(new ExtendedAbstractAction(
-			"Export heatmap as image", this::exportAsImage
+			"Export heatmap as image", ICON_IMAGE_16, this::exportAsImage
 		));
 
 		return menu;
