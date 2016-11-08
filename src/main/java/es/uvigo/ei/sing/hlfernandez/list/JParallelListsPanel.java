@@ -5,12 +5,11 @@ import static javax.swing.BorderFactory.createTitledBorder;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.io.InvalidClassException;
 
 import javax.swing.AbstractAction;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JList;
@@ -19,6 +18,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import es.uvigo.ei.sing.hlfernandez.ComponentFactory;
+import es.uvigo.ei.sing.hlfernandez.ui.CenteredJPanel;
 
 /**
  * A {@code JParallelListsPanel} displays two parallel {@code JListPanel}s,
@@ -125,9 +125,6 @@ public class JParallelListsPanel<E> extends JPanel {
 	}
 
 	private Component getCenterComponent() {
-		JPanel center = new JPanel();
-		center.setLayout(new BoxLayout(center, BoxLayout.Y_AXIS));
-		
 		actionMoveLeft = new AbstractAction("Move left", ICON_ARROW_LEFT) {
 			private static final long serialVersionUID = 1L;
 
@@ -148,11 +145,11 @@ public class JParallelListsPanel<E> extends JPanel {
 		btnMoveRight = ComponentFactory.createButton(actionMoveRight, false,
 			"Moves the selected element to the right list", false);
 
-		center.add(Box.createVerticalGlue());
-		center.add(btnMoveLeft);
-		center.add(btnMoveRight);
-		center.add(Box.createVerticalGlue());
-		return center;
+		JPanel buttons = new JPanel(new GridLayout(2, 1));
+		buttons.add(btnMoveLeft);
+		buttons.add(btnMoveRight);
+
+		return new CenteredJPanel(buttons);
 	}
 
 	protected void moveRightSelectedElement() {
