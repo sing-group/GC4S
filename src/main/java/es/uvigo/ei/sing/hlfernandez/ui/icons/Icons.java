@@ -68,6 +68,10 @@ public class Icons {
 	public static final ImageIcon ICON_RANGE_24 = getResource("icons/range24.png");
 	public static final ImageIcon ICON_RANGE_16 = getResource("icons/range16.png");
 
+	public static final ImageIcon ICON_MERGE_32 = getResource("icons/merge32.png");
+	public static final ImageIcon ICON_MERGE_24 = getResource("icons/merge24.png");
+	public static final ImageIcon ICON_MERGE_16 = getResource("icons/merge16.png");
+
 	public static ImageIcon getResource(String resource) {
 		return new ImageIcon(Icons.class.getResource(resource));
 	}
