@@ -1,12 +1,13 @@
 package es.uvigo.ei.sing.hlfernandez.demo;
 
-import java.awt.BorderLayout;
 import java.awt.Component;
 
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import es.uvigo.ei.sing.hlfernandez.ui.CenteredJPanel;
 
 /**
  * Utility methods for demo classes.
@@ -48,13 +49,7 @@ public class DemoUtils {
 	public static final JPanel createPanelAndCenterComponent(
 		JComponent component
 	) {
-		JPanel toret = new JPanel(new BorderLayout());
-		toret.add(new JPanel(), BorderLayout.NORTH);
-		toret.add(new JPanel(), BorderLayout.WEST);
-		toret.add(new JPanel(), BorderLayout.EAST);
-		toret.add(new JPanel(), BorderLayout.SOUTH);
-		toret.add(component, BorderLayout.CENTER);
-		return toret;
+		return new CenteredJPanel(component);
 	}
 	
 	/**
