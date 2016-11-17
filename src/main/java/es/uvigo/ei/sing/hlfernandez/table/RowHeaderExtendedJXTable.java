@@ -37,17 +37,26 @@ public class RowHeaderExtendedJXTable extends ExtendedJXTable {
         this.rowNames = rowNames;
         this.init();
     }
-    
+
 	private void init() {
 		this.setModel(new RowHeaderTableModel(this.getModel(), this.rowNames));
-		this.setDefaultRenderer(RowHeaderCell.class, 
-			new RowHeaderRenderer(this.getTableHeader().getDefaultRenderer())
+
+		TableCellRenderer headerRenderer = new RowHeaderRenderer(
+			this.getTableHeader().getDefaultRenderer()
 		);
+
+		this.getTableHeader().setDefaultRenderer(headerRenderer );
+		this.setDefaultRenderer(RowHeaderCell.class, headerRenderer);
+		this.setDefaultRenderer(Object.class,
+			new FontRenderer(this.getDefaultRenderer(Object.class))
+		);
+
+		this.getSortController().setSortable(0, false);
 	}
     
 	private class RowHeaderRenderer extends DefaultTableRenderer {
 		private static final long serialVersionUID = 1L;
-		
+
 		private TableCellRenderer defaultRenderer;
 
 		public RowHeaderRenderer(TableCellRenderer defaultRenderer) {
@@ -58,8 +67,34 @@ public class RowHeaderExtendedJXTable extends ExtendedJXTable {
 			Object value, boolean isSelected, boolean hasFocus, int row,
 			int column
 		) {
-			return defaultRenderer.getTableCellRendererComponent(table, value,
-				isSelected, hasFocus, row, column);
+			Component component = defaultRenderer.getTableCellRendererComponent(
+				table, value, isSelected, hasFocus, row, column);
+
+			component.setFont(RowHeaderExtendedJXTable.this.getFont());
+
+			return component;
 		}
     }
+
+	private class FontRenderer extends DefaultTableRenderer {
+		private static final long serialVersionUID = 1L;
+
+		private TableCellRenderer defaultRenderer;
+
+		public FontRenderer(TableCellRenderer defaultRenderer) {
+			this.defaultRenderer = defaultRenderer;
+		}
+
+		public Component getTableCellRendererComponent(JTable table,
+			Object value, boolean isSelected, boolean hasFocus, int row,
+			int column
+		) {
+			Component component = defaultRenderer.getTableCellRendererComponent(
+				table, value, isSelected, hasFocus, row, column);
+
+			component.setFont(RowHeaderExtendedJXTable.this.getFont());
+
+			return component;
+		}
+	}
 }

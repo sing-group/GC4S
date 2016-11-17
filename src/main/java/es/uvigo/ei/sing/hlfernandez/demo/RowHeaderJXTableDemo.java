@@ -1,6 +1,9 @@
 package es.uvigo.ei.sing.hlfernandez.demo;
 
 import static es.uvigo.ei.sing.hlfernandez.demo.DemoUtils.showComponent;
+
+import java.awt.Font;
+
 import javax.swing.JScrollPane;
 
 import es.uvigo.ei.sing.hlfernandez.table.RowHeaderExtendedJXTable;
@@ -32,6 +35,7 @@ public class RowHeaderJXTableDemo {
 		RowHeaderExtendedJXTable table = 
 			new RowHeaderExtendedJXTable(dataValues, columnNames, rowNames);
 		table.setColumnControlVisible(true);
+		table.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
 		
 		showComponent(new JScrollPane(table), "RowHeaderJXTableDemo demo dialog");
 	}
