@@ -56,6 +56,14 @@ public class Icons {
 	public static final ImageIcon ICON_QUESTION_24 = getResource("icons/question24.png");
 	public static final ImageIcon ICON_QUESTION_16 = getResource("icons/question16.png");
 
+	public static final ImageIcon ICON_QUESTION_2_32 = getResource("icons/question232.png");
+	public static final ImageIcon ICON_QUESTION_2_24 = getResource("icons/question224.png");
+	public static final ImageIcon ICON_QUESTION_2_16 = getResource("icons/question216.png");
+
+	public static final ImageIcon ICON_QUESTION_3_32 = getResource("icons/question332.png");
+	public static final ImageIcon ICON_QUESTION_3_24 = getResource("icons/question324.png");
+	public static final ImageIcon ICON_QUESTION_3_16 = getResource("icons/question316.png");
+
 	public static final ImageIcon ICON_ROW_32 = getResource("icons/row32.png");
 	public static final ImageIcon ICON_ROW_24 = getResource("icons/row24.png");
 	public static final ImageIcon ICON_ROW_16 = getResource("icons/row16.png");
