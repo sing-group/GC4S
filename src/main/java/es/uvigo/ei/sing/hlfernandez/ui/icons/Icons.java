@@ -64,6 +64,10 @@ public class Icons {
 	public static final ImageIcon ICON_QUESTION_3_24 = getResource("icons/question324.png");
 	public static final ImageIcon ICON_QUESTION_3_16 = getResource("icons/question316.png");
 
+	public static final ImageIcon ICON_QUESTION_4_32 = getResource("icons/question432.png");
+	public static final ImageIcon ICON_QUESTION_4_24 = getResource("icons/question424.png");
+	public static final ImageIcon ICON_QUESTION_4_16 = getResource("icons/question416.png");
+
 	public static final ImageIcon ICON_ROW_32 = getResource("icons/row32.png");
 	public static final ImageIcon ICON_ROW_24 = getResource("icons/row24.png");
 	public static final ImageIcon ICON_ROW_16 = getResource("icons/row16.png");
