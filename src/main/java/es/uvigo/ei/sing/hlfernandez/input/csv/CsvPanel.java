@@ -170,7 +170,7 @@ public class CsvPanel extends JPanel {
 		final JLabel lblQuoteFields = new JLabel("Quote fields");
 		final JLabel lblQuoteFieldsHelp = new JLabel(ICON_INFO_2_16);
 		lblQuoteFieldsHelp.setToolTipText(
-			"Sets wether fields must be delimited by double quotes");
+			"Sets whether fields must be delimited by double quotes.");
 		JPanel quotePanel = new JPanel(new GridLayout(1,1));
 		quoteFields = new JCheckBox("", false);
 		quoteFields.addItemListener(itemListener);
