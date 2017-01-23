@@ -1,5 +1,6 @@
 package es.uvigo.ei.sing.hlfernandez.ui.icons;
 
+import static java.awt.Image.SCALE_SMOOTH;
 import javax.swing.ImageIcon;
 
 public class Icons {
@@ -68,6 +69,10 @@ public class Icons {
 	public static final ImageIcon ICON_QUESTION_4_24 = getResource("icons/question424.png");
 	public static final ImageIcon ICON_QUESTION_4_16 = getResource("icons/question416.png");
 
+	public static final ImageIcon ICON_QUESTION_5_32 = getResource("icons/question532.png");
+	public static final ImageIcon ICON_QUESTION_5_24 = getResource("icons/question524.png");
+	public static final ImageIcon ICON_QUESTION_5_16 = getResource("icons/question516.png");
+
 	public static final ImageIcon ICON_ROW_32 = getResource("icons/row32.png");
 	public static final ImageIcon ICON_ROW_24 = getResource("icons/row24.png");
 	public static final ImageIcon ICON_ROW_16 = getResource("icons/row16.png");
@@ -84,7 +89,29 @@ public class Icons {
 	public static final ImageIcon ICON_MERGE_24 = getResource("icons/merge24.png");
 	public static final ImageIcon ICON_MERGE_16 = getResource("icons/merge16.png");
 
-	public static ImageIcon getResource(String resource) {
+	public static final ImageIcon ICON_OK_32 = getResource("icons/ok32.png");
+	public static final ImageIcon ICON_OK_24 = getResource("icons/ok24.png");
+	public static final ImageIcon ICON_OK_16 = getResource("icons/ok16.png");
+
+	public static final ImageIcon ICON_CANCEL_32 = getResource("icons/cancel32.png");
+	public static final ImageIcon ICON_CANCEL_24 = getResource("icons/cancel24.png");
+	public static final ImageIcon ICON_CANCEL_16 = getResource("icons/cancel16.png");
+
+	private static ImageIcon getResource(String resource) {
 		return new ImageIcon(Icons.class.getResource(resource));
+	}
+	
+	/**
+	 * Scales {@code icon} to {@code width} and {@code height}.
+	 * 
+	 * @param icon an {@code ImageIcon} to scale.
+	 * @param width the width.
+	 * @param height the height.
+	 * @return a new {@code ImageIcon} containing the scaled icon.
+	 */
+	public static ImageIcon getScaledIcon(ImageIcon icon, int width, int height) {
+		return 	new ImageIcon(
+			icon.getImage().getScaledInstance(width, height, SCALE_SMOOTH)
+		);
 	}
 }
