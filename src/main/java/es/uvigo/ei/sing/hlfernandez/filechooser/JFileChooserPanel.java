@@ -23,18 +23,42 @@ import javax.swing.event.DocumentListener;
 import es.uvigo.ei.sing.hlfernandez.ComponentFactory;
 import es.uvigo.ei.sing.hlfernandez.utilities.FileDrop;
 
+/**
+ * A {@code JFileChooserPanel} displays a text field together a browse button
+ * that allows users to select a file. The name of the file selected is shown in
+ * the text field.
+ * 
+ * @author hlfernandez
+ *
+ */
 public class JFileChooserPanel extends JPanel {
-	
-	public static enum Mode {
-		OPEN, SAVE;
-	};
-	
 	private static final long serialVersionUID = 1L;
 	private static final ImageIcon ICON_BROWSE = new ImageIcon(
 		JFileChooserPanel.class.getResource("icons/browse.png"));
 	
+	public static enum Mode {
+		OPEN, SAVE;
+	};
+
+	public static enum SelectionMode {
+		FILES(JFileChooser.FILES_ONLY), 
+		DIRECTORIES(JFileChooser.DIRECTORIES_ONLY), 
+		FILES_DIRECTORIES(JFileChooser.FILES_AND_DIRECTORIES);
+
+		private int fileSelectionMode;
+
+		SelectionMode(int fileSelectionMode) {
+			this.fileSelectionMode = fileSelectionMode;
+		}
+
+		public int getFileSelectionMode() {
+			return fileSelectionMode;
+		}
+	};
+
 	private JFileChooser filechooser;
 	private Mode mode;
+	private SelectionMode selectionMode;
 	private AbstractAction browseAction;
 	private JButton btnBrowse;
 	private JLabel lblFile;
@@ -52,7 +76,8 @@ public class JFileChooserPanel extends JPanel {
 	 *            the {@code JFileChooser} mode.
 	 */
 	public JFileChooserPanel(Mode mode) {
-		this(mode, new JFileChooser(), ICON_BROWSE, "File: ", null);
+		this(mode, new JFileChooser(), ICON_BROWSE, "File: ", null, 
+			SelectionMode.FILES_DIRECTORIES);
 	}
 
 	/**
@@ -69,7 +94,7 @@ public class JFileChooserPanel extends JPanel {
 	 */
 	public JFileChooserPanel(Mode mode, String requiredFileExtension) {
 		this(mode, new JFileChooser(), ICON_BROWSE, "File: ",
-				requiredFileExtension);
+			requiredFileExtension, SelectionMode.FILES_DIRECTORIES);
 	}
 	
 	/**
@@ -88,9 +113,26 @@ public class JFileChooserPanel extends JPanel {
 	public JFileChooserPanel(Mode  mode, JFileChooser filechooser, 
 		String requiredFileExtension
 	){
-		this(mode, filechooser, ICON_BROWSE, "File: ", requiredFileExtension);
+		this(mode, filechooser, ICON_BROWSE, "File: ", requiredFileExtension, 
+			SelectionMode.FILES_DIRECTORIES);
 	}
 	
+	/**
+	 * Constructs a {@link JFileChooserPanel} with the specified {@code} mode}
+	 * and {@code filechooser}. For the rest, the default configuration (default
+	 * browse icon, file label text and no required extension) is taken.
+	 * 
+	 * @param mode
+	 *            the {@code JFileChooser} mode.
+	 * @param selectionMode
+	 *            the {@code JFileChooser} selection mode.
+	 * @param filechooser
+	 *            the {@link JFileChooser} that will be opened.
+	 */
+	public JFileChooserPanel(Mode  mode, SelectionMode selectionMode, JFileChooser filechooser){
+		this(mode, filechooser, ICON_BROWSE, "File: ", null, selectionMode);
+	}
+
 	/**
 	 * Constructs a {@link JFileChooserPanel} with the specified {@code} mode}
 	 * and {@code filechooser}. For the rest, the default configuration (default
@@ -102,7 +144,7 @@ public class JFileChooserPanel extends JPanel {
 	 *            the {@link JFileChooser} that will be opened.
 	 */
 	public JFileChooserPanel(Mode  mode, JFileChooser filechooser){
-		this(mode, filechooser, ICON_BROWSE, "File: ", null);
+		this(mode, filechooser, ICON_BROWSE, "File: ", null, SelectionMode.FILES_DIRECTORIES);
 	}
 
 	/**
@@ -121,9 +163,13 @@ public class JFileChooserPanel extends JPanel {
 	 * @param requiredFileExtension
 	 *            only for Mode.SAVE, the extension that file must have (e.g.:
 	 *            "txt")
+	 * @param selectionMode
+	 *            the {@code JFileChooser} selection mode.
 	 */
-	public JFileChooserPanel(Mode mode, JFileChooser filechooser, ImageIcon browseIcon,
-			String labelFileText, String requiredFileExtension) {
+	public JFileChooserPanel(Mode mode, JFileChooser filechooser, 
+		ImageIcon browseIcon, String labelFileText, 
+		String requiredFileExtension, SelectionMode selectionMode
+	) {
 		super();
 		this.filechooser = filechooser;
 		this.lblFileText = labelFileText;
@@ -131,10 +177,10 @@ public class JFileChooserPanel extends JPanel {
 			this.requiredFileExtension = requiredFileExtension;
 		}
 		this.mode = mode;
+		this.selectionMode = selectionMode;
 		initComponent();
-
 	}
-	
+
 	private void initComponent() {
 		this.setLayout(new BorderLayout());
 		lblFile = new JLabel(this.lblFileText);
@@ -145,12 +191,12 @@ public class JFileChooserPanel extends JPanel {
 			@Override
 			public void removeUpdate(DocumentEvent e) {
 			}
-			
+
 			@Override
 			public void insertUpdate(DocumentEvent e) {
 				fileNameUpdated();
 			}
-			
+
 			@Override
 			public void changedUpdate(DocumentEvent e) {
 			}
@@ -185,7 +231,7 @@ public class JFileChooserPanel extends JPanel {
 		this.add(fileName, BorderLayout.CENTER);
 		this.add(btnBrowse, BorderLayout.EAST);
 	}
-	
+
 	private void fileNameUpdated() {
 		fireFileChoosedEvent();
 	}
@@ -198,13 +244,19 @@ public class JFileChooserPanel extends JPanel {
 
 	private void onBrowse() {
 		JFileChooser fileChooser = getFilechooser();
+		fileChooser.setFileSelectionMode(selectionMode.getFileSelectionMode());
 		int returnVal = mode.equals(Mode.SAVE) ? 
 			fileChooser.showSaveDialog(JFileChooserPanel.this) : 
 			fileChooser.showOpenDialog(JFileChooserPanel.this);
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			setSelectedFile(fileChooser.getSelectedFile());
 		}
+		this.clearFileChooser();
 	}	
+
+	private void clearFileChooser() {
+		getFilechooser().setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+	}
 
 	/**
 	 * Sets the selected file.
