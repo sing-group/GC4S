@@ -6,6 +6,8 @@ import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 
 import es.uvigo.ei.sing.hlfernandez.ui.CenteredJPanel;
 
@@ -60,5 +62,21 @@ public class DemoUtils {
 	public static final void showDialog(JDialog dialog) {
 		dialog.setVisible(true);
 		System.exit(0);
+	}
+
+	/**
+	 * Sets the Nimbus look and feel.
+	 */
+	public static final void setNimbusLookAndFeel() {
+		try {
+		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+		        if ("Nimbus".equals(info.getName())) {
+		            UIManager.setLookAndFeel(info.getClassName());
+		            break;
+		        }
+		    }
+		} catch (Exception e) {
+		    // If Nimbus is not available, you can set the GUI to another look and feel.
+		}
 	}
 }
