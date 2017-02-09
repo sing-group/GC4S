@@ -6,7 +6,30 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
-	</properties>  
+	</properties>
+
+	<distributionManagement>
+		<repository>
+			<id>sing-maven-releases</id>
+			<name>SING Maven Releases</name>
+			<url>http://maven.sing-group.org/repository/maven-releases/</url>
+		</repository>
+
+		<snapshotRepository>
+			<id>sing-maven-releases</id>
+			<name>SING Maven Snapshots</name>
+			<url>http://maven.sing-group.org/repository/maven-snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<repositories>
+		<repository>
+			<id>sing-repository</id>
+			<name>SING repository</name>
+			<url>http://maven.sing-group.org/repository/maven/</url>
+		</repository>
+	</repositories>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.swinglabs.swingx</groupId>
