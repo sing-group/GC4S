@@ -1,7 +1,5 @@
 package es.uvigo.ei.sing.hlfernandez.demo;
 
-import java.io.InvalidClassException;
-
 import javax.swing.event.ChangeEvent;
 
 import es.uvigo.ei.sing.hlfernandez.input.csv.CsvListener;
@@ -15,7 +13,7 @@ import es.uvigo.ei.sing.hlfernandez.input.csv.CsvPanel;
  */
 public class CsvPanelDemo {
 
-	public static void main(String[] args) throws InvalidClassException {
+	public static void main(String[] args) {
 		CsvPanel csvPanel = new CsvPanel();
 		csvPanel.addCsvListener(new CsvListener() {
 

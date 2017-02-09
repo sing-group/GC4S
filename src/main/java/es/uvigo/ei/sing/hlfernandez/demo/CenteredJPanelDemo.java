@@ -2,8 +2,6 @@ package es.uvigo.ei.sing.hlfernandez.demo;
 
 import static es.uvigo.ei.sing.hlfernandez.demo.DemoUtils.showComponent;
 
-import java.io.InvalidClassException;
-
 import javax.swing.JLabel;
 
 import es.uvigo.ei.sing.hlfernandez.ui.CenteredJPanel;
@@ -16,7 +14,7 @@ import es.uvigo.ei.sing.hlfernandez.ui.CenteredJPanel;
  */
 public class CenteredJPanelDemo {
 
-	public static void main(String[] args) throws InvalidClassException {
+	public static void main(String[] args) {
 		showComponent(
 			new CenteredJPanel(new JLabel("Centered")), "CenteredJPanel demo");
 	}

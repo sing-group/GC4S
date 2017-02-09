@@ -1,7 +1,6 @@
 package es.uvigo.ei.sing.hlfernandez.demo;
 
 import java.awt.Color;
-import java.io.InvalidClassException;
 
 import es.uvigo.ei.sing.hlfernandez.input.JColorChooserButton;
 
@@ -13,7 +12,7 @@ import es.uvigo.ei.sing.hlfernandez.input.JColorChooserButton;
  */
 public class JColorChooserButtonDemo {
 
-	public static void main(String[] args) throws InvalidClassException {
+	public static void main(String[] args) {
 		DemoUtils.showComponent(new JColorChooserButton(Color.LIGHT_GRAY));
 	}
 }

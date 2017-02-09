@@ -1,7 +1,5 @@
 package es.uvigo.ei.sing.hlfernandez.demo;
 
-import java.io.InvalidClassException;
-
 import es.uvigo.ei.sing.hlfernandez.input.RangeInputPanel;
 
 /**
@@ -12,7 +10,7 @@ import es.uvigo.ei.sing.hlfernandez.input.RangeInputPanel;
  */
 public class RangeInputPanelDemo {
 
-	public static void main(String[] args) throws InvalidClassException {
+	public static void main(String[] args) {
 		RangeInputPanel rangeInputPanel = new RangeInputPanel(0,10);
 		
 		rangeInputPanel.addChangeListener((e) -> {

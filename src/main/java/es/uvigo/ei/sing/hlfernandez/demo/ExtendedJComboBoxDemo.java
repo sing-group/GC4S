@@ -1,7 +1,6 @@
 package es.uvigo.ei.sing.hlfernandez.demo;
 
 import java.awt.Dimension;
-import java.io.InvalidClassException;
 
 import javax.swing.JPanel;
 
@@ -15,7 +14,7 @@ import es.uvigo.ei.sing.hlfernandez.combobox.ExtendedJComboBox;
  */
 public class ExtendedJComboBoxDemo {
 
-	public static void main(String[] args) throws InvalidClassException {
+	public static void main(String[] args) {
         String[] items = {
         	"Item 1: this item needs more with to be visible",
             "Item 2: this item also needs more with to be visible", 

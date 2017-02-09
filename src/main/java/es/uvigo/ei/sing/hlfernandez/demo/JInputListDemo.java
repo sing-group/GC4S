@@ -1,7 +1,5 @@
 package es.uvigo.ei.sing.hlfernandez.demo;
 
-import java.io.InvalidClassException;
-
 import es.uvigo.ei.sing.hlfernandez.input.JInputList;
 
 /**
@@ -12,7 +10,7 @@ import es.uvigo.ei.sing.hlfernandez.input.JInputList;
  */
 public class JInputListDemo {
 
-	public static void main(String[] args) throws InvalidClassException {
+	public static void main(String[] args) {
 		DemoUtils.showComponent(new JInputList());
 	}
 }
