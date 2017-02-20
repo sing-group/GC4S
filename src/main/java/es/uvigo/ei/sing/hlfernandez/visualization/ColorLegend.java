@@ -1,6 +1,8 @@
 package es.uvigo.ei.sing.hlfernandez.visualization;
 
-import static javax.swing.JLabel.LEFT;
+import static javax.swing.BorderFactory.createEmptyBorder;
+import static javax.swing.SwingConstants.LEFT;
+
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.util.Map;
@@ -53,8 +55,16 @@ public class ColorLegend extends JPanel {
 	private void init() {
 		this.setLayout(new GridLayout(getNumRows(), getNumColumns()));
 		colors.forEach((label, color) -> {
-			this.add(new JLabel(label, new ColorIcon(16, 16, color), LEFT));
+			this.add(createLabel(label, color));
 		});
+	}
+
+	private JLabel createLabel(String text, Color color) {
+		JLabel label = new JLabel(text, new ColorIcon(16, 16, color), LEFT);
+		if (isHorizontal()) {
+			label.setBorder(createEmptyBorder(0, 0, 0, 5));
+		}
+		return label;
 	}
 
 	private int getNumColumns() {

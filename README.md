@@ -78,3 +78,9 @@ ColorKeyLegend
 A component for displaying color key legends.
 
 ![ColorKeyLegend](https://raw.githubusercontent.com/hlfernandez/GC4S/master/screenshots/ColorKeyLegend.png)
+
+ColorLegend
+------------
+A component for displaying color legends.
+
+![ColorLegend](https://raw.githubusercontent.com/hlfernandez/GC4S/master/screenshots/ColorLegend.png)
