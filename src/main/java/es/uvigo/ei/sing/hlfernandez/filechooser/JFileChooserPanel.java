@@ -21,6 +21,7 @@ import javax.swing.event.DocumentListener;
 
 
 import es.uvigo.ei.sing.hlfernandez.ComponentFactory;
+import es.uvigo.ei.sing.hlfernandez.ui.icons.Icons;
 import es.uvigo.ei.sing.hlfernandez.utilities.FileDrop;
 
 /**
@@ -33,8 +34,7 @@ import es.uvigo.ei.sing.hlfernandez.utilities.FileDrop;
  */
 public class JFileChooserPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
-	private static final ImageIcon ICON_BROWSE = new ImageIcon(
-		JFileChooserPanel.class.getResource("icons/browse.png"));
+	private static final ImageIcon ICON_BROWSE = Icons.ICON_BROWSE_16;
 	
 	public static enum Mode {
 		OPEN, SAVE;
