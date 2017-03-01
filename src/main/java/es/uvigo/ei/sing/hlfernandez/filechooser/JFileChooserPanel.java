@@ -7,7 +7,6 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.Arrays;
 
-
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -18,7 +17,6 @@ import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-
 
 import es.uvigo.ei.sing.hlfernandez.ComponentFactory;
 import es.uvigo.ei.sing.hlfernandez.ui.icons.Icons;
@@ -145,6 +143,25 @@ public class JFileChooserPanel extends JPanel {
 	 */
 	public JFileChooserPanel(Mode  mode, JFileChooser filechooser){
 		this(mode, filechooser, ICON_BROWSE, "File: ", null, SelectionMode.FILES_DIRECTORIES);
+	}
+
+	/**
+	 * Constructs a {@link JFileChooserPanel} with the specified {@code} mode},
+	 * {@code filechooser}, {@code labelFiletext} and {@code selectionMode}.
+	 *
+	 * @param mode
+	 *            the {@code JFileChooser} mode.
+	 * @param filechooser
+	 *            the {@link JFileChooser} that will be opened.
+	 * @param labelFileText
+	 *            the text for the label file.
+	 * @param selectionMode
+	 *            the {@code JFileChooser} selection mode.
+	 */
+	public JFileChooserPanel(Mode mode, JFileChooser filechooser,
+		String labelFileText, SelectionMode selectionMode
+	) {
+		this(mode, filechooser, ICON_BROWSE, labelFileText, null, selectionMode);
 	}
 
 	/**
