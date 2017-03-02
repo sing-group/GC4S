@@ -101,6 +101,10 @@ public class Icons {
 	public static final ImageIcon ICON_BROWSE_24 = getResource("icons/browse24.png");
 	public static final ImageIcon ICON_BROWSE_16 = getResource("icons/browse16.png");
 
+	public static final ImageIcon ICON_LINK_32 = getResource("icons/link32.png");
+	public static final ImageIcon ICON_LINK_24 = getResource("icons/link24.png");
+	public static final ImageIcon ICON_LINK_16 = getResource("icons/link16.png");
+
 	private static ImageIcon getResource(String resource) {
 		return new ImageIcon(Icons.class.getResource(resource));
 	}
