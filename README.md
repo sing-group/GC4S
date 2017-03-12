@@ -84,3 +84,9 @@ ColorLegend
 A component for displaying color legends.
 
 ![ColorLegend](https://raw.githubusercontent.com/hlfernandez/GC4S/master/screenshots/ColorLegend.png)
+
+ColumnSummaryTabeCellRenderer
+------------
+A table cell renderer that displays a column summary.
+
+![ColumnSummaryTabeCellRenderer](https://raw.githubusercontent.com/hlfernandez/GC4S/master/screenshots/ColumnSummaryTabeCellRenderer.png)
