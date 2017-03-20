@@ -6,6 +6,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
@@ -16,23 +18,38 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
+import javax.swing.filechooser.FileFilter;
 
 import es.uvigo.ei.sing.hlfernandez.ComponentFactory;
+import es.uvigo.ei.sing.hlfernandez.event.DocumentAdapter;
 import es.uvigo.ei.sing.hlfernandez.ui.icons.Icons;
 import es.uvigo.ei.sing.hlfernandez.utilities.FileDrop;
 
 /**
+ * <p>
  * A {@code JFileChooserPanel} displays a text field together a browse button
  * that allows users to select a file. The name of the file selected is shown in
  * the text field.
+ * </p>
+ * 
+ * <p>
+ * Moreover, {@code JFileChooserPanelBuilder} is provided to facilitate the
+ * creation of this component.
+ * </p>
  * 
  * @author hlfernandez
- *
+ * @see JFileChooserPanelBuilder
  */
 public class JFileChooserPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
-	private static final ImageIcon ICON_BROWSE = Icons.ICON_BROWSE_16;
+
+	public static final String DEFAULT_FILES_LABEL = "File: ";
+	public static final ImageIcon DEFAULT_ICON_BROWSE = Icons.ICON_BROWSE_16;
+	public static final SelectionMode DEFAULT_SELECTION_MODE = 
+		SelectionMode.FILES_DIRECTORIES;
+	public static final boolean DEFAULT_ALLOW_ALL_FILTER = true;
+	public static final List<FileFilter> DEFAULT_FILE_FILTERS = 
+		Collections.emptyList();
 	
 	public static enum Mode {
 		OPEN, SAVE;
@@ -52,11 +69,10 @@ public class JFileChooserPanel extends JPanel {
 		public int getFileSelectionMode() {
 			return fileSelectionMode;
 		}
-	};
+	}
 
 	private JFileChooser filechooser;
 	private Mode mode;
-	private SelectionMode selectionMode;
 	private AbstractAction browseAction;
 	private JButton btnBrowse;
 	private JLabel lblFile;
@@ -64,18 +80,18 @@ public class JFileChooserPanel extends JPanel {
 	private JTextField fileName;
 	private File selectedFile = null;
 	private String requiredFileExtension = null;
+	private JFileChooserConfiguration fileChooserConfiguration;
 
 	/**
 	 * Constructs a {@link JFileChooserPanel} with the specified {@code} mode}.
 	 * For the rest, the default configuration (default browse icon, file label
 	 * text and a new {@code JFileChooser} and no required extension) is taken.
 	 * 
-	 * @param mode
-	 *            the {@code JFileChooser} mode.
+	 * @param mode the {@code JFileChooser} mode.
 	 */
 	public JFileChooserPanel(Mode mode) {
-		this(mode, new JFileChooser(), ICON_BROWSE, "File: ", null, 
-			SelectionMode.FILES_DIRECTORIES);
+		this(mode, new JFileChooser(), DEFAULT_ICON_BROWSE, DEFAULT_FILES_LABEL,
+			null, DEFAULT_SELECTION_MODE);
 	}
 
 	/**
@@ -84,14 +100,12 @@ public class JFileChooserPanel extends JPanel {
 	 * (default browse icon, file label text and a new {@code JFileChooser}) is
 	 * taken.
 	 * 
-	 * @param mode
-	 *            the {@code JFileChooser} mode.
-	 * @param requiredFileExtension
-	 *            only for Mode.SAVE, the extension that file must have (e.g.:
-	 *            "txt")
+	 * @param mode the {@code JFileChooser} mode.
+	 * @param requiredFileExtension only for Mode.SAVE, the extension that file 
+	 * 	must have (e.g.: "txt").
 	 */
 	public JFileChooserPanel(Mode mode, String requiredFileExtension) {
-		this(mode, new JFileChooser(), ICON_BROWSE, "File: ",
+		this(mode, new JFileChooser(), DEFAULT_ICON_BROWSE, DEFAULT_FILES_LABEL,
 			requiredFileExtension, SelectionMode.FILES_DIRECTORIES);
 	}
 	
@@ -100,19 +114,16 @@ public class JFileChooserPanel extends JPanel {
 	 * and {@code filechooser}. For the rest, the default configuration (default
 	 * browse icon, file label text and no required extension) is taken.
 	 * 
-	 * @param mode
-	 *            the {@code JFileChooser} mode.
-	 * @param filechooser
-	 *            the {@link JFileChooser} that will be opened.
-	 * @param requiredFileExtension
-	 *            only for Mode.SAVE, the extension that file must have (e.g.:
-	 *            "txt")
+	 * @param mode the {@code JFileChooser} mode.
+	 * @param filechooser the {@link JFileChooser} that will be opened.
+	 * @param requiredFileExtension only for Mode.SAVE, the extension that file 
+	 * 	must have (e.g.: "txt").
 	 */
 	public JFileChooserPanel(Mode  mode, JFileChooser filechooser, 
 		String requiredFileExtension
 	){
-		this(mode, filechooser, ICON_BROWSE, "File: ", requiredFileExtension, 
-			SelectionMode.FILES_DIRECTORIES);
+		this(mode, filechooser, DEFAULT_ICON_BROWSE, DEFAULT_FILES_LABEL,
+			requiredFileExtension, DEFAULT_SELECTION_MODE);
 	}
 	
 	/**
@@ -120,15 +131,15 @@ public class JFileChooserPanel extends JPanel {
 	 * and {@code filechooser}. For the rest, the default configuration (default
 	 * browse icon, file label text and no required extension) is taken.
 	 * 
-	 * @param mode
-	 *            the {@code JFileChooser} mode.
-	 * @param selectionMode
-	 *            the {@code JFileChooser} selection mode.
-	 * @param filechooser
-	 *            the {@link JFileChooser} that will be opened.
+	 * @param mode the {@code JFileChooser} mode.
+	 * @param selectionMode  the {@code JFileChooser} selection mode.
+	 * @param filechooser the {@link JFileChooser} that will be opened.
 	 */
-	public JFileChooserPanel(Mode  mode, SelectionMode selectionMode, JFileChooser filechooser){
-		this(mode, filechooser, ICON_BROWSE, "File: ", null, selectionMode);
+	public JFileChooserPanel(Mode mode, SelectionMode selectionMode,
+		JFileChooser filechooser
+	) {
+		this(mode, filechooser, DEFAULT_ICON_BROWSE, DEFAULT_FILES_LABEL, null,
+			selectionMode);
 	}
 
 	/**
@@ -136,56 +147,88 @@ public class JFileChooserPanel extends JPanel {
 	 * and {@code filechooser}. For the rest, the default configuration (default
 	 * browse icon, file label text and no required extension) is taken.
 	 * 
-	 * @param mode
-	 *            the {@code JFileChooser} mode.
-	 * @param filechooser
-	 *            the {@link JFileChooser} that will be opened.
+	 * @param mode the {@code JFileChooser} mode.
+	 * @param filechooser the {@link JFileChooser} that will be opened.
 	 */
-	public JFileChooserPanel(Mode  mode, JFileChooser filechooser){
-		this(mode, filechooser, ICON_BROWSE, "File: ", null, SelectionMode.FILES_DIRECTORIES);
+	public JFileChooserPanel(Mode mode, JFileChooser filechooser) {
+		this(mode, filechooser, DEFAULT_ICON_BROWSE, DEFAULT_FILES_LABEL, null,
+			DEFAULT_SELECTION_MODE);
 	}
 
 	/**
 	 * Constructs a {@link JFileChooserPanel} with the specified {@code} mode},
 	 * {@code filechooser}, {@code labelFiletext} and {@code selectionMode}.
 	 *
-	 * @param mode
-	 *            the {@code JFileChooser} mode.
-	 * @param filechooser
-	 *            the {@link JFileChooser} that will be opened.
-	 * @param labelFileText
-	 *            the text for the label file.
-	 * @param selectionMode
-	 *            the {@code JFileChooser} selection mode.
+	 * @param mode the {@code JFileChooser} mode.
+	 * @param filechooser the {@link JFileChooser} that will be opened.
+	 * @param labelFileText the text for the label file.
+	 * @param selectionMode the {@code JFileChooser} selection mode.
 	 */
 	public JFileChooserPanel(Mode mode, JFileChooser filechooser,
 		String labelFileText, SelectionMode selectionMode
 	) {
-		this(mode, filechooser, ICON_BROWSE, labelFileText, null, selectionMode);
+		this(mode, filechooser, DEFAULT_ICON_BROWSE, labelFileText, null,
+			selectionMode);
 	}
 
 	/**
+	 * <p>
 	 * Constructs a {@link JFileChooserPanel} with the specified {@code} mode},
 	 * {@code filechooser}, {@code browseIcon}, {@code labelFiletext} and
 	 * {@code requiredFileExtension}.
+	 * </p>
 	 * 
-	 * @param mode
-	 *            the {@code JFileChooser} mode.
-	 * @param filechooser
-	 *            the {@link JFileChooser} that will be opened.
-	 * @param browseIcon
-	 *            the {@link ImageIcon} for the browse button.
-	 * @param labelFileText
-	 *            the text for the label file.
-	 * @param requiredFileExtension
-	 *            only for Mode.SAVE, the extension that file must have (e.g.:
-	 *            "txt")
-	 * @param selectionMode
-	 *            the {@code JFileChooser} selection mode.
+	 * <p>
+	 * Parameter {@code selectionMode} is used to configure the
+	 * {@code JFileChooser} before showing it to the user.
+	 * </p>
+	 * 
+	 * @param mode the {@code JFileChooser} mode.
+	 * @param filechooser the {@link JFileChooser} that will be opened.
+	 * @param browseIcon the {@link ImageIcon} for the browse button.
+	 * @param labelFileText the text for the label file.
+	 * @param requiredFileExtension only for Mode.SAVE, the extension that file 
+	 * 	must have (e.g.: "txt").
+	 * @param selectionMode the {@code JFileChooser} selection mode.
 	 */
 	public JFileChooserPanel(Mode mode, JFileChooser filechooser, 
 		ImageIcon browseIcon, String labelFileText, 
 		String requiredFileExtension, SelectionMode selectionMode
+	) {
+		this(mode, filechooser, browseIcon, labelFileText,
+			requiredFileExtension, selectionMode, DEFAULT_ALLOW_ALL_FILTER,
+			DEFAULT_FILE_FILTERS);
+	}
+
+	/**
+	 * <p>
+	 * Constructs a {@link JFileChooserPanel} with the specified {@code} mode},
+	 * {@code filechooser}, {@code browseIcon}, {@code labelFiletext} and
+	 * {@code requiredFileExtension}.
+	 * </p>
+	 * 
+	 * <p>
+	 * Parameters {@code selectionMode}, {@code allowAll} and {@code fileFilter}
+	 * are used to configure the {@code JFileChooser} before showing it to the
+	 * user.
+	 * </p>
+	 * 
+	 * @param mode the {@code JFileChooser} mode.
+	 * @param filechooser the {@link JFileChooser} that will be opened.
+	 * @param browseIcon the {@link ImageIcon} for the browse button.
+	 * @param labelFileText the text for the label file.
+	 * @param requiredFileExtension only for Mode.SAVE, the extension that file 
+	 * 	must have (e.g.: "txt")
+	 * @param selectionMode the {@code JFileChooser} selection mode.
+	 * @param allowAll whether the "All files" file filter should be used or 
+	 * 	not.
+	 * @param fileFilters the list of {@code FileFilter} to use in the file 
+	 * 	chooser.
+	 */	
+	public JFileChooserPanel(Mode mode, JFileChooser filechooser, 
+		ImageIcon browseIcon, String labelFileText, 
+		String requiredFileExtension, SelectionMode selectionMode,
+		boolean allowAll, List<FileFilter> fileFilters
 	) {
 		super();
 		this.filechooser = filechooser;
@@ -194,7 +237,8 @@ public class JFileChooserPanel extends JPanel {
 			this.requiredFileExtension = requiredFileExtension;
 		}
 		this.mode = mode;
-		this.selectionMode = selectionMode;
+		this.fileChooserConfiguration = new JFileChooserConfiguration(
+			selectionMode.getFileSelectionMode(), fileFilters, allowAll);
 		initComponent();
 	}
 
@@ -203,19 +247,11 @@ public class JFileChooserPanel extends JPanel {
 		lblFile = new JLabel(this.lblFileText);
 		fileName = new JTextField("", 20);
 		fileName.setEditable(false);
-		fileName.getDocument().addDocumentListener(new DocumentListener() {
-			
-			@Override
-			public void removeUpdate(DocumentEvent e) {
-			}
+		fileName.getDocument().addDocumentListener(new DocumentAdapter() {
 
 			@Override
 			public void insertUpdate(DocumentEvent e) {
 				fileNameUpdated();
-			}
-
-			@Override
-			public void changedUpdate(DocumentEvent e) {
 			}
 		});
 		fileName.addMouseListener(new MouseAdapter() {
@@ -233,7 +269,7 @@ public class JFileChooserPanel extends JPanel {
 				}
 			}
 		});
-		browseAction = new AbstractAction("Browse", ICON_BROWSE) {
+		browseAction = new AbstractAction("Browse", DEFAULT_ICON_BROWSE) {
 			private static final long serialVersionUID = 1L;
 
 			@Override
@@ -261,7 +297,7 @@ public class JFileChooserPanel extends JPanel {
 
 	private void onBrowse() {
 		JFileChooser fileChooser = getFilechooser();
-		fileChooser.setFileSelectionMode(selectionMode.getFileSelectionMode());
+		this.fileChooserConfiguration.configure(fileChooser);
 		int returnVal = mode.equals(Mode.SAVE) ? 
 			fileChooser.showSaveDialog(JFileChooserPanel.this) : 
 			fileChooser.showOpenDialog(JFileChooserPanel.this);
@@ -295,6 +331,7 @@ public class JFileChooserPanel extends JPanel {
 	
 	/**
 	 * Returns the browse action.
+	 * 
 	 * @return the browse action.
 	 */
 	public JFileChooser getFilechooser() {
@@ -303,6 +340,7 @@ public class JFileChooserPanel extends JPanel {
 	
 	/**
 	 * Returns the browse action.
+	 * 
 	 * @return the browse action.
 	 */
 	public AbstractAction getBrowseAction() {
@@ -311,6 +349,7 @@ public class JFileChooserPanel extends JPanel {
 	
 	/**
 	 * Returns the file label.
+	 * 
 	 * @return the file label.
 	 */
 	public JLabel getComponentLabelFile() {
@@ -319,14 +358,16 @@ public class JFileChooserPanel extends JPanel {
 	
 	/**
 	 * Returns the file name text field component.
+	 * 
 	 * @return the file name text field component.
 	 */
 	public JTextField getComponentFileName() {
 		return fileName;
 	}
-	
+
 	/**
 	 * Returns the browse button component.
+	 * 
 	 * @return the browse button component.
 	 */
 	public JButton getComponentButtonBrowse() {
@@ -335,6 +376,7 @@ public class JFileChooserPanel extends JPanel {
 
 	/**
 	 * Returns the selected file.
+	 * 
 	 * @return the selected file.
 	 */
 	public File getSelectedFile() {
@@ -346,8 +388,7 @@ public class JFileChooserPanel extends JPanel {
 	 * this component. If listener {@code l} is {@code null}, no exception is
 	 * thrown and no action is performed.
 	 *
-	 * @param l
-	 *            the {@code FileChooserListener}.
+	 * @param l the {@code FileChooserListener}.
 	 */
 	public synchronized void addFileChooserListener(FileChooserListener l) {
 		this.listenerList.add(FileChooserListener .class, l);
@@ -358,7 +399,7 @@ public class JFileChooserPanel extends JPanel {
 	 * component.
 	 *
 	 * @return all {@code FileChooserListener}s of this component or an empty
-	 *         array if no component listeners are currently registered
+	 * array if no component listeners are currently registered
 	 */
 	public synchronized FileChooserListener[] getFileChooserListeners() {
 		return this.listenerList.getListeners(FileChooserListener.class);
