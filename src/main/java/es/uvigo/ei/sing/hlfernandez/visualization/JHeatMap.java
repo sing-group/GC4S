@@ -3,7 +3,6 @@ package es.uvigo.ei.sing.hlfernandez.visualization;
 import static es.uvigo.ei.sing.hlfernandez.utilities.MatrixUtils.max;
 import static es.uvigo.ei.sing.hlfernandez.utilities.MatrixUtils.min;
 import static java.util.Arrays.asList;
-import static javax.swing.BorderFactory.createEmptyBorder;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -21,8 +20,6 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -38,6 +35,7 @@ import org.jdesktop.swingx.JXTable;
 import org.jdesktop.swingx.table.TableColumnExt;
 
 import es.uvigo.ei.sing.hlfernandez.input.DoubleRange;
+import es.uvigo.ei.sing.hlfernandez.ui.CenteredJPanel;
 import es.uvigo.ei.sing.hlfernandez.ui.VerticalLabelUI;
 import es.uvigo.ei.sing.hlfernandez.utilities.Gradient;
 import es.uvigo.ei.sing.hlfernandez.utilities.ImageIOUtils;
@@ -172,17 +170,11 @@ public class JHeatMap extends JPanel {
 	}
 
 	private Component getColorKey() {
-		JPanel colorKeyPanel = new JPanel();
-		colorKeyPanel.setLayout(new BoxLayout(colorKeyPanel, BoxLayout.X_AXIS));
-		colorKeyPanel.setBorder(createEmptyBorder(5, 5, 5, 5));
 		colorKey = new ColorKeyLegend(
 			this.lowColor, this.highColor, 
 			min(this.data), max(this.data)
 		);
-		colorKeyPanel.add(Box.createHorizontalGlue());
-		colorKeyPanel.add(colorKey);
-		colorKeyPanel.add(Box.createHorizontalGlue());
-		return colorKeyPanel;
+		return new CenteredJPanel(colorKey);
 	}
 
 	private Component getHeatMap() {
@@ -289,7 +281,7 @@ public class JHeatMap extends JPanel {
 	 * @throws IOException if an error occurs while saving the image.
 	 */
 	public void toPngImage(File f) throws IOException {
-		ImageIOUtils.toImage(this.heatmap, "png", f);
+		ImageIOUtils.toImage("png", f, this.colorKey, this.heatmap);
 	}
 	
 	/**

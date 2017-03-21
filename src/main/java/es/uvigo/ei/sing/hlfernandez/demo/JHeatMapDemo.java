@@ -1,5 +1,7 @@
 package es.uvigo.ei.sing.hlfernandez.demo;
 
+import static es.uvigo.ei.sing.hlfernandez.demo.DemoUtils.showComponent;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -36,7 +38,7 @@ public class JHeatMapDemo {
 
 		heatmap.setValuesRange(new DoubleRange(0d, 7d));
 
-		DemoUtils.showComponent(new JHeatMapPanel(heatmap), "JHeatMap demo");
+		showComponent(new JHeatMapPanel(heatmap), "JHeatMap demo");
 	}
 	
 	private static String[] generateRowNames(double[][] data) {
