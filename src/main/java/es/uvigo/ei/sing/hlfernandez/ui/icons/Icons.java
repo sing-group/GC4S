@@ -105,6 +105,14 @@ public class Icons {
 	public static final ImageIcon ICON_LINK_24 = getResource("icons/link24.png");
 	public static final ImageIcon ICON_LINK_16 = getResource("icons/link16.png");
 
+	public static final ImageIcon ICON_BAR_CHART_1_32 = getResource("icons/bar-chart-1-32.png");
+	public static final ImageIcon ICON_BAR_CHART_1_24 = getResource("icons/bar-chart-1-24.png");
+	public static final ImageIcon ICON_BAR_CHART_1_16 = getResource("icons/bar-chart-1-16.png");
+
+	public static final ImageIcon ICON_BAR_CHART_2_32 = getResource("icons/bar-chart-2-32.png");
+	public static final ImageIcon ICON_BAR_CHART_2_24 = getResource("icons/bar-chart-2-24.png");
+	public static final ImageIcon ICON_BAR_CHART_2_16 = getResource("icons/bar-chart-2-16.png");
+
 	private static ImageIcon getResource(String resource) {
 		return new ImageIcon(Icons.class.getResource(resource));
 	}
