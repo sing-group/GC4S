@@ -75,4 +75,20 @@ public class ExtensionFileFilter extends FileFilter {
 	public String getDescription() {
 		return this.description;
 	}
+
+	@Override
+	public boolean equals(Object aThat) {
+		if (aThat == null) {
+			return false;
+		}
+		if (!(aThat instanceof ExtensionFileFilter)) {
+			return false;
+		}
+
+		ExtensionFileFilter that = (ExtensionFileFilter) aThat;
+
+		return this.nameregexp.equals(that.nameregexp)
+			&& this.description.equals(that.description)
+			&& this.caseSensitive == that.caseSensitive;
+	}
 }

@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.AbstractAction;
@@ -81,6 +82,8 @@ public class JFileChooserPanel extends JPanel {
 	private File selectedFile = null;
 	private String requiredFileExtension = null;
 	private JFileChooserConfiguration fileChooserConfiguration;
+
+	private FileFilter lastFileFilter;
 
 	/**
 	 * Constructs a {@link JFileChooserPanel} with the specified {@code} mode}.
@@ -296,16 +299,46 @@ public class JFileChooserPanel extends JPanel {
 	}
 
 	private void onBrowse() {
-		JFileChooser fileChooser = getFilechooser();
-		this.fileChooserConfiguration.configure(fileChooser);
+		JFileChooser fileChooser = getConfiguredFileChooser();
+		
 		int returnVal = mode.equals(Mode.SAVE) ? 
 			fileChooser.showSaveDialog(JFileChooserPanel.this) : 
 			fileChooser.showOpenDialog(JFileChooserPanel.this);
+
+		lastFileFilter = fileChooser.getFileFilter();
+
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			setSelectedFile(fileChooser.getSelectedFile());
 		}
 		this.clearFileChooser();
-	}	
+	}
+
+	private JFileChooser getConfiguredFileChooser() {
+		JFileChooser fileChooser = getFilechooser();
+		this.fileChooserConfiguration.configure(fileChooser);
+		checkLastFileFilter(fileChooser, lastFileFilter);
+
+		return fileChooser;
+	}
+
+	private void checkLastFileFilter(JFileChooser fileChooser,
+		FileFilter lastFileFilter
+	) {
+		if (lastFileFilter != null) {
+			if (containsFilter(fileChooser, lastFileFilter)) {
+				fileChooser.setFileFilter(lastFileFilter);
+			}
+		}
+	}
+
+	private static boolean containsFilter(JFileChooser fileChooser,
+		FileFilter filter
+	) {
+		List<FileFilter> filters = new LinkedList<>(
+			Arrays.asList(fileChooser.getChoosableFileFilters()));
+
+		return filters.contains(filter);
+	}
 
 	private void clearFileChooser() {
 		getFilechooser().setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
