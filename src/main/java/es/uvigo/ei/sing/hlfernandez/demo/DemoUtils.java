@@ -79,4 +79,23 @@ public class DemoUtils {
 		    // If Nimbus is not available, you can set the GUI to another look and feel.
 		}
 	}
+
+	/**
+	 * Sets the value of the property {@code Nimbus.keepAlternateRowColor} in
+	 * {@code UIManager} to {@code true}.
+	 * 
+	 */
+	public static void setNimbusKeepAlternateRowColor() {
+		setNimbusKeepAlternateRowColor(Boolean.TRUE);
+	}
+
+	/**
+	 * Sets the value of the property {@code Nimbus.keepAlternateRowColor} in
+	 * {@code UIManager}.
+	 * 
+	 * @param keep the value of the property {@code Nimbus.keepAlternateRowColor}
+	 */
+	public static void setNimbusKeepAlternateRowColor(boolean keep) {
+		UIManager.put("Nimbus.keepAlternateRowColor", keep);
+	}
 }
