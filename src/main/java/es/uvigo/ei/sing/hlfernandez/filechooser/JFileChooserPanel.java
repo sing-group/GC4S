@@ -7,8 +7,8 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
@@ -34,12 +34,22 @@ import es.uvigo.ei.sing.hlfernandez.utilities.FileDrop;
  * </p>
  * 
  * <p>
+ * This component remembers the last file filter selected in the
+ * {@code JFileChooser}. If you create different {@code JFileChooserPanel}
+ * components that share a the same set of filters and you want them to remember
+ * other's selection, then you must invoke
+ * {@link JFileChooserPanel#setUseSharedLastFileFilter(true)}. This way, user's
+ * choice in one of them will be remembered in the others.
+ * </p>
+ * 
+ * <p>
  * Moreover, {@code JFileChooserPanelBuilder} is provided to facilitate the
  * creation of this component.
  * </p>
  * 
  * @author hlfernandez
  * @see JFileChooserPanelBuilder
+ * @see JFileChooser
  */
 public class JFileChooserPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -83,6 +93,8 @@ public class JFileChooserPanel extends JPanel {
 	private String requiredFileExtension = null;
 	private JFileChooserConfiguration fileChooserConfiguration;
 
+	private boolean useSharedLastFileFilter = false;
+	private static FileFilter LAST_FILE_FILTER;
 	private FileFilter lastFileFilter;
 
 	/**
@@ -305,7 +317,7 @@ public class JFileChooserPanel extends JPanel {
 			fileChooser.showSaveDialog(JFileChooserPanel.this) : 
 			fileChooser.showOpenDialog(JFileChooserPanel.this);
 
-		lastFileFilter = fileChooser.getFileFilter();
+		saveLastFileFilter(fileChooser.getFileFilter());
 
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			setSelectedFile(fileChooser.getSelectedFile());
@@ -313,31 +325,78 @@ public class JFileChooserPanel extends JPanel {
 		this.clearFileChooser();
 	}
 
+	private void saveLastFileFilter(FileFilter fileFilter) {
+		this.lastFileFilter = fileFilter;
+		if (useSharedLastFileFilter) {
+			LAST_FILE_FILTER = this.lastFileFilter;
+		}
+	}
+
 	private JFileChooser getConfiguredFileChooser() {
 		JFileChooser fileChooser = getFilechooser();
 		this.fileChooserConfiguration.configure(fileChooser);
-		checkLastFileFilter(fileChooser, lastFileFilter);
+		configureLastFileFilter(fileChooser);
 
 		return fileChooser;
 	}
 
-	private void checkLastFileFilter(JFileChooser fileChooser,
-		FileFilter lastFileFilter
-	) {
-		if (lastFileFilter != null) {
-			if (containsFilter(fileChooser, lastFileFilter)) {
-				fileChooser.setFileFilter(lastFileFilter);
+	private void configureLastFileFilter(JFileChooser fileChooser) {
+		if (useSharedLastFileFilter) {
+			if (!setFileFilter(fileChooser, LAST_FILE_FILTER)) {
+				if (isAcceptAllFileFilter(LAST_FILE_FILTER)) {
+					/**
+					 * If LAST_FILE_FILTER is the accept all file filter of a
+					 * other JFileChooser, then it can't be found by the
+					 * setFileFilter method.
+					 */
+					setAcceptAllFileFilter(fileChooser);
+				}
 			}
+		} else {
+			setFileFilter(fileChooser, lastFileFilter);
 		}
 	}
 
-	private static boolean containsFilter(JFileChooser fileChooser,
+	private static boolean setFileFilter(JFileChooser fileChooser,
 		FileFilter filter
 	) {
-		List<FileFilter> filters = new LinkedList<>(
-			Arrays.asList(fileChooser.getChoosableFileFilters()));
+		if (filter != null) {
+			if (containsFilter(fileChooser, filter)) {
+				fileChooser.setFileFilter(filter);
+				return true;
+			}
+		}
+		return false;
+	}
 
-		return filters.contains(filter);
+	private static boolean containsFilter(JFileChooser fileChooser,
+		FileFilter filter 
+	) {
+		return getFileFilters(fileChooser).contains(filter);
+	}
+
+	private static List<FileFilter> getFileFilters(JFileChooser fileChooser) {
+		return Arrays.asList(fileChooser.getChoosableFileFilters());
+	}
+
+	private static boolean isAcceptAllFileFilter(FileFilter filter) {
+		return filter != null
+			&& filter.getClass().getSimpleName().equals("AcceptAllFileFilter");
+	}
+
+	private void setAcceptAllFileFilter(JFileChooser fileChooser) {
+		Optional<FileFilter> acceptAllFileFilter =
+			findAcceptAllFileFilter(fileChooser);
+		if (acceptAllFileFilter.isPresent()) {
+			fileChooser.setFileFilter(acceptAllFileFilter.get());
+		}
+	}
+
+	private static Optional<FileFilter> findAcceptAllFileFilter(
+		JFileChooser fileChooser
+	) {
+		return getFileFilters(fileChooser).stream()
+				.filter(JFileChooserPanel::isAcceptAllFileFilter).findAny();
 	}
 
 	private void clearFileChooser() {
@@ -415,7 +474,25 @@ public class JFileChooserPanel extends JPanel {
 	public File getSelectedFile() {
 		return selectedFile;
 	}
-	
+
+	/**
+	 * Establishes whether the last file filter selected by the user should be 
+	 * shared with other instances or not.
+	 * 
+	 * @param use whether the last file filter selected by the user should be
+	 *        shared or not.
+	 */
+	public void setUseSharedLastFileFilter(boolean use) {
+		this.useSharedLastFileFilter = use;
+	}
+
+	/**
+	 * Clears the last file filter shared with other instances.
+	 */
+	public static void clearSharedLastFileFilter() {
+		LAST_FILE_FILTER = null;
+	}
+
 	/**
 	 * Adds the specified file chooser listener to receive component events from
 	 * this component. If listener {@code l} is {@code null}, no exception is
