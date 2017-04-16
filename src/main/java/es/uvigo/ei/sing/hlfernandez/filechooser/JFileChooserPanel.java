@@ -38,7 +38,7 @@ import es.uvigo.ei.sing.hlfernandez.utilities.FileDrop;
  * {@code JFileChooser}. If you create different {@code JFileChooserPanel}
  * components that share a the same set of filters and you want them to remember
  * other's selection, then you must invoke
- * {@link JFileChooserPanel#setUseSharedLastFileFilter(true)}. This way, user's
+ * {@link JFileChooserPanel#setUseSharedLastFileFilter(boolean)}. This way, user's
  * choice in one of them will be remembered in the others.
  * </p>
  * 
