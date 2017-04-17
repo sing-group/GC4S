@@ -212,7 +212,7 @@ public class ColumnSummaryTabeCellRenderer
 
 		return getDoubleListSummary(values, "double");
 	}
-	
+
 	protected String getFloatColumnSummary(TableModel model, int columnModel) {
 		List<Double> values = new LinkedList<>();
 		for (int row = 0; row < model.getRowCount(); row++) {
@@ -308,11 +308,11 @@ public class ColumnSummaryTabeCellRenderer
 			StringJoiner joiner = 
 				new StringJoiner("</li><li>", "<ul><li>", "</li></ul>");
 			joiner
-				.add("Average:" + getAverage())
-				.add("Maximum:" + getMax())
-				.add("Minimum:" + getMin())
-				.add("Count:" + getCount())
-				.add("Sum:" + getSum());
+				.add("Average: " + getAverage())
+				.add("Maximum: " + getMax())
+				.add("Minimum: " + getMin())
+				.add("Count: " + getCount())
+				.add("Sum: " + getSum());
 
 			return joiner.toString();
 		}
