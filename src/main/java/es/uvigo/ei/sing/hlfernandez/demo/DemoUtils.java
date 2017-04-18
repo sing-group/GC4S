@@ -1,8 +1,8 @@
 package es.uvigo.ei.sing.hlfernandez.demo;
 
 import java.awt.Component;
+import java.awt.Dimension;
 
-import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -18,9 +18,56 @@ import es.uvigo.ei.sing.hlfernandez.ui.CenteredJPanel;
  *
  */
 public class DemoUtils {
-	
+
 	/**
-	 * Shows a JFrame containing the specified <code>component</code>.
+	 * Shows a {@code JFrame} containing the specified {@code component} and 
+	 * frame extended {@code state}.
+	 * 
+	 * @param component the {@code Component} to show
+	 * @param state the extended state of the frame
+	 */
+	public static final void showComponent(Component component, int state) {
+		showComponent(component, "", state);
+	}
+
+	/**
+	 * Shows a {@code JFrame} containing the specified {@code component}, 
+	 * {@code title} and frame extended {@code state}.
+	 * 
+	 * @param component the {@code Component} to show
+	 * @param title the frame title
+	 * @param state the extended state of the frame
+	 */
+	public static final void showComponent(Component component, String title,
+		int state) {
+		JFrame frame = new JFrame(title);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.add(component);
+		frame.pack();
+		frame.setVisible(true);
+		frame.setExtendedState(state);
+	}
+
+	/**
+	 * Shows a {@code JFrame} containing the specified {@code component} and 
+	 * {@code size}
+	 * 
+	 * @param component the {@code Component} to show
+	 * @param size the frame size
+	 */
+	public static final void showComponent(Component component,
+		Dimension size) {
+		JFrame frame = new JFrame();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.add(component);
+		frame.pack();
+		frame.setVisible(true);
+		frame.setMinimumSize(size);
+	}
+
+	/**
+	 * Shows a {@code JFrame} containing the specified {@code component} and 
+	 * {@code title}.
 	 * 
 	 * @param component the {@code Component} to show
 	 * @param title the title for the window
@@ -32,28 +79,29 @@ public class DemoUtils {
 		frame.pack();
 		frame.setVisible(true);
 	}
-	
+
 	/**
-	 * Shows a JFrame containing the specified <code>component</code>.
+	 * Shows a {@code JFrame} containing the specified {@code component}.
 	 * 
-	 * @param component JComponent to show
+	 * @param component the {@code Component} to show
 	 */
-	public static final void showComponent(JComponent component) {
-		showComponent(component, "Demo dialog");
+	public static final void showComponent(Component component) {
+		showComponent(component, "");
 	}
-	
+
 	/**
 	 * Returns a new {@code JPanel} with {@code component} in the center.
 	 * 
 	 * @param component the component to add to the {@code JPanel}.
+	 * 
 	 * @return a new {@code JPanel} with {@code component} in the center.
 	 */
 	public static final JPanel createPanelAndCenterComponent(
-		JComponent component
+		Component component
 	) {
 		return new CenteredJPanel(component);
 	}
-	
+
 	/**
 	 * Shows {@code dialog} and ends the application after it is closed.
 	 * 
@@ -76,7 +124,10 @@ public class DemoUtils {
 		        }
 		    }
 		} catch (Exception e) {
-		    // If Nimbus is not available, you can set the GUI to another look and feel.
+		    /**
+		     *  If Nimbus is not available, you can set the GUI to another look 
+		     *  and feel.
+		     */
 		}
 	}
 
