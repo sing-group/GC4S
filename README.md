@@ -1,92 +1,42 @@
 GC4S [![Build Status](https://travis-ci.org/hlfernandez/GC4S.svg?branch=master)](https://travis-ci.org/hlfernandez/GC4S) [![license](https://img.shields.io/badge/LICENSE-GPLv3-blue.svg)]()
 ========================
 
-GUI Components for (Java) Swing.
+A collection of GUI Components for (Java) Swing.
 
-JHeatMap
-------------
-A component that shows a heatmap from a given double matrix. It allows zooming and changing gradient's colors.
+Projects using GC4S
+-------------------
+- [S2P](http://sing-group.org/s2p/): an open-source application for processing of 2D-gel and MALDI-based mass spectrometry protein data. a. The graphical user interface has been created using GC4S.
 
-![JHeatMap](https://raw.githubusercontent.com/hlfernandez/GC4S/master/screenshots/JHeatMap.gif)
+Using GC4S
+----------
+Clone this project and install it using `mvn install` or add the following repository and dependency declarations to your `pom.xml`:
+```xml
+    <repositories>
+		<repository>
+			<id>sing-repository</id>
+			<name>SING repository</name>
+			<url>http://maven.sing-group.org/repository/maven/</url>
+		</repository>
+	</repositories>
+	
+	<dependencies>
+    	<dependency>
+			<groupId>es.uvigo.ei.sing.hlfernandez</groupId>
+			<artifactId>GC4S</artifactId>
+			<version>0.6.0-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+```
 
-JListPanel
-------------
-A component that wraps a JList to add common actions.
+Examples
+--------
 
-![JListPanel](https://raw.githubusercontent.com/hlfernandez/GC4S/master/screenshots/JListPanel.png)
+The following image shows `JHeatMap`, a component that shows a heatmap from a given double matrix. It allows zooming, changing gradient's colors and exporting the heatmap as image.
 
-This component can also show a text field that allows filtering the elements shown.
+![JHeatMap](screenshots/JHeatMap.gif)
 
-![JListPanel filtering demo](https://raw.githubusercontent.com/hlfernandez/GC4S/master/screenshots/JListPanel-FilterDemo.gif)
+The following image shows `JFileChooserPanel`, a component with a button to select a file (using a `JFileChooser`) and a text field that show the selected file. You have full control of how the underlying `JFileChooser` since you have can set file filters or choose the dialog mode.
 
-JFileChooserPanel
-------------
-A component with a button to select a file (using a JFileChooser) and a text field that show the selected file.
+![JFileChooserPanel](screenshots/JFileChooserPanel.png)
 
-![JFileChooserPanel](https://raw.githubusercontent.com/hlfernandez/GC4S/master/screenshots/JFileChooserPanel.png)
-
-JLimitedTextField
-------------
-An extension of JTextField to limit the length of the text.
-
-![JLimitedTextField](https://raw.githubusercontent.com/hlfernandez/GC4S/master/screenshots/JLimitedTextField.png)
-
-AbstractInputJDialog
-------------
-An extension of JDialog to ease the creation of new input dialogs by providing common functionalities such as buttons pane, description or key bindings.
-
-![AbstractInputJDialog](https://raw.githubusercontent.com/hlfernandez/GC4S/master/screenshots/AbstractInputJDialog.png)
-
-ExtendedJXTable
-------------
-An extension of JXTable that allows to hide/show the column visibility actions and also facilitates adding own actions to the ColumnControlButton.
-
-![ExtendedJXTable](https://raw.githubusercontent.com/hlfernandez/GC4S/master/screenshots/ExtendedJXTable.png)
-
-CloseableJTabbedPane
-------------
-An extension of JTabbedPane that adds a close button to tabs.
-
-![CloseableJTabbedPane](https://raw.githubusercontent.com/hlfernandez/GC4S/master/screenshots/CloseableJTabbedPane.gif)
-
-JProgressDialog
-------------
-An extension of JDialog to ease the creation of simple progress dialogs based on a task list.
-
-![JProgressDialog](https://raw.githubusercontent.com/hlfernandez/GC4S/master/screenshots/JProgressDialog.gif)
-
-ExtendedJComboBox
-------------
-An extension of JComboBox that adjust its width to the maximum item width when the drop down list is being displayed.
-
-![JProgressDialog](https://raw.githubusercontent.com/hlfernandez/GC4S/master/screenshots/ExtendedJComboBox.png)
-
-ExtendedJTabbedPaneDemo
-------------
-An extension of JTabbedPane that allows setting wether the tab bar must be hidden if there is only one tab.
-
-![JProgressDialog](https://raw.githubusercontent.com/hlfernandez/GC4S/master/screenshots/ExtendedJTabbedPaneDemo.gif)
-
-JParallelListsPanel
-------------
-A component that that wraps two JListPanel and allows moving elements between them.
-
-![JParallelListsPanel](https://raw.githubusercontent.com/hlfernandez/GC4S/master/screenshots/JParallelLists.gif)
-
-ColorKeyLegend
-------------
-A component for displaying color key legends.
-
-![ColorKeyLegend](https://raw.githubusercontent.com/hlfernandez/GC4S/master/screenshots/ColorKeyLegend.png)
-
-ColorLegend
-------------
-A component for displaying color legends.
-
-![ColorLegend](https://raw.githubusercontent.com/hlfernandez/GC4S/master/screenshots/ColorLegend.png)
-
-ColumnSummaryTabeCellRenderer
-------------
-A table cell renderer that displays a column summary.
-
-![ColumnSummaryTabeCellRenderer](https://raw.githubusercontent.com/hlfernandez/GC4S/master/screenshots/ColumnSummaryTabeCellRenderer.png)
+These are just two examples of GC4S components. To see more, please, see the [examples](EXAMPLES.md) section.
