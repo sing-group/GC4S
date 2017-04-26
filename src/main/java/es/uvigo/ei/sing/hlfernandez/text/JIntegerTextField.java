@@ -10,7 +10,7 @@ import es.uvigo.ei.sing.hlfernandez.utilities.TextFieldSelectionFocusListener;
 /**
  * This class extends {@code JFormattedTextField} and only accepts integers as
  * input.
- * 
+ *
  * @author hlfernandez
  *
  */
@@ -20,13 +20,12 @@ public class JIntegerTextField extends JFormattedTextField {
 	/**
 	 * Creates a new {@code JIntegerTextField} and initializes it with the
 	 * specified value.
-	 * 
-	 * @param value
-	 *            the initial value.
+	 *
+	 * @param value the initial value
 	 */
 	public JIntegerTextField(Integer value) {
 	    this.setFormatter(configureFormatter());
-	    this.setValue(0);
+	    this.setValue(value);
 	    this.addFocusListener(new TextFieldSelectionFocusListener());
 	}
 
@@ -38,10 +37,10 @@ public class JIntegerTextField extends JFormattedTextField {
 	    formatter.setMaximum(Integer.MAX_VALUE);
 	    formatter.setAllowsInvalid(false);
 	    formatter.setCommitsOnValidEdit(true);
-	    
+
 	    return formatter;
 	}
-	
+
 	@Override
 	public Integer getValue() {
 		return (Integer) super.getValue();
