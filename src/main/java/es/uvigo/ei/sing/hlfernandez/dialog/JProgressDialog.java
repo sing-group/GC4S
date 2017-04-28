@@ -1,12 +1,12 @@
 package es.uvigo.ei.sing.hlfernandez.dialog;
 
 import java.awt.GridLayout;
+import java.awt.Window;
 import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
@@ -23,7 +23,7 @@ public class JProgressDialog extends JDialog {
 	private static final String DEFAULT_LABEL_CURRENT_TASK = "Current task:";
 	private static final String DEFAULT_LABEL_TOTAL_PROGRESS = "Total progress:";
 
-	private JFrame parent;
+	private Window parent;
 	private List<String> tasks;
 	private JLabel taskLabel;
 	private JProgressBar progressBar;
@@ -37,11 +37,11 @@ public class JProgressDialog extends JDialog {
 	 * Constructs a new {@code ProgressDialog} instance with the specified
 	 * parameters.
 	 *
-	 * @param parent the parent frame to show the dialog
+	 * @param parent the parent window to show the dialog
 	 * @param title the dialog title
 	 * @param tasks the list of tasks
 	 */
-	public JProgressDialog(JFrame parent, String title, List<String> tasks) {
+	public JProgressDialog(Window parent, String title, List<String> tasks) {
 		this(parent, title, tasks, DEFAULT_LABEL_CURRENT_TASK,
 			DEFAULT_LABEL_TOTAL_PROGRESS);
 	}
@@ -50,13 +50,13 @@ public class JProgressDialog extends JDialog {
 	 * Constructs a new {@code ProgressDialog} instance with the specified
 	 * parameters.
 	 *
-	 * @param parent the parent frame to show the dialog
+	 * @param parent the parent window to show the dialog
 	 * @param title the dialog title
 	 * @param tasks the list of tasks
 	 * @param tasks the list of tasks
 	 * @param currentTaskLabel the label of the current task
 	 */
-	public JProgressDialog(JFrame parent, String title, List<String> tasks,
+	public JProgressDialog(Window parent, String title, List<String> tasks,
 		String currentTaskLabel) {
 		this(parent, title, tasks, currentTaskLabel,
 			DEFAULT_LABEL_TOTAL_PROGRESS);
@@ -66,14 +66,14 @@ public class JProgressDialog extends JDialog {
 	 * Constructs a new {@code ProgressDialog} instance with the specified
 	 * parameters.
 	 *
-	 * @param parent the parent frame to show the dialog
+	 * @param parent the parent window to show the dialog
 	 * @param title the dialog title
 	 * @param tasks the list of tasks
 	 * @param tasks the list of tasks
 	 * @param currentTaskLabel the label of the current task
 	 * @param totalProgressLabel the label of the total progress bar
 	 */
-	public JProgressDialog(JFrame parent, String title, List<String> tasks,
+	public JProgressDialog(Window parent, String title, List<String> tasks,
 		String currentTaskLabel, String totalProgressLabel) {
 		super(parent, title);
 

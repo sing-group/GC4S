@@ -18,7 +18,8 @@ public class JProgressDialogDemo {
 		List<String> tasks = Arrays.asList(new String[]{
 			"Task 1", "Task 2", "Task 3", "Task 4"	
 		});
-		JProgressDialog dialog = new JProgressDialog(new JFrame(), "JProgressDialog demo", tasks);
+		JProgressDialog dialog = new JProgressDialog(
+			new JFrame(), "JProgressDialog demo", tasks);
 		dialog.setVisible(true);
 		tasks.stream().forEach(t -> {
 			try {
