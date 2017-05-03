@@ -1,7 +1,7 @@
 GC4S examples
 =============
 
-In this section you can find different examples of GC4S components. Code for all examples is provided at the `es.uvigo.ei.sing.hlfernandez.demo` package.
+In this section you can find different examples of GC4S components. Code for all examples is provided at the `org.sing_group.gc4s.demo` package.
 
 JHeatMap
 --------

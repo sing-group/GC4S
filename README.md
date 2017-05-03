@@ -21,9 +21,9 @@ Clone this project and install it using `mvn install` or add the following repos
 	
 	<dependencies>
     	<dependency>
-			<groupId>es.uvigo.ei.sing.hlfernandez</groupId>
+			<groupId>org.sing_group</groupId>
 			<artifactId>GC4S</artifactId>
-			<version>0.6.0-SNAPSHOT</version>
+			<version>0.7.0-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 ```
