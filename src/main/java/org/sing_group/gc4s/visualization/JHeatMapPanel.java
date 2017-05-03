@@ -36,18 +36,31 @@ import org.sing_group.gc4s.visualization.JHeatMapOperations.Transform;
 /**
  * A {@code JHeatMapPanel} wraps a {@code JHeatMap}, adding a toolbar with
  * options to manipulate it.
- * 
+ *
  * @author hlfernandez
  * @see JHeatMap
  */
 public class JHeatMapPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
-	
+
+	protected static final String DESCRIPTION_RANGE_DIALOG =
+		"This dialog allows you to select the minimum and maximum values used "
+		+ "to create the color gradient.";
+	protected static final String DESCRIPTION_FONT_DIALOG =
+		"This dialog allows you to select the style and size of the font used "
+		+ "in the heatmap.";
+	protected static final String DESCRIPTION_VISIBLE_ROWS =
+		"This dialog allows you to configure the visible rows. To do so, move "
+		+ "them from one list to another using the controls.";
+	protected static final String DESCRIPTION_VISIBLE_COLUMNS =
+		"This dialog allows you to configure the visible columns. To do so, move "
+			+ "them from one list to another using the controls.";
+
 	private enum ComboColor {
 		RED 	(Color.RED, 	"Red"),
 		GREEN 	(Color.GREEN, 	"Green"),
 		BLUE 	(Color.BLUE, 	"Blue");
-		
+
 		private Color color;
 		private String name;
 
@@ -55,29 +68,29 @@ public class JHeatMapPanel extends JPanel {
 			this.color = color;
 			this.name = name;
 		}
-		
+
 		public Color getColor() {
 			return color;
 		}
-		
+
 		@Override
 		public String toString() {
 			return this.name;
 		}
 	}
-	
+
 	private JHeatMap heatmap;
 	private Optional<Font> heatmapFont = Optional.empty();
 
 	/**
 	 * Constructs a new {@code JHeatMapPanel} wrapping {@code heatmap}.
-	 * 
+	 *
 	 * @param heatmap
 	 *            a {@code JHeatMap}.
 	 */
 	public JHeatMapPanel(JHeatMap heatmap) {
 		super(new BorderLayout());
-		
+
 		this.heatmap = heatmap;
 		this.initComponent();
 	}
@@ -87,10 +100,10 @@ public class JHeatMapPanel extends JPanel {
 		toolbar.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
 		BoxLayout layout = new BoxLayout(toolbar, BoxLayout.X_AXIS);
 		toolbar.setLayout(layout);
-		
+
 		toolbar.add(getMenu());
-		
-		JComboBox<ComboColor> lowColorCB = 
+
+		JComboBox<ComboColor> lowColorCB =
 			new JComboBox<ComboColor>(ComboColor.values());
 		fixComboSize(lowColorCB);
 		lowColorCB.setSelectedItem(ComboColor.GREEN);
@@ -99,12 +112,12 @@ public class JHeatMapPanel extends JPanel {
 				((ComboColor)lowColorCB.getSelectedItem()).getColor()
 			);
 		});
-		
+
 		toolbar.add(Box.createHorizontalGlue());
 		toolbar.add(new JLabel("Low: "));
 		toolbar.add(lowColorCB);
-		
-		JComboBox<ComboColor> highColorCB = 
+
+		JComboBox<ComboColor> highColorCB =
 			new JComboBox<ComboColor>(ComboColor.values());
 		fixComboSize(highColorCB);
 		highColorCB.setSelectedItem(ComboColor.RED);
@@ -113,11 +126,11 @@ public class JHeatMapPanel extends JPanel {
 				((ComboColor)highColorCB.getSelectedItem()).getColor()
 			);
 		});
-		
+
 		toolbar.add(Box.createHorizontalStrut(10));
 		toolbar.add(new JLabel("High: "));
 		toolbar.add(highColorCB);
-		
+
 		toolbar.add(Box.createHorizontalStrut(10));
 
 		this.add(toolbar, BorderLayout.NORTH);
@@ -161,10 +174,16 @@ public class JHeatMapPanel extends JPanel {
 
 		ListSelectionDialog<String> dialog;
 		try {
-			dialog = new ListSelectionDialog<>(
-				getDialogParent(), visible, notVisible, "Visible rows", 
+			dialog = new ListSelectionDialog<String>(
+				getDialogParent(), visible, notVisible, "Visible rows",
 				"Not visible rows"
-			);
+			) {
+				private static final long serialVersionUID = 1L;
+
+				public String getDescription() {
+					return DESCRIPTION_VISIBLE_ROWS;
+				}
+			};
 			dialog.setVisible(true);
 
 			if (!dialog.isCanceled()) {
@@ -186,10 +205,16 @@ public class JHeatMapPanel extends JPanel {
 
 		ListSelectionDialog<String> dialog;
 		try {
-			dialog = new ListSelectionDialog<>(
-				getDialogParent(), visible, notVisible, "Visible columns", 
+			dialog = new ListSelectionDialog<String>(
+				getDialogParent(), visible, notVisible, "Visible columns",
 				"Not visible columns"
-			);
+			){
+				private static final long serialVersionUID = 1L;
+
+				public String getDescription() {
+					return DESCRIPTION_VISIBLE_COLUMNS;
+				}
+			};
 
 			dialog.setVisible(true);
 
@@ -205,7 +230,14 @@ public class JHeatMapPanel extends JPanel {
 		DoubleRangeInputDialog dialog = new DoubleRangeInputDialog(
 			getDialogParent(),
 			new DoubleRange(heatmap.getLowValue(), heatmap.getHighValue())
-		);
+		) {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			protected String getDescription() {
+				return DESCRIPTION_RANGE_DIALOG;
+			}
+		};
 		dialog.setVisible(true);
 
 		if(!dialog.isCanceled()) {
@@ -224,13 +256,20 @@ public class JHeatMapPanel extends JPanel {
 			}
 		}
 	}
-	
+
 	protected void configureFont() {
 		FontConfigurationDialog dialog = new FontConfigurationDialog(
 			getDialogParent(), getHeatmapFont()
-		);
+		) {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			protected String getDescription() {
+				return DESCRIPTION_FONT_DIALOG;
+			}
+		};
 		dialog.setVisible(true);
-		
+
 		if(!dialog.isCanceled()) {
 			this.setHeatmapFont(dialog.getSelectedFont());
 		}
@@ -240,33 +279,33 @@ public class JHeatMapPanel extends JPanel {
 		this.heatmapFont = Optional.ofNullable(font);
 		this.heatmap.setHeatmapFont(getHeatmapFont());
 	}
-	
+
 	/**
 	 * Returns the heat map font.
-	 * 
+	 *
 	 * @return the heat map font.
 	 */
 	public Font getHeatmapFont() {
 		return this.heatmapFont.orElse(this.getFont());
 	}
-	
+
 	private void fixComboSize(JComboBox<ComboColor> lowColorCB) {
 		Dimension d = new Dimension(120, 20);
 		lowColorCB.setSize(d);
 		lowColorCB.setMaximumSize(d);
 		lowColorCB.setPreferredSize(d);
 	}
-	
+
 	private void transformDataMatrix() {
-		JHeatMapDataOperationsDialog dialog = 
+		JHeatMapDataOperationsDialog dialog =
 			new JHeatMapDataOperationsDialog(getDialogParent());
 		dialog.setVisible(true);
-		
+
 		if(!dialog.isCanceled()) {
 			applyTransformations(dialog.getTransform(), dialog.getCentering());
 		}
 	}
-	
+
 	private void applyTransformations(Transform transform, Centering centering) {
 		this.heatmap.setData(
 			center(
