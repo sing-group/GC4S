@@ -113,6 +113,10 @@ public class Icons {
 	public static final ImageIcon ICON_BAR_CHART_2_24 = getResource("icons/bar-chart-2-24.png");
 	public static final ImageIcon ICON_BAR_CHART_2_16 = getResource("icons/bar-chart-2-16.png");
 
+	public static final ImageIcon ICON_RECENT_FILES_32 = getResource("icons/open-recent32.png");
+	public static final ImageIcon ICON_RECENT_FILES_24 = getResource("icons/open-recent24.png");
+	public static final ImageIcon ICON_RECENT_FILES_16 = getResource("icons/open-recent16.png");
+
 	private static ImageIcon getResource(String resource) {
 		return new ImageIcon(Icons.class.getResource(resource));
 	}
