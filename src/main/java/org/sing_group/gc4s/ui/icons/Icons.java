@@ -117,13 +117,25 @@ public class Icons {
 	public static final ImageIcon ICON_RECENT_FILES_24 = getResource("icons/open-recent24.png");
 	public static final ImageIcon ICON_RECENT_FILES_16 = getResource("icons/open-recent16.png");
 
+	public static final ImageIcon ICON_REFRESH_1_32 = getResource("icons/refresh-1-32.png");
+	public static final ImageIcon ICON_REFRESH_1_24 = getResource("icons/refresh-1-24.png");
+	public static final ImageIcon ICON_REFRESH_1_16 = getResource("icons/refresh-1-16.png");
+
+	public static final ImageIcon ICON_REFRESH_2_32 = getResource("icons/refresh-2-32.png");
+	public static final ImageIcon ICON_REFRESH_2_24 = getResource("icons/refresh-2-24.png");
+	public static final ImageIcon ICON_REFRESH_2_16 = getResource("icons/refresh-2-16.png");
+
+	public static final ImageIcon ICON_REFRESH_3_32 = getResource("icons/refresh-3-32.png");
+	public static final ImageIcon ICON_REFRESH_3_24 = getResource("icons/refresh-3-24.png");
+	public static final ImageIcon ICON_REFRESH_3_16 = getResource("icons/refresh-3-16.png");
+
 	private static ImageIcon getResource(String resource) {
 		return new ImageIcon(Icons.class.getResource(resource));
 	}
-	
+
 	/**
 	 * Scales {@code icon} to {@code width} and {@code height}.
-	 * 
+	 *
 	 * @param icon an {@code ImageIcon} to scale.
 	 * @param width the width.
 	 * @param height the height.
