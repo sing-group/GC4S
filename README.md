@@ -23,7 +23,7 @@ Clone this project and install it using `mvn install` or add the following repos
     	<dependency>
 			<groupId>org.sing_group</groupId>
 			<artifactId>gc4s</artifactId>
-			<version>0.7.0-SNAPSHOT</version>
+			<version>0.7.0</version>
 		</dependency>
 	</dependencies>
 ```
