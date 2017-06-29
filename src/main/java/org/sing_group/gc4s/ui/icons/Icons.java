@@ -129,6 +129,14 @@ public class Icons {
 	public static final ImageIcon ICON_REFRESH_3_24 = getResource("icons/refresh-3-24.png");
 	public static final ImageIcon ICON_REFRESH_3_16 = getResource("icons/refresh-3-16.png");
 
+	public static final ImageIcon ICON_WARNING_32 = getResource("icons/warning32.png");
+	public static final ImageIcon ICON_WARNING_24 = getResource("icons/warning24.png");
+	public static final ImageIcon ICON_WARNING_16 = getResource("icons/warning16.png");
+
+	public static final ImageIcon ICON_WARNING_COLOR_32 = getResource("icons/warning-color32.png");
+	public static final ImageIcon ICON_WARNING_COLOR_24 = getResource("icons/warning-color24.png");
+	public static final ImageIcon ICON_WARNING_COLOR_16 = getResource("icons/warning-color16.png");
+
 	private static ImageIcon getResource(String resource) {
 		return new ImageIcon(Icons.class.getResource(resource));
 	}

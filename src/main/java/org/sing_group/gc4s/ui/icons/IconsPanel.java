@@ -9,8 +9,9 @@ import java.lang.reflect.Field;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
-public class IconsPanel extends JPanel {
+public class IconsPanel extends JScrollPane {
 	private static final long serialVersionUID = 1L;
 	
 	public IconsPanel() {
@@ -26,7 +27,7 @@ public class IconsPanel extends JPanel {
 			iconsPanel.add(createIconPanel(f, icons));
 		}
 		
-		this.add(iconsPanel);
+		this.setViewportView(iconsPanel);
 	}
 
 	private Component createIconPanel(Field f, Icons icons) {
