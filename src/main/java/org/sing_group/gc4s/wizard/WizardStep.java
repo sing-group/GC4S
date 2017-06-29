@@ -9,24 +9,24 @@ import org.sing_group.gc4s.wizard.event.WizardStepEvent;
 import org.sing_group.gc4s.wizard.event.WizardStepListener;
 
 /**
- * 
+ *
  * @author hlfernandez
  *
  */
 public abstract class WizardStep {
-	
+
 	private final List<WizardStepListener> listeners = new LinkedList<>();
 
 	/**
 	 * Returns the title of the step.
-	 * 
+	 *
 	 * @return the title of the step
 	 */
 	public abstract String getStepTitle();
 
 	/**
 	 * Returns the {@code JComponent} that shows the step.
-	 * 
+	 *
 	 * @return the {@code JComponent} that shows the step.
 	 */
 	public abstract JComponent getStepComponent();
@@ -34,7 +34,7 @@ public abstract class WizardStep {
 	/**
 	 * Returns {@code true} if the step is completed and {@code false}
 	 * otherwise.
-	 * 
+	 *
 	 * @return {@code true} if the step is completed and {@code false} otherwise
 	 */
 	public abstract boolean isStepCompleted();
@@ -70,8 +70,8 @@ public abstract class WizardStep {
 	}
 
 	/**
-	 * Returns the list of all registered wizard step listeners. 
-	 * 
+	 * Returns the list of all registered wizard step listeners.
+	 *
 	 * @return the list of registered {@code WizardStepListener}s
 	 */
 	public List<WizardStepListener> getWizardStepListeners() {
@@ -93,5 +93,11 @@ public abstract class WizardStep {
 
 	protected void notifyWizardStepUncompleted(WizardStepEvent event) {
 		this.getWizardStepListeners().forEach(l -> l.wizardStepUncompleted(event));
+	}
+
+	protected void notifyWizardStepNextButtonTooltipChanged(String nextButtonTooltip) {
+		this.getWizardStepListeners().forEach(l ->
+			l.wizardStepNextButtonTooltipChanged(nextButtonTooltip)
+		);
 	}
 }

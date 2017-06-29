@@ -22,6 +22,7 @@ import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import org.jdesktop.swingx.JXLabel;
 
@@ -257,12 +258,13 @@ public class Wizard extends JDialog implements WizardStepListener {
 	private boolean canMoveToNextStep() {
 		return this.steps.get(currentStep).isStepCompleted();
 	}
-	
+
 	private void stepChanged() {
 		this.checkButtonsStatus();
 		this.updateWizardStepSidebarLabelsStyle();
 		this.checkStep();
 		this.notifyStepEntered();
+		this.nextStepButton.setToolTipText(null);
 	}
 
 	private void checkStep() {
@@ -297,6 +299,21 @@ public class Wizard extends JDialog implements WizardStepListener {
 	@Override
 	public void wizardStepUncompleted(WizardStepEvent event) {
 		this.checkButtonsStatus();
+	}
+
+	@Override
+	public void wizardStepNextButtonTooltipChanged(String nextButtonTooltip) {
+		if (nextButtonTooltip.isEmpty()) {
+			setNextButtonTooltip(null);
+		} else {
+			setNextButtonTooltip(nextButtonTooltip);
+		}
+	}
+
+	private void setNextButtonTooltip(String nextButtonTooltip) {
+		SwingUtilities.invokeLater(() -> {
+			this.nextStepButton.setToolTipText(nextButtonTooltip);
+		});
 	}
 
 	private void checkButtonsStatus() {
