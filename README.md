@@ -5,7 +5,7 @@ A collection of GUI Components for (Java) Swing.
 
 Projects using GC4S
 -------------------
-- [S2P](http://sing-group.org/s2p/): an open-source application for processing of 2D-gel and MALDI-based mass spectrometry protein data. a. The graphical user interface has been created using GC4S.
+- [S2P](http://sing-group.org/s2p/): an open-source application for processing of 2D-gel and MALDI-based mass spectrometry protein data. The graphical user interface has been created using GC4S.
 
 Using GC4S
 ----------
