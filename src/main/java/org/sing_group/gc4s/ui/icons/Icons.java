@@ -93,6 +93,10 @@ public class Icons {
 	public static final ImageIcon ICON_OK_24 = getResource("icons/ok24.png");
 	public static final ImageIcon ICON_OK_16 = getResource("icons/ok16.png");
 
+	public static final ImageIcon ICON_OK_COLOR_32 = getResource("icons/ok-color-32.png");
+	public static final ImageIcon ICON_OK_COLOR_24 = getResource("icons/ok-color-24.png");
+	public static final ImageIcon ICON_OK_COLOR_16 = getResource("icons/ok-color-16.png");
+
 	public static final ImageIcon ICON_CANCEL_32 = getResource("icons/cancel32.png");
 	public static final ImageIcon ICON_CANCEL_24 = getResource("icons/cancel24.png");
 	public static final ImageIcon ICON_CANCEL_16 = getResource("icons/cancel16.png");
