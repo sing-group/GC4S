@@ -34,7 +34,6 @@ public class ExtendedJXTextField extends JXTextField {
 		public void changedUpdate(DocumentEvent e) {
 			textChanged();
 		}
-
 	};
 
 	/**

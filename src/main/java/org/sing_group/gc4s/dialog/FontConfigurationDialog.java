@@ -76,7 +76,7 @@ public class FontConfigurationDialog extends AbstractInputJDialog {
 	@Override
 	public void setVisible(boolean b) {
 		this.okButton.setEnabled(true);
-		
+		this.pack();
 		super.setVisible(b);
 	}
 }
