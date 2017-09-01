@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.io.InvalidClassException;
 
 import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -25,20 +26,19 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import org.jdesktop.swingx.JXTextField;
-
 import org.sing_group.gc4s.ComponentFactory;
 
 /**
  * This class encloses a {@link JList} based on a
  * {@link ExtendedDefaultListModel} to provide common list functionalities
  * (moving elements, select all, clear selection, filtering elements).
- * 
+ *
  * @author hlfernandez
  *
  */
 public class JListPanel<E> extends JPanel {
 	private static final long serialVersionUID = 1L;
-	
+
 	protected static final ImageIcon ICON_ARROW_DOWN = new ImageIcon(
 		JListPanel.class.getResource("icons/down.png"));
 	protected static final ImageIcon ICON_ARROW_UP = new ImageIcon(
@@ -49,7 +49,7 @@ public class JListPanel<E> extends JPanel {
 		JListPanel.class.getResource("icons/clear.png"));
 	protected static final ImageIcon ICON_SELECT_ALL = new ImageIcon(
 		JListPanel.class.getResource("icons/check.png"));
-	
+
 	private JList<E> list;
 	private ExtendedDefaultListModel<E> listModel;
 	private FilteredListModel<E> filteredListModel;
@@ -71,14 +71,16 @@ public class JListPanel<E> extends JPanel {
 	private boolean buttons;
 	private boolean filter;
 
+  private JPanel userActions;
+
 	/**
-	 * Constructs a {@code JListPanel} within the button actions and the 
+	 * Constructs a {@code JListPanel} within the button actions and the
 	 * filter visible.
-	 * 
+	 *
 	 * @param list
 	 *            a JList that uses a {@link ExtendedDefaultListModel}.
-	 *            
-	 * @throws InvalidClassException            
+	 *
+	 * @throws InvalidClassException
 	 *             if list's model is not an {@code ExtendedDefaultModel}.
 	 */
 	public JListPanel(JList<E> list) throws InvalidClassException{
@@ -87,18 +89,18 @@ public class JListPanel<E> extends JPanel {
 
 	/**
 	 * Constructs a {@code JListPanel}.
-	 * 
+	 *
 	 * @param list
 	 *            a JList that uses a {@link ExtendedDefaultListModel}.
 	 * @param buttons
 	 *            if true, the action buttons are showed.
 	 * @param filter
 	 *            if true, the list filter is shown.
-	 * 
+	 *
 	 * @throws InvalidClassException
 	 *             if list's model is not an {@code ExtendedDefaultModel}.
 	 */
-	public JListPanel(JList<E> list, boolean buttons, boolean filter) 
+	public JListPanel(JList<E> list, boolean buttons, boolean filter)
 		throws InvalidClassException
 	{
 		super();
@@ -119,24 +121,24 @@ public class JListPanel<E> extends JPanel {
 		this.add(this.getNorthPane(), BorderLayout.NORTH);
 		this.add(new JScrollPane(list), BorderLayout.CENTER);
 		this.list.addListSelectionListener(new ListSelectionListener() {
-			
+
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				checkActionButtons();
 			}
 		});
 		this.listModel.addListDataListener(new ListDataListener() {
-			
+
 			@Override
 			public void intervalRemoved(ListDataEvent e) {
 				checkActionButtons();
 			}
-			
+
 			@Override
 			public void intervalAdded(ListDataEvent e) {
 				checkActionButtons();
 			}
-			
+
 			@Override
 			public void contentsChanged(ListDataEvent e) {
 				checkActionButtons();
@@ -162,7 +164,7 @@ public class JListPanel<E> extends JPanel {
 	private Component getFilterPane() {
 		if(this.filterPanel == null){
 			this.filterPanel = new JPanel(new BorderLayout());
-			
+
 			filterTextField = new JXTextField("Filter", Color.LIGHT_GRAY);
 			this.filterPanel.add(filterTextField, BorderLayout.CENTER);
 			filterTextField.getDocument().addDocumentListener(new DocumentListener() {
@@ -180,7 +182,7 @@ public class JListPanel<E> extends JPanel {
 					filterChanged();
 				}
 			});
-			
+
 			regexButton = ComponentFactory
 				.createToggleButton(null, null, false, new AbstractAction(
 					"(.*)") {
@@ -193,37 +195,37 @@ public class JListPanel<E> extends JPanel {
 					});
 			regexButton.setToolTipText("Select this option to apply the filter as a regular expression");
 			this.filterPanel.add(regexButton, BorderLayout.EAST);
-			
+
 		}
 		return this.filterPanel;
 	}
 
 	protected void filterChanged() {
 		filteredListModel.setFilter(new FilteredListModel.Filter() {
-	        public boolean accept(Object element) {
-	        	
-	        	String string = element.toString();
-	        	String filter = filterTextField.getText();
-	        	
-				if(!regexButton.isSelected()){
-		        	if (string.contains(filter))
-		        		return true; 
-				} else{
-					try{
-						if(string.matches(".*"+filter+".*"))
+			public boolean accept(Object element) {
+
+				String string = element.toString();
+				String filter = filterTextField.getText();
+
+				if (!regexButton.isSelected()) {
+					if (string.contains(filter))
+						return true;
+				} else {
+					try {
+						if (string.matches(".*" + filter + ".*"))
 							return true;
-					} catch (java.util.regex.PatternSyntaxException ex){
+					} catch (java.util.regex.PatternSyntaxException ex) {
 						return false;
 					}
 				}
-	        	
-	        	return false;
-	        }
-	    });
+
+				return false;
+			}
+		});
 	}
 
 	private Component getButtonsPane() {
-		if(this.buttonsPanel == null){
+		if (this.buttonsPanel == null) {
 			this.buttonsPanel = new JPanel();
 			BoxLayout layout = new BoxLayout(this.buttonsPanel, BoxLayout.X_AXIS);
 			this.buttonsPanel.setLayout(layout);
@@ -237,33 +239,33 @@ public class JListPanel<E> extends JPanel {
 			};
 			actionMoveUp = new AbstractAction("Move up", ICON_ARROW_UP) {
 				private static final long serialVersionUID = 1L;
-				
+
 				public void actionPerformed(ActionEvent e) {
 					moveUpSelectedElement();
 				}
 			};
 			actionRemoveElements = new AbstractAction("Remove", ICON_REMOVE) {
 				private static final long serialVersionUID = 1L;
-				
+
 				public void actionPerformed(ActionEvent e) {
 					removeSelectedElements();
 				}
 			};
 			actionClearSelection = new AbstractAction("Clear selection", ICON_CLEAR) {
 				private static final long serialVersionUID = 1L;
-				
+
 				public void actionPerformed(ActionEvent e) {
 					clearSelection();
 				}
 			};
 			actionSelectAll = new AbstractAction("Select all", ICON_SELECT_ALL) {
 				private static final long serialVersionUID = 1L;
-				
+
 				public void actionPerformed(ActionEvent e) {
 					selectAll();
 				}
 			};
-			
+
 			btnMoveDown = ComponentFactory.createButton(actionMoveDown, false,
 				"Moves down the selected element", false);
 
@@ -287,11 +289,20 @@ public class JListPanel<E> extends JPanel {
 			buttonsPanel.add(btnRemove);
 			buttonsPanel.add(btnSelectAll);
 			buttonsPanel.add(btnClearSelection);
+			buttonsPanel.add(getUserActionsPanel());
 			buttonsPanel.add(Box.createHorizontalGlue());
 		}
 		return buttonsPanel;
 	}
-	
+
+	private JPanel getUserActionsPanel() {
+		userActions = new JPanel();
+		BoxLayout layout = new BoxLayout(userActions, BoxLayout.X_AXIS);
+		userActions.setLayout(layout);
+
+		return userActions;
+	}
+
 	private void moveDownSelectedElement() {
 		if (listModel.moveDown(list.getSelectedIndex())) {
 			list.setSelectedIndex(list.getSelectedIndex() + 1);
@@ -303,7 +314,7 @@ public class JListPanel<E> extends JPanel {
 			list.setSelectedIndex(list.getSelectedIndex() - 1);
 		}
 	}
-	
+
 	private void removeSelectedElements() {
 		list.getSelectedValuesList().forEach(e -> {
 			this.listModel.removeElement(e);
@@ -311,7 +322,7 @@ public class JListPanel<E> extends JPanel {
 		this.list.clearSelection();
 		this.list.updateUI();
 	}
-	
+
 	private void checkActionButtons() {
 		int selectedIndexesCount = this.list.getSelectedIndices().length;
 		boolean moveEnabled = selectedIndexesCount == 1
@@ -321,15 +332,15 @@ public class JListPanel<E> extends JPanel {
 		btnClearSelection.setEnabled(selectedIndexesCount > 0);
 		btnRemove.setEnabled(selectedIndexesCount > 0);
 		btnSelectAll.setEnabled(
-			selectedIndexesCount < this.listModel.getSize() && 
+			selectedIndexesCount < this.listModel.getSize() &&
 			this.listModel.getSize() > 0
 		);
 	}
-	
+
 	private void clearSelection() {
 		this.list.clearSelection();
 	}
-	
+
 	private void selectAll() {
 		int size = this.listModel.getSize();
 		int[] selectedIndexes = new int[size];
@@ -341,34 +352,34 @@ public class JListPanel<E> extends JPanel {
 
 	/**
 	 * Returns the move up button.
-	 * 
+	 *
 	 * @return the move up button.
 	 */
 	public JButton getBtnMoveUp() {
 		return btnMoveUp;
 	}
-	
+
 	/**
 	 * Returns the move down button.
-	 * 
+	 *
 	 * @return the move down button.
 	 */
 	public JButton getBtnMoveDown() {
 		return btnMoveDown;
 	}
-	
+
 	/**
 	 * Returns the remove elements button.
-	 * 
+	 *
 	 * @return the remove elements button.
 	 */
 	public JButton getBtnRemoveElements() {
 		return btnMoveDown;
 	}
-	
+
 	/**
 	 * Returns the clear selection button.
-	 * 
+	 *
 	 * @return the clear selection button.
 	 */
 	public JButton getBtnClearSelection() {
@@ -377,16 +388,16 @@ public class JListPanel<E> extends JPanel {
 
 	/**
 	 * Returns the select all button.
-	 * 
+	 *
 	 * @return the select all button.
 	 */
 	public JButton getBtnSelectAll() {
 		return btnSelectAll;
 	}
-	
+
 	/**
 	 * Returns the move down action.
-	 * 
+	 *
 	 * @return the move down action.
 	 */
 	public AbstractAction getActionMoveUp() {
@@ -395,16 +406,16 @@ public class JListPanel<E> extends JPanel {
 
 	/**
 	 * Returns the move down action.
-	 * 
+	 *
 	 * @return the move down action.
 	 */
 	public AbstractAction getActionMoveDown() {
 		return actionMoveDown;
 	}
-	
+
 	/**
 	 * Returns the remove elements action.
-	 * 
+	 *
 	 * @return the remove elements action.
 	 */
 	public AbstractAction getActionRemoveElements() {
@@ -413,28 +424,47 @@ public class JListPanel<E> extends JPanel {
 
 	/**
 	 * Returns the clear selection action.
-	 * 
+	 *
 	 * @return the clear selection action.
 	 */
 	public AbstractAction getActionClearSelection() {
 		return actionClearSelection;
 	}
-	
+
 	/**
 	 * Returns the select all action.
-	 * 
+	 *
 	 * @return the select all action.
 	 */
 	public AbstractAction getActionSelectAll() {
 		return actionSelectAll;
 	}
-	
+
 	/**
 	 * Returns the wrapped {@code JList}.
-	 * 
+	 *
 	 * @return the wrapped {@code JList}.
 	 */
 	public JList<E> getList() {
 		return list;
+	}
+
+	/**
+	 * Adds a button with the specified action.
+	 *
+	 * @param a the button action
+	 */
+	public void addAction(Action a) {
+		addAction(a, null);
+	}
+
+	/**
+	 * Adds a button with the specified action.
+	 *
+	 * @param a the button action
+	 * @param tooltip the button tooltip
+	 */
+	public void addAction(Action a, String tooltip) {
+		userActions.add(ComponentFactory.createButton(a, true, tooltip, false));
 	}
 }

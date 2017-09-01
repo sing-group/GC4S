@@ -1,6 +1,7 @@
 package org.sing_group.gc4s;
 
 import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JToggleButton;
@@ -25,8 +26,8 @@ public final class ComponentFactory {
 	 *            if the action text is visible.
 	 * @return a new configured button.
 	 */
-	public static JButton createButton(AbstractAction action,
-			final boolean enabled, final String tooltip, boolean useText) {
+	public static JButton createButton(Action action, final boolean enabled,
+		final String tooltip, boolean useText) {
 		final JButton button = new JButton(action);
 		button.setEnabled(enabled);
 		button.setToolTipText(tooltip);
