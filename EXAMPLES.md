@@ -96,3 +96,9 @@ RadioButtonsPanel
 A panel that displays a list of elements using `JRadioButton`s. It is designed to be an alternative to `JComboBox` when you want all values visible to the user.
 
 ![RadioButtonsPanel](screenshots/RadioButtonsPanelDemo.png)
+
+FontConfigurationPanel
+-----------------
+A panel that allows configuring a `Font`.
+
+![FontConfigurationPanel](screenshots/FontConfigurationPanel.png)
