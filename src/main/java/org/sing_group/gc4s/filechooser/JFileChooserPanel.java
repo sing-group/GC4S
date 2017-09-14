@@ -142,12 +142,20 @@ public class JFileChooserPanel extends JPanel {
 	}
 	
 	/**
-	 * Constructs a {@link JFileChooserPanel} with the specified {@code} mode}
-	 * and {@code filechooser}. For the rest, the default configuration (default
-	 * browse icon, file label text and no required extension) is taken.
+	 * <p>
+	 * Constructs a {@link JFileChooserPanel} with the specified {@code} mode},
+	 * {@code selectionMode} and {@code filechooser}. For the rest, the default
+	 * configuration (default browse icon, file label text and no required
+	 * extension) is taken.
+	 * </p>
+	 * 
+	 * <p>
+	 * Parameter {@code selectionMode} is used to configure the
+	 * {@code JFileChooser} before showing it to the user.
+	 * </p>
 	 * 
 	 * @param mode the {@code JFileChooser} mode.
-	 * @param selectionMode  the {@code JFileChooser} selection mode.
+	 * @param selectionMode the {@code JFileChooser} selection mode.
 	 * @param filechooser the {@link JFileChooser} that will be opened.
 	 */
 	public JFileChooserPanel(Mode mode, SelectionMode selectionMode,
@@ -171,8 +179,15 @@ public class JFileChooserPanel extends JPanel {
 	}
 
 	/**
+	 * <p>
 	 * Constructs a {@link JFileChooserPanel} with the specified {@code} mode},
 	 * {@code filechooser}, {@code labelFiletext} and {@code selectionMode}.
+	 * </p>
+	 * 
+	 * <p>
+	 * Parameter {@code selectionMode} is used to configure the
+	 * {@code JFileChooser} before showing it to the user.
+	 * </p>
 	 *
 	 * @param mode the {@code JFileChooser} mode.
 	 * @param filechooser the {@link JFileChooser} that will be opened.
@@ -189,8 +204,8 @@ public class JFileChooserPanel extends JPanel {
 	/**
 	 * <p>
 	 * Constructs a {@link JFileChooserPanel} with the specified {@code} mode},
-	 * {@code filechooser}, {@code browseIcon}, {@code labelFiletext} and
-	 * {@code requiredFileExtension}.
+	 * {@code selectionMode}, {@code filechooser}, {@code browseIcon},
+	 * {@code labelFiletext} and {@code requiredFileExtension}.
 	 * </p>
 	 * 
 	 * <p>
@@ -203,7 +218,7 @@ public class JFileChooserPanel extends JPanel {
 	 * @param browseIcon the {@link ImageIcon} for the browse button.
 	 * @param labelFileText the text for the label file.
 	 * @param requiredFileExtension only for Mode.SAVE, the extension that file 
-	 * 	must have (e.g.: "txt").
+	 *        must have (e.g.: "txt").
 	 * @param selectionMode the {@code JFileChooser} selection mode.
 	 */
 	public JFileChooserPanel(Mode mode, JFileChooser filechooser, 
@@ -218,8 +233,8 @@ public class JFileChooserPanel extends JPanel {
 	/**
 	 * <p>
 	 * Constructs a {@link JFileChooserPanel} with the specified {@code} mode},
-	 * {@code filechooser}, {@code browseIcon}, {@code labelFiletext} and
-	 * {@code requiredFileExtension}.
+	 * {@code filechooser}, {@code selectionMode}, {@code browseIcon}, 
+	 * {@code labelFiletext} and {@code requiredFileExtension}.
 	 * </p>
 	 * 
 	 * <p>
@@ -272,7 +287,9 @@ public class JFileChooserPanel extends JPanel {
 		fileName.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (e.getButton() != MouseEvent.BUTTON3) {
+				if (e.getButton() != MouseEvent.BUTTON3
+					&& browseAction.isEnabled()
+				) {
 					onBrowse();
 				}
 			}
@@ -346,7 +363,7 @@ public class JFileChooserPanel extends JPanel {
 				if (isAcceptAllFileFilter(LAST_FILE_FILTER)) {
 					/**
 					 * If LAST_FILE_FILTER is the accept all file filter of a
-					 * other JFileChooser, then it can't be found by the
+					 * different JFileChooser, then it can't be found by the
 					 * setFileFilter method.
 					 */
 					setAcceptAllFileFilter(fileChooser);
