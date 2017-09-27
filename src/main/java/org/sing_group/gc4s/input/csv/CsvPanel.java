@@ -472,7 +472,7 @@ public class CsvPanel extends JPanel {
 	 * otherwise.
 	 * 
 	 * @return {@code true} if the format introduced is valid and {@code false}
-	 *         otherwise.
+	 *         otherwise
 	 */
 	public boolean isValidFormat() {
 		return checkSeparators(false);
@@ -491,8 +491,8 @@ public class CsvPanel extends JPanel {
 	 * Return the {@code CsvFormat} based on the configuration selected by the
 	 * user.
 	 * 
-	 * @return Return the {@code CsvFormat} based on the configuration selected
-	 *         by the user.
+	 * @return the {@code CsvFormat} based on the configuration selected by the 
+	 *         user
 	 */
 	public CsvFormat getCsvFormat() {
 		CsvFormat toret;
@@ -537,8 +537,7 @@ public class CsvPanel extends JPanel {
 	 * component. If listener {@code l} is {@code null}, no exception is thrown
 	 * and no action is performed.
 	 *
-	 * @param l
-	 *            the {@code CsvListener}.
+	 * @param l the {@code CsvListener}
 	 */
 	public synchronized void addCsvListener(CsvListener l) {
 		this.listenerList.add(CsvListener.class, l);

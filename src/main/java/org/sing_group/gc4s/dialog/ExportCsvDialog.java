@@ -15,6 +15,12 @@ import org.sing_group.gc4s.filechooser.JFileChooserPanel;
 import org.sing_group.gc4s.input.csv.CsvFormat;
 import org.sing_group.gc4s.input.csv.CsvPanel;
 
+/**
+ * An input dialog that allows the configuration of a CSV format.
+ * 
+ * @author hlfernandez
+ * @see CsvFormat
+ */
 public class ExportCsvDialog extends AbstractInputJDialog {
 	private static final long serialVersionUID = 1L;
 	
@@ -25,9 +31,13 @@ public class ExportCsvDialog extends AbstractInputJDialog {
 		"Libre/Open Office) or Custom to customize it.";
 
 	private CsvPanel csvPanel;
-
 	private JFileChooserPanel fileChooserPanel;
-	
+
+	/**
+	 * Constructs an {@code ExportCsvDialog}.
+	 * 
+	 * @param parent the parent {@code Window}.
+	 */
 	public ExportCsvDialog(Window parent) {
 		super(parent);
 		this.pack();
@@ -42,7 +52,6 @@ public class ExportCsvDialog extends AbstractInputJDialog {
 	protected String getDescription() {
 		return DESCRIPTION;
 	}
-	
 
 	@Override
 	protected JPanel getInputComponentsPane() {
@@ -93,7 +102,7 @@ public class ExportCsvDialog extends AbstractInputJDialog {
 	/**
 	 * Returns the selected file.
 	 * 
-	 * @return the selected file.
+	 * @return the selected file
 	 */
 	public File getSelectedFile() {
 		return fileChooserPanel.getSelectedFile();
@@ -103,8 +112,8 @@ public class ExportCsvDialog extends AbstractInputJDialog {
 	 * Return the {@code CsvFormat} based on the configuration selected by the
 	 * user.
 	 * 
-	 * @return Return the {@code CsvFormat} based on the configuration selected
-	 *         by the user.
+	 * @return the {@code CsvFormat} based on the configuration selected by the 
+	 *         user
 	 */
 	public CsvFormat getSelectedCsvFormat() {
 		return csvPanel.getCsvFormat();
@@ -113,7 +122,7 @@ public class ExportCsvDialog extends AbstractInputJDialog {
 	/**
 	 * Establishes the selected {@code CsvFormat.FileFormat}.
 	 * 
-	 * @param format a {@code CsvFormat.FileFormat}.
+	 * @param format a {@code CsvFormat.FileFormat}
 	 */
 	public void setSelectedCsvFileFormat(CsvFormat.FileFormat format) {
 		csvPanel.setSelectedCsvFileFormat(format);

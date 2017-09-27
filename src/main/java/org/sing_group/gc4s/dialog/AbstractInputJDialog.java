@@ -51,8 +51,7 @@ public abstract class AbstractInputJDialog extends JDialog {
 	/**
 	 * Constructs an {@code AbstractInputJDialog}.
 	 * 
-	 * @param parent
-	 *            the parent {@code Window}.
+	 * @param parent the parent {@code Window}.
 	 */
 	protected AbstractInputJDialog(Window parent) {
 		super(parent);
