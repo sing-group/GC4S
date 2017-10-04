@@ -64,7 +64,7 @@ public abstract class AbstractInputJDialog extends JDialog {
 		this.setTitle(getDialogTitle());
 		this.setLayout(new BorderLayout());
 		this.add(getDescriptionPane(), BorderLayout.NORTH);
-		JPanel inputComponents = getInputComponentsPane();
+		Component inputComponents = getInputComponentsPane();
 		JScrollPane scroll = new JScrollPane(inputComponents);
 		this.add(scroll, BorderLayout.CENTER);
 		this.add(getButtonsPane(), BorderLayout.SOUTH);
@@ -183,5 +183,5 @@ public abstract class AbstractInputJDialog extends JDialog {
 
 	protected abstract String getDescription();
 
-	protected abstract JPanel getInputComponentsPane();
+	protected abstract Component getInputComponentsPane();
 }
