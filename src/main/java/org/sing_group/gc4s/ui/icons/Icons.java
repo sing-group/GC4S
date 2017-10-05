@@ -141,6 +141,14 @@ public class Icons {
 	public static final ImageIcon ICON_WARNING_COLOR_24 = getResource("icons/warning-color24.png");
 	public static final ImageIcon ICON_WARNING_COLOR_16 = getResource("icons/warning-color16.png");
 
+	public static final ImageIcon ICON_RAM_32 = getResource("icons/ram32.png");
+	public static final ImageIcon ICON_RAM_24 = getResource("icons/ram24.png");
+	public static final ImageIcon ICON_RAM_16 = getResource("icons/ram16.png");
+
+	public static final ImageIcon ICON_HARD_DISK_32 = getResource("icons/harddisk32.png");
+	public static final ImageIcon ICON_HARD_DISK_24 = getResource("icons/harddisk24.png");
+	public static final ImageIcon ICON_HARD_DISK_16 = getResource("icons/harddisk16.png");
+
 	private static ImageIcon getResource(String resource) {
 		return new ImageIcon(Icons.class.getResource(resource));
 	}
