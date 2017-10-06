@@ -425,19 +425,20 @@ public class JFileChooserPanel extends JPanel {
 	 * 
 	 * @param file the selected {@code File}.
 	 */
-	public void setSelectedFile(File file){
-		selectedFile = file;
-		if (requiredFileExtension != null
-				&& !file.getName().toLowerCase()
-						.endsWith("." + requiredFileExtension)) {
-			selectedFile = new File(file.getAbsolutePath()
-					+ "." + requiredFileExtension);
+	public void setSelectedFile(File file) {
+		if (this.selectedFile == null || !this.selectedFile.equals(file)) {
+			selectedFile = file;
+			if (requiredFileExtension != null && !file.getName().toLowerCase()
+				.endsWith("." + requiredFileExtension)) {
+				selectedFile = new File(
+					file.getAbsolutePath() + "." + requiredFileExtension);
+			}
+			fileName.setText(selectedFile.getAbsolutePath());
+			fileName.setToolTipText(selectedFile.getAbsolutePath());
+			filechooser.setSelectedFile(file);
 		}
-		fileName.setText(selectedFile.getAbsolutePath());
-		fileName.setToolTipText(selectedFile.getAbsolutePath());
-		filechooser.setSelectedFile(file);
 	}
-	
+
 	/**
 	 * Returns the browse action.
 	 * 
