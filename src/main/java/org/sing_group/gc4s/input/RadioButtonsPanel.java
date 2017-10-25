@@ -5,6 +5,7 @@ import java.awt.LayoutManager;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -181,6 +182,13 @@ public class RadioButtonsPanel<T> extends JPanel implements ItemListener {
 	 */
 	public boolean isValidSelection() {
 		return getSelectedItem().isPresent();
+	}
+
+	@Override
+	public void setEnabled(boolean enabled) {
+		Collections.list(this.group.getElements())
+			.forEach(b -> b.setEnabled(enabled));
+		super.setEnabled(enabled);
 	}
 
     /**
