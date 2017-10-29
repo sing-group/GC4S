@@ -431,12 +431,12 @@ public class JHeatMap extends JPanel {
 				this.setUI(new VerticalLabelUI(false));
 				this.setHorizontalAlignment(JLabel.LEFT);
 				this.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 0));
-				this.setFont(getHeatmapFont().deriveFont(20));
+				this.setFont(getHeatmapFont());
 			} else {
 				this.setUI(new BasicLabelUI());
 				this.setHorizontalAlignment(JLabel.RIGHT);
 				this.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5));
-				this.setFont(getHeatmapFont().deriveFont(20));
+				this.setFont(getHeatmapFont());
 			}
 			
 			return this;
