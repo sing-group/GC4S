@@ -16,8 +16,8 @@ public class ExtendedJComboBoxDemo {
 
 	public static void main(String[] args) {
         String[] items = {
-        	"Item 1: this item needs more with to be visible",
-            "Item 2: this item also needs more with to be visible", 
+        	"Item 1: this item needs more width to be visible",
+            "Item 2: this item also needs more width to be visible", 
         };
         ExtendedJComboBox<String> combobox = new ExtendedJComboBox<String>(items);
         combobox.setPreferredSize(new Dimension(180, 20));
