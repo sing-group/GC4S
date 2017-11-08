@@ -18,15 +18,15 @@ import org.sing_group.gc4s.ui.icons.Icons;
 /**
  * An {@code InputParametersPanel} takes one or more {@link InputParameter} and
  * properly arranges them using a {@code GroupLayout}.
- * 
+ *
  * @author hlfernandez
  *
  */
 public class InputParametersPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
-	
+
 	private List<InputParameter> parameters;
-	
+
 	private Map<InputParameter, JComponent> descriptionLabels;
 	private Map<InputParameter, JComponent> inputComponents;
 	private Map<InputParameter, JComponent> helpLabels;
@@ -34,7 +34,7 @@ public class InputParametersPanel extends JPanel {
 	/**
 	 * Creates a new {@code InputParametersPanel} using the list of
 	 * {@code parameters}.
-	 * 
+	 *
 	 * @param parameters
 	 *            one or more {@code InputParemeter}.
 	 */
@@ -45,12 +45,12 @@ public class InputParametersPanel extends JPanel {
 
 	private void initComponent() {
 		this.initInputComponents();
-		
+
 		final GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setAutoCreateContainerGaps(true);
 		groupLayout.setAutoCreateGaps(true);
 		this.setLayout(groupLayout);
-		
+
 		SequentialGroup horizontalGroup = groupLayout.createSequentialGroup();
 		ParallelGroup first = groupLayout.createParallelGroup(Alignment.TRAILING);
 		ParallelGroup second = groupLayout.createParallelGroup();
@@ -65,7 +65,7 @@ public class InputParametersPanel extends JPanel {
 			.addGroup(second)
 			.addGroup(third);
 		groupLayout.setHorizontalGroup(horizontalGroup);
-		
+
 		SequentialGroup verticalGroup = groupLayout.createSequentialGroup();
 		parameters.forEach(c -> {
 			ParallelGroup current = groupLayout.createParallelGroup(Alignment.CENTER);
@@ -84,10 +84,25 @@ public class InputParametersPanel extends JPanel {
 		parameters.forEach(c -> {
 			descriptionLabels.put(c, new JLabel(c.getLabel()));
 			inputComponents.put(c, c.getInput());
-			
+
 			JLabel helpLabel = new JLabel(Icons.ICON_INFO_2_16);
 			helpLabel.setToolTipText(c.getHelpLabel());
 			helpLabels.put(c, helpLabel);
 		});
+	}
+
+    /**
+     * Makes the specified parameter visible or invisible.
+     *
+     * @param parameter the {@code InputParameter} to change its visibility
+     * @param visible {@code true} to make the parameter visible and
+     *        {@code false} to make it invisible
+     */
+	public void setVisible(InputParameter parameter, boolean visible) {
+		if (this.parameters.contains(parameter)) {
+			this.descriptionLabels.get(parameter).setVisible(visible);
+			this.inputComponents.get(parameter).setVisible(visible);
+			this.helpLabels.get(parameter).setVisible(visible);
+		}
 	}
 }
