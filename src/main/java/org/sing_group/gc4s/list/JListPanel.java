@@ -374,7 +374,7 @@ public class JListPanel<E> extends JPanel {
 	 * @return the remove elements button.
 	 */
 	public JButton getBtnRemoveElements() {
-		return btnMoveDown;
+		return btnRemove;
 	}
 
 	/**
