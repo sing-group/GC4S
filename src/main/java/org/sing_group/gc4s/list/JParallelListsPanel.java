@@ -23,7 +23,7 @@ import org.sing_group.gc4s.ui.CenteredJPanel;
 /**
  * A {@code JParallelListsPanel} displays two parallel {@code JListPanel}s,
  * allowing to move elements between them.
- * 
+ *
  * @author hlfernandez
  *
  * @param <E> the type of the elements in the lists.
@@ -35,7 +35,7 @@ public class JParallelListsPanel<E> extends JPanel {
 		JParallelListsPanel.class.getResource("icons/right.png"));
 	protected static final ImageIcon ICON_ARROW_LEFT = new ImageIcon(
 		JParallelListsPanel.class.getResource("icons/left.png"));
-	
+
 	private JListPanel<E> left;
 	private JListPanel<E> right;
 	private AbstractAction actionMoveLeft;
@@ -48,14 +48,14 @@ public class JParallelListsPanel<E> extends JPanel {
 	/**
 	 * Creates a new {@code JParallelListsPanel} with {@code left} and
 	 * {@code right} lists.
-	 * 
+	 *
 	 * @param left the left {@code JList}.
 	 * @param right the right {@code JList}.
-	 * @throws InvalidClassException if list's model is not an 
+	 * @throws InvalidClassException if list's model is not an
 	 * 	{@code ExtendedDefaultModel}.
 	 */
-	public JParallelListsPanel(JList<E> left, JList<E> right) 
-		throws InvalidClassException 
+	public JParallelListsPanel(JList<E> left, JList<E> right)
+		throws InvalidClassException
 	{
 		this(left, right, true, false);
 	}
@@ -63,16 +63,16 @@ public class JParallelListsPanel<E> extends JPanel {
 	/**
 	 * Creates a new {@code JParallelListsPanel} with {@code left} and
 	 * {@code right} lists.
-	 * 
+	 *
 	 * @param left the left {@code JList}.
 	 * @param right the right {@code JList}.
 	 * @param buttons if {@code true}, the action buttons are shown.
 	 * @param filter if {@code true}, list filters are shown.
-	 * @throws InvalidClassException if list's model is not an 
+	 * @throws InvalidClassException if list's model is not an
 	 * 	{@code ExtendedDefaultModel}.
 	 */
 	public JParallelListsPanel(JList<E> left, JList<E> right, boolean buttons,
-			boolean filter ) 
+			boolean filter )
 		throws InvalidClassException
 	{
 		this(left, right, "", "", buttons, filter);
@@ -81,14 +81,14 @@ public class JParallelListsPanel<E> extends JPanel {
 	/**
 	 * Creates a new {@code JParallelListsPanel} with {@code left} and
 	 * {@code right} lists.
-	 * 
+	 *
 	 * @param left the left {@code JList}.
 	 * @param right the right {@code JList}.
 	 * @param leftTitle the title for the left list.
 	 * @param rightTitle the title for the right list.
 	 * @param buttons if {@code true}, the action buttons are shown.
 	 * @param filter if {@code true}, list filters are shown.
-	 * @throws InvalidClassException if list's model is not an 
+	 * @throws InvalidClassException if list's model is not an
 	 * 	{@code ExtendedDefaultModel}.
 	 */
 	public JParallelListsPanel(JList<E> left, JList<E> right, String leftTitle,
@@ -134,12 +134,12 @@ public class JParallelListsPanel<E> extends JPanel {
 		};
 		actionMoveRight = new AbstractAction("Move right", ICON_ARROW_RIGHT) {
 			private static final long serialVersionUID = 1L;
-			
+
 			public void actionPerformed(ActionEvent e) {
 				moveRightSelectedElement();
 			}
 		};
-		
+
 		btnMoveLeft = ComponentFactory.createButton(actionMoveLeft, false,
 			"Moves the selected element to the left list", false);
 		btnMoveRight = ComponentFactory.createButton(actionMoveRight, false,
@@ -164,18 +164,18 @@ public class JParallelListsPanel<E> extends JPanel {
 
 	private void moveSelectedElements(JList<E> source, JList<E> dest) {
 		FilteredListModel<E> sFLM = (FilteredListModel<E>) source.getModel();
-		ExtendedDefaultListModel<E> sEDLM = 
+		ExtendedDefaultListModel<E> sEDLM =
 			(ExtendedDefaultListModel<E>) sFLM.getSourceListModel();
-		
+
 		FilteredListModel<E> dFLM = (FilteredListModel<E>) dest.getModel();
-		ExtendedDefaultListModel<E> dEDLM = 
+		ExtendedDefaultListModel<E> dEDLM =
 			(ExtendedDefaultListModel<E>) dFLM.getSourceListModel();
-		
+
 		for (E sV : source.getSelectedValuesList()) {
 			sEDLM.removeElement(sV);
 			dEDLM.addElement(sV);
 		}
-		
+
 		source.clearSelection();
 		source.updateUI();
 		dest.updateUI();
@@ -183,14 +183,14 @@ public class JParallelListsPanel<E> extends JPanel {
 
 	private void addListeners() {
 		this.left.getList().addListSelectionListener(new ListSelectionListener() {
-			
+
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				checkLeftListSelection();
 			}
 		});
 		this.right.getList().addListSelectionListener(new ListSelectionListener() {
-			
+
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				checkRightListSelection();
@@ -203,10 +203,18 @@ public class JParallelListsPanel<E> extends JPanel {
 		boolean moveEnabled = selectedIndexesCount > 0;
 		this.btnMoveRight.setEnabled(moveEnabled);
 	}
-	
+
 	protected void checkRightListSelection() {
 		int selectedIndexesCount = this.right.getList().getSelectedIndices().length;
 		boolean moveEnabled = selectedIndexesCount > 0;
 		this.btnMoveLeft.setEnabled(moveEnabled);
+	}
+
+	public JListPanel<E> getLeftListPanel() {
+		return left;
+	}
+
+	public JListPanel<E> getRightListPanel() {
+		return right;
 	}
 }
