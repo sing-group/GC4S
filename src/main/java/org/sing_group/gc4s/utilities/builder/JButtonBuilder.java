@@ -98,6 +98,7 @@ public class JButtonBuilder {
 		}
 		if (action != null) {
 			build.setAction(action);
+			fixAction();
 		}
 		if (icon != null) {
 			build.setIcon(icon);
@@ -105,5 +106,17 @@ public class JButtonBuilder {
 		build.setEnabled(enabled);
 
 		return build;
+	}
+
+	private void fixAction() {
+		if (action.getValue(Action.NAME) == null) {
+			action.putValue(Action.NAME, text);
+		}
+		if (action.getValue(Action.NAME) == null) {
+			action.putValue(Action.SHORT_DESCRIPTION, tooltip);
+		}
+		if (action.getValue(Action.NAME) == null) {
+			action.putValue(Action.LONG_DESCRIPTION, tooltip);
+		}
 	}
 }
