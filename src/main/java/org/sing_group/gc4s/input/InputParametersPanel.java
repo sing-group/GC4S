@@ -25,7 +25,12 @@ import org.sing_group.gc4s.ui.icons.Icons;
 public class InputParametersPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 
+	public static enum DescriptionAlignment {
+		LEFT, RIGHT
+	};
+
 	private List<InputParameter> parameters;
+	private DescriptionAlignment alignment;
 
 	private Map<InputParameter, JComponent> descriptionLabels;
 	private Map<InputParameter, JComponent> inputComponents;
@@ -35,10 +40,23 @@ public class InputParametersPanel extends JPanel {
 	 * Creates a new {@code InputParametersPanel} using the list of
 	 * {@code parameters}.
 	 *
-	 * @param parameters
-	 *            one or more {@code InputParemeter}.
+	 * @param parameters one or more {@code InputParemeter}
 	 */
-	public InputParametersPanel(InputParameter...parameters) {
+	public InputParametersPanel(InputParameter... parameters) {
+		this(DescriptionAlignment.RIGHT, parameters);
+	}
+
+	/**
+	 * Creates a new {@code InputParametersPanel} using the list of
+	 * {@code parameters}.
+	 *
+	 * @param alignment the alignment of the description labels
+	 * @param parameters one or more {@code InputParemeter}
+	 */
+	public InputParametersPanel(DescriptionAlignment alignment,
+		InputParameter... parameters
+	) {
+		this.alignment = alignment;
 		this.parameters = Arrays.asList(parameters);
 		this.initComponent();
 	}
@@ -52,7 +70,7 @@ public class InputParametersPanel extends JPanel {
 		this.setLayout(groupLayout);
 
 		SequentialGroup horizontalGroup = groupLayout.createSequentialGroup();
-		ParallelGroup first = groupLayout.createParallelGroup(Alignment.TRAILING);
+		ParallelGroup first = groupLayout.createParallelGroup(getLabelsAlignment());
 		ParallelGroup second = groupLayout.createParallelGroup();
 		ParallelGroup third = groupLayout.createParallelGroup();
 		parameters.forEach(c -> {
@@ -75,6 +93,11 @@ public class InputParametersPanel extends JPanel {
 			verticalGroup.addGroup(current);
 		});
 		groupLayout.setVerticalGroup(verticalGroup);
+	}
+
+	private Alignment getLabelsAlignment() {
+		return 	this.alignment.equals(DescriptionAlignment.RIGHT)
+				? Alignment.TRAILING : Alignment.LEADING;
 	}
 
 	private void initInputComponents() {
