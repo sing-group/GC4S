@@ -14,8 +14,8 @@ import javax.swing.JProgressBar;
 
 /**
  * A {@code WorkingDialog} shows a progress in work dialog with an indeterminate
- * progress bar and a label. The indeterminate progress bar my be replaced by an
- * user image.
+ * progress bar and a label. The indeterminate progress bar may be replaced by 
+ * a user image.
  *
  * @author hlfernandez
  *
