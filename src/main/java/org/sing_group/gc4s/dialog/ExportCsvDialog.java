@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.event.ChangeEvent;
 
 import org.sing_group.gc4s.filechooser.JFileChooserPanel;
+import org.sing_group.gc4s.filechooser.Mode;
 import org.sing_group.gc4s.input.csv.CsvFormat;
 import org.sing_group.gc4s.input.csv.CsvPanel;
 
@@ -70,7 +71,7 @@ public class ExportCsvDialog extends AbstractInputJDialog {
 		JPanel fileChooserComponent = new JPanel(new BorderLayout());
 		fileChooserComponent.setBorder(createEmptyBorder(0, 12, 0, 5));
 		fileChooserPanel = new JFileChooserPanel(
-			JFileChooserPanel.Mode.SAVE, getFileChooser(), "csv"
+			Mode.SAVE, getFileChooser(), "csv"
 		);
 		fileChooserPanel.addFileChooserListener(this::onChangeEvent);
 		JLabel help = new JLabel(ICON_HELP);

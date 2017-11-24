@@ -1,7 +1,7 @@
 package org.sing_group.gc4s.demo;
 
-import static org.sing_group.gc4s.demo.DemoUtils.showComponent;
 import static java.util.Arrays.asList;
+import static org.sing_group.gc4s.demo.DemoUtils.showComponent;
 
 import java.awt.GridLayout;
 import java.util.List;
@@ -12,6 +12,7 @@ import javax.swing.filechooser.FileFilter;
 import org.sing_group.gc4s.filechooser.ExtensionFileFilter;
 import org.sing_group.gc4s.filechooser.JFileChooserPanel;
 import org.sing_group.gc4s.filechooser.JFileChooserPanelBuilder;
+import org.sing_group.gc4s.filechooser.SelectionMode;
 
 /**
  * An example showing the creation of two {@link JFileChooserPanel} that share
@@ -44,7 +45,7 @@ public class JFileChooserPanelSharedLastFileFilterDemo {
 	private static JFileChooserPanel createJFileChooserPanel() {
 		return JFileChooserPanelBuilder
 			.createOpenJFileChooserPanel()
-			.withFileChooserSelectionMode(JFileChooserPanel.SelectionMode.FILES)
+			.withFileChooserSelectionMode(SelectionMode.FILES)
 			.withFileFilters(FILTERS)
 			.withAllowAllFilter(true)
 		.build();

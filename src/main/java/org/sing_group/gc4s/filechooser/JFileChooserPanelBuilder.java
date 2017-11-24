@@ -6,9 +6,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 
-import org.sing_group.gc4s.filechooser.JFileChooserPanel.Mode;
-import org.sing_group.gc4s.filechooser.JFileChooserPanel.SelectionMode;
-
 
 /**
  * A builder class for {@link JFileChooserPanel}.
@@ -35,7 +32,7 @@ public class JFileChooserPanelBuilder {
 	 * @return a new {@code JFileChooserPanelBuilder} instance.
 	 */
 	public static JFileChooserPanelBuilder createOpenJFileChooserPanel() {
-		return new JFileChooserPanelBuilder(JFileChooserPanel.Mode.OPEN);
+		return new JFileChooserPanelBuilder(Mode.OPEN);
 	}
 
 	/**
@@ -46,7 +43,7 @@ public class JFileChooserPanelBuilder {
 	 * @return a new {@code JFileChooserPanelBuilder} instance.
 	 */
 	public static JFileChooserPanelBuilder createSaveJFileChooserPanel() {
-		return new JFileChooserPanelBuilder(JFileChooserPanel.Mode.SAVE);
+		return new JFileChooserPanelBuilder(Mode.SAVE);
 	}
 
 	protected JFileChooserPanelBuilder(Mode mode) {

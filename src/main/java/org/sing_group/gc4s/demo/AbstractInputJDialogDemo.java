@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 
 import org.sing_group.gc4s.dialog.AbstractInputJDialog;
 import org.sing_group.gc4s.filechooser.JFileChooserPanel;
+import org.sing_group.gc4s.filechooser.Mode;
 
 /**
  * An example showing the use of {@link AbstractInputJDialog}.
@@ -35,9 +36,7 @@ public class AbstractInputJDialogDemo {
 			protected JPanel getInputComponentsPane() {
 				JPanel toret = new JPanel();
 				toret.setLayout(new GridLayout(0, 1));
-				toret.add(new JFileChooserPanel(
-					JFileChooserPanel.Mode.OPEN, "Select a file:")
-				);
+				toret.add(new JFileChooserPanel(Mode.OPEN, "Select a file:"));
 				toret.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 				return toret;
 			}

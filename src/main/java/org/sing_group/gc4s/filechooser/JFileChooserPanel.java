@@ -62,26 +62,6 @@ public class JFileChooserPanel extends JPanel {
 	public static final List<FileFilter> DEFAULT_FILE_FILTERS = 
 		Collections.emptyList();
 	
-	public static enum Mode {
-		OPEN, SAVE;
-	};
-
-	public static enum SelectionMode {
-		FILES(JFileChooser.FILES_ONLY), 
-		DIRECTORIES(JFileChooser.DIRECTORIES_ONLY), 
-		FILES_DIRECTORIES(JFileChooser.FILES_AND_DIRECTORIES);
-
-		private int fileSelectionMode;
-
-		SelectionMode(int fileSelectionMode) {
-			this.fileSelectionMode = fileSelectionMode;
-		}
-
-		public int getFileSelectionMode() {
-			return fileSelectionMode;
-		}
-	}
-
 	private JFileChooser filechooser;
 	private Mode mode;
 	private AbstractAction browseAction;
