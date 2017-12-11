@@ -1,7 +1,7 @@
 package org.sing_group.gc4s.input;
 
-import static org.sing_group.gc4s.util.Checks.requireStrictPositive;
 import static java.util.Objects.requireNonNull;
+import static org.sing_group.gc4s.utilities.Checks.requireStrictPositive;
 
 import java.awt.Component;
 import java.awt.event.ItemEvent;
@@ -11,7 +11,7 @@ import java.util.function.Function;
 
 import javax.swing.JComboBox;
 
-import org.sing_group.gc4s.combobox.ComboBoxItem;
+import org.sing_group.gc4s.input.combobox.ComboBoxItem;
 import org.sing_group.gc4s.ui.CenteredJPanel;
 
 /**

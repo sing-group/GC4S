@@ -1,7 +1,7 @@
 package org.sing_group.gc4s.demo;
 
-import org.sing_group.gc4s.filechooser.JFileChooserPanel;
-import org.sing_group.gc4s.filechooser.Mode;
+import org.sing_group.gc4s.input.filechooser.JFileChooserPanel;
+import org.sing_group.gc4s.input.filechooser.Mode;
 
 /**
  * An example showing the use of {@link JFileChooserPanel}.

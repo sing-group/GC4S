@@ -1,6 +1,6 @@
 package org.sing_group.gc4s.demo;
 
-import org.sing_group.gc4s.input.JInputList;
+import org.sing_group.gc4s.input.list.JInputList;
 
 /**
  * An example showing the use of {@link JInputList}.

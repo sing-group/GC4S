@@ -11,10 +11,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.event.ChangeEvent;
 
-import org.sing_group.gc4s.filechooser.JFileChooserPanel;
-import org.sing_group.gc4s.filechooser.Mode;
 import org.sing_group.gc4s.input.csv.CsvFormat;
 import org.sing_group.gc4s.input.csv.CsvPanel;
+import org.sing_group.gc4s.input.filechooser.JFileChooserPanel;
+import org.sing_group.gc4s.input.filechooser.Mode;
 
 /**
  * An input dialog that allows the configuration of a CSV format.

@@ -9,10 +9,10 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import org.sing_group.gc4s.dialog.wizard.Wizard;
+import org.sing_group.gc4s.dialog.wizard.WizardStep;
+import org.sing_group.gc4s.dialog.wizard.event.WizardStepEvent;
 import org.sing_group.gc4s.ui.CenteredJPanel;
-import org.sing_group.gc4s.wizard.Wizard;
-import org.sing_group.gc4s.wizard.WizardStep;
-import org.sing_group.gc4s.wizard.event.WizardStepEvent;
 
 /**
  * An example showing the use of {@link Wizard} and {@link WizardStep}.

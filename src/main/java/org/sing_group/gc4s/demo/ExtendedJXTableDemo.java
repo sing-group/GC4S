@@ -6,7 +6,7 @@ import javax.swing.AbstractAction;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 
-import org.sing_group.gc4s.table.ExtendedJXTable;
+import org.sing_group.gc4s.visualization.table.ExtendedJXTable;
 
 /**
  * An example showing the use of {@link ExtendedJXTable}.

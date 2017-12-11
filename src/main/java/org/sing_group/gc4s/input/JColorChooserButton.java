@@ -8,6 +8,13 @@ import javax.swing.JButton;
 import javax.swing.JColorChooser;
 import javax.swing.JOptionPane;
 
+/**
+ * A button that allows users selecting a color by using a
+ * {@code JColorChooser}.
+ * 
+ * @author hlfernandez
+ *
+ */
 public class JColorChooserButton extends JButton {
 	private static final long serialVersionUID = 1L;
 	private static final Color DEFAULT_COLOR = Color.BLUE;

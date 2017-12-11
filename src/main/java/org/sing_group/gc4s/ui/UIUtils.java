@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 import javax.swing.JComponent;
 
 /**
- * Provides functionalities to deal with components.
+ * Provides functionalities to deal with UI components.
  * 
  * @author hlfernandez
  *

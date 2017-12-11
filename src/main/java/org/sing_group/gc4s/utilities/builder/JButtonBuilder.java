@@ -109,13 +109,13 @@ public class JButtonBuilder {
 	}
 
 	private void fixAction() {
-		if (action.getValue(Action.NAME) == null) {
+		if (action.getValue(Action.NAME) == null || text.isEmpty()) {
 			action.putValue(Action.NAME, text);
 		}
-		if (action.getValue(Action.NAME) == null) {
+		if (action.getValue(Action.SHORT_DESCRIPTION) == null) {
 			action.putValue(Action.SHORT_DESCRIPTION, tooltip);
 		}
-		if (action.getValue(Action.NAME) == null) {
+		if (action.getValue(Action.LONG_DESCRIPTION) == null) {
 			action.putValue(Action.LONG_DESCRIPTION, tooltip);
 		}
 	}

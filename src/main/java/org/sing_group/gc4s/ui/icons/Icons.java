@@ -3,6 +3,12 @@ package org.sing_group.gc4s.ui.icons;
 import static java.awt.Image.SCALE_SMOOTH;
 import javax.swing.ImageIcon;
 
+/**
+ * Provides a set of icons in different sizes.
+ * 
+ * @author hlfernandez
+ *
+ */
 public class Icons {
 
 	public static final ImageIcon ICON_ADD_32 = getResource("icons/add32.png");

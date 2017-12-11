@@ -13,8 +13,8 @@ import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 
-import org.sing_group.gc4s.list.ExtendedDefaultListModel;
-import org.sing_group.gc4s.list.JParallelListsPanel;
+import org.sing_group.gc4s.input.list.ExtendedDefaultListModel;
+import org.sing_group.gc4s.input.list.JParallelListsPanel;
 
 /**
  * A {@code ListSelectionDialog} displays two parallel {@code JListPanel}s,

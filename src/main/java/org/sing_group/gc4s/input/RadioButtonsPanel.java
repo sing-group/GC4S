@@ -21,7 +21,7 @@ import javax.swing.JRadioButton;
 
 /**
  *
- * A component that allows user selecting a single item from a list of items
+ * A component that allows users selecting a single item from a list of items
  * using radio buttons.
  *
  * @author hlfernandez

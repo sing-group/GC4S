@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
-import org.sing_group.gc4s.table.FilterableJXTable;
+import org.sing_group.gc4s.visualization.table.FilterableJXTable;
 
 /**
  * An example showing the use of {@link FilterableJXTable}.

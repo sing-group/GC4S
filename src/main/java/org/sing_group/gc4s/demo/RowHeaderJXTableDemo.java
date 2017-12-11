@@ -6,7 +6,7 @@ import java.awt.Font;
 
 import javax.swing.JScrollPane;
 
-import org.sing_group.gc4s.table.RowHeaderExtendedJXTable;
+import org.sing_group.gc4s.visualization.table.RowHeaderExtendedJXTable;
 
 /**
  * An example showing the use of {@link RowHeaderExtendedJXTable}.

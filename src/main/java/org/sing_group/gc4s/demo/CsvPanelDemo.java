@@ -2,8 +2,8 @@ package org.sing_group.gc4s.demo;
 
 import javax.swing.event.ChangeEvent;
 
-import org.sing_group.gc4s.input.csv.CsvListener;
 import org.sing_group.gc4s.input.csv.CsvPanel;
+import org.sing_group.gc4s.input.csv.event.CsvListener;
 
 /**
  * An example showing the use of {@link CsvPanel}.

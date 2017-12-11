@@ -7,9 +7,9 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import org.sing_group.gc4s.input.DoubleRange;
-import org.sing_group.gc4s.visualization.JHeatMap;
-import org.sing_group.gc4s.visualization.JHeatMapModel;
-import org.sing_group.gc4s.visualization.JHeatMapPanel;
+import org.sing_group.gc4s.visualization.heatmap.JHeatMap;
+import org.sing_group.gc4s.visualization.heatmap.JHeatMapModel;
+import org.sing_group.gc4s.visualization.heatmap.JHeatMapPanel;
 
 /**
  * An example showing the use of {@link JHeatMap}.

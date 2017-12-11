@@ -24,7 +24,7 @@ import javax.swing.JSpinner;
 import javax.swing.JTextArea;
 import javax.swing.SpinnerNumberModel;
 
-import org.sing_group.gc4s.combobox.ComboBoxItem;
+import org.sing_group.gc4s.input.combobox.ComboBoxItem;
 
 /**
  * <p>

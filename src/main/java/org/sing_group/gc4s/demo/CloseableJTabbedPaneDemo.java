@@ -5,11 +5,10 @@ import java.awt.Dimension;
 import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
 
-import org.sing_group.gc4s.tabbedpane.CloseableJTabbedPane;
-import org.sing_group.gc4s.text.JLimitedTextField;
+import org.sing_group.gc4s.ui.tabbedpane.CloseableJTabbedPane;
 
 /**
- * An example showing the use of {@link JLimitedTextField}.
+ * An example showing the use of {@link CloseableJTabbedPane}.
  * 
  * @author hlfernandez
  *

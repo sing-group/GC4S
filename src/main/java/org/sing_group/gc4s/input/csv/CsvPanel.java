@@ -35,10 +35,10 @@ import javax.swing.text.JTextComponent;
 
 import org.jdesktop.swingx.JXTaskPane;
 import org.jdesktop.swingx.JXTaskPaneContainer;
-
+import org.sing_group.gc4s.event.TextFieldSelectionFocusListener;
 import org.sing_group.gc4s.input.csv.CsvFormat.FileFormat;
-import org.sing_group.gc4s.text.JLimitedTextField;
-import org.sing_group.gc4s.utilities.TextFieldSelectionFocusListener;
+import org.sing_group.gc4s.input.csv.event.CsvListener;
+import org.sing_group.gc4s.input.text.JLimitedTextField;
 
 /**
  * A panel that allows user to configure a CSV format. The configured format may

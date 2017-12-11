@@ -7,9 +7,8 @@ import java.util.Arrays;
 import javax.swing.JScrollPane;
 
 import org.jdesktop.swingx.JXTable;
-
-import org.sing_group.gc4s.table.ColumnSummaryTabeCellRenderer;
-import org.sing_group.gc4s.table.ExtendedDefaultTableModel;
+import org.sing_group.gc4s.visualization.table.ColumnSummaryTabeCellRenderer;
+import org.sing_group.gc4s.visualization.table.ExtendedDefaultTableModel;
 
 /**
  * An example showing the use of {@link ColumnSummaryTabeCellRenderer}.

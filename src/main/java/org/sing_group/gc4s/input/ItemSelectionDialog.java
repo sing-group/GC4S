@@ -11,6 +11,15 @@ import javax.swing.JPanel;
 
 import org.sing_group.gc4s.dialog.AbstractInputJDialog;
 
+/**
+ * An {@code ItemSelectionDialog} allows users choosing <i>n</i> items from 
+ * different combo boxes using an {@code ItemSelectionPanel}. 
+ * 
+ * @author hlfernandez
+ *
+ * @param <T> the type of the items.
+ * @see ItemSelectionPanel
+ */
 public class ItemSelectionDialog<T> extends AbstractInputJDialog {
 	private static final long serialVersionUID = 1L;
 	private List<T> items;

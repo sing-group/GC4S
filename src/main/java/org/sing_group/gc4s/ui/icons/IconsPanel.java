@@ -11,6 +11,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+/**
+ * Shows all icons in the {@code Icons} class.
+ * 
+ * @author hlfernandez
+ *
+ */
 public class IconsPanel extends JScrollPane {
 	private static final long serialVersionUID = 1L;
 	

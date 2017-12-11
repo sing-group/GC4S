@@ -9,10 +9,10 @@ import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileFilter;
 
-import org.sing_group.gc4s.filechooser.ExtensionFileFilter;
-import org.sing_group.gc4s.filechooser.JFileChooserPanel;
-import org.sing_group.gc4s.filechooser.JFileChooserPanelBuilder;
-import org.sing_group.gc4s.filechooser.SelectionMode;
+import org.sing_group.gc4s.input.filechooser.ExtensionFileFilter;
+import org.sing_group.gc4s.input.filechooser.JFileChooserPanel;
+import org.sing_group.gc4s.input.filechooser.JFileChooserPanelBuilder;
+import org.sing_group.gc4s.input.filechooser.SelectionMode;
 
 /**
  * An example showing the creation of two {@link JFileChooserPanel} that share

@@ -12,7 +12,7 @@ import javax.swing.JToolBar;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import org.sing_group.gc4s.tabbedpane.ExtendedJTabbedPane;
+import org.sing_group.gc4s.ui.tabbedpane.ExtendedJTabbedPane;
 
 /**
  * An example showing the use of {@link ExtendedJTabbedPane}.

@@ -6,8 +6,8 @@ import java.util.List;
 
 import javax.swing.JList;
 
-import org.sing_group.gc4s.list.ExtendedDefaultListModel;
-import org.sing_group.gc4s.list.JListPanel;
+import org.sing_group.gc4s.input.list.ExtendedDefaultListModel;
+import org.sing_group.gc4s.input.list.JListPanel;
 
 /**
  * An example showing the use of {@link ExtendedDefaultListModel} and

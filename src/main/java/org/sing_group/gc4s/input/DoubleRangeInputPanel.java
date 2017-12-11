@@ -9,8 +9,8 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 
-import org.sing_group.gc4s.text.DoubleTextField;
-import org.sing_group.gc4s.utilities.TextFieldSelectionFocusListener;
+import org.sing_group.gc4s.event.TextFieldSelectionFocusListener;
+import org.sing_group.gc4s.input.text.DoubleTextField;
 
 /**
  * <p>

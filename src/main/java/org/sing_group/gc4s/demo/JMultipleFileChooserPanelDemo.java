@@ -2,9 +2,9 @@ package org.sing_group.gc4s.demo;
 
 import javax.swing.event.ChangeEvent;
 
-import org.sing_group.gc4s.filechooser.JMultipleFileChooserPanel;
-import org.sing_group.gc4s.filechooser.Mode;
-import org.sing_group.gc4s.filechooser.MultipleFileChooserListener;
+import org.sing_group.gc4s.input.filechooser.JMultipleFileChooserPanel;
+import org.sing_group.gc4s.input.filechooser.Mode;
+import org.sing_group.gc4s.input.filechooser.event.MultipleFileChooserListener;
 import org.sing_group.gc4s.ui.CenteredJPanel;
 
 /**

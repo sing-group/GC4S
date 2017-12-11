@@ -5,11 +5,11 @@ import static org.sing_group.gc4s.demo.DemoUtils.showComponent;
 
 import javax.swing.event.ChangeEvent;
 
-import org.sing_group.gc4s.filechooser.ExtensionFileFilter;
-import org.sing_group.gc4s.filechooser.JMultipleFileChooserPanel;
-import org.sing_group.gc4s.filechooser.JMultipleFileChooserPanelBuilder;
-import org.sing_group.gc4s.filechooser.MultipleFileChooserListener;
-import org.sing_group.gc4s.filechooser.SelectionMode;
+import org.sing_group.gc4s.input.filechooser.ExtensionFileFilter;
+import org.sing_group.gc4s.input.filechooser.JMultipleFileChooserPanel;
+import org.sing_group.gc4s.input.filechooser.JMultipleFileChooserPanelBuilder;
+import org.sing_group.gc4s.input.filechooser.SelectionMode;
+import org.sing_group.gc4s.input.filechooser.event.MultipleFileChooserListener;
 
 /**
  * An example showing the use of {@link JMultipleFileChooserPanelBuilder} to

@@ -4,7 +4,7 @@ import java.awt.Dimension;
 
 import javax.swing.JPanel;
 
-import org.sing_group.gc4s.combobox.ExtendedJComboBox;
+import org.sing_group.gc4s.input.combobox.ExtendedJComboBox;
 
 /**
  * An example showing the use of {@link ExtendedJComboBox}.

@@ -9,8 +9,7 @@ import java.util.List;
 import javax.swing.JScrollPane;
 
 import org.jdesktop.swingx.JXTable;
-
-import org.sing_group.gc4s.table.BeanTableModel;
+import org.sing_group.gc4s.visualization.table.BeanTableModel;
 
 /**
  * An example showing the use of {@link BeanTableModel}.

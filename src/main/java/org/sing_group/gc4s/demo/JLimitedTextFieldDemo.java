@@ -6,7 +6,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import org.sing_group.gc4s.text.JLimitedTextField;
+import org.sing_group.gc4s.input.text.JLimitedTextField;
 
 /**
  * An example showing the use of {@link JLimitedTextField}.
