@@ -109,7 +109,9 @@ public class JButtonBuilder {
 	}
 
 	private void fixAction() {
-		if (action.getValue(Action.NAME) == null || text.isEmpty()) {
+		if (action.getValue(Action.NAME) == null 
+			|| (text != null && text.isEmpty())
+		) {
 			action.putValue(Action.NAME, text);
 		}
 		if (action.getValue(Action.SHORT_DESCRIPTION) == null) {
