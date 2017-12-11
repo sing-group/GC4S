@@ -1,4 +1,4 @@
-GC4S [![Build Status](https://travis-ci.org/hlfernandez/GC4S.svg?branch=master)](https://travis-ci.org/hlfernandez/GC4S) [![license](https://img.shields.io/badge/LICENSE-GPLv3-blue.svg)]()
+GC4S [![Build Status](https://travis-ci.org/sing-group/GC4S.svg?branch=master)](https://travis-ci.org/hlfernandez/GC4S) [![license](https://img.shields.io/badge/LICENSE-GPLv3-blue.svg)]()
 ========================
 
 A collection of GUI Components for (Java) Swing.
