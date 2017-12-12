@@ -155,6 +155,34 @@ public class Icons {
 	public static final ImageIcon ICON_HARD_DISK_24 = getResource("icons/harddisk24.png");
 	public static final ImageIcon ICON_HARD_DISK_16 = getResource("icons/harddisk16.png");
 
+	public static final ImageIcon ICON_ARROWS_LEFT_32 = getResource("icons/arrows-left-32.png");
+	public static final ImageIcon ICON_ARROWS_LEFT_24 = getResource("icons/arrows-left-24.png");
+	public static final ImageIcon ICON_ARROWS_LEFT_16 = getResource("icons/arrows-left-16.png");
+
+	public static final ImageIcon ICON_ARROWS_RIGHT_32 = getResource("icons/arrows-right-32.png");
+	public static final ImageIcon ICON_ARROWS_RIGHT_24 = getResource("icons/arrows-right-24.png");
+	public static final ImageIcon ICON_ARROWS_RIGHT_16 = getResource("icons/arrows-right-16.png");
+
+	public static final ImageIcon ICON_ARROW_LEFT_32 = getResource("icons/arrow-left-32.png");
+	public static final ImageIcon ICON_ARROW_LEFT_24 = getResource("icons/arrow-left-24.png");
+	public static final ImageIcon ICON_ARROW_LEFT_16 = getResource("icons/arrow-left-16.png");
+	
+	public static final ImageIcon ICON_ARROW_RIGHT_32 = getResource("icons/arrow-right-32.png");
+	public static final ImageIcon ICON_ARROW_RIGHT_24 = getResource("icons/arrow-right-24.png");
+	public static final ImageIcon ICON_ARROW_RIGHT_16 = getResource("icons/arrow-right-16.png");
+
+	public static final ImageIcon ICON_FILES_32 = getResource("icons/files-32.png");
+	public static final ImageIcon ICON_FILES_24 = getResource("icons/files-24.png");
+	public static final ImageIcon ICON_FILES_16 = getResource("icons/files-16.png");
+
+	public static final ImageIcon ICON_FOLDER_BLACK_32 = getResource("icons/folder-black-32.png");
+	public static final ImageIcon ICON_FOLDER_BLACK_24 = getResource("icons/folder-black-24.png");
+	public static final ImageIcon ICON_FOLDER_BLACK_16 = getResource("icons/folder-black-16.png");
+
+	public static final ImageIcon ICON_FIND_32 = getResource("icons/find-32.png");
+	public static final ImageIcon ICON_FIND_24 = getResource("icons/find-24.png");
+	public static final ImageIcon ICON_FIND_16 = getResource("icons/find-16.png");
+
 	private static ImageIcon getResource(String resource) {
 		return new ImageIcon(Icons.class.getResource(resource));
 	}
