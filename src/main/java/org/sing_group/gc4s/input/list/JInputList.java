@@ -25,29 +25,31 @@ import org.sing_group.gc4s.utilities.builder.JButtonBuilder;
 /**
  * This class encloses a {@code JListPanel<String>} to provide the ability of
  * adding ({@code String}) elements to the list.
- * 
+ *
  * @author hlfernandez
  * @see JListPanel
  *
  */
 public class JInputList extends JPanel {
 	private static final long serialVersionUID = 1L;
-	
+
 	protected static final ImageIcon ICON_ADD = new ImageIcon(
 		JInputList.class.getResource("icons/add.png"));
-	
+
 	private JPanel northPanel;
 	private JPanel inputPanel;
 	private JXTextField elementTextField;
 	private JButton addElementButton;
-	
+
 	private boolean listButtons;
 	private boolean listFilter;
 	private boolean allowRepetitions;
+	private boolean elementIntroductionEnabled = false;
 
 	private JListPanel<String> itemsListPanel;
 	private JList<String> itemsList;
 	private ExtendedDefaultListModel<String> itemsListModel;
+
 
 	/**
 	 * Creates a new {@code JInputList} instance with {@code JListPanel}
@@ -56,10 +58,10 @@ public class JInputList extends JPanel {
 	public JInputList() {
 		this(false, false, false);
 	}
-	
+
 	/**
 	 * Creates a new {@code JInputList} instance.
-	 * 
+	 *
 	 * @param listButtons
 	 *            {@code true} if {@code JListPanel} buttons must be shown.
 	 * @param listFilter
@@ -73,7 +75,7 @@ public class JInputList extends JPanel {
 		this.listButtons = listButtons;
 		this.listFilter = listFilter;
 		this.allowRepetitions = allowRepetitions;
-		
+
 		this.initComponent();
 	}
 
@@ -105,39 +107,39 @@ public class JInputList extends JPanel {
 					@Override
 					public void changedUpdate(DocumentEvent arg0) {
 					}
-	
+
 					@Override
 					public void insertUpdate(DocumentEvent arg0) {
 						currentItemChanged();
 					}
-	
+
 					@Override
 					public void removeUpdate(DocumentEvent arg0) {
 						currentItemChanged();
 					}
 				});
-			
+
 			addElementButton = JButtonBuilder.newJButtonBuilder()
 				.thatDoes(new AbstractAction() {
 					private static final long serialVersionUID = 1L;
-	
+
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						addElement();
-						
+
 					}
 				})
 				.withText("")
 				.withIcon(ICON_ADD)
 				.disabled()
 			.build();
-			
+
 			this.inputPanel.add(elementTextField, BorderLayout.CENTER);
 			this.inputPanel.add(addElementButton, BorderLayout.EAST);
 		}
 		return this.inputPanel;
 	}
-	
+
 
 	private Component getItemsList() {
 		if(this.itemsListPanel == null) {
@@ -157,16 +159,21 @@ public class JInputList extends JPanel {
 	}
 
 	private void currentItemChanged() {
-		this.addElementButton.setEnabled(isValidInput());
+		this.updateAddElementStatus();
+	}
+
+	private void updateAddElementStatus() {
+		this.addElementButton
+			.setEnabled(this.elementIntroductionEnabled && isValidInput());
 	}
 
 	private boolean isValidInput() {
-		return 		!this.elementTextField.getText().equals("") 
+		return 		!this.elementTextField.getText().equals("")
 				&&	checkRepetitions();
 	}
 
 	private boolean checkRepetitions() {
-		return 		this.allowRepetitions 
+		return 		this.allowRepetitions
 				|| 	!listContains(this.elementTextField.getText());
 	}
 
@@ -181,10 +188,10 @@ public class JInputList extends JPanel {
 		this.elementTextField.setText("");
 		this.itemsList.updateUI();
 	}
-	
+
 	/**
 	 * Adds {@code elements} to the input list.
-	 * 
+	 *
 	 * @param elements one or several elements to add.
 	 */
 	public void addElements(String ...elements) {
@@ -196,8 +203,7 @@ public class JInputList extends JPanel {
 	 * Adds a listener to the list that's notified each time a change to the
 	 * data model occurs.
 	 *
-	 * @param l
-	 *            the {@code ListDataListener} to be added
+	 * @param l the {@code ListDataListener} to be added
 	 */
 	public void addListDataListener(ListDataListener l) {
 		this.itemsListModel.addListDataListener(l);
@@ -205,19 +211,34 @@ public class JInputList extends JPanel {
 
 	/**
 	 * Returns a list with the items introduced.
-	 * 
+	 *
 	 * @return a list with the items introduced.
 	 */
 	public List<String> getInputItems() {
 		return Collections.list(this.itemsListModel.elements());
 	}
-	
+
 	/**
 	 * Returns the enclosed {@code JListPanel<String>}.
-	 * 
+	 *
 	 * @return the enclosed {@code JListPanel<String>}.
 	 */
 	public JListPanel<String> getListPanel() {
 		return itemsListPanel;
+	}
+
+	/**
+	 * Enables or disables the introduction of new elements to the list.
+	 *
+	 * @param enabled whether element introduction must be enabled or not.
+	 */
+	public void setElementIntroductionEnabled(boolean enabled) {
+		this.elementIntroductionEnabled = enabled;
+		this.updateAddElementStatus();
+		this.updateTextFieldStatus();
+	}
+
+	private void updateTextFieldStatus() {
+		this.elementTextField.setEnabled(this.elementIntroductionEnabled);
 	}
 }
