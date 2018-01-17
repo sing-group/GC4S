@@ -48,7 +48,7 @@ public class JColorChooserButton extends JButton {
 		});
 	}
 
-	private void showDialog() {
+	protected void showDialog() {
 		JColorChooser colorChooser = getColorChooser();
 		int response = JOptionPane.showConfirmDialog(
 			getParent(), colorChooser, 
@@ -61,9 +61,13 @@ public class JColorChooserButton extends JButton {
 	}
 	
 	private JColorChooser getColorChooser() {
-		return new JColorChooser(currentColor);
+		if (currentColor != null) {
+			return new JColorChooser(currentColor);
+		} else {
+			return new JColorChooser();
+		}
 	}
-	
+
 	/**
 	 * Sets the component selected color.
 	 * 
