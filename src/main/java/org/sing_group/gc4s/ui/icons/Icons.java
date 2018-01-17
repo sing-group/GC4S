@@ -170,6 +170,22 @@ public class Icons {
 	public static final ImageIcon ICON_ARROW_RIGHT_32 = getResource("icons/arrow-right-32.png");
 	public static final ImageIcon ICON_ARROW_RIGHT_24 = getResource("icons/arrow-right-24.png");
 	public static final ImageIcon ICON_ARROW_RIGHT_16 = getResource("icons/arrow-right-16.png");
+	
+	public static final ImageIcon ICON_ARROW_UP_32 = getResource("icons/arrow-up-32.png");
+	public static final ImageIcon ICON_ARROW_UP_24 = getResource("icons/arrow-up-24.png");
+	public static final ImageIcon ICON_ARROW_UP_16 = getResource("icons/arrow-up-16.png");
+
+	public static final ImageIcon ICON_ARROWS_UP_32 = getResource("icons/arrows-up-32.png");
+	public static final ImageIcon ICON_ARROWS_UP_24 = getResource("icons/arrows-up-24.png");
+	public static final ImageIcon ICON_ARROWS_UP_16 = getResource("icons/arrows-up-16.png");
+
+	public static final ImageIcon ICON_ARROW_DOWN_32 = getResource("icons/arrow-down-32.png");
+	public static final ImageIcon ICON_ARROW_DOWN_24 = getResource("icons/arrow-down-24.png");
+	public static final ImageIcon ICON_ARROW_DOWN_16 = getResource("icons/arrow-down-16.png");
+	
+	public static final ImageIcon ICON_ARROWS_DOWN_32 = getResource("icons/arrows-down-32.png");
+	public static final ImageIcon ICON_ARROWS_DOWN_24 = getResource("icons/arrows-down-24.png");
+	public static final ImageIcon ICON_ARROWS_DOWN_16 = getResource("icons/arrows-down-16.png");
 
 	public static final ImageIcon ICON_FILES_32 = getResource("icons/files-32.png");
 	public static final ImageIcon ICON_FILES_24 = getResource("icons/files-24.png");
@@ -182,7 +198,27 @@ public class Icons {
 	public static final ImageIcon ICON_FIND_32 = getResource("icons/find-32.png");
 	public static final ImageIcon ICON_FIND_24 = getResource("icons/find-24.png");
 	public static final ImageIcon ICON_FIND_16 = getResource("icons/find-16.png");
+	
+	public static final ImageIcon ICON_FIND_2_32 = getResource("icons/find-2-32.png");
+	public static final ImageIcon ICON_FIND_2_24 = getResource("icons/find-2-24.png");
+	public static final ImageIcon ICON_FIND_2_16 = getResource("icons/find-2-16.png");
+	
+	public static final ImageIcon ICON_ZOOM_IN_32 = getResource("icons/zoom-in-32.png");
+	public static final ImageIcon ICON_ZOOM_IN_24 = getResource("icons/zoom-in-24.png");
+	public static final ImageIcon ICON_ZOOM_IN_16 = getResource("icons/zoom-in-16.png");
 
+	public static final ImageIcon ICON_ZOOM_OUT_32 = getResource("icons/zoom-out-32.png");
+	public static final ImageIcon ICON_ZOOM_OUT_24 = getResource("icons/zoom-out-24.png");
+	public static final ImageIcon ICON_ZOOM_OUT_16 = getResource("icons/zoom-out-16.png");
+	
+	public static final ImageIcon ICON_SETTINGS_1_32 = getResource("icons/settings-1-32.png");
+	public static final ImageIcon ICON_SETTINGS_1_24 = getResource("icons/settings-1-24.png");
+	public static final ImageIcon ICON_SETTINGS_1_16 = getResource("icons/settings-1-16.png");
+	
+	public static final ImageIcon ICON_SETTINGS_2_32 = getResource("icons/settings-2-32.png");
+	public static final ImageIcon ICON_SETTINGS_2_24 = getResource("icons/settings-2-24.png");
+	public static final ImageIcon ICON_SETTINGS_2_16 = getResource("icons/settings-2-16.png");
+	
 	private static ImageIcon getResource(String resource) {
 		return new ImageIcon(Icons.class.getResource(resource));
 	}
