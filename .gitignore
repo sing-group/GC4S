@@ -4,3 +4,4 @@ gc4s*/target
 .settings
 .classpath
 /artwork
+**/pom.xml.versionsBackup
