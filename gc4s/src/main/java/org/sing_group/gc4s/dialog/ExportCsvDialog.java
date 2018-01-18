@@ -97,7 +97,7 @@ public class ExportCsvDialog extends AbstractInputJDialog {
 	
 	private boolean isSelectedFileValid() {
 		return 		this.fileChooserPanel.getSelectedFile() != null
-				&& 	!this.fileChooserPanel.getSelectedFile().equals("");
+				&& 	!this.fileChooserPanel.getSelectedFile().getName().equals("");
 	}
 
 	/**

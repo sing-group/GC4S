@@ -5,13 +5,13 @@ A collection of GUI Components for (Java) Swing.
 
 Projects using GC4S
 -------------------
-- [S2P](http://sing-group.org/s2p/): an open-source application for processing of 2D-gel and MALDI-based mass spectrometry protein data. The graphical user interface has been created using GC4S.
+- [S2P](http://sing-group.org/s2p/): an open-source application for processing of 2D-gel and MALDI-based mass spectrometry protein data.
 
 Using GC4S
 ----------
 Clone this project and install it using `mvn install` or add the following repository and dependency declarations to your `pom.xml`:
 ```xml
-    <repositories>
+	<repositories>
 		<repository>
 			<id>sing-repository</id>
 			<name>SING repository</name>
@@ -23,7 +23,7 @@ Clone this project and install it using `mvn install` or add the following repos
     	<dependency>
 			<groupId>org.sing_group</groupId>
 			<artifactId>gc4s</artifactId>
-			<version>0.7.0</version>
+			<version>0.15.0</version>
 		</dependency>
 	</dependencies>
 ```
