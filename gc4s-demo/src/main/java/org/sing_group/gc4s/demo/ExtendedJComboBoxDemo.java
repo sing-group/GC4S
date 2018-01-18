@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import javax.swing.JPanel;
 
 import org.sing_group.gc4s.input.combobox.ExtendedJComboBox;
+import org.sing_group.gc4s.visualization.VisualizationUtils;
 
 /**
  * An example showing the use of {@link ExtendedJComboBox}.
@@ -23,8 +24,8 @@ public class ExtendedJComboBoxDemo {
         combobox.setPreferredSize(new Dimension(180, 20));
         combobox.setAutoAdjustWidth(true);
         
-        JPanel demoPanel = DemoUtils.createPanelAndCenterComponent(combobox);
+        JPanel demoPanel = VisualizationUtils.createPanelAndCenterComponent(combobox);
         
-        DemoUtils.showComponent(demoPanel, "Extended JComboBox demo");
+        VisualizationUtils.showComponent(demoPanel, "Extended JComboBox demo");
 	}
 }

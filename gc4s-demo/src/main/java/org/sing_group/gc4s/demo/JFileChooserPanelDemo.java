@@ -2,6 +2,7 @@ package org.sing_group.gc4s.demo;
 
 import org.sing_group.gc4s.input.filechooser.JFileChooserPanel;
 import org.sing_group.gc4s.input.filechooser.Mode;
+import org.sing_group.gc4s.visualization.VisualizationUtils;
 
 /**
  * An example showing the use of {@link JFileChooserPanel}.
@@ -21,6 +22,6 @@ public class JFileChooserPanelDemo {
 		 * fileChooserPanel.getComponentLabelFile().setVisible(false);
 		 */
 
-		DemoUtils.showComponent(fileChooserPanel);
+		VisualizationUtils.showComponent(fileChooserPanel);
 	}
 }

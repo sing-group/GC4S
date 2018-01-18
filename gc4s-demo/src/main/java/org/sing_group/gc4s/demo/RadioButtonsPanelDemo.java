@@ -4,6 +4,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 import org.sing_group.gc4s.input.RadioButtonsPanel;
+import org.sing_group.gc4s.visualization.VisualizationUtils;
 
 /**
  * An example showing the use of {@link RadioButtonsPanel}.
@@ -33,6 +34,6 @@ public class RadioButtonsPanelDemo {
 			}
 		});
 
-		DemoUtils.showComponent(panel, "RadioButtonsPanel demo");
+		VisualizationUtils.showComponent(panel, "RadioButtonsPanel demo");
 	}
 }

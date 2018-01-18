@@ -1,6 +1,6 @@
 package org.sing_group.gc4s.demo;
 
-import static org.sing_group.gc4s.demo.DemoUtils.showComponent;
+import static org.sing_group.gc4s.visualization.VisualizationUtils.showComponent;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -9,6 +9,7 @@ import javax.swing.AbstractAction;
 
 import org.sing_group.gc4s.ui.icons.Icons;
 import org.sing_group.gc4s.utilities.builder.JButtonBuilder;
+import org.sing_group.gc4s.visualization.VisualizationUtils;
 
 /**
  * An example showing the use of {@link JButtonBuilder}.
@@ -19,7 +20,7 @@ import org.sing_group.gc4s.utilities.builder.JButtonBuilder;
 public class JButtonBuilderDemo {
 
 	public static void main(String[] args)  {
-		DemoUtils.setNimbusLookAndFeel();
+		VisualizationUtils.setNimbusLookAndFeel();
 		showComponent(createButton(), "JButtonBuilder demo");
 	}
 

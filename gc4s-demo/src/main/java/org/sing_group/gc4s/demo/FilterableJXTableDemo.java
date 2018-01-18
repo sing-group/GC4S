@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
+import org.sing_group.gc4s.visualization.VisualizationUtils;
 import org.sing_group.gc4s.visualization.table.FilterableJXTable;
 
 /**
@@ -43,7 +44,7 @@ public class FilterableJXTableDemo {
 		table.setColumnControlVisible(true);
 		table.setColumVisibilityActionsEnabled(false);
 		
-		DemoUtils.showComponent(createDemoPanel(table), "FilterableJXTable demo dialog");
+		VisualizationUtils.showComponent(createDemoPanel(table), "FilterableJXTable demo dialog");
 	}
 
 	private static JPanel createDemoPanel(FilterableJXTable table) {

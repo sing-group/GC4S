@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import org.sing_group.gc4s.input.text.JLimitedTextField;
+import org.sing_group.gc4s.visualization.VisualizationUtils;
 
 /**
  * An example showing the use of {@link JLimitedTextField}.
@@ -22,6 +23,6 @@ public class JLimitedTextFieldDemo {
 		demoPanel.add(new JLabel("With limit 5:"));
 		demoPanel.add(new JLimitedTextField("12345", 5));
 		demoPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-		DemoUtils.showComponent(demoPanel);
+		VisualizationUtils.showComponent(demoPanel);
 	}
 }

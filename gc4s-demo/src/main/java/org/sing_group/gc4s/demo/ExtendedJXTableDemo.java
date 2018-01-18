@@ -6,6 +6,7 @@ import javax.swing.AbstractAction;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 
+import org.sing_group.gc4s.visualization.VisualizationUtils;
 import org.sing_group.gc4s.visualization.table.ExtendedJXTable;
 
 /**
@@ -42,6 +43,6 @@ public class ExtendedJXTableDemo {
 		});
 		table.setColumVisibilityActionsEnabled(false);
 		
-		DemoUtils.showComponent(new JScrollPane(table), "ExtendedJXTable demo dialog");
+		VisualizationUtils.showComponent(new JScrollPane(table), "ExtendedJXTable demo dialog");
 	}
 }

@@ -8,6 +8,7 @@ import javax.swing.JList;
 
 import org.sing_group.gc4s.input.list.ExtendedDefaultListModel;
 import org.sing_group.gc4s.input.list.JListPanel;
+import org.sing_group.gc4s.visualization.VisualizationUtils;
 
 /**
  * An example showing the use of {@link ExtendedDefaultListModel} and
@@ -29,6 +30,6 @@ public class JListPanelDemo2 {
 
 		JListPanel<String> listPanel = new JListPanel<String>(list, false, true);
 
-		DemoUtils.showComponent(listPanel, "JList filter demo");
+		VisualizationUtils.showComponent(listPanel, "JList filter demo");
 	}
 }

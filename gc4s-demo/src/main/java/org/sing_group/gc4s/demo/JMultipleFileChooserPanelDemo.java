@@ -6,6 +6,7 @@ import org.sing_group.gc4s.input.filechooser.JMultipleFileChooserPanel;
 import org.sing_group.gc4s.input.filechooser.Mode;
 import org.sing_group.gc4s.input.filechooser.event.MultipleFileChooserListener;
 import org.sing_group.gc4s.ui.CenteredJPanel;
+import org.sing_group.gc4s.visualization.VisualizationUtils;
 
 /**
  * An example showing the use of {@link JMultipleFileChooserPanel}.
@@ -39,6 +40,6 @@ public class JMultipleFileChooserPanelDemo {
 				}
 			});
 		
-		DemoUtils.showComponent(new CenteredJPanel(fileChooserPanel));
+		VisualizationUtils.showComponent(new CenteredJPanel(fileChooserPanel));
 	}
 }

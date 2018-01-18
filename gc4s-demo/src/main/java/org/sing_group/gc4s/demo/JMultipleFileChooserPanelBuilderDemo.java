@@ -1,7 +1,7 @@
 package org.sing_group.gc4s.demo;
 
 import static java.util.Arrays.asList;
-import static org.sing_group.gc4s.demo.DemoUtils.showComponent;
+import static org.sing_group.gc4s.visualization.VisualizationUtils.showComponent;
 
 import javax.swing.event.ChangeEvent;
 

@@ -4,6 +4,7 @@ import javax.swing.event.ChangeEvent;
 
 import org.sing_group.gc4s.input.csv.CsvPanel;
 import org.sing_group.gc4s.input.csv.event.CsvListener;
+import org.sing_group.gc4s.visualization.VisualizationUtils;
 
 /**
  * An example showing the use of {@link CsvPanel}.
@@ -23,6 +24,6 @@ public class CsvPanelDemo {
 					+ csvPanel.isValidFormat());
 			}
 		});
-		DemoUtils.showComponent(csvPanel);
+		VisualizationUtils.showComponent(csvPanel);
 	}
 }

@@ -1,8 +1,8 @@
 package org.sing_group.gc4s.demo;
 
-import static org.sing_group.gc4s.demo.DemoUtils.createPanelAndCenterComponent;
-import static org.sing_group.gc4s.demo.DemoUtils.showComponent;
 import static org.sing_group.gc4s.visualization.ColorLegend.Orientation.VERTICAL;
+import static org.sing_group.gc4s.visualization.VisualizationUtils.createPanelAndCenterComponent;
+import static org.sing_group.gc4s.visualization.VisualizationUtils.showComponent;
 
 import java.awt.Color;
 import java.util.HashMap;

@@ -1,6 +1,7 @@
 package org.sing_group.gc4s.demo;
 
-import static org.sing_group.gc4s.demo.DemoUtils.*;
+import static org.sing_group.gc4s.visualization.VisualizationUtils.*;
+
 import javax.swing.JLabel;
 
 import org.sing_group.gc4s.ui.text.VerticalLabelUI;

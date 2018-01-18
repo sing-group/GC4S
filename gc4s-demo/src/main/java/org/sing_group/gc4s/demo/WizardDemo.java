@@ -13,6 +13,7 @@ import org.sing_group.gc4s.dialog.wizard.Wizard;
 import org.sing_group.gc4s.dialog.wizard.WizardStep;
 import org.sing_group.gc4s.dialog.wizard.event.WizardStepEvent;
 import org.sing_group.gc4s.ui.CenteredJPanel;
+import org.sing_group.gc4s.visualization.VisualizationUtils;
 
 /**
  * An example showing the use of {@link Wizard} and {@link WizardStep}.
@@ -32,7 +33,7 @@ public class WizardDemo {
 					super.wizardFinished();
 				}
 			};
-		DemoUtils.showDialog(dialog);
+		VisualizationUtils.showDialog(dialog);
 	}
 
 	private static List<WizardStep> getWizardSteps() {

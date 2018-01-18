@@ -1,6 +1,6 @@
 package org.sing_group.gc4s.demo;
 
-import static org.sing_group.gc4s.demo.DemoUtils.showDialog;
+import static org.sing_group.gc4s.visualization.VisualizationUtils.showDialog;
 
 import java.io.InvalidClassException;
 import java.util.Arrays;

@@ -9,6 +9,7 @@ import javax.swing.JList;
 
 import org.sing_group.gc4s.input.list.ExtendedDefaultListModel;
 import org.sing_group.gc4s.input.list.JParallelListsPanel;
+import org.sing_group.gc4s.visualization.VisualizationUtils;
 
 /**
  * An example showing the use of {@link JParallelListsPanel}.
@@ -22,7 +23,7 @@ public class JParallelListsPanelDemo {
 		JParallelListsPanel<String> parallelLists = new JParallelListsPanel<>(
 			createLeftList(), createRightList(), "Left", "Right", true, false);
 
-		DemoUtils.showComponent(parallelLists);
+		VisualizationUtils.showComponent(parallelLists);
 	}
 
 	private static JList<String> createLeftList() {

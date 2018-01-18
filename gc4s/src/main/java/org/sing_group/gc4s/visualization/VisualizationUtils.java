@@ -1,4 +1,4 @@
-package org.sing_group.gc4s.demo;
+package org.sing_group.gc4s.visualization;
 
 import java.awt.Component;
 import java.awt.Dimension;
@@ -12,12 +12,12 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import org.sing_group.gc4s.ui.CenteredJPanel;
 
 /**
- * Utility methods for demo classes.
+ * Utility methods for showing components.
  * 
  * @author hlfernandez
  *
  */
-public class DemoUtils {
+public class VisualizationUtils {
 
 	/**
 	 * Shows a {@code JFrame} containing the specified {@code component} and 

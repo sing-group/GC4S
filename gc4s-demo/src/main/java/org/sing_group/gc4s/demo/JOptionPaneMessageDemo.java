@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import org.sing_group.gc4s.dialog.JOptionPaneMessage;
+import org.sing_group.gc4s.visualization.VisualizationUtils;
 
 /**
  * An example showing the use of {@code JOptionPaneMessage}.
@@ -20,7 +21,7 @@ import org.sing_group.gc4s.dialog.JOptionPaneMessage;
 public class JOptionPaneMessageDemo {
 
 	public static void main(String[] args) {
-		DemoUtils.showComponent(createJOptionPaneMessageDemooComponent());
+		VisualizationUtils.showComponent(createJOptionPaneMessageDemooComponent());
 	}
 
 	private static JComponent createJOptionPaneMessageDemooComponent() {

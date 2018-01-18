@@ -1,8 +1,8 @@
 package org.sing_group.gc4s.demo;
 
-import static org.sing_group.gc4s.demo.DemoUtils.showComponent;
 import static java.awt.Color.GREEN;
 import static java.awt.Color.RED;
+import static org.sing_group.gc4s.visualization.VisualizationUtils.showComponent;
 
 import org.sing_group.gc4s.visualization.ColorKeyLegend;
 

@@ -11,6 +11,7 @@ import javax.swing.JList;
 import org.sing_group.gc4s.input.list.ExtendedDefaultListModel;
 import org.sing_group.gc4s.input.list.JListPanel;
 import org.sing_group.gc4s.ui.icons.Icons;
+import org.sing_group.gc4s.visualization.VisualizationUtils;
 
 /**
  * An example showing the use of {@link ExtendedDefaultListModel} and
@@ -38,6 +39,6 @@ public class JListPanelDemo3 {
 			}
 		});
 
-		DemoUtils.showComponent(listPanel);
+		VisualizationUtils.showComponent(listPanel);
 	}
 }

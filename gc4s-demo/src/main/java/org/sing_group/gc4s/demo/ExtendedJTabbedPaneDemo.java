@@ -13,6 +13,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import org.sing_group.gc4s.ui.tabbedpane.ExtendedJTabbedPane;
+import org.sing_group.gc4s.visualization.VisualizationUtils;
 
 /**
  * An example showing the use of {@link ExtendedJTabbedPane}.
@@ -24,7 +25,7 @@ public class ExtendedJTabbedPaneDemo {
 	public static void main(String[] args) {
 		ExtendedJTabbedPane tabbedPane = new ExtendedJTabbedPane();
 		tabbedPane.setHideTabBarWhenSingleTab(true);
-		tabbedPane.addTab("Tab 1", DemoUtils.createPanelAndCenterComponent(new JLabel("Tab 1")));
+		tabbedPane.addTab("Tab 1", VisualizationUtils.createPanelAndCenterComponent(new JLabel("Tab 1")));
 		tabbedPane.setPreferredSize(new Dimension(300,200));
 
 		final JButton addTab = new JButton(new AbstractAction("Add tab") {
@@ -33,7 +34,7 @@ public class ExtendedJTabbedPaneDemo {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String tabName = "Tab " + String.valueOf(tabbedPane.getTabCount()+1);
-				tabbedPane.addTab(tabName, DemoUtils.createPanelAndCenterComponent(new JLabel(tabName)));
+				tabbedPane.addTab(tabName, VisualizationUtils.createPanelAndCenterComponent(new JLabel(tabName)));
 			}
 		});
 		final JButton removeLastTab = new JButton(new AbstractAction("Remove last tab") {
@@ -60,6 +61,6 @@ public class ExtendedJTabbedPaneDemo {
 		demoPanel.add(tabbedPane, BorderLayout.CENTER);
 		
 		demoPanel.setPreferredSize(new Dimension(300,200));
-		DemoUtils.showComponent(demoPanel, "ExtendedJTabbedPane demo");
+		VisualizationUtils.showComponent(demoPanel, "ExtendedJTabbedPane demo");
 	}
 }
