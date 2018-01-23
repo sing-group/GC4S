@@ -15,6 +15,8 @@
 	<modules>
 		<module>gc4s</module>
 		<module>gc4s-demo</module>
+		<module>gc4s-genomebrowser</module>
+		<module>gc4s-genomebrowser-demo</module>
 	</modules>
 	
 	<licenses>
@@ -36,6 +38,7 @@
 
 		<swingx-all.version>1.6.5-1</swingx-all.version>
 		<junit.version>4.12</junit.version>
+		<pileline-tools.version>1.2.1-SNAPSHOT</pileline-tools.version>
 	</properties>
 
 	<repositories>
@@ -68,6 +71,11 @@
 				<artifactId>gc4s</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>org.sing_group</groupId>
+				<artifactId>gc4s-genomebrowser</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 
 			<!-- General -->
 			<dependency>
@@ -79,6 +87,11 @@
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
 				<version>${junit.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>es.uvigo.ei.sing</groupId>
+				<artifactId>pileline-tools</artifactId>
+				<version>${pileline-tools.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
