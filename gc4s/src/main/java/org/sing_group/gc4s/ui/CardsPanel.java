@@ -5,7 +5,6 @@ import java.awt.CardLayout;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.event.ItemEvent;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.Box;
@@ -30,29 +29,6 @@ public class CardsPanel extends JPanel {
 	private Map<Object, Component> cardsMap;
 	private JComboBox<Object> cardSelectionCombo;
 	private String selectionLabel;
-	
-	public static class CardsPanelBuilder {
-		private Map<Object, Component> cardsMap = new HashMap<Object, Component>();
-		private String selectionLabel = "Card:";
-
-		public static CardsPanelBuilder newBuilder() {
-			return new CardsPanelBuilder();
-		}
-
-		public CardsPanelBuilder withCard(Object label, Component card) {
-			cardsMap.put(label, card);
-			return this;
-		}
-
-		public CardsPanelBuilder withSelectionLabel(String label) {
-			selectionLabel = label;
-			return this;
-		}
-
-		public CardsPanel build() {
-			return new CardsPanel(this.cardsMap, this.selectionLabel);
-		}
-	}
 	
 	/**
 	 * Creates a new {@code CardsPanel} with the specified selection label and

@@ -7,7 +7,7 @@ import java.awt.Component;
 import javax.swing.JLabel;
 
 import org.sing_group.gc4s.ui.CardsPanel;
-import org.sing_group.gc4s.ui.CardsPanel.CardsPanelBuilder;
+import org.sing_group.gc4s.ui.CardsPanelBuilder;
 import org.sing_group.gc4s.ui.CenteredJPanel;
 
 /**
