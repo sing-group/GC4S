@@ -2,8 +2,7 @@ package org.sing_group.gc4s.demo;
 
 import static org.sing_group.gc4s.visualization.VisualizationUtils.showComponent;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Random;
 import java.util.stream.IntStream;
 
 import org.sing_group.gc4s.input.DoubleRange;
@@ -20,13 +19,21 @@ import org.sing_group.gc4s.visualization.heatmap.JHeatMapPanel;
 public class JHeatMapDemo {
 	
 	public static void main(String[] args) {
-		double[][] data = new double[][] {
-				new double[] { 1.0d, 2.0d, 3.0d, 4.0d, Double.NaN },
-				new double[] { 1.1d, 2.1d, 3.1d, 4.1d, 5.1d },
-				new double[] { 1.2d, 2.2d, 3.2d, 4.2d, 5.2d },
-				new double[] { 1.3d, 2.3d, 3.3d, 4.3d, 5.3d },
-				new double[] { 1.4d, 2.4d, 3.4d, 4.4d, 5.4d },
-		};
+		final int size = 5;
+		final int missingValues = 1;
+
+		double[][] data = new double[size][size];
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j < size; j++) {
+				data[i][j] = i + (double) j / size;
+			}
+		}
+
+		// Repeated missing values are not controlled
+		Random random = new Random(size * missingValues);
+		for (int i = 0; i < missingValues; i++) {
+			data[random.nextInt(size)][random.nextInt(size)] = Double.NaN;
+		}
 
 		JHeatMap heatmap = new JHeatMap(
 			new JHeatMapModel(
@@ -36,24 +43,22 @@ public class JHeatMapDemo {
 			)
 		);
 
-		heatmap.setValuesRange(new DoubleRange(0d, 7d));
+		heatmap.setValuesRange(new DoubleRange(0d, size));
 
 		showComponent(new JHeatMapPanel(heatmap), "JHeatMap demo");
 	}
 	
 	private static String[] generateRowNames(double[][] data) {
-		List<String> rownames = IntStream.range(0, data.length)
-			.mapToObj(String::valueOf).map(s -> new String("R" + s))
-			.collect(Collectors.toList());
-		
-		return rownames.toArray(new String[rownames.size()]);
+		return IntStream.range(0, data.length)
+			.mapToObj(Integer::toString)
+			.map(s -> new String("R" + s))
+		.toArray(String[]::new);
 	}
 	
 	private static String[] generateColumnNames(double[][] data) {
-		List<String> colnames = IntStream.range(0, data[0].length)
-			.mapToObj(String::valueOf).map(s -> new String("Column " + s))
-			.collect(Collectors.toList());
-		
-		return colnames.toArray(new String[colnames.size()]);
+		return IntStream.range(0, data[0].length)
+			.mapToObj(Integer::toString)
+			.map(s -> new String("Column " + s))
+		.toArray(String[]::new);
 	}
 }
