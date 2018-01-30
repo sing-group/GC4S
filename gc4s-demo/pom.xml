@@ -9,7 +9,7 @@
 	</parent>
 	
 	<artifactId>gc4s-demo</artifactId>
-	<packaging>pom</packaging>
+	<packaging>jar</packaging>
 	<name>GC4S demo</name>
 
 	<dependencies>
