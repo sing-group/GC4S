@@ -47,6 +47,7 @@ import org.sing_group.gc4s.event.DocumentAdapter;
 import org.sing_group.gc4s.input.filechooser.event.FileChooserListener;
 import org.sing_group.gc4s.ui.icons.Icons;
 import org.sing_group.gc4s.utilities.FileDrop;
+import org.sing_group.gc4s.utilities.FileDropListener;
 import org.sing_group.gc4s.utilities.builder.JButtonBuilder;
 
 /**
@@ -297,8 +298,8 @@ public class JFileChooserPanel extends JPanel {
 				}
 			}
 		});
-		new FileDrop(this.fileName, new FileDrop.Listener() {
-			public void filesDropped(java.io.File[] files) {
+		new FileDrop(this.fileName, new FileDropListener() {
+			public void filesDropped(File[] files) {
 				if (files.length > 0) {
 					setSelectedFile(files[0]);
 				}

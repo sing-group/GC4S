@@ -48,6 +48,7 @@ import org.sing_group.gc4s.input.list.ExtendedDefaultListModel;
 import org.sing_group.gc4s.input.list.JListPanel;
 import org.sing_group.gc4s.ui.icons.Icons;
 import org.sing_group.gc4s.utilities.FileDrop;
+import org.sing_group.gc4s.utilities.FileDropListener;
 
 /**
  * <p>
@@ -227,8 +228,8 @@ public class JMultipleFileChooserPanel extends JPanel {
 			throw new RuntimeException(e1);
 		}
 
-		new FileDrop(list, new FileDrop.Listener() {
-			public void filesDropped(java.io.File[] files) {
+		new FileDrop(list, new FileDropListener() {
+			public void filesDropped(File[] files) {
 				setSelectedFiles(files);
 			}
 		});
