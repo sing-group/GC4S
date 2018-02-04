@@ -21,7 +21,8 @@
  * #L%
  */
 /**
- * Provides interfaces and classes for dealing with different types of events fired by list components.
+ * Provides interfaces and classes related to different types of events fired by
+ * list components.
  * 
  * @author hlfernandez
  */

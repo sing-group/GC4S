@@ -21,7 +21,7 @@
  * #L%
  */
 /**
- * Provides components related with the creation of text components.
+ * Provides components related to the creation of text components.
  * 
  * @author hlfernandez
  */

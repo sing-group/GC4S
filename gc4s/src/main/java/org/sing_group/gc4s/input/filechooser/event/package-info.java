@@ -21,7 +21,8 @@
  * #L%
  */
 /**
- * Provides interfaces and classes for dealing with different types of events fired by file chooser components.
+ * Provides interfaces and classes frelated to different types of events fired
+ * by file chooser components.
  * 
  * @author hlfernandez
  */

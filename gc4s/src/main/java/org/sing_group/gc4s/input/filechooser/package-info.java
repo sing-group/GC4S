@@ -21,7 +21,7 @@
  * #L%
  */
 /**
- * Provides components related with file selection.
+ * Provides components related to file selection.
  * 
  * @author hlfernandez
  */

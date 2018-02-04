@@ -21,7 +21,8 @@
  * #L%
  */
 /**
- * Provides components related with retrieving different types of user inputs.
+ * Provides components related to the retrieval of different types of user
+ * inputs.
  * 
  * @author hlfernandez
  */

@@ -21,7 +21,7 @@
  * #L%
  */
 /**
- * Provides components related with table visualization.
+ * Provides components related to table visualization.
  * 
  * @author hlfernandez
  */

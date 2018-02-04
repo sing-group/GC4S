@@ -21,7 +21,7 @@
  * #L%
  */
 /**
- * Provides components related with the creation of tabbed panes.
+ * Provides components related to the creation of tabbed panes.
  * 
  * @author hlfernandez
  */

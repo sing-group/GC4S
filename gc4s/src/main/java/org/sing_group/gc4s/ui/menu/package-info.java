@@ -21,7 +21,7 @@
  * #L%
  */
 /**
- * Provides components related with the creation of menus.
+ * Provides components related to the creation of menus.
  * 
  * @author hlfernandez
  */

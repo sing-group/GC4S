@@ -21,7 +21,7 @@
  * #L%
  */
 /**
- * Provides components related with heat map visualization.
+ * Provides components related to heat map visualization.
  * 
  * @author hlfernandez
  */

@@ -21,7 +21,8 @@
  * #L%
  */
 /**
- * Provides extensions of interfaces and classes for dealing with different types of events fired by AWT components.
+ * Provides extensions of interfaces and classes related to different types of
+ * events fired by AWT components.
  * 
  * @author hlfernandez
  */

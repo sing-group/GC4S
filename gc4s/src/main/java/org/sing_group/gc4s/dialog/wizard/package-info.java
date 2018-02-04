@@ -21,7 +21,7 @@
  * #L%
  */
 /**
- * Provides components related with the creation of Wizard dialogs or assistants.
+ * Provides components related with to creation of Wizard dialogs or assistants.
  * 
  * @author hlfernandez
  */

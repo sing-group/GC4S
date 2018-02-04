@@ -21,7 +21,7 @@
  * #L%
  */
 /**
- * Provides components related with data visualization.
+ * Provides components related to data visualization.
  * 
  * @author hlfernandez
  */

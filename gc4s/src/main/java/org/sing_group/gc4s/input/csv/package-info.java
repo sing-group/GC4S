@@ -21,7 +21,8 @@
  * #L%
  */
 /**
- * Provides components related with retrieving CSV (comma-separated values) configurations.
+ * Provides components related to the retrieval of CSV (comma-separated values)
+ * configurations.
  * 
  * @author hlfernandez
  */

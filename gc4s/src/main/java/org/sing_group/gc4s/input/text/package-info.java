@@ -21,7 +21,7 @@
  * #L%
  */
 /**
- * Provides components related with retrieving user input using text fields.
+ * Provides components related to the retrieval of user input using text fields.
  * 
  * @author hlfernandez
  */

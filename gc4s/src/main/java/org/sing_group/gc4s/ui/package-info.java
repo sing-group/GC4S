@@ -21,7 +21,7 @@
  * #L%
  */
 /**
- * Provides components related with creating user interfaces and layouts.
+ * Provides components related to the creation of user interfaces and layouts.
  * 
  * @author hlfernandez
  */

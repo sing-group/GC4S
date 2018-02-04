@@ -21,7 +21,7 @@
  * #L%
  */
 /**
- * Provides components related with retrieving user input using combo boxes.
+ * Provides components related to the retrieval of user input using combo boxes.
  * 
  * @author hlfernandez
  */

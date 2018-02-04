@@ -21,7 +21,7 @@
  * #L%
  */
 /**
- * Provides components related with the creation of different types of dialogs.
+ * Provides components related to the creation of different types of dialogs.
  * 
  * @author hlfernandez
  */
