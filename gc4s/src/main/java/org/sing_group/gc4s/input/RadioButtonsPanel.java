@@ -48,7 +48,7 @@ import javax.swing.JRadioButton;
  *
  * @author hlfernandez
  *
- * @param <T>  the type of the elements in this component
+ * @param <T> the type of the elements in this component
  */
 public class RadioButtonsPanel<T> extends JPanel implements ItemListener {
 	private static final long serialVersionUID = 1L;

@@ -1,6 +1,6 @@
 /*
  * #%L
- * GC4S components
+ * GC4S demo
  * %%
  * Copyright (C) 2014 - 2018 Hugo López-Fernández, Daniel Glez-Peña, Miguel Reboiro-Jato,
  * 			Florentino Fdez-Riverola, Rosalía Laza-Fidalgo, Reyes Pavón-Rial
@@ -9,34 +9,52 @@
  * it under the terms of the GNU Lesser General Public License as
  * published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Lesser Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Lesser Public
  * License along with this program.  If not, see
  * <http://www.gnu.org/licenses/lgpl-3.0.html>.
  * #L%
  */
-package org.sing_group.gc4s.utilities;
+package org.sing_group.gc4s.demo;
 
-import java.io.File;
+import static org.sing_group.gc4s.visualization.VisualizationUtils.showComponent;
+
+import java.awt.Component;
+
+import javax.swing.JTextField;
+
+import org.sing_group.gc4s.ui.ComponentsListPanel;
 
 /**
- * Interface to listen when files are dropped. Objects of a class implementing
- * this interface are passed to a {@link FileDrop} when it is created.
+ * An example showing the use of {@link ComponentsListPanel}.
  *
  * @author hlfernandez
  *
  */
-public interface FileDropListener {
+public class ComponentsListPanelDemo {
 
-    /**
-     * Called when files have been successfully dropped.
-     *
-     * @param files the array of {@code File}s that were dropped
-     */
-	public abstract void filesDropped(File[] files);
+	public static void main(String[] args) {
+		showComponent(
+			getComponentsListPanel(), "ComponentsListPanel demo");
+	}
+
+	private static Component getComponentsListPanel() {
+		return new ComponentsListPanel<JTextField>(1) {
+			private static final long serialVersionUID = 1L;
+
+			protected JTextField getGenericComponent() {
+				return new JTextField(10);
+			}
+
+			@Override
+			protected String getAddComponentButtonLabel() {
+				return "Add text field";
+			}
+		};
+	}
 }
