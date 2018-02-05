@@ -4,7 +4,7 @@
   	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.sing_group</groupId>
   	<artifactId>gc4s-all</artifactId>
-	<version>0.16.0-SNAPSHOT</version>
+	<version>0.16.0</version>
 
 	<name>GC4S</name>
 	<description>GUI Components for Java Swing.</description>
@@ -52,6 +52,11 @@
 			<id>sing-repository</id>
 			<name>SING repository</name>
 			<url>http://maven.sing-group.org/repository/maven/</url>
+		</repository>
+		<repository>
+			<id>sing-snapshots-repository</id>
+			<name>SING SNAPSHOTS repository</name>
+			<url>https://maven.sing-group.org/repository/maven-snapshots/</url>
 		</repository>
 	</repositories>
 
