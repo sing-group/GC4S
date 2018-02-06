@@ -1,7 +1,7 @@
 The `gc4s` module
 =================
 
-This module contains the bioinformatics-oriented collection of GUI Components for (Java) Swing.
+This module contains the bioinformatics-oriented collection of GUI Components for (Java) Swing. Javadoc documentation is available [here](http://sing-group.org/gc4s/javadoc).
 
 Using this module
 -----------------
@@ -19,7 +19,7 @@ Add the following repository and dependency declarations to your `pom.xml`:
     	<dependency>
 			<groupId>org.sing_group</groupId>
 			<artifactId>gc4s</artifactId>
-			<version>0.16.0</version>
+			<version>1.0.0</version>
 		</dependency>
 	</dependencies>
 ```
