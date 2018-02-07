@@ -287,6 +287,11 @@ public class JFileChooserPanel extends JPanel {
 			public void insertUpdate(DocumentEvent e) {
 				fileNameUpdated();
 			}
+			
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				fileNameUpdated();
+			}
 		});
 		fileName.addMouseListener(new MouseAdapter() {
 			@Override
@@ -444,6 +449,18 @@ public class JFileChooserPanel extends JPanel {
 			fileName.setText(selectedFile.getAbsolutePath());
 			fileName.setToolTipText(selectedFile.getAbsolutePath());
 			filechooser.setSelectedFile(file);
+		}
+	}
+	
+	/**
+	 * Clears the selected file.
+	 */
+	public void clearSelectedFile() {
+		if (this.selectedFile != null) {
+			this.selectedFile = null;
+			fileName.setText("");
+			fileName.setToolTipText("");
+			filechooser.setSelectedFile(new File(""));
 		}
 	}
 
