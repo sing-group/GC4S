@@ -348,9 +348,17 @@ public class JMultipleFileChooserPanel extends JPanel {
 	 */
 	public void setSelectedFiles(File[] files) {
 		this.selectedFilesModel.addElements(Arrays.asList(files));
-		selectedFilesListPanel.getList().updateUI();
+		this.selectedFilesListPanel.getList().updateUI();
 	}
-	
+
+	/**
+	 * Clears the selected files.
+	 */
+	public void clearSelectedFiles() {
+		this.selectedFilesModel.removeAllElements();
+		this.selectedFilesListPanel.getList().updateUI();
+	}
+
 	/**
 	 * Returns the browse action.
 	 * 
