@@ -241,6 +241,10 @@ public class Icons {
 	public static final ImageIcon ICON_SETTINGS_2_24 = getResource("icons/settings-2-24.png");
 	public static final ImageIcon ICON_SETTINGS_2_16 = getResource("icons/settings-2-16.png");
 	
+	public static final ImageIcon ICON_CASE_SENSITIVE_32 = getResource("icons/case-sensitive-32.png");
+	public static final ImageIcon ICON_CASE_SENSITIVE_24 = getResource("icons/case-sensitive-24.png");
+	public static final ImageIcon ICON_CASE_SENSITIVE_16 = getResource("icons/case-sensitive-16.png");
+	
 	private static ImageIcon getResource(String resource) {
 		return new ImageIcon(Icons.class.getResource(resource));
 	}
