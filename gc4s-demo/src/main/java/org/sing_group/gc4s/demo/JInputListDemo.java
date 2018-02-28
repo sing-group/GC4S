@@ -34,6 +34,8 @@ import org.sing_group.gc4s.visualization.VisualizationUtils;
 public class JInputListDemo {
 
 	public static void main(String[] args) {
-		VisualizationUtils.showComponent(new JInputList());
+		JInputList inputList = new JInputList();
+		inputList.setElementIntroductionEnabled(true);
+		VisualizationUtils.showComponent(inputList);
 	}
 }
