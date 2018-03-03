@@ -2,19 +2,19 @@
  * #%L
  * GC4S components
  * %%
- * Copyright (C) 2014 - 2018 Hugo López-Fernández, Daniel Glez-Peña, Miguel Reboiro-Jato, 
+ * Copyright (C) 2014 - 2018 Hugo López-Fernández, Daniel Glez-Peña, Miguel Reboiro-Jato,
  * 			Florentino Fdez-Riverola, Rosalía Laza-Fidalgo, Reyes Pavón-Rial
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as
  * published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Lesser Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Lesser Public
  * License along with this program.  If not, see
  * <http://www.gnu.org/licenses/lgpl-3.0.html>.
@@ -57,6 +57,7 @@ import org.sing_group.gc4s.dialog.FontConfigurationDialog;
 import org.sing_group.gc4s.dialog.ListSelectionDialog;
 import org.sing_group.gc4s.input.DoubleRange;
 import org.sing_group.gc4s.input.DoubleRangeInputDialog;
+import org.sing_group.gc4s.ui.ColorListCellRenderer;
 import org.sing_group.gc4s.ui.menu.HamburgerMenu;
 import org.sing_group.gc4s.utilities.ExtendedAbstractAction;
 import org.sing_group.gc4s.visualization.heatmap.JHeatMapOperations.Centering;
@@ -85,28 +86,7 @@ public class JHeatMapPanel extends JPanel {
 		"This dialog allows you to configure the visible columns. To do so, move "
 			+ "them from one list to another using the controls.";
 
-	private enum ComboColor {
-		RED 	(Color.RED, 	"Red"),
-		GREEN 	(Color.GREEN, 	"Green"),
-		BLUE 	(Color.BLUE, 	"Blue");
-
-		private Color color;
-		private String name;
-
-		ComboColor(Color color, String name) {
-			this.color = color;
-			this.name = name;
-		}
-
-		public Color getColor() {
-			return color;
-		}
-
-		@Override
-		public String toString() {
-			return this.name;
-		}
-	}
+	private final Color[] colors = new Color[] {Color.RED, Color.GREEN, Color.BLUE };
 
 	private JHeatMap heatmap;
 	private Optional<Font> heatmapFont = Optional.empty();
@@ -126,7 +106,7 @@ public class JHeatMapPanel extends JPanel {
 
 	private void initComponent() {
 		JPopupMenu.setDefaultLightWeightPopupEnabled(false);
-		ToolTipManager.sharedInstance().setLightWeightPopupEnabled(false);	
+		ToolTipManager.sharedInstance().setLightWeightPopupEnabled(false);
 
 		JPanel toolbar = new JPanel();
 		toolbar.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
@@ -135,13 +115,14 @@ public class JHeatMapPanel extends JPanel {
 
 		toolbar.add(getMenu());
 
-		JComboBox<ComboColor> lowColorCB =
-			new JComboBox<ComboColor>(ComboColor.values());
+		JComboBox<Color> lowColorCB =
+			new JComboBox<Color>(colors);
+		lowColorCB.setRenderer(new ColorListCellRenderer());
 		fixComboSize(lowColorCB);
-		lowColorCB.setSelectedItem(ComboColor.GREEN);
+		lowColorCB.setSelectedItem(Color.GREEN);
 		lowColorCB.addItemListener(e -> {
 			heatmap.setLowColor(
-				((ComboColor)lowColorCB.getSelectedItem()).getColor()
+				((Color)lowColorCB.getSelectedItem())
 			);
 		});
 
@@ -149,13 +130,14 @@ public class JHeatMapPanel extends JPanel {
 		toolbar.add(new JLabel("Low: "));
 		toolbar.add(lowColorCB);
 
-		JComboBox<ComboColor> highColorCB =
-			new JComboBox<ComboColor>(ComboColor.values());
+		JComboBox<Color> highColorCB =
+			new JComboBox<Color>(colors);
 		fixComboSize(highColorCB);
-		highColorCB.setSelectedItem(ComboColor.RED);
+		highColorCB.setRenderer(new ColorListCellRenderer());
+		highColorCB.setSelectedItem(Color.RED);
 		highColorCB.addItemListener(e -> {
 			heatmap.setHighColor(
-				((ComboColor)highColorCB.getSelectedItem()).getColor()
+				((Color)highColorCB.getSelectedItem())
 			);
 		});
 
@@ -321,11 +303,11 @@ public class JHeatMapPanel extends JPanel {
 		return this.heatmapFont.orElse(this.getFont());
 	}
 
-	private void fixComboSize(JComboBox<ComboColor> lowColorCB) {
+	private void fixComboSize(JComboBox<Color> combobox) {
 		Dimension d = new Dimension(120, 20);
-		lowColorCB.setSize(d);
-		lowColorCB.setMaximumSize(d);
-		lowColorCB.setPreferredSize(d);
+		combobox.setSize(d);
+		combobox.setMaximumSize(d);
+		combobox.setPreferredSize(d);
 	}
 
 	private void transformDataMatrix() {
