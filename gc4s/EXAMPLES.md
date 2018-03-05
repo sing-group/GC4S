@@ -102,3 +102,9 @@ FontConfigurationPanel
 A panel that allows configuring a `Font`.
 
 ![FontConfigurationPanel](screenshots/FontConfigurationPanel.png)
+
+ColorsListPanel
+-----------------
+A panel that allows the selection of several colors.
+
+![ColorsListPanel](screenshots/ColorsListPanel.png)

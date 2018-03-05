@@ -1,6 +1,6 @@
 /*
  * #%L
- * GC4S components
+ * GC4S demo
  * %%
  * Copyright (C) 2014 - 2018 Hugo López-Fernández, Daniel Glez-Peña, Miguel Reboiro-Jato, 
  * 			Florentino Fdez-Riverola, Rosalía Laza-Fidalgo, Reyes Pavón-Rial
@@ -20,47 +20,28 @@
  * <http://www.gnu.org/licenses/lgpl-3.0.html>.
  * #L%
  */
-package org.sing_group.gc4s.ui;
+package org.sing_group.gc4s.demo;
+
+import static org.sing_group.gc4s.visualization.VisualizationUtils.showDialog;
 
 import java.awt.Color;
-import java.awt.Component;
+import java.util.Arrays;
+import java.util.List;
 
-import javax.swing.JButton;
-import javax.swing.JList;
-import javax.swing.ListCellRenderer;
+import javax.swing.JFrame;
+
+import org.sing_group.gc4s.dialog.ColorsSelectionDialog;
 
 /**
- * An implementation of {@code ListCellRenderer} to show colors.
+ * An example showing the use of {@link ColorsSelectionDialog}.
  * 
  * @author hlfernandez
  *
  */
-public class ColorListCellRenderer extends JButton
-	implements ListCellRenderer<Color> {  
-	private static final long serialVersionUID = 1L;
+public class ColorsSelectionDialogDemo {
+	private static List<Color> COLORS = Arrays.asList(Color.RED, Color.BLUE);
 
-	boolean rendering = false;
-
-	public ColorListCellRenderer() {
-		setOpaque(true);
-	}
-
-	@Override
-	public void setBackground(Color bg) {
-		if (!rendering) {
-			return;
-		}
-
-		super.setBackground(bg);
-	}
-
-	public Component getListCellRendererComponent(JList<? extends Color> list,
-		Color value, int index, boolean isSelected, boolean cellHasFocus
-	) {
-		this.rendering = true;
-		this.setText(" ");
-		this.setBackground(value);
-		this.rendering = false;
-		return this;
+	public static void main(String[] args) {
+		showDialog(new ColorsSelectionDialog(new JFrame(), 1, 2, COLORS));
 	}
 }
