@@ -29,6 +29,7 @@ import static org.sing_group.gc4s.ui.icons.Icons.ICON_FONT_16;
 import static org.sing_group.gc4s.ui.icons.Icons.ICON_IMAGE_16;
 import static org.sing_group.gc4s.ui.icons.Icons.ICON_RANGE_16;
 import static org.sing_group.gc4s.ui.icons.Icons.ICON_ROW_16;
+import static org.sing_group.gc4s.ui.icons.Icons.ICON_PAINT_16;
 import static org.sing_group.gc4s.visualization.heatmap.JHeatMapOperations.center;
 import static org.sing_group.gc4s.visualization.heatmap.JHeatMapOperations.transform;
 
@@ -40,12 +41,14 @@ import java.awt.Font;
 import java.awt.Window;
 import java.io.IOException;
 import java.io.InvalidClassException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -53,6 +56,7 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.ToolTipManager;
 
+import org.sing_group.gc4s.dialog.ColorsSelectionDialog;
 import org.sing_group.gc4s.dialog.FontConfigurationDialog;
 import org.sing_group.gc4s.dialog.ListSelectionDialog;
 import org.sing_group.gc4s.input.DoubleRange;
@@ -86,7 +90,9 @@ public class JHeatMapPanel extends JPanel {
 		"This dialog allows you to configure the visible columns. To do so, move "
 			+ "them from one list to another using the controls.";
 
-	private final Color[] colors = new Color[] {Color.RED, Color.GREEN, Color.BLUE };
+	private Color[] colors = new Color[] {Color.RED, Color.GREEN, Color.BLUE };
+	private JComboBox<Color> lowColorCB;
+	private JComboBox<Color> highColorCB;
 
 	private JHeatMap heatmap;
 	private Optional<Font> heatmapFont = Optional.empty();
@@ -115,8 +121,7 @@ public class JHeatMapPanel extends JPanel {
 
 		toolbar.add(getMenu());
 
-		JComboBox<Color> lowColorCB =
-			new JComboBox<Color>(colors);
+		lowColorCB = new JComboBox<Color>(colors);
 		lowColorCB.setRenderer(new ColorListCellRenderer());
 		fixComboSize(lowColorCB);
 		lowColorCB.setSelectedItem(Color.GREEN);
@@ -130,8 +135,7 @@ public class JHeatMapPanel extends JPanel {
 		toolbar.add(new JLabel("Low: "));
 		toolbar.add(lowColorCB);
 
-		JComboBox<Color> highColorCB =
-			new JComboBox<Color>(colors);
+		highColorCB = new JComboBox<Color>(colors);
 		fixComboSize(highColorCB);
 		highColorCB.setRenderer(new ColorListCellRenderer());
 		highColorCB.setSelectedItem(Color.RED);
@@ -172,6 +176,9 @@ public class JHeatMapPanel extends JPanel {
 
 		menu.add(new ExtendedAbstractAction(
 			"Configure font", ICON_FONT_16, this::configureFont
+		));
+		menu.add(new ExtendedAbstractAction(
+			"Edit colors", ICON_PAINT_16, this::editColors
 		));
 
 		menu.add(new ExtendedAbstractAction(
@@ -292,6 +299,48 @@ public class JHeatMapPanel extends JPanel {
 	private void setHeatmapFont(Font font) {
 		this.heatmapFont = Optional.ofNullable(font);
 		this.heatmap.setHeatmapFont(getHeatmapFont());
+	}
+
+	protected void editColors() {
+		ColorsSelectionDialog dialog = new ColorsSelectionDialog(
+			getDialogParent(), 2, Integer.MAX_VALUE,
+			Arrays.asList(this.colors)
+		);
+
+		dialog.setVisible(true);
+
+		if (!dialog.isCanceled()) {
+			this.setColors(dialog.getSelectedColors());
+		}
+	}
+
+	private void setColors(List<Color> selectedColors) {
+		this.colors = selectedColors.toArray(new Color[selectedColors.size()]);
+		Color previousLowColor = (Color) lowColorCB.getSelectedItem();
+		Color previousHighColor = (Color) highColorCB.getSelectedItem();
+
+		lowColorCB.setModel(new DefaultComboBoxModel<>(colors));
+		highColorCB.setModel(new DefaultComboBoxModel<>(colors));
+
+		boolean changeColors = false;
+		if (selectedColors.contains(previousLowColor)) {
+			lowColorCB.setSelectedItem(previousLowColor);
+		} else {
+			changeColors = true;
+		}
+
+		if (selectedColors.contains(previousHighColor)) {
+			highColorCB.setSelectedItem(previousHighColor);
+		} else {
+			changeColors = true;
+		}
+
+		if (changeColors) {
+			this.heatmap.setColors(
+				(Color) lowColorCB.getSelectedItem(),
+				(Color) highColorCB.getSelectedItem()
+			);
+		}
 	}
 
 	/**
