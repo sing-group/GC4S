@@ -249,6 +249,22 @@ public class Icons {
 	public static final ImageIcon ICON_PAINT_24 = getResource("icons/paint-24.png");
 	public static final ImageIcon ICON_PAINT_16 = getResource("icons/paint-16.png");
 
+	public static final ImageIcon ICON_COLOR_CMYK_32 = getResource("icons/color-cmyk-32.png");
+	public static final ImageIcon ICON_COLOR_CMYK_24 = getResource("icons/color-cmyk-24.png");
+	public static final ImageIcon ICON_COLOR_CMYK_16 = getResource("icons/color-cmyk-16.png");
+
+	public static final ImageIcon ICON_COLOR_WHEEL_32 = getResource("icons/color-wheel-32.png");
+	public static final ImageIcon ICON_COLOR_WHEEL_24 = getResource("icons/color-wheel-24.png");
+	public static final ImageIcon ICON_COLOR_WHEEL_16 = getResource("icons/color-wheel-16.png");
+
+	public static final ImageIcon ICON_PAINT_BRUSH_1_32 = getResource("icons/paint-brush-1-32.png");
+	public static final ImageIcon ICON_PAINT_BRUSH_1_24 = getResource("icons/paint-brush-1-24.png");
+	public static final ImageIcon ICON_PAINT_BRUSH_1_16 = getResource("icons/paint-brush-1-16.png");
+
+	public static final ImageIcon ICON_PAINT_BRUSH_2_32 = getResource("icons/paint-brush-2-32.png");
+	public static final ImageIcon ICON_PAINT_BRUSH_2_24 = getResource("icons/paint-brush-2-24.png");
+	public static final ImageIcon ICON_PAINT_BRUSH_2_16 = getResource("icons/paint-brush-2-16.png");
+
 	private static ImageIcon getResource(String resource) {
 		return new ImageIcon(Icons.class.getResource(resource));
 	}
