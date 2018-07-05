@@ -1,0 +1,41 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.sing_group</groupId>
+		<artifactId>gc4s-all</artifactId>
+		<version>1.2.0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+	
+	<artifactId>gc4s-multiple-sequence-alignment-viewer</artifactId>
+	<packaging>jar</packaging>
+	<name>GC4S multiple sequence alignment viewer</name>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.sing_group</groupId>
+			<artifactId>gc4s</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+  		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.target}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<finalName>gc4s-multiple-sequence-alignment-viewer-${project.version}</finalName>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>	
+</project>

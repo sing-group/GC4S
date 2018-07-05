@@ -17,6 +17,8 @@ This repository contains four GC4S modules:
 - `gc4s-demo`: a module that contains examples of usage of the components in the `gc4s` module.
 - `gc4s-genomebrowser`: a module that depends on the `gc4s` module to provide an interactive genome browser.
 - `gc4s-genomebrowser-demo`: a module that contains an example of usage of the genome browser component.
+- `gc4s-multiple-sequence-alignment-viewer`: a module that depends on the `gc4s` module to provide a multiple sequence alignments viewer.
+- `gc4s-multiple-sequence-alignment-viewer-demo`: a module that contains an example of usage of the multiple sequence alignments viewer.
 
 Using GC4S
 ----------
@@ -34,7 +36,7 @@ Add the following repository and dependency declarations to your `pom.xml` in or
     	<dependency>
 			<groupId>org.sing_group</groupId>
 			<artifactId>gc4s</artifactId>
-			<version>1.0.0</version>
+			<version>1.2.0</version>
 		</dependency>
 	</dependencies>
 ```
