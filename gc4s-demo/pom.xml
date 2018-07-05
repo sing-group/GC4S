@@ -10,7 +10,7 @@
 	
 	<artifactId>gc4s-demo</artifactId>
 	<packaging>jar</packaging>
-	<name>GC4S demo</name>
+	<name>GC4S components demo</name>
 
 	<dependencies>
 		<dependency>
