@@ -31,6 +31,19 @@ import org.sing_group.gc4s.msaviewer.SequenceAlignmentRenderer;
 import org.sing_group.gc4s.msaviewer.SequenceBaseRenderingInfo;
 import org.sing_group.gc4s.msaviewer.Track;
 
+/**
+ * This {@code SequenceAlignmentRenderer} emulates the behaviour of the aligned
+ * sequences viewer used in ADOPS (http://sing-group.org/ADOPS/) to highlight
+ * bases where signals of positive selection have been identified using CodeML.
+ * 
+ * The constructor of this renderer receives a map from positions to the 
+ * probabilities or {@code Confidence}s obtained with CodeML. Depending on the
+ * values of the two probabilities, a different color is used to highlight the
+ * corresponding base.
+ * 
+ * @author hlfernandez
+ *
+ */
 public class CodeMlPositiveSelectionSequenceAlignmentRenderer implements SequenceAlignmentRenderer {
 	private Color neb95beb95Background = Color.YELLOW;
 	private Color neb95beb9095Background = Color.RED;

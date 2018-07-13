@@ -23,10 +23,12 @@
 package org.sing_group.gc4s.msaviewer.demo;
 
 import static java.util.Arrays.asList;
+import static java.util.Optional.empty;
 import static org.sing_group.gc4s.msaviewer.demo.Data.getRandomScores;
+import static org.sing_group.gc4s.msaviewer.demo.Data.getRandomSequences;
+import static org.sing_group.gc4s.visualization.VisualizationUtils.showComponent;
 
 import java.awt.Color;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -42,7 +44,6 @@ import org.sing_group.gc4s.msaviewer.Sequence;
 import org.sing_group.gc4s.msaviewer.SequenceAlignmentRenderer;
 import org.sing_group.gc4s.msaviewer.SequenceBaseRenderingInfo;
 import org.sing_group.gc4s.msaviewer.Track;
-import org.sing_group.gc4s.visualization.VisualizationUtils;
 
 /**
  * This class show the basic usage of the
@@ -55,6 +56,13 @@ public class MultipleSequenceAlignmentViewerControlDemo {
 	public static void main(String[] args) {
 		int sequenceLength = 120;
 		
+		List<Sequence> sequences = getRandomSequences(6, sequenceLength);
+		
+		/**
+		 * A {@code MultipleSequenceAlignmentTracksModel} that is set to the
+		 * viewer panel to show only one bottom track that simulates scores 
+		 * (from 0 to 9) for each position.
+		 */
 		MultipleSequenceAlignmentTracksModel model1 = 
 			new MultipleSequenceAlignmentTracksModel() {
 		
@@ -85,6 +93,11 @@ public class MultipleSequenceAlignmentViewerControlDemo {
 				}
 		};
 
+		/**
+		 * A {@code SequenceAlignmentRenderer} implementation that renders
+		 * sequence position using different colors and styles.
+		 * 
+		 */
 		SequenceAlignmentRenderer model1Renderer = new SequenceAlignmentRenderer() {
 			private SequenceBaseRenderingInfo RED = 
 				new SequenceBaseRenderingInfo(Color.RED, Color.YELLOW, false, false);
@@ -102,18 +115,23 @@ public class MultipleSequenceAlignmentViewerControlDemo {
 			@Override
 			public Optional<SequenceBaseRenderingInfo> render(Sequence sequence,
 				int position) {
-				if(Arrays.asList(0, 1, 2, 3, 4).contains(position)) {
+				if(asList(0, 1, 2, 3, 4).contains(position)) {
 					return Optional.of(RED);
-				} else if(Arrays.asList(6, 11, 16, 21, 26).contains(position)) {
+				} else if(asList(6, 11, 16, 21, 26).contains(position)) {
 					return Optional.of(BLUE);
-				} else if(Arrays.asList(7, 12, 17, 22, 27, 37, 47, 57).contains(position)) {
+				} else if(asList(7, 12, 17, 22, 27, 37, 47, 57).contains(position)) {
 					return Optional.of(BOLD);
 				} else {
-					return Optional.empty();
+					return empty();
 				}
 			}
 		};
 
+		/**
+		 * Another {@code MultipleSequenceAlignmentTracksModel} that is set to
+		 * the viewer panel to show only one bottom track that simulates scores
+		 * (from 0 to 9) for each position.
+		 */
 		MultipleSequenceAlignmentTracksModel model2 = 
 			new MultipleSequenceAlignmentTracksModel() {
 				
@@ -144,17 +162,25 @@ public class MultipleSequenceAlignmentViewerControlDemo {
 				}
 			};
 
-		MultipleSequenceAlignmentViewerConfiguration configuration = 
-			new MultipleSequenceAlignmentViewerConfiguration(
-				10, 5, 10, 4, 16, true, true, true);
-
-	
-		List<Sequence> sequences = Data.getRandomSequences(6, sequenceLength);
-		
+		/**
+		 * The following map is used to associate
+		 * {@code SequenceAlignmentRenderer}s to
+		 * {@code MultipleSequenceAlignmentTracksModel}s. In this case, a
+		 * renderer is only set to the first model.
+		 */
 		Map<MultipleSequenceAlignmentTracksModel, SequenceAlignmentRenderer> renderersMap = new HashMap<>();
 		renderersMap.put(model1, model1Renderer);
-		
-		VisualizationUtils.showComponent(
+
+		/**
+		 * The {@code MultipleSequenceAlignmentViewerConfiguration} used to set
+		 * the initial configuration of the viewer. This is optional since the
+		 * viewer panel can create a configuration with default values if it is
+		 * not provided.
+		 */
+		MultipleSequenceAlignmentViewerConfiguration configuration = new MultipleSequenceAlignmentViewerConfiguration(
+			10, 5, 10, 4, 16, true, true, true);
+
+		showComponent(
 			new MultipleSequenceAlignmentViewerControl(
 				sequences, asList(model1, model2), renderersMap, configuration), 
 			JFrame.MAXIMIZED_BOTH
