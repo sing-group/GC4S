@@ -22,26 +22,34 @@
  */
 package org.sing_group.gc4s.msaviewer;
 
+import static javax.swing.BorderFactory.createEmptyBorder;
+import static javax.swing.JOptionPane.showConfirmDialog;
 import static org.sing_group.gc4s.msaviewer.MultipleSequenceAlignmentViewerPanel.requireSameLengthSequences;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Vector;
 
 import javax.swing.Action;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import org.sing_group.gc4s.ui.menu.HamburgerMenu;
+import org.sing_group.gc4s.ui.menu.HamburgerMenu.Size;
 import org.sing_group.gc4s.utilities.ExtendedAbstractAction;
 
 /**
@@ -102,6 +110,7 @@ public class MultipleSequenceAlignmentViewerControl extends JPanel {
 		final JComponent selectionComponent;
 		if (!models.isEmpty()) {
 			this.cmbModels = new JComboBox<>(new Vector<>(modelsMap.keySet()));
+			this.cmbModels.setSelectedItem(models.get(0).getName());
 			this.cmbModels.addItemListener(
 				new ItemListener() {
 					@Override
@@ -129,6 +138,7 @@ public class MultipleSequenceAlignmentViewerControl extends JPanel {
 		}
 
 		final JPanel controlPanel = new JPanel(new BorderLayout());
+		controlPanel.setBorder(createEmptyBorder(5, 5, 5, 5));
 		controlPanel.add(selectionComponent, BorderLayout.WEST);
 		controlPanel.add(getButtonsPanel(), BorderLayout.EAST);
 
@@ -138,9 +148,12 @@ public class MultipleSequenceAlignmentViewerControl extends JPanel {
 
 	protected JPanel getButtonsPanel() {
 		JPanel buttonsPanel = new JPanel(new FlowLayout());
+		HamburgerMenu menu = new HamburgerMenu(Size.SIZE24);
+
 		for (Action a : getButtonActions()) {
-			buttonsPanel.add(new JButton(a));
+			menu.add(a);
 		}
+		buttonsPanel.add(menu);
 
 		return buttonsPanel;
 	}
@@ -148,12 +161,22 @@ public class MultipleSequenceAlignmentViewerControl extends JPanel {
 	protected List<Action> getButtonActions() {
 		List<Action> actions = new LinkedList<>();
 		actions.add(getEditConfigurationAction());
+		actions.add(getExportToHtmlAction());
+		actions.add(getExportToPngAction());
 
 		return actions;
 	}
 
 	private Action getEditConfigurationAction() {
 		return new ExtendedAbstractAction("Edit configuration", this::editConfiguration);
+	}
+
+	private Action getExportToHtmlAction() {
+		return new ExtendedAbstractAction("Export to HTML", this::exportToHtml);
+	}
+
+	private Action getExportToPngAction() {
+		return new ExtendedAbstractAction("Export to PNG", this::exportToPng);
 	}
 
 	private SequenceAlignmentRenderer getModelRenderer(
@@ -197,6 +220,50 @@ public class MultipleSequenceAlignmentViewerControl extends JPanel {
 		} else if (dialog.isCanceled()) {
 			setConfiguration(previousConfiguration);
 		}
+	}
+
+	private void exportToHtml() {
+		Optional<File> exportFile = getExportFile();
+		if (exportFile.isPresent()) {
+			try {
+				this.msaViewerPanel.exportToHtml(exportFile.get().toPath());
+			} catch (IOException e) {
+				showConfirmDialog(this,
+					"An error has been produced while writing alignment to "
+						+ exportFile.get().getAbsolutePath() + ".",
+					"Write error", JOptionPane.OK_OPTION,
+					JOptionPane.ERROR_MESSAGE);
+			}
+		}
+	}
+
+	private void exportToPng() {
+		Optional<File> exportFile = getExportFile();
+		if (exportFile.isPresent()) {
+			try {
+				this.msaViewerPanel.exportToPng(exportFile.get().toPath());
+			} catch (IOException e) {
+				showConfirmDialog(this,
+					"An error has been produced while writing image alignment to "
+						+ exportFile.get().getAbsolutePath() + ".",
+					"Write error", JOptionPane.OK_OPTION,
+					JOptionPane.ERROR_MESSAGE);
+			}
+		}
+	}
+
+	private Optional<File> getExportFile() {
+		JFileChooser fc = getFileChooser();
+		int result = fc.showSaveDialog(this);
+		if (result == JFileChooser.APPROVE_OPTION) {
+			return Optional.of(fc.getSelectedFile());
+		} else {
+			return Optional.empty();
+		}
+	}
+
+	protected JFileChooser getFileChooser() {
+		return new JFileChooser();
 	}
 
 	private void setConfiguration(

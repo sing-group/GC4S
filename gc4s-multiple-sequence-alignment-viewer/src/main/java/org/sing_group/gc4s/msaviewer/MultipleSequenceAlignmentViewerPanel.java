@@ -27,6 +27,8 @@ import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -36,6 +38,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.text.html.HTMLDocument;
 import javax.swing.text.html.HTMLEditorKit;
+
+import org.sing_group.gc4s.utilities.ImageIOUtils;
 
 /**
  * A panel that displays the aligned sequences.
@@ -388,6 +392,10 @@ public class MultipleSequenceAlignmentViewerPanel extends JPanel {
 					}
 				} else if (!line.trim().equals("[HEADER]")) {
 					sb.append(line).append('\n');
+				} else if (line.trim().equals("[HEADER]")) {
+					sb.append("<style type=\"text/css\">\n");
+					sb.append(this.configuration.getRules());
+					sb.append("</style>");
 				}
 			}
 		} catch (IOException ioe) {
@@ -483,5 +491,25 @@ public class MultipleSequenceAlignmentViewerPanel extends JPanel {
 	 */
 	public void setMouseZoomEnabled(boolean enabled) {
 		this.mouseZoomEnabled = enabled;
+	}
+
+	/**
+	 * Exports the view as an HTML document to the specified file.
+	 *
+	 * @param path the file to write the view
+	 * @throws IOException if an error occurs while saving the file
+	 */
+	public void exportToHtml(Path path) throws IOException {
+		Files.write(path, this.teDocument.getText().getBytes());
+	}
+
+	/**
+	 * Exports the view as a PNG image to the specified file.
+	 *
+	 * @param path the file to write the view
+	 * @throws IOException if an error occurs while saving the image
+	 */
+	public void exportToPng(Path path) throws IOException {
+		ImageIOUtils.toImage("png", path.toFile(), this.teDocument);
 	}
 }
