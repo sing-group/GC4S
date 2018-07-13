@@ -134,7 +134,7 @@ public class MultipleSequenceAlignmentViewerConfigurationPanel extends JPanel {
 		spnFontSize = new JSpinner(new SpinnerNumberModel(initialConfiguration.getFontSize(), 1, Integer.MAX_VALUE, 1));
 		lblFontSize.setLabelFor(spnFontSize);
 
-		cbShowIndexes = new JCheckBox("Show indexes (block length must be 5 or greater)");
+		cbShowIndexes = new JCheckBox("Show indexes (block length must be 5 or greater)", initialConfiguration.isShowIndexes());
 		cbShowUpperTracks = new JCheckBox("Show upper tracks", initialConfiguration.isShowUpperTracks());
 		cbShowBottomTracks = new JCheckBox("Show bottom tracks", initialConfiguration.isShowBottomTracks());
 
@@ -290,8 +290,8 @@ public class MultipleSequenceAlignmentViewerConfigurationPanel extends JPanel {
 	 * @return the {@code MultipleSequenceAlignmentViewerConfiguration} object
 	 */
 	public MultipleSequenceAlignmentViewerConfiguration getConfiguration() {
-		return new MultipleSequenceAlignmentViewerConfiguration(getLabelLenth(), getLabelTab(),
-			getBlockLength(), getBlocksPerLine(), getFontSize(),
+		return new MultipleSequenceAlignmentViewerConfiguration(getLabelLenth(),
+			getLabelTab(), getBlockLength(), getBlocksPerLine(), getFontSize(),
 			isShowIndexes(), isShowUpperTracks(), isShowBottomTracks());
 	}
 }
