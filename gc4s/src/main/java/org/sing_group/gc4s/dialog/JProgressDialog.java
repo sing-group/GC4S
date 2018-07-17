@@ -151,6 +151,7 @@ public class JProgressDialog extends JDialog {
 		} else {
 			this.progressBar.setValue(100);
 		}
+		this.pack();
 	}
 
 	protected void centerDialogOnScreen() {
