@@ -19,6 +19,8 @@ This repository contains four GC4S modules:
 - `gc4s-genomebrowser-demo`: a module that contains an example of usage of the genome browser component.
 - `gc4s-multiple-sequence-alignment-viewer`: a module that depends on the `gc4s` module to provide a multiple sequence alignments viewer.
 - `gc4s-multiple-sequence-alignment-viewer-demo`: a module that contains an example of usage of the multiple sequence alignments viewer.
+- `gc4s-statistics-tests-table`: a module that depends on the `gc4s` module to provide a statistical tests table.
+- `gc4s-statistics-tests-table-demo`: a module that contains examples of usage of the statistical tests table components.
 
 Using GC4S
 ----------

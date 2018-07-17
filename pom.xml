@@ -20,6 +20,8 @@
 		<module>gc4s-genomebrowser-demo</module>
 		<module>gc4s-multiple-sequence-alignment-viewer</module>
 		<module>gc4s-multiple-sequence-alignment-viewer-demo</module>
+		<module>gc4s-statistics-tests-table</module>
+		<module>gc4s-statistics-tests-table-demo</module>
 	</modules>
 
 	<licenses>
@@ -41,7 +43,7 @@
 		<swingx-all.version>1.6.5-1</swingx-all.version>
 		<junit.version>4.12</junit.version>
 		<pileline-tools.version>1.2.1</pileline-tools.version>
-
+		<sing-math.version>0.2.0-SNAPSHOT</sing-math.version>
 		<license.licenseName>lgpl_v3</license.licenseName>
 		<license.copyrightOwners>Hugo López-Fernández, Daniel Glez-Peña, Miguel Reboiro-Jato,
 			Florentino Fdez-Riverola, Rosalía Laza-Fidalgo, Reyes Pavón-Rial
@@ -95,6 +97,11 @@
 				<artifactId>gc4s-multiple-sequence-alignment-viewer</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>org.sing_group</groupId>
+				<artifactId>gc4s-statistics-tests-table</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 
 			<!-- General -->
 			<dependency>
@@ -111,6 +118,11 @@
 				<groupId>es.uvigo.ei.sing</groupId>
 				<artifactId>pileline-tools</artifactId>
 				<version>${pileline-tools.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>es.uvigo.ei.sing</groupId>
+				<artifactId>math</artifactId>
+				<version>${sing-math.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
