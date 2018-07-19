@@ -20,10 +20,10 @@ Add the following repository and dependency declarations to your `pom.xml`:
 	</repositories>
 	
 	<dependencies>
-    	<dependency>
+		<dependency>
 			<groupId>org.sing_group</groupId>
 			<artifactId>gc4s-statistics-tests-table</artifactId>
-			<version>1.0.0</version>
+			<version>1.2.0</version>
 		</dependency>
 	</dependencies>
 ```

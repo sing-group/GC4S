@@ -1,5 +1,5 @@
 The `gc4s-multiple-sequence-alignment-viewer` module
-=================================
+====================================================
 
 This module provides the `MultipleSequenceAlignmentViewerPanel` component to display multiple sequence alignments. By using this module, it is also possible to use the main `gc4s` components. This module also provides the `MultipleSequenceAlignmentViewerControl` that adds some functionalities to the panel.
 
@@ -20,10 +20,10 @@ Add the following repository and dependency declarations to your `pom.xml`:
 	</repositories>
 	
 	<dependencies>
-    	<dependency>
+		<dependency>
 			<groupId>org.sing_group</groupId>
 			<artifactId>gc4s-multiple-sequence-alignment-viewer</artifactId>
-			<version>1.0.0</version>
+			<version>1.2.0</version>
 		</dependency>
 	</dependencies>
 ```
