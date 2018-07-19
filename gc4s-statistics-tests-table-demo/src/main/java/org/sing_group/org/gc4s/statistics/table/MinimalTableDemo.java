@@ -38,11 +38,8 @@ import org.sing_group.org.gc4s.statistics.table.ui.ConditionsSeparatorHighlighte
 import org.sing_group.org.gc4s.statistics.table.ui.StatisticsTestTableHeaderRenderer;
 import org.sing_group.org.gc4s.statistics.table.ui.YesNoTableCellRenderer;
 
-// An example to show the usage of the StatisticsTestTable with a Dataset of
-// booleans with four conditions and forty samples. The statistical test to
-// use is decided by the decideBooleanStatisticTest method of the
-// StatisticsTestsUtils class.
-public class MinimalisticTableDemo {
+// An example to show the simplest usage of the StatisticsTestTable.
+public class MinimalTableDemo {
 	public static void main(String[] args) {
 		// Creation of the data needed to create the a Dataset of booleans
 		// feature names, sample names and conditions and a random matrix of

@@ -22,9 +22,19 @@
  */
 package org.sing_group.gc4s.visualization.heatmap;
 
+import static java.awt.BorderLayout.CENTER;
+import static java.awt.BorderLayout.NORTH;
+import static java.lang.Double.isNaN;
+import static java.util.Arrays.asList;
+import static java.util.Optional.empty;
+import static java.util.Optional.of;
+import static java.util.Optional.ofNullable;
+import static java.util.stream.IntStream.range;
+import static javax.swing.SwingUtilities.invokeLater;
+import static org.sing_group.gc4s.utilities.Gradient.createGradient;
+import static org.sing_group.gc4s.utilities.ImageIOUtils.toImage;
 import static org.sing_group.gc4s.utilities.MatrixUtils.max;
 import static org.sing_group.gc4s.utilities.MatrixUtils.min;
-import static java.util.Arrays.asList;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -38,7 +48,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import javax.swing.BorderFactory;
@@ -47,7 +56,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
-import javax.swing.SwingUtilities;
 import javax.swing.plaf.basic.BasicLabelUI;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableCellRenderer;
@@ -55,12 +63,10 @@ import javax.swing.table.TableColumn;
 
 import org.jdesktop.swingx.JXTable;
 import org.jdesktop.swingx.table.TableColumnExt;
-
 import org.sing_group.gc4s.input.DoubleRange;
 import org.sing_group.gc4s.ui.CenteredJPanel;
 import org.sing_group.gc4s.ui.text.VerticalLabelUI;
 import org.sing_group.gc4s.utilities.Gradient;
-import org.sing_group.gc4s.utilities.ImageIOUtils;
 import org.sing_group.gc4s.visualization.ColorKeyLegend;
 
 /**
@@ -121,19 +127,19 @@ public class JHeatMap extends JPanel {
 	/**
 	 * Constructs a new {@code JHeatMap} taking {@code model} as data source.
 	 *
-	 * @param model
-	 *            the {@code JHeatMapModel}.
+	 * @param model the {@code JHeatMapModel}
 	 */
 	public JHeatMap(JHeatMapModel model) {
 		this(model.getData(), model.getRowNames(), model.getColumnNames());
 	}
 
 	/**
-	 * Constructs a new {@code JHeatMap} taking {@code data} as input data matrix
-	 * 	and {@code rowNames}/{@code columNames} as names for rows and columns.
+	 * Constructs a new {@code JHeatMap} taking {@code data} as input data
+	 * matrix and {@code rowNames}/{@code columNames} as names for rows and
+	 * columns.
 	 *
-	 * @param data the input data matrix.
-	 * @param rowNames the names for the rows.
+	 * @param data the input data matrix
+	 * @param rowNames the names for the rows
 	 * @param columnNames the names for the columns
 	 */
 	public JHeatMap(double[][] data, String[] rowNames, String[] columnNames) {
@@ -148,8 +154,8 @@ public class JHeatMap extends JPanel {
 		this.initializeColors();
 
 		this.setLayout(new BorderLayout());
-		this.add(getColorKey(), BorderLayout.NORTH);
-		this.add(getHeatMap(), BorderLayout.CENTER);
+		this.add(getColorKey(), NORTH);
+		this.add(getHeatMap(), CENTER);
 	}
 
 	private void initializeColors() {
@@ -161,7 +167,7 @@ public class JHeatMap extends JPanel {
 
 			@Override
 			public Color apply(Double t) {
-				if (Double.isNaN(t)) {
+				if (isNaN(t)) {
 					return nanColor;
 				} else {
 					double normalized = normalize(checkRange(t), max, min);
@@ -189,7 +195,7 @@ public class JHeatMap extends JPanel {
 	}
 
 	private Color[] getColorGradient() {
-		return Gradient.createGradient(lowColor, highColor, DEFAULT_STEPS);
+		return createGradient(lowColor, highColor, DEFAULT_STEPS);
 	}
 
 	private Component getColorKey() {
@@ -203,7 +209,8 @@ public class JHeatMap extends JPanel {
 	private Component getHeatMap() {
 		this.heatmapTM = new HeatMapTableModel();
 		this.heatmap = new JXTable(this.heatmapTM);
-		this.heatmap.setDefaultRenderer(Object.class, new CustomTableCellRenderer());
+		this.heatmap.setDefaultRenderer(
+			Object.class, new CustomTableCellRenderer());
 		this.heatmap.setTableHeader(null);
 
 		this.heatmap.addMouseWheelListener(e -> {
@@ -233,7 +240,7 @@ public class JHeatMap extends JPanel {
 
 	private void fixCellSize() {
 		this.heatmap.setRowHeight(0, getMaxColumnNameLength());
-		IntStream.range(1, getVisibleRowNames().size()+1).forEach(row -> {
+		range(1, getVisibleRowNames().size() + 1).forEach(row -> {
 			this.heatmap.setRowHeight(row, this.cellSize);
 		});
 
@@ -269,7 +276,7 @@ public class JHeatMap extends JPanel {
 	/**
 	 * Zooms in the heatmap by a factor of {@code scale}.
 	 *
-	 * @param scale the scaling factor.
+	 * @param scale the scaling factor
 	 */
 	public void zoomIn(double scale) {
 		scaleCellSize(scale);
@@ -282,7 +289,7 @@ public class JHeatMap extends JPanel {
 	/**
 	 * Zooms out the heatmap by a factor of {@code scale}.
 	 *
-	 * @param scale the scaling factor.
+	 * @param scale the scaling factor
 	 */
 	public void zoomOut(double scale) {
 		scaleCellSize(scale);
@@ -300,17 +307,17 @@ public class JHeatMap extends JPanel {
 	/**
 	 * Exports the heatmap as a png image.
 	 *
-	 * @param f the file to save the image.
-	 * @throws IOException if an error occurs while saving the image.
+	 * @param f the file to save the image
+	 * @throws IOException if an error occurs while saving the image
 	 */
 	public void toPngImage(File f) throws IOException {
-		ImageIOUtils.toImage("png", f, this.colorKey, this.heatmap);
+		toImage("png", f, this.colorKey, this.heatmap);
 	}
 
 	/**
 	 * Establishes the low color of the gradient.
 	 *
-	 * @param color the low color of the gradient.
+	 * @param color the low color of the gradient
 	 */
 	public void setLowColor(Color color) {
 		this.lowColor = color;
@@ -319,9 +326,18 @@ public class JHeatMap extends JPanel {
 	}
 
 	/**
+	 * Returns the low color of the gradient.
+	 *
+	 * @return the low color of the gradient
+	 */
+	public Color getLowColor() {
+		return lowColor;
+	}
+
+	/**
 	 * Establishes the high color of the gradient.
 	 *
-	 * @param color the high color of the gradient.
+	 * @param color the high color of the gradient
 	 */
 	public void setHighColor(Color color) {
 		this.highColor = color;
@@ -330,10 +346,19 @@ public class JHeatMap extends JPanel {
 	}
 
 	/**
+	 * Returns the high color of the gradient.
+	 *
+	 * @return the high color of the gradient
+	 */
+	public Color getHighColor() {
+		return highColor;
+	}
+
+	/**
 	 * Establishes the low and high colors of the gradient.
 	 *
 	 * @param lowColor the low color of the gradient
-	 * @param highColor the high color of the gradient.
+	 * @param highColor the high color of the gradient
 	 */
 	public void setColors(Color lowColor, Color highColor) {
 		this.lowColor = lowColor;
@@ -344,7 +369,7 @@ public class JHeatMap extends JPanel {
 	/**
 	 * Establishes the color for missing values ({@code Double.NaN}).
 	 *
-	 * @param color the color for missing values.
+	 * @param color the color for missing values
 	 */
 	public void setNanColor(Color color) {
 		this.nanColor = color;
@@ -354,7 +379,7 @@ public class JHeatMap extends JPanel {
 	/**
 	 * Sets the decimal format.
 	 *
-	 * @param decimalFormat the decimal format.
+	 * @param decimalFormat the decimal format
 	 */
 	public void setDecimalFormat(DecimalFormat decimalFormat) {
 		this.decimalFormat = decimalFormat;
@@ -364,7 +389,7 @@ public class JHeatMap extends JPanel {
 	/**
 	 * Returns the data matrix.
 	 *
-	 * @return the data matrix.
+	 * @return the data matrix
 	 */
 	public double[][] getData() {
 		return data;
@@ -380,7 +405,7 @@ public class JHeatMap extends JPanel {
 		this.colorKey.setLowValue(min(data));
 		this.colorKey.setHighValue(max(data));
 		this.initializeColors();
-		SwingUtilities.invokeLater(() -> {
+		invokeLater(() -> {
 			this.heatmapTM.fireTableDataChanged();
 			this.fixCellSize();
 		});
@@ -486,10 +511,10 @@ public class JHeatMap extends JPanel {
 	/**
 	 * Sets the heat map font.
 	 *
-	 * @param font the heat map font.
+	 * @param font the heat map font
 	 */
 	public void setHeatmapFont(Font font) {
-		this.font = Optional.ofNullable(font);
+		this.font = ofNullable(font);
 		this.colorKey.setFont(font);
 		this.fixCellSize();
 		this.updateUI();
@@ -498,19 +523,19 @@ public class JHeatMap extends JPanel {
 	/**
 	 * Returns the heat map font.
 	 *
-	 * @return the heat map font.
+	 * @return the heat map font
 	 */
 	public Font getHeatmapFont() {
 		return this.font.orElse(super.getFont());
 	}
 
-
 	/**
 	 * Returns the low value of the heatmap.
-	 * @return the low value of the heatmap.
+	 *
+	 * @return the low value of the heatmap
 	 */
 	public double getLowValue() {
-		if (Double.isNaN(lowValue)) {
+		if (isNaN(lowValue)) {
 			return min(this.data);
 		} else {
 			return lowValue;
@@ -519,7 +544,8 @@ public class JHeatMap extends JPanel {
 
 	/**
 	 * Returns the high value of the heatmap.
-	 * @return the high value of the heatmap.
+	 *
+	 * @return the high value of the heatmap
 	 */
 	public double getHighValue() {
 		if (Double.isNaN(highValue)) {
@@ -531,7 +557,8 @@ public class JHeatMap extends JPanel {
 
 	/**
 	 * Sets the range of values used to draw the heatmap.
-	 * @param range a {@code DoubleRange}.
+	 *
+	 * @param range a {@code DoubleRange}
 	 */
 	public void setValuesRange(DoubleRange range) {
 		this.lowValue = range.getMin();
@@ -546,7 +573,7 @@ public class JHeatMap extends JPanel {
 	/**
 	 * Returns a list with the row names.
 	 *
-	 * @return a list with the row names.
+	 * @return a list with the row names
 	 */
 	public List<String> getRowNames() {
 		return new LinkedList<String>(asList(rowNames));
@@ -564,7 +591,7 @@ public class JHeatMap extends JPanel {
 	/**
 	 * Returns a list with the row names that are currently visible.
 	 *
-	 * @return a list with the row names that are currently visible.
+	 * @return a list with the row names that are currently visible
 	 */
 	public List<String> getVisibleRowNames() {
 		if (visibleRows.isPresent()) {
@@ -577,7 +604,7 @@ public class JHeatMap extends JPanel {
 	/**
 	 * Returns a list with the column names that are currently visible.
 	 *
-	 * @return a list with the column names that are currently visible.
+	 * @return a list with the column names that are currently visible
 	 */
 	public List<String> getVisibleColumnNames() {
 		if (visibleColumns.isPresent()) {
@@ -590,13 +617,13 @@ public class JHeatMap extends JPanel {
 	/**
 	 * Sets the visible row names.
 	 *
-	 * @param rowNames a {@code List} containing the visible row names.
+	 * @param rowNames a {@code List} containing the visible row names
 	 */
 	public void setVisibleRowNames(List<String> rowNames) {
 		if (rowNames != null && !rowNames.isEmpty()) {
-			this.visibleRows = Optional.of(rowNames);
+			this.visibleRows = of(rowNames);
 		} else {
-			this.visibleRows = Optional.empty();
+			this.visibleRows = empty();
 		}
 		updateVisibleRows();
 	}
@@ -608,13 +635,13 @@ public class JHeatMap extends JPanel {
 	/**
 	 * Sets the visible column names.
 	 *
-	 * @param columnNames a {@code List} containing the visible column names.
+	 * @param columnNames a {@code List} containing the visible column names
 	 */
 	public void setVisibleColumnNames(List<String> columnNames) {
 		if (columnNames != null && !columnNames.isEmpty()) {
-			this.visibleColumns = Optional.of(columnNames);
+			this.visibleColumns = of(columnNames);
 		} else {
-			this.visibleColumns = Optional.empty();
+			this.visibleColumns = empty();
 		}
 		updateVisibleColumns();
 	}

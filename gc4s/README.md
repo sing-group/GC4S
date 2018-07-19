@@ -29,7 +29,7 @@ Examples
 
 The following image shows `JHeatMap`, a component that shows a heatmap from a given double matrix. It allows zooming, changing gradient's colors and exporting the heatmap as image.
 
-![JHeatMap](screenshots/JHeatMap.gif)
+![JHeatMap](screenshots/JHeatMap.png)
 
 The following image shows `JFileChooserPanel`, a component with a button to select a file (using a `JFileChooser`) and a text field that show the selected file. You have full control of how the underlying `JFileChooser` since you have can set file filters or choose the dialog mode.
 

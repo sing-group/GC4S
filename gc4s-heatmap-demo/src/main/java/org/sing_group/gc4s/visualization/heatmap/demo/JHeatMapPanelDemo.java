@@ -2,7 +2,7 @@
  * #%L
  * GC4S demo
  * %%
- * Copyright (C) 2014 - 2018 Hugo López-Fernández, Daniel Glez-Peña, Miguel Reboiro-Jato, 
+ * Copyright (C) 2014 - 2018 Hugo López-Fernández, Daniel Glez-Peña, Miguel Reboiro-Jato,
  * 			Florentino Fdez-Riverola, Rosalía Laza-Fidalgo, Reyes Pavón-Rial
  * %%
  * This program is free software: you can redistribute it and/or modify
@@ -20,27 +20,27 @@
  * <http://www.gnu.org/licenses/lgpl-3.0.html>.
  * #L%
  */
-package org.sing_group.gc4s.demo;
+package org.sing_group.gc4s.visualization.heatmap.demo;
 
+import static java.lang.Double.NaN;
+import static java.util.stream.IntStream.range;
 import static org.sing_group.gc4s.visualization.VisualizationUtils.showComponent;
 
+import java.awt.Color;
 import java.util.Random;
-import java.util.stream.IntStream;
 
 import org.sing_group.gc4s.input.DoubleRange;
 import org.sing_group.gc4s.visualization.heatmap.JHeatMap;
 import org.sing_group.gc4s.visualization.heatmap.JHeatMapModel;
 import org.sing_group.gc4s.visualization.heatmap.JHeatMapPanel;
 
-/**
- * An example showing the use of {@link JHeatMap}.
- * 
- * @author hlfernandez
- *
- */
-public class JHeatMapDemo {
-	
+// An example showing the use of {@link JHeatMap} trough a
+// {@link JHeatMapPanel}, which adds additional functionalities to the basic
+// heatmap visualization.
+public class JHeatMapPanelDemo {
 	public static void main(String[] args) {
+		// Creation of the data needed to create the JHeatMap: the matrix data
+		// and two arrays with the names of the columns and rows.
 		final int size = 5;
 		final int missingValues = 1;
 
@@ -51,36 +51,40 @@ public class JHeatMapDemo {
 			}
 		}
 
-		// Repeated missing values are not controlled
+		// Addition of some missing values to the data matrix. Repeated missing
+		// values are not controlled.
 		Random random = new Random(size * missingValues);
 		for (int i = 0; i < missingValues; i++) {
-			data[random.nextInt(size)][random.nextInt(size)] = Double.NaN;
+			data[random.nextInt(size)][random.nextInt(size)] = NaN;
 		}
 
-		JHeatMap heatmap = new JHeatMap(
-			new JHeatMapModel(
-				data, 
-				generateRowNames(data), 
-				generateColumnNames(data)
-			)
+		// Creation of a JHeatMapModel with the data created before.
+		JHeatMapModel heatmapModel = new JHeatMapModel(
+			data,
+			generateLabels("Row ", data.length),
+			generateLabels("Column ", data[0].length)
 		);
 
+		// Creation of the JHeatMap using the JHeatMapModel created previously.
+		JHeatMap heatmap = new JHeatMap(heatmapModel);
+
+		// Configuration of the range of values that the heatmap should use to
+		// create the color gradient.
 		heatmap.setValuesRange(new DoubleRange(0d, size));
 
-		showComponent(new JHeatMapPanel(heatmap), "JHeatMap demo");
+		// Configuration of the colors associated with the lowest and highest
+		// values in the data matrix.
+		heatmap.setLowColor(Color.BLUE);
+		heatmap.setHighColor(Color.ORANGE);
+
+		// Finally, the heatmap panel is shown.
+		showComponent(new JHeatMapPanel(heatmap), "JHeatMapPanel demo");
 	}
-	
-	private static String[] generateRowNames(double[][] data) {
-		return IntStream.range(0, data.length)
+
+	private static final String[] generateLabels(String prefix, int length) {
+		return range(0, length)
 			.mapToObj(Integer::toString)
-			.map(s -> new String("R" + s))
-		.toArray(String[]::new);
-	}
-	
-	private static String[] generateColumnNames(double[][] data) {
-		return IntStream.range(0, data[0].length)
-			.mapToObj(Integer::toString)
-			.map(s -> new String("Column " + s))
+			.map(s -> new String(prefix + s))
 		.toArray(String[]::new);
 	}
 }

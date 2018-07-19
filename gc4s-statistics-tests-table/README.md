@@ -30,7 +30,7 @@ Add the following repository and dependency declarations to your `pom.xml`:
 
 A simple example
 -----------------
-The following code (available at `org.sing_group.org.gc4s.statistics.table.MinimalisticTableDemo`) shows the minimum code required to create a table and set some renderers and highlighters provided by the library.
+The following code (available at `org.sing_group.org.gc4s.statistics.table.MinimalTableDemo` of the demo module) shows the minimum code required to create a table and set some renderers and highlighters provided by the library.
 ```java
 import static org.sing_group.gc4s.visualization.VisualizationUtils.showComponent;
 import static org.sing_group.org.gc4s.statistics.data.tests.StatisticsTestsUtils.decideBooleanStatisticTest;
@@ -57,7 +57,7 @@ import org.sing_group.org.gc4s.statistics.table.ui.ConditionsSeparatorHighlighte
 import org.sing_group.org.gc4s.statistics.table.ui.StatisticsTestTableHeaderRenderer;
 import org.sing_group.org.gc4s.statistics.table.ui.YesNoTableCellRenderer;
 
-public class MinimalisticTableDemo {
+public class MinimalTableDemo {
 	public static void main(String[] args) {
 		String[] features = new String[] { "F1", "F2" };
 		String[] samples = new String[] { "S1", "S2", "S3", "S4" };
@@ -93,6 +93,4 @@ public class MinimalisticTableDemo {
 		showComponent(new JScrollPane(table), JFrame.MAXIMIZED_BOTH);
 	}
 }
-
-
 ```

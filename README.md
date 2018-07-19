@@ -15,12 +15,14 @@ GC4S modules
 This repository contains four GC4S modules:
 - `gc4s`: the main module containing the components library.
 - `gc4s-demo`: a module that contains examples of usage of the components in the `gc4s` module.
+- `gc4s-heatmap`: a module that depends on the `gc4s` module to provide an interactive heat map visualization component.
+- `gc4s-heatmap-demo`: a module that contains examples of the usage of heat map visualization component.
 - `gc4s-genomebrowser`: a module that depends on the `gc4s` module to provide an interactive genome browser.
 - `gc4s-genomebrowser-demo`: a module that contains an example of usage of the genome browser component.
-- `gc4s-multiple-sequence-alignment-viewer`: a module that depends on the `gc4s` module to provide a multiple sequence alignments viewer.
-- `gc4s-multiple-sequence-alignment-viewer-demo`: a module that contains an example of usage of the multiple sequence alignments viewer.
 - `gc4s-statistics-tests-table`: a module that depends on the `gc4s` module to provide a statistical tests table.
 - `gc4s-statistics-tests-table-demo`: a module that contains examples of usage of the statistical tests table components.
+- `gc4s-multiple-sequence-alignment-viewer`: a module that depends on the `gc4s` module to provide a multiple sequence alignments viewer.
+- `gc4s-multiple-sequence-alignment-viewer-demo`: a module that contains an example of usage of the multiple sequence alignments viewer.
 
 Using GC4S
 ----------
@@ -48,7 +50,7 @@ Examples
 
 The following image shows `JHeatMap`, a component that shows a heatmap from a given double matrix. It allows zooming, changing gradient's colors and exporting the heatmap as image.
 
-![JHeatMap](gc4s/screenshots/JHeatMap.gif)
+![JHeatMap](gc4s/screenshots/JHeatMap.png)
 
 The following image shows `JFileChooserPanel`, a component with a button to select a file (using a `JFileChooser`) and a text field that show the selected file. You have full control of how the underlying `JFileChooser` since you have can set file filters or choose the dialog mode.
 

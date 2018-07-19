@@ -16,12 +16,14 @@
 	<modules>
 		<module>gc4s</module>
 		<module>gc4s-demo</module>
+		<module>gc4s-heatmap</module>
+		<module>gc4s-heatmap-demo</module>
 		<module>gc4s-genomebrowser</module>
 		<module>gc4s-genomebrowser-demo</module>
-		<module>gc4s-multiple-sequence-alignment-viewer</module>
-		<module>gc4s-multiple-sequence-alignment-viewer-demo</module>
 		<module>gc4s-statistics-tests-table</module>
 		<module>gc4s-statistics-tests-table-demo</module>
+		<module>gc4s-multiple-sequence-alignment-viewer</module>
+		<module>gc4s-multiple-sequence-alignment-viewer-demo</module>
 	</modules>
 
 	<licenses>
@@ -85,6 +87,11 @@
 			<dependency>
 				<groupId>org.sing_group</groupId>
 				<artifactId>gc4s</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.sing_group</groupId>
+				<artifactId>gc4s-heatmap</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>

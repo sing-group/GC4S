@@ -22,14 +22,23 @@
  */
 package org.sing_group.gc4s.visualization.heatmap;
 
+import static java.awt.BorderLayout.CENTER;
+import static java.awt.BorderLayout.NORTH;
+import static java.util.Arrays.asList;
+import static java.util.Optional.empty;
+import static java.util.Optional.ofNullable;
+import static javax.swing.BorderFactory.createEmptyBorder;
+import static javax.swing.Box.createHorizontalGlue;
+import static javax.swing.Box.createHorizontalStrut;
+import static javax.swing.BoxLayout.X_AXIS;
 import static javax.swing.SwingUtilities.getWindowAncestor;
 import static org.sing_group.gc4s.ui.icons.Icons.ICON_COLUMN_16;
 import static org.sing_group.gc4s.ui.icons.Icons.ICON_EDIT_16;
 import static org.sing_group.gc4s.ui.icons.Icons.ICON_FONT_16;
 import static org.sing_group.gc4s.ui.icons.Icons.ICON_IMAGE_16;
+import static org.sing_group.gc4s.ui.icons.Icons.ICON_PAINT_16;
 import static org.sing_group.gc4s.ui.icons.Icons.ICON_RANGE_16;
 import static org.sing_group.gc4s.ui.icons.Icons.ICON_ROW_16;
-import static org.sing_group.gc4s.ui.icons.Icons.ICON_PAINT_16;
 import static org.sing_group.gc4s.visualization.heatmap.JHeatMapOperations.center;
 import static org.sing_group.gc4s.visualization.heatmap.JHeatMapOperations.transform;
 
@@ -41,12 +50,10 @@ import java.awt.Font;
 import java.awt.Window;
 import java.io.IOException;
 import java.io.InvalidClassException;
-import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
-import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -95,7 +102,7 @@ public class JHeatMapPanel extends JPanel {
 	private JComboBox<Color> highColorCB;
 
 	private JHeatMap heatmap;
-	private Optional<Font> heatmapFont = Optional.empty();
+	private Optional<Font> heatmapFont = empty();
 
 	/**
 	 * Constructs a new {@code JHeatMapPanel} wrapping {@code heatmap}.
@@ -115,44 +122,53 @@ public class JHeatMapPanel extends JPanel {
 		ToolTipManager.sharedInstance().setLightWeightPopupEnabled(false);
 
 		JPanel toolbar = new JPanel();
-		toolbar.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
-		BoxLayout layout = new BoxLayout(toolbar, BoxLayout.X_AXIS);
+		toolbar.setBorder(createEmptyBorder(2, 2, 2, 2));
+		BoxLayout layout = new BoxLayout(toolbar, X_AXIS);
 		toolbar.setLayout(layout);
 
 		toolbar.add(getMenu());
 
+		this.checkInitialColors();
+
 		lowColorCB = new JComboBox<Color>(colors);
 		lowColorCB.setRenderer(new ColorListCellRenderer());
 		fixComboSize(lowColorCB);
-		lowColorCB.setSelectedItem(Color.GREEN);
+		lowColorCB.setSelectedItem(this.heatmap.getLowColor());
 		lowColorCB.addItemListener(e -> {
-			heatmap.setLowColor(
-				((Color)lowColorCB.getSelectedItem())
-			);
+			heatmap.setLowColor(((Color) lowColorCB.getSelectedItem()));
 		});
 
-		toolbar.add(Box.createHorizontalGlue());
+		toolbar.add(createHorizontalGlue());
 		toolbar.add(new JLabel("Low: "));
 		toolbar.add(lowColorCB);
 
 		highColorCB = new JComboBox<Color>(colors);
 		fixComboSize(highColorCB);
 		highColorCB.setRenderer(new ColorListCellRenderer());
-		highColorCB.setSelectedItem(Color.RED);
+		highColorCB.setSelectedItem(this.heatmap.getHighColor());
 		highColorCB.addItemListener(e -> {
-			heatmap.setHighColor(
-				((Color)highColorCB.getSelectedItem())
-			);
+			heatmap.setHighColor(((Color) highColorCB.getSelectedItem()));
 		});
 
-		toolbar.add(Box.createHorizontalStrut(10));
+		toolbar.add(createHorizontalStrut(10));
 		toolbar.add(new JLabel("High: "));
 		toolbar.add(highColorCB);
 
-		toolbar.add(Box.createHorizontalStrut(10));
+		toolbar.add(createHorizontalStrut(10));
 
-		this.add(toolbar, BorderLayout.NORTH);
-		this.add(heatmap, BorderLayout.CENTER);
+		this.add(toolbar, NORTH);
+		this.add(heatmap, CENTER);
+	}
+
+	private void checkInitialColors() {
+		List<Color> colorsList = new LinkedList<>(asList(this.colors));
+		if (!colorsList.contains(this.heatmap.getLowColor())) {
+			colorsList.add(this.heatmap.getLowColor());
+		}
+		if (!colorsList.contains(this.heatmap.getHighColor())) {
+			colorsList.add(this.heatmap.getHighColor());
+		}
+		this.colors = colorsList.toArray(new Color[colorsList.size()]);
 	}
 
 	private Component getMenu() {
@@ -297,14 +313,14 @@ public class JHeatMapPanel extends JPanel {
 	}
 
 	private void setHeatmapFont(Font font) {
-		this.heatmapFont = Optional.ofNullable(font);
+		this.heatmapFont = ofNullable(font);
 		this.heatmap.setHeatmapFont(getHeatmapFont());
 	}
 
 	protected void editColors() {
 		ColorsSelectionDialog dialog = new ColorsSelectionDialog(
 			getDialogParent(), 2, Integer.MAX_VALUE,
-			Arrays.asList(this.colors)
+			asList(this.colors)
 		);
 
 		dialog.setVisible(true);
@@ -346,7 +362,7 @@ public class JHeatMapPanel extends JPanel {
 	/**
 	 * Returns the heat map font.
 	 *
-	 * @return the heat map font.
+	 * @return the heat map font
 	 */
 	public Font getHeatmapFont() {
 		return this.heatmapFont.orElse(this.getFont());

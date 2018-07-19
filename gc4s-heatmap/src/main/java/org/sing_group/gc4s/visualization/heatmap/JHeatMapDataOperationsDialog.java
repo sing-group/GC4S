@@ -2,7 +2,7 @@
  * #%L
  * GC4S components
  * %%
- * Copyright (C) 2014 - 2018 Hugo López-Fernández, Daniel Glez-Peña, Miguel Reboiro-Jato, 
+ * Copyright (C) 2014 - 2018 Hugo López-Fernández, Daniel Glez-Peña, Miguel Reboiro-Jato,
  * 			Florentino Fdez-Riverola, Rosalía Laza-Fidalgo, Reyes Pavón-Rial
  * %%
  * This program is free software: you can redistribute it and/or modify
@@ -39,17 +39,17 @@ import org.sing_group.gc4s.visualization.heatmap.JHeatMapOperations.Transform;
 /**
  * An input dialog that shows the different operations that can be applied to a
  * heat map.
- * 
+ *
  * @author hlfernandez
  *
  */
 public class JHeatMapDataOperationsDialog extends AbstractInputJDialog {
 	private static final long serialVersionUID = 1L;
 
-	private static final String DESCRIPTION = 
+	private static final String DESCRIPTION =
 		"This dialog allows you to apply different operations to the current "
 		+ "data matrix. Operations are performed in the order they appear.";
-	
+
 	private JPanel inputComponents;
 	private JComboBox<Centering> centerMethod;
 	private JComboBox<Transform> transformMethod;
@@ -57,7 +57,7 @@ public class JHeatMapDataOperationsDialog extends AbstractInputJDialog {
 	protected JHeatMapDataOperationsDialog(Window parent) {
 		super(parent);
 	}
-	
+
 	@Override
 	protected String getDialogTitle() {
 		return "Operations dialog";
@@ -70,7 +70,7 @@ public class JHeatMapDataOperationsDialog extends AbstractInputJDialog {
 
 	@Override
 	protected JPanel getInputComponentsPane() {
-		if(this.inputComponents == null) {
+		if (this.inputComponents == null) {
 			this.inputComponents = new InputParametersPanel(getParameters());
 		}
 		return this.inputComponents;
@@ -80,18 +80,19 @@ public class JHeatMapDataOperationsDialog extends AbstractInputJDialog {
 		List<InputParameter> toret = new LinkedList<>();
 		toret.add(getLogTransformationParameter());
 		toret.add(getCenteringParameter());
+
 		return toret.toArray(new InputParameter[toret.size()]);
 	}
-	
+
 	private InputParameter getLogTransformationParameter() {
 		return 	new InputParameter(
-				"Transform", getTransformationComponent(), 
+				"Transform", getTransformationComponent(),
 				"The transformation method. It is applied to each "
 				+ "individual value of the data matrix.");
 	}
 
 	private JComponent getTransformationComponent() {
-		this.transformMethod = 
+		this.transformMethod =
 			new JComboBox<>(Transform.values());
 		return transformMethod;
 	}
@@ -102,20 +103,20 @@ public class JHeatMapDataOperationsDialog extends AbstractInputJDialog {
 
 	private InputParameter getCenteringParameter() {
 		return 	new InputParameter(
-				"Row centering", getCenteringComponent(), 
+				"Row centering", getCenteringComponent(),
 				"The row centering method.");
 	}
 
 	private JComponent getCenteringComponent() {
-		this.centerMethod = 
-			new JComboBox<>(Centering.values());
+		this.centerMethod = new JComboBox<>(Centering.values());
+
 		return centerMethod;
 	}
 
 	public Centering getCentering() {
 		return (Centering) this.centerMethod.getSelectedItem();
 	}
-	
+
 	@Override
 	public void setVisible(boolean b) {
 		this.okButton.setEnabled(true);
