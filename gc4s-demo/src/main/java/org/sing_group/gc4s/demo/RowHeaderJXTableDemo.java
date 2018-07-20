@@ -59,6 +59,6 @@ public class RowHeaderJXTableDemo {
 		table.setColumnControlVisible(true);
 		table.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
 		
-		showComponent(new JScrollPane(table), "RowHeaderJXTableDemo demo dialog");
+		showComponent(new JScrollPane(table), "RowHeaderJXTable demo");
 	}
 }

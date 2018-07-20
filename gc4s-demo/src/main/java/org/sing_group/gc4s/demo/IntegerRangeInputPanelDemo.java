@@ -22,8 +22,9 @@
  */
 package org.sing_group.gc4s.demo;
 
+import static org.sing_group.gc4s.visualization.VisualizationUtils.showComponent;
+
 import org.sing_group.gc4s.input.text.IntegerRangeInputPanel;
-import org.sing_group.gc4s.visualization.VisualizationUtils;
 
 /**
  * An example showing the use of {@link IntegerRangeInputPanel}.
@@ -32,7 +33,6 @@ import org.sing_group.gc4s.visualization.VisualizationUtils;
  *
  */
 public class IntegerRangeInputPanelDemo {
-
 	public static void main(String[] args) {
 		IntegerRangeInputPanel rangeInputPanel = 
 				new IntegerRangeInputPanel(0, 10);
@@ -42,7 +42,7 @@ public class IntegerRangeInputPanelDemo {
 				+ rangeInputPanel.getMinValue() + ", "
 				+ rangeInputPanel.getMaxValue() + "]");
 		});
-		
-		VisualizationUtils.showComponent(rangeInputPanel);
+
+		showComponent(rangeInputPanel, "IntegerRangeInputPanel demo");
 	}
 }

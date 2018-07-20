@@ -22,12 +22,14 @@
  */
 package org.sing_group.gc4s.demo;
 
+import static org.sing_group.gc4s.visualization.VisualizationUtils.createPanelAndCenterComponent;
+import static org.sing_group.gc4s.visualization.VisualizationUtils.showComponent;
+
 import java.awt.Dimension;
 
 import javax.swing.JPanel;
 
 import org.sing_group.gc4s.input.combobox.ExtendedJComboBox;
-import org.sing_group.gc4s.visualization.VisualizationUtils;
 
 /**
  * An example showing the use of {@link ExtendedJComboBox}.
@@ -42,12 +44,12 @@ public class ExtendedJComboBoxDemo {
         	"Item 1: this item needs more width to be visible",
             "Item 2: this item also needs more width to be visible", 
         };
-        ExtendedJComboBox<String> combobox = new ExtendedJComboBox<String>(items);
+        ExtendedJComboBox<String> combobox = 
+        	new ExtendedJComboBox<String>(items);
         combobox.setPreferredSize(new Dimension(180, 20));
         combobox.setAutoAdjustWidth(true);
         
-        JPanel demoPanel = VisualizationUtils.createPanelAndCenterComponent(combobox);
-        
-        VisualizationUtils.showComponent(demoPanel, "Extended JComboBox demo");
+		JPanel demoPanel = createPanelAndCenterComponent(combobox);
+		showComponent(demoPanel, "ExtendedJComboBox demo");
 	}
 }

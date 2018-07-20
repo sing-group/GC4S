@@ -36,7 +36,6 @@ import org.sing_group.gc4s.input.ItemSelectionDialog;
  *
  */
 public class ItemSelectionDialogDemo {
-
 	public static void main(String[] args)  {
 		showDialog(
 			new ItemSelectionDialog<>(new JFrame(), asList("A", "B", "C"), 2)

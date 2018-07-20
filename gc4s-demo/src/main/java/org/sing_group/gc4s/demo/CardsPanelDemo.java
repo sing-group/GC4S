@@ -39,16 +39,16 @@ import org.sing_group.gc4s.ui.CenteredJPanel;
  *
  */
 public class CardsPanelDemo {
-
 	public static void main(String[] args) {
-		showComponent(
-			getCardsPanel(), "GroupLayoutPanel demo");
+		showComponent(getCardsPanel(), "CardsPanel demo");
 	}
 
 	private static Component getCardsPanel() {
 		return CardsPanelBuilder.newBuilder()
-			.withCard("Card 1", new CenteredJPanel(new JLabel("Card 1 component")))
-			.withCard("Card 2", new CenteredJPanel(new JLabel("Card 2 component")))
+			.withCard("Card 1",
+				new CenteredJPanel(new JLabel("Card 1 component")))
+			.withCard("Card 2",
+				new CenteredJPanel(new JLabel("Card 2 component")))
 			.build();
 	}
 }

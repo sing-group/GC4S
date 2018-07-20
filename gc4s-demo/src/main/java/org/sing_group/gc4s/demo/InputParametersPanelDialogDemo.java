@@ -22,6 +22,8 @@
  */
 package org.sing_group.gc4s.demo;
 
+import static org.sing_group.gc4s.visualization.VisualizationUtils.showDialog;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -77,6 +79,6 @@ public class InputParametersPanelDialogDemo {
 		}
 
 		InputJDialog dialog = new InputJDialog(new JFrame());
-		dialog.setVisible(true);
+		showDialog(dialog);
 	}
 }

@@ -22,9 +22,10 @@
  */
 package org.sing_group.gc4s.demo;
 
+import static org.sing_group.gc4s.input.filechooser.Mode.SAVE;
+import static org.sing_group.gc4s.visualization.VisualizationUtils.showComponent;
+
 import org.sing_group.gc4s.input.filechooser.JFileChooserPanel;
-import org.sing_group.gc4s.input.filechooser.Mode;
-import org.sing_group.gc4s.visualization.VisualizationUtils;
 
 /**
  * An example showing the use of {@link JFileChooserPanel}.
@@ -34,8 +35,7 @@ import org.sing_group.gc4s.visualization.VisualizationUtils;
  */
 public class JFileChooserPanelDemo {
 	public static void main(String[] args) {
-		JFileChooserPanel fileChooserPanel =
-			new JFileChooserPanel(Mode.SAVE, "csv");
+		JFileChooserPanel fileChooserPanel = new JFileChooserPanel(SAVE, "csv");
 
 		/**
 		 * Uncomment the following line to hide the label.
@@ -44,6 +44,6 @@ public class JFileChooserPanelDemo {
 		 * fileChooserPanel.getComponentLabelFile().setVisible(false);
 		 */
 
-		VisualizationUtils.showComponent(fileChooserPanel);
+		showComponent(fileChooserPanel, "JFileChooserPanel demo");
 	}
 }

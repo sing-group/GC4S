@@ -22,15 +22,16 @@
  */
 package org.sing_group.gc4s.demo;
 
+import static java.util.Arrays.asList;
+import static org.sing_group.gc4s.visualization.VisualizationUtils.showComponent;
+
 import java.io.InvalidClassException;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.JList;
 
 import org.sing_group.gc4s.input.list.ExtendedDefaultListModel;
 import org.sing_group.gc4s.input.list.JListPanel;
-import org.sing_group.gc4s.visualization.VisualizationUtils;
 
 /**
  * An example showing the use of {@link ExtendedDefaultListModel} and
@@ -40,18 +41,17 @@ import org.sing_group.gc4s.visualization.VisualizationUtils;
  *
  */
 public class JListPanelDemo {
-
 	public static void main(String[] args) throws InvalidClassException {
-		List<String> data = Arrays.asList(new String[] { "a", "b", "c", "d",
-				"e" });
+		List<String> data = asList(new String[] { "a", "b", "c", "d", "e" });
 
-		ExtendedDefaultListModel<String> listModel = new ExtendedDefaultListModel<String>();
+		ExtendedDefaultListModel<String> listModel = 
+			new ExtendedDefaultListModel<String>();
 		listModel.addElements(data);
 
 		JList<String> list = new JList<String>(listModel);
 
 		JListPanel<String> listPanel = new JListPanel<String>(list);
 
-		VisualizationUtils.showComponent(listPanel);
+		showComponent(listPanel, "JListPanel demo");
 	}
 }

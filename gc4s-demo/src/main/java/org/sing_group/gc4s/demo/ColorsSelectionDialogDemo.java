@@ -22,6 +22,8 @@
  */
 package org.sing_group.gc4s.demo;
 
+import static java.awt.Color.BLUE;
+import static java.awt.Color.RED;
 import static org.sing_group.gc4s.visualization.VisualizationUtils.showDialog;
 
 import java.awt.Color;
@@ -39,7 +41,7 @@ import org.sing_group.gc4s.dialog.ColorsSelectionDialog;
  *
  */
 public class ColorsSelectionDialogDemo {
-	private static List<Color> COLORS = Arrays.asList(Color.RED, Color.BLUE);
+	private static final List<Color> COLORS = Arrays.asList(RED, BLUE);
 
 	public static void main(String[] args) {
 		showDialog(new ColorsSelectionDialog(new JFrame(), 1, 2, COLORS));

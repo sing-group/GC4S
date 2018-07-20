@@ -46,6 +46,7 @@ public class DoubleRangeSpinnerInputPanelDemo {
 			});
 		panel.setStartLabel("Minimum value:");
 		panel.setEndLabel("Maximum value:");
-		showComponent(panel, "Double range spinner input panel demo");
+
+		showComponent(panel, "DoubleRangeSpinnerInputPanel demo");
 	}
 }

@@ -22,6 +22,11 @@
  */
 package org.sing_group.gc4s.demo;
 
+import static java.awt.BorderLayout.CENTER;
+import static java.awt.BorderLayout.NORTH;
+import static org.sing_group.gc4s.visualization.VisualizationUtils.createPanelAndCenterComponent;
+import static org.sing_group.gc4s.visualization.VisualizationUtils.showComponent;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -35,7 +40,6 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import org.sing_group.gc4s.ui.tabbedpane.ExtendedJTabbedPane;
-import org.sing_group.gc4s.visualization.VisualizationUtils;
 
 /**
  * An example showing the use of {@link ExtendedJTabbedPane}.
@@ -47,7 +51,8 @@ public class ExtendedJTabbedPaneDemo {
 	public static void main(String[] args) {
 		ExtendedJTabbedPane tabbedPane = new ExtendedJTabbedPane();
 		tabbedPane.setHideTabBarWhenSingleTab(true);
-		tabbedPane.addTab("Tab 1", VisualizationUtils.createPanelAndCenterComponent(new JLabel("Tab 1")));
+		tabbedPane.addTab("Tab 1",
+			createPanelAndCenterComponent(new JLabel("Tab 1")));
 		tabbedPane.setPreferredSize(new Dimension(300,200));
 
 		final JButton addTab = new JButton(new AbstractAction("Add tab") {
@@ -55,34 +60,36 @@ public class ExtendedJTabbedPaneDemo {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String tabName = "Tab " + String.valueOf(tabbedPane.getTabCount()+1);
-				tabbedPane.addTab(tabName, VisualizationUtils.createPanelAndCenterComponent(new JLabel(tabName)));
+				String tabName = "Tab "
+					+ String.valueOf(tabbedPane.getTabCount() + 1);
+				tabbedPane.addTab(tabName,
+					createPanelAndCenterComponent(new JLabel(tabName)));
 			}
 		});
-		final JButton removeLastTab = new JButton(new AbstractAction("Remove last tab") {
-			private static final long serialVersionUID = 1L;
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				tabbedPane.removeTabAt(tabbedPane.getTabCount()-1);
-			}
-		});
+		final JButton removeLastTab = new JButton(
+			new AbstractAction("Remove last tab") {
+				private static final long serialVersionUID = 1L;
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					tabbedPane.removeTabAt(tabbedPane.getTabCount() - 1);
+				}
+			});
 		tabbedPane.addChangeListener(new ChangeListener() {
-			
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				removeLastTab.setEnabled(tabbedPane.getTabCount() > 0);
 			}
 		});
-		
+
 		JPanel demoPanel = new JPanel(new BorderLayout());
 		JToolBar toolbar = new JToolBar(JToolBar.HORIZONTAL);
 		toolbar.add(addTab);
 		toolbar.add(removeLastTab);
-		demoPanel.add(toolbar, BorderLayout.NORTH);
-		demoPanel.add(tabbedPane, BorderLayout.CENTER);
-		
-		demoPanel.setPreferredSize(new Dimension(300,200));
-		VisualizationUtils.showComponent(demoPanel, "ExtendedJTabbedPane demo");
+		demoPanel.add(toolbar, NORTH);
+		demoPanel.add(tabbedPane, CENTER);
+
+		demoPanel.setPreferredSize(new Dimension(300, 200));
+		showComponent(demoPanel, "ExtendedJTabbedPane demo");
 	}
 }

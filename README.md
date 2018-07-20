@@ -4,13 +4,13 @@ GC4S [![Build Status](https://travis-ci.org/sing-group/GC4S.svg?branch=master)](
 GC4S is an open-source library that provides a bioinformatics-oriented collection of GUI Components for (Java) Swing.
 
 Projects using GC4S
--------------------
+--------------------------
 - [S2P](http://sing-group.org/s2p/): an open-source application for processing of 2D-gel and MALDI-based mass spectrometry protein data.
 - [DEWE](http://sing-group.org/dewe/): an open-source application for executing differential expression analysis in RNA-Seq data.
 - [SEDA](http://sing-group.org/seda/): an open-source application for processing FASTA files containing DNA and protein sequences.
 
 GC4S modules
-------------
+-------------------
 
 This repository contains the following `GC4S` modules:
 - `gc4s`: the main module containing the components library.
@@ -23,7 +23,7 @@ This repository contains the following `GC4S` modules:
 Additionally, there is a `*-demo` module for each one of them containing examples of the usage of the components included in them.
 
 Using GC4S
-----------
+---------------
 Add the following repository and dependency declarations to your `pom.xml` in order to use the `gc4s` module:
 ```xml
 	<repositories>
@@ -43,8 +43,8 @@ Add the following repository and dependency declarations to your `pom.xml` in or
 	</dependencies>
 ```
 
-Examples
---------
+Examples of GUI Components
+--------------------------------------
 
 The following image shows `JHeatMap`, a component that shows a heatmap from a given double matrix. It allows zooming, changing gradient's colors and exporting the heatmap as image.
 
@@ -54,4 +54,4 @@ The following image shows `JFileChooserPanel`, a component with a button to sele
 
 ![JFileChooserPanel](gc4s/screenshots/JFileChooserPanel.png)
 
-These are just two examples of GC4S components. To see more, please, see the [examples](gc4s/EXAMPLES.md) section.
+These are just two examples of GC4S components. To see more, please, see the [gallery](gc4s/GALLERY.md) section.

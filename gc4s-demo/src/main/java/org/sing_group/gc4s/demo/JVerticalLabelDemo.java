@@ -38,6 +38,9 @@ public class JVerticalLabelDemo {
 	public static void main(String[] args) {
 		JLabel verticalLabel = new JLabel("A vertical label");
 		verticalLabel.setUI(new VerticalLabelUI(false));
-		showComponent(createPanelAndCenterComponent(verticalLabel));
+		showComponent(
+			createPanelAndCenterComponent(verticalLabel),
+			"JVerticalLabel demo"
+		);
 	}
 }

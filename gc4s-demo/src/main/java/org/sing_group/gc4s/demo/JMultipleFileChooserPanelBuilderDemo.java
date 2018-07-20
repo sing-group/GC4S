@@ -73,6 +73,6 @@ public class JMultipleFileChooserPanelBuilderDemo {
 				}
 			});
 			
-		showComponent(fileChooserPanel);
+		showComponent(fileChooserPanel, "JMultipleFileChooserPanelBuilder demo");
 	}
 }

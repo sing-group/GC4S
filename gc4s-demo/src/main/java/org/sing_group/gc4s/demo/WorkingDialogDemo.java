@@ -34,16 +34,11 @@ import org.sing_group.gc4s.dialog.WorkingDialog;
  */
 public class WorkingDialogDemo {
 	public static void main(String[] args) throws InterruptedException {
-		WorkingDialog dialog = new WorkingDialog(new JFrame(),
-			"WorkingDialog demo", "Doing something...");
+		WorkingDialog dialog = new WorkingDialog(
+			new JFrame(), "WorkingDialog demo", "Doing something...");
 		dialog.setVisible(true);
-		sleep(2000);
+		Thread.sleep(12000);
 		dialog.finished("Finished!");
-		sleep(2000);
-	}
-	
-	private static final void sleep(int milis) throws InterruptedException {
-		Thread.currentThread();
-		Thread.sleep(milis);
+		Thread.sleep(2000);
 	}
 }

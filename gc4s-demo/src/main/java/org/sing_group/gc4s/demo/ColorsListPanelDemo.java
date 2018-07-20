@@ -22,6 +22,8 @@
  */
 package org.sing_group.gc4s.demo;
 
+import static org.sing_group.gc4s.visualization.VisualizationUtils.showComponent;
+
 import java.awt.Color;
 import java.io.InvalidClassException;
 import java.util.Arrays;
@@ -31,7 +33,6 @@ import javax.swing.event.ListDataEvent;
 
 import org.sing_group.gc4s.event.ListDataAdapter;
 import org.sing_group.gc4s.input.list.ColorsListPanel;
-import org.sing_group.gc4s.visualization.VisualizationUtils;
 
 /**
  * An example showing the use of {@link ColorsListPanel}.
@@ -62,6 +63,7 @@ public class ColorsListPanelDemo {
 					+ colorsListPanel.getSelectedColors());
 			}
 		});
-		VisualizationUtils.showComponent(colorsListPanel);
+
+		showComponent(colorsListPanel, "ColorsListPanel demo");
 	}
 }

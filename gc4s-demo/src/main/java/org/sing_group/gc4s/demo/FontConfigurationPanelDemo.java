@@ -36,7 +36,6 @@ import org.sing_group.gc4s.input.FontConfigurationPanel;
  *
  */
 public class FontConfigurationPanelDemo {
-
 	public static void main(String[] args) {
 		FontConfigurationPanel fontConfigurationPanel = new FontConfigurationPanel();
 		fontConfigurationPanel.addPropertyChangeListener(

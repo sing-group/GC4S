@@ -22,15 +22,16 @@
  */
 package org.sing_group.gc4s.demo;
 
+import static javax.swing.BorderFactory.createEmptyBorder;
+import static org.sing_group.gc4s.input.filechooser.Mode.OPEN;
+
 import java.awt.GridLayout;
 
-import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import org.sing_group.gc4s.dialog.AbstractInputJDialog;
 import org.sing_group.gc4s.input.filechooser.JFileChooserPanel;
-import org.sing_group.gc4s.input.filechooser.Mode;
 
 /**
  * An example showing the use of {@link AbstractInputJDialog}.
@@ -58,8 +59,9 @@ public class AbstractInputJDialogDemo {
 			protected JPanel getInputComponentsPane() {
 				JPanel toret = new JPanel();
 				toret.setLayout(new GridLayout(0, 1));
-				toret.add(new JFileChooserPanel(Mode.OPEN, "Select a file:"));
-				toret.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+				toret.add(new JFileChooserPanel(OPEN, "Select a file:"));
+				toret.setBorder(createEmptyBorder(10, 10, 10, 10));
+
 				return toret;
 			}
 		}

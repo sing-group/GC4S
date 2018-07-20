@@ -23,6 +23,7 @@
 package org.sing_group.gc4s.demo;
 
 import static java.util.Arrays.asList;
+import static org.sing_group.gc4s.visualization.VisualizationUtils.showComponent;
 
 import java.io.InvalidClassException;
 import java.util.List;
@@ -31,7 +32,6 @@ import javax.swing.JList;
 
 import org.sing_group.gc4s.input.list.ExtendedDefaultListModel;
 import org.sing_group.gc4s.input.list.JParallelListsPanel;
-import org.sing_group.gc4s.visualization.VisualizationUtils;
 
 /**
  * An example showing the use of {@link JParallelListsPanel}.
@@ -45,7 +45,7 @@ public class JParallelListsPanelDemo {
 		JParallelListsPanel<String> parallelLists = new JParallelListsPanel<>(
 			createLeftList(), createRightList(), "Left", "Right", true, false);
 
-		VisualizationUtils.showComponent(parallelLists);
+		showComponent(parallelLists, "JParallelListsPanel demo");
 	}
 
 	private static JList<String> createLeftList() {

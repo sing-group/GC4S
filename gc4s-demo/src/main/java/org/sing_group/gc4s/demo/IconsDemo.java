@@ -33,7 +33,6 @@ import org.sing_group.gc4s.ui.icons.IconsPanel;
  *
  */
 public class IconsDemo {
-
 	public static void main(String[] args) {
 		showComponent(new IconsPanel(), "GC4S icons");
 	}

@@ -22,6 +22,8 @@
  */
 package org.sing_group.gc4s.demo;
 
+import static org.sing_group.gc4s.visualization.VisualizationUtils.showDialog;
+
 import java.awt.event.ItemEvent;
 import java.util.Arrays;
 import java.util.List;
@@ -35,7 +37,6 @@ import org.sing_group.gc4s.dialog.wizard.Wizard;
 import org.sing_group.gc4s.dialog.wizard.WizardStep;
 import org.sing_group.gc4s.dialog.wizard.event.WizardStepEvent;
 import org.sing_group.gc4s.ui.CenteredJPanel;
-import org.sing_group.gc4s.visualization.VisualizationUtils;
 
 /**
  * An example showing the use of {@link Wizard} and {@link WizardStep}.
@@ -55,7 +56,7 @@ public class WizardDemo {
 					super.wizardFinished();
 				}
 			};
-		VisualizationUtils.showDialog(dialog);
+		showDialog(dialog);
 	}
 
 	private static List<WizardStep> getWizardSteps() {

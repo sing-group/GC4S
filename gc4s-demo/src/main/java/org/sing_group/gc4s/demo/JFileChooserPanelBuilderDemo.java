@@ -49,7 +49,8 @@ public class JFileChooserPanelBuilderDemo {
 				.withAllowAllFilter(true)
 			.build(); 
 		fileChooserPanel.addFileChooserListener(e -> {
-			System.err.println("File selected changed: " + fileChooserPanel.getSelectedFile());
+			System.err.println(
+				"File selected changed: " + fileChooserPanel.getSelectedFile());
 		});
 		showComponent(fileChooserPanel);
 	}

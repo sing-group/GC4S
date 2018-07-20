@@ -22,9 +22,10 @@
  */
 package org.sing_group.gc4s.demo;
 
+import static org.sing_group.gc4s.visualization.VisualizationUtils.showComponent;
+
 import javax.swing.JScrollPane;
 
-import org.sing_group.gc4s.visualization.VisualizationUtils;
 import org.sing_group.gc4s.visualization.table.ExtendedJXTable;
 import org.sing_group.gc4s.visualization.table.csv.CsvTable;
 
@@ -38,19 +39,18 @@ public class CsvTableDemo {
 	private static final String columnNames[] =
 		{ "Column 1", "Column 2", "Column 3" };
 
-	private static final String dataValues[][] =
-			{
-				{ "12", "234", "67" },
-				{ "-123", "43", "853" },
-				{ "93", "89.2", "109" },
-				{ "279", "9033", "3092" }
-			};
+	private static final String dataValues[][] = { 
+		{ "12", "234", "67" },
+		{ "-123", "43", "853" }, 
+		{ "93", "89.2", "109" },
+		{ "279", "9033", "3092" } 
+	};
 
 	public static void main(String[] args) {
 		java.util.Locale.setDefault(java.util.Locale.ENGLISH);
 
 		CsvTable table = new CsvTable(dataValues, columnNames);
 
-		VisualizationUtils.showComponent(new JScrollPane(table), "CsvTable demo dialog");
+		showComponent(new JScrollPane(table), "CsvTable demo");
 	}
 }

@@ -61,15 +61,15 @@ public class JFileChooserPanelSharedLastFileFilterDemo {
 		panel.add(fileChooserPanel1);
 		panel.add(fileChooserPanel2);
 
-		showComponent(panel);
+		showComponent(panel, "JFileChooserPanel demo");
 	}
 
 	private static JFileChooserPanel createJFileChooserPanel() {
 		return JFileChooserPanelBuilder
-			.createOpenJFileChooserPanel()
-			.withFileChooserSelectionMode(SelectionMode.FILES)
-			.withFileFilters(FILTERS)
-			.withAllowAllFilter(true)
-		.build();
+					.createOpenJFileChooserPanel()
+					.withFileChooserSelectionMode(SelectionMode.FILES)
+					.withFileFilters(FILTERS)
+					.withAllowAllFilter(true)
+				.build();
 	}
 }

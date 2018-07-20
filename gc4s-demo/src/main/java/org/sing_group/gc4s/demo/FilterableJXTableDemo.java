@@ -22,6 +22,12 @@
  */
 package org.sing_group.gc4s.demo;
 
+import static java.awt.BorderLayout.CENTER;
+import static java.awt.BorderLayout.EAST;
+import static java.awt.BorderLayout.NORTH;
+import static java.awt.BorderLayout.WEST;
+import static org.sing_group.gc4s.visualization.VisualizationUtils.showComponent;
+
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.util.Arrays;
@@ -35,7 +41,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
-import org.sing_group.gc4s.visualization.VisualizationUtils;
 import org.sing_group.gc4s.visualization.table.FilterableJXTable;
 
 /**
@@ -48,17 +53,16 @@ public class FilterableJXTableDemo {
 	private static final String columnNames[] = 
 		{"#", "Column 1", "Column 2", "Column 3" };
 
-	private static final String dataValues[][] =
-			{
-				{ "1", "12", "234", "67" },
-				{ "2", "-123", "43", "853" },
-				{ "3", "93", "89.3", "119" },
-				{ "4", "94", "89.4", "139" },
-				{ "5", "95", "89.5", "129" },
-				{ "6", "96", "89.6", "119" },
-				{ "7", "279", "9033", "3092" }
-			};
-	
+	private static final String dataValues[][] = { 
+		{ "1", "12", "234", "67" },
+		{ "2", "-123", "43", "853" }, 
+		{ "3", "93", "89.3", "119" },
+		{ "4", "94", "89.4", "139" }, 
+		{ "5", "95", "89.5", "129" },
+		{ "6", "96", "89.6", "119" }, 
+		{ "7", "279", "9033", "3092" } 
+	};
+
 	public static void main(String[] args) {
 		java.util.Locale.setDefault(java.util.Locale.ENGLISH);
 		
@@ -66,7 +70,7 @@ public class FilterableJXTableDemo {
 		table.setColumnControlVisible(true);
 		table.setColumVisibilityActionsEnabled(false);
 		
-		VisualizationUtils.showComponent(createDemoPanel(table), "FilterableJXTable demo dialog");
+		showComponent(createDemoPanel(table), "FilterableJXTable demo");
 	}
 
 	private static JPanel createDemoPanel(FilterableJXTable table) {
@@ -96,17 +100,18 @@ public class FilterableJXTableDemo {
 				table.setAllRowsVisible();
 			}
 		});
-		
+
 		JPanel buttonsPanel = new JPanel(new BorderLayout());
-		buttonsPanel.add(applyFilter, BorderLayout.WEST);
-		buttonsPanel.add(Box.createHorizontalStrut(5), BorderLayout.CENTER);
-		buttonsPanel.add(removeFilter, BorderLayout.EAST);
-		
-		controlPanel.add(filter, BorderLayout.CENTER);
-		controlPanel.add(buttonsPanel, BorderLayout.EAST);
-		
-		panel.add(controlPanel, BorderLayout.NORTH);
-		panel.add(new JScrollPane(table), BorderLayout.CENTER);
+		buttonsPanel.add(applyFilter, WEST);
+		buttonsPanel.add(Box.createHorizontalStrut(5), CENTER);
+		buttonsPanel.add(removeFilter, EAST);
+
+		controlPanel.add(filter, CENTER);
+		controlPanel.add(buttonsPanel, EAST);
+
+		panel.add(controlPanel, NORTH);
+		panel.add(new JScrollPane(table), CENTER);
+
 		return panel;
 	}
 }

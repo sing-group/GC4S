@@ -39,6 +39,6 @@ public class DoubleRangeInputPanelDemo {
 			e -> {
 				System.err.println(e.getNewValue().toString());
 			});
-		showComponent(panel, "Double range input panel demo");
+		showComponent(panel, "DoubleRangeInputPanel demo");
 	}
 }

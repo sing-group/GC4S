@@ -35,9 +35,8 @@ import org.sing_group.gc4s.visualization.ColorKeyLegend;
  *
  */
 public class ColorKeyLegendDemo {
-
 	public static void main(String[] args) {
 		ColorKeyLegend colorKeyPanel = new ColorKeyLegend(GREEN, RED, 0d, 100d);
-		showComponent(colorKeyPanel, "Color key legend demo");
+		showComponent(colorKeyPanel, "ColorKeyLegend demo");
 	}
 }

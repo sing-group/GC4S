@@ -22,17 +22,18 @@
  */
 package org.sing_group.gc4s.demo;
 
+import static javax.swing.JOptionPane.showMessageDialog;
+import static org.sing_group.gc4s.visualization.VisualizationUtils.showComponent;
+
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import org.sing_group.gc4s.dialog.JOptionPaneMessage;
-import org.sing_group.gc4s.visualization.VisualizationUtils;
 
 /**
  * An example showing the use of {@code JOptionPaneMessage}.
@@ -43,7 +44,9 @@ import org.sing_group.gc4s.visualization.VisualizationUtils;
 public class JOptionPaneMessageDemo {
 
 	public static void main(String[] args) {
-		VisualizationUtils.showComponent(createJOptionPaneMessageDemooComponent());
+		showComponent(
+			createJOptionPaneMessageDemooComponent(),
+			"JOptionPaneMessage demo");
 	}
 
 	private static JComponent createJOptionPaneMessageDemooComponent() {
@@ -59,12 +62,15 @@ public class JOptionPaneMessageDemo {
 			}
 		});
 		toret.add(demoButton);
+
 		return toret;
 	}
 
-	protected static void demoButtonAction(JComponent parent, JOptionPaneMessage message) {
+	protected static void demoButtonAction(JComponent parent,
+		JOptionPaneMessage message
+	) {
 		if (message.shouldBeShown()) {
-			JOptionPane.showMessageDialog(parent, message.getMessage());
+			showMessageDialog(parent, message.getMessage());
 		}
 	}
 }

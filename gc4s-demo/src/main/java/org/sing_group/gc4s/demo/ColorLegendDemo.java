@@ -39,7 +39,6 @@ import org.sing_group.gc4s.visualization.ColorLegend;
  *
  */
 public class ColorLegendDemo {
-
 	public static void main(String[] args) {
 		ColorLegend colorLegend = new ColorLegend(getColors(), VERTICAL);
 		showComponent(
@@ -53,6 +52,7 @@ public class ColorLegendDemo {
 		colors.put("Red", 	Color.RED);
 		colors.put("Blue", 	Color.BLUE);
 		colors.put("Green",	Color.GREEN);
+
 		return colors;
 	}
 }

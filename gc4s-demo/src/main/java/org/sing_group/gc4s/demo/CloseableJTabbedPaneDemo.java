@@ -22,13 +22,14 @@
  */
 package org.sing_group.gc4s.demo;
 
+import static org.sing_group.gc4s.visualization.VisualizationUtils.showComponent;
+
 import java.awt.Dimension;
 
 import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
 
 import org.sing_group.gc4s.ui.tabbedpane.CloseableJTabbedPane;
-import org.sing_group.gc4s.visualization.VisualizationUtils;
 
 /**
  * An example showing the use of {@link CloseableJTabbedPane}.
@@ -43,6 +44,7 @@ public class CloseableJTabbedPaneDemo {
 		demoPanel.addTab("Tab 2", new JLabel("Tab 2"));
 		demoPanel.addTab("Tab 3", new JLabel("Tab 3"));
 		demoPanel.setPreferredSize(new Dimension(300,200));
-		VisualizationUtils.showComponent(demoPanel, "CloseableJTabbedPane demo");
+
+		showComponent(demoPanel, "CloseableJTabbedPane demo");
 	}
 }

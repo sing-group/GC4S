@@ -22,10 +22,11 @@
  */
 package org.sing_group.gc4s.demo;
 
+import static org.sing_group.gc4s.visualization.VisualizationUtils.showComponent;
+
 import java.awt.Color;
 
 import org.sing_group.gc4s.input.JColorChooserButton;
-import org.sing_group.gc4s.visualization.VisualizationUtils;
 
 /**
  * An example showing the use of {@link JColorChooserButton}.
@@ -34,8 +35,10 @@ import org.sing_group.gc4s.visualization.VisualizationUtils;
  *
  */
 public class JColorChooserButtonDemo {
-
 	public static void main(String[] args) {
-		VisualizationUtils.showComponent(new JColorChooserButton(Color.LIGHT_GRAY));
+		showComponent(
+			new JColorChooserButton(Color.LIGHT_GRAY),
+			"JColorChooserButton demo"
+		);
 	}
 }

@@ -37,7 +37,6 @@ import org.sing_group.gc4s.ui.ComponentsListPanel;
  *
  */
 public class ComponentsListPanelDemo {
-
 	public static void main(String[] args) {
 		showComponent(
 			getComponentsListPanel(), "ComponentsListPanel demo");

@@ -1,10 +1,10 @@
 The `gc4s` module
-=================
+===========
 
-This module contains the bioinformatics-oriented collection of GUI Components for (Java) Swing. Javadoc documentation is available [here](http://sing-group.org/gc4s/javadoc).
+This module contains the general-purpose collection of GUI Components for (Java) Swing. Javadoc documentation is available [here](http://sing-group.org/gc4s/javadoc). This [gallery](GALLERY.md) shows screenshots of different elements of this module.
 
 Using this module
------------------
+-----------------------
 Add the following repository and dependency declarations to your `pom.xml`:
 ```xml
 	<repositories>
@@ -24,15 +24,15 @@ Add the following repository and dependency declarations to your `pom.xml`:
 	</dependencies>
 ```
 
-Examples
---------
+Examples of GUI components
+-------------------------------------
 
-The following image shows `JHeatMap`, a component that shows a heatmap from a given double matrix. It allows zooming, changing gradient's colors and exporting the heatmap as image.
+The following image shows `CloseableJTabbedPane`, an extension of `JTabbedPane` that adds a close button to tabs.
 
-![JHeatMap](screenshots/JHeatMap.png)
+![CloseableJTabbedPane](screenshots/CloseableJTabbedPane.gif)
 
 The following image shows `JFileChooserPanel`, a component with a button to select a file (using a `JFileChooser`) and a text field that show the selected file. You have full control of how the underlying `JFileChooser` since you have can set file filters or choose the dialog mode.
 
 ![JFileChooserPanel](screenshots/JFileChooserPanel.png)
 
-These are just two examples of GC4S components. To see more, please, see the [examples](EXAMPLES.md) section. Also, the `gc4s-demo` module provides examples of usage of most of the components.
+These are just two examples of GC4S components. To see more examples, please, see the [gallery](GALLERY.md) section. Also, the `gc4s-demo` module provides examples of usage of them.

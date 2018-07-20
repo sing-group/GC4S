@@ -71,6 +71,8 @@ public class BeanTableModelDemo {
 	public static void main(String[] args) {
 		List<Bean> beans = asList(new Bean("Row 1", 1), new Bean("Row 2", 2));
 		JXTable table = new JXTable(new BeanTableModel<Bean>(beans));
-		showComponent(createPanelAndCenterComponent(new JScrollPane(table)));
+		showComponent(
+			createPanelAndCenterComponent(new JScrollPane(table)),
+			"BeanTableModel demo");
 	}
 }

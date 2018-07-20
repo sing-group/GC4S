@@ -22,11 +22,12 @@
  */
 package org.sing_group.gc4s.demo;
 
+import static org.sing_group.gc4s.visualization.VisualizationUtils.showComponent;
+
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 import org.sing_group.gc4s.input.RadioButtonsPanel;
-import org.sing_group.gc4s.visualization.VisualizationUtils;
 
 /**
  * An example showing the use of {@link RadioButtonsPanel}.
@@ -56,6 +57,6 @@ public class RadioButtonsPanelDemo {
 			}
 		});
 
-		VisualizationUtils.showComponent(panel, "RadioButtonsPanel demo");
+		showComponent(panel, "RadioButtonsPanel demo");
 	}
 }

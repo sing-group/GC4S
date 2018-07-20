@@ -22,8 +22,9 @@
  */
 package org.sing_group.gc4s.demo;
 
+import static org.sing_group.gc4s.visualization.VisualizationUtils.showComponent;
+
 import org.sing_group.gc4s.input.RangeInputPanel;
-import org.sing_group.gc4s.visualization.VisualizationUtils;
 
 /**
  * An example showing the use of {@link RangeInputPanel}.
@@ -42,6 +43,6 @@ public class RangeInputPanelDemo {
 				+ rangeInputPanel.getMaxValue() + "]");
 		});
 		
-		VisualizationUtils.showComponent(rangeInputPanel);
+		showComponent(rangeInputPanel, "RangeInputPanel demo");
 	}
 }

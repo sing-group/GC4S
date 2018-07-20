@@ -36,7 +36,6 @@ import org.sing_group.gc4s.input.ItemSelectionPanel;
  *
  */
 public class ItemSelectionPanelDemo {
-
 	public static void main(String[] args)  {
 		showComponent(createItemSelectionPanel(), "ItemSelectionPanel demo");
 	}
