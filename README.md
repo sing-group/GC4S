@@ -12,17 +12,15 @@ Projects using GC4S
 GC4S modules
 ------------
 
-This repository contains four GC4S modules:
+This repository contains the following `GC4S` modules:
 - `gc4s`: the main module containing the components library.
-- `gc4s-demo`: a module that contains examples of usage of the components in the `gc4s` module.
-- `gc4s-heatmap`: a module that depends on the `gc4s` module to provide an interactive heat map visualization component.
-- `gc4s-heatmap-demo`: a module that contains examples of the usage of heat map visualization component.
 - `gc4s-genomebrowser`: a module that depends on the `gc4s` module to provide an interactive genome browser.
-- `gc4s-genomebrowser-demo`: a module that contains an example of usage of the genome browser component.
-- `gc4s-statistics-tests-table`: a module that depends on the `gc4s` module to provide a statistical tests table.
-- `gc4s-statistics-tests-table-demo`: a module that contains examples of usage of the statistical tests table components.
+- `gc4s-heatmap`: a module that depends on the `gc4s` module to provide an interactive heat map visualization component.
+- `gc4s-jsparklines-factory`: a module that eases the creation of [JSparklines](https://github.com/compomics/jsparklines) renderers.
 - `gc4s-multiple-sequence-alignment-viewer`: a module that depends on the `gc4s` module to provide a multiple sequence alignments viewer.
-- `gc4s-multiple-sequence-alignment-viewer-demo`: a module that contains an example of usage of the multiple sequence alignments viewer.
+- `gc4s-statistics-tests-table`: a module that depends on the `gc4s` module to provide a statistical tests table.
+
+Additionally, there is a `*-demo` module for each one of them containing examples of the usage of the components included in them.
 
 Using GC4S
 ----------
@@ -37,7 +35,7 @@ Add the following repository and dependency declarations to your `pom.xml` in or
 	</repositories>
 	
 	<dependencies>
-    	<dependency>
+		<dependency>
 			<groupId>org.sing_group</groupId>
 			<artifactId>gc4s</artifactId>
 			<version>1.2.0</version>

@@ -16,14 +16,16 @@
 	<modules>
 		<module>gc4s</module>
 		<module>gc4s-demo</module>
-		<module>gc4s-heatmap</module>
-		<module>gc4s-heatmap-demo</module>
 		<module>gc4s-genomebrowser</module>
 		<module>gc4s-genomebrowser-demo</module>
-		<module>gc4s-statistics-tests-table</module>
-		<module>gc4s-statistics-tests-table-demo</module>
+		<module>gc4s-heatmap</module>
+		<module>gc4s-heatmap-demo</module>
+		<module>gc4s-jsparklines-factory</module>
+		<module>gc4s-jsparklines-factory-demo</module>
 		<module>gc4s-multiple-sequence-alignment-viewer</module>
 		<module>gc4s-multiple-sequence-alignment-viewer-demo</module>
+		<module>gc4s-statistics-tests-table</module>
+		<module>gc4s-statistics-tests-table-demo</module>
 	</modules>
 
 	<licenses>
@@ -46,6 +48,8 @@
 		<junit.version>4.12</junit.version>
 		<pileline-tools.version>1.2.1</pileline-tools.version>
 		<sing-math.version>0.2.0-SNAPSHOT</sing-math.version>
+		<jsparklines.version>1.0.9</jsparklines.version>
+
 		<license.licenseName>lgpl_v3</license.licenseName>
 		<license.copyrightOwners>Hugo López-Fernández, Daniel Glez-Peña, Miguel Reboiro-Jato,
 			Florentino Fdez-Riverola, Rosalía Laza-Fidalgo, Reyes Pavón-Rial
@@ -64,6 +68,13 @@
 			<id>sing-snapshots-repository</id>
 			<name>SING SNAPSHOTS repository</name>
 			<url>https://maven.sing-group.org/repository/maven-snapshots/</url>
+		</repository>
+
+		<!-- For JSparkLines -->
+		<repository>
+			<id>genesis-maven2-repository</id>
+			<name>Genesis maven2 repository</name>
+			<url>http://genesis.UGent.be/maven2</url>
 		</repository>
 	</repositories>
 
@@ -109,6 +120,12 @@
 				<artifactId>gc4s-statistics-tests-table</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>org.sing_group</groupId>
+				<artifactId>gc4s-jsparklines-factory</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
 
 			<!-- General -->
 			<dependency>
@@ -130,6 +147,11 @@
 				<groupId>es.uvigo.ei.sing</groupId>
 				<artifactId>math</artifactId>
 				<version>${sing-math.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>no.uib</groupId>
+				<artifactId>jsparklines</artifactId>
+				<version>${jsparklines.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
