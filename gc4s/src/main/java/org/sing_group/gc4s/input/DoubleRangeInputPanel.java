@@ -22,6 +22,9 @@
  */
 package org.sing_group.gc4s.input;
 
+import static javax.swing.UIManager.getColor;
+import static org.sing_group.gc4s.utilities.ColorUtils.COLOR_INVALID_INPUT;
+
 import java.awt.Color;
 import java.awt.event.FocusListener;
 import java.beans.PropertyChangeEvent;
@@ -29,7 +32,6 @@ import java.beans.PropertyChangeListener;
 
 import javax.swing.JComponent;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
 
 import org.sing_group.gc4s.event.TextFieldSelectionFocusListener;
 import org.sing_group.gc4s.input.text.DoubleTextField;
@@ -55,9 +57,7 @@ public class DoubleRangeInputPanel extends JPanel {
 	
 	public static final String PROPERTY_RANGE = "value";
 
-	public static final Color COLOR_INVALID_INPUT = new Color(255,148,148);
-	public static final Color COLOR_VALID_INPUT = 
-		UIManager.getColor("TextField.background");
+	public static final Color COLOR_VALID_INPUT = getColor("TextField.background");
 
 	private static final String MINIMUM_VALUE = "Minimum value";
 	private static final String MAXIMUM_VALUE = "Maximum value";

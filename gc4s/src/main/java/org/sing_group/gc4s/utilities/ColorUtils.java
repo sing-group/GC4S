@@ -36,6 +36,8 @@ import java.util.Set;
  *
  */
 public class ColorUtils {
+	public static final Color COLOR_INVALID_INPUT = new Color(255, 148, 148);
+
 	public final static Color COLOR_LIGHT_RED = new Color(233, 198, 175);
 	public final static Color COLOR_LIGHT_GREEN = new Color(175, 233, 198);
 	public final static Color COLOR_LIGHT_BLUE = new Color(175, 198, 233);

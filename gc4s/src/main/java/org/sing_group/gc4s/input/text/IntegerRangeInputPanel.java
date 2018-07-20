@@ -22,6 +22,8 @@
  */
 package org.sing_group.gc4s.input.text;
 
+import static org.sing_group.gc4s.utilities.ColorUtils.COLOR_INVALID_INPUT;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -244,7 +246,7 @@ public class IntegerRangeInputPanel extends JPanel {
 	}
 
 	private void checkRange() {
-		Color color = isValidRange()? null : Color.RED;
+		Color color = isValidRange()? null : COLOR_INVALID_INPUT;
 		this.minValueTf.setBackground(color);
 		this.maxValueTf.setBackground(color);
 	}
