@@ -22,6 +22,10 @@
  */
 package org.sing_group.gc4s.genomebrowser.demo;
 
+import static java.lang.Thread.sleep;
+import static org.sing_group.gc4s.visualization.VisualizationUtils.setNimbusLookAndFeel;
+import static org.sing_group.gc4s.visualization.VisualizationUtils.showComponent;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,12 +34,13 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 
 import org.sing_group.gc4s.genomebrowser.GenomeBrowser;
-import org.sing_group.gc4s.visualization.VisualizationUtils;
 
+import es.cnio.bioinfo.pileline.refgenomeindex.GenomeIndex;
 import es.cnio.bioinfo.pileline.refgenomeindex.PileLineGenomeIndex;
 
-public class GenomeBrowserTest {
-
+// This class shows the basic usage of the GenomeBrowser component using real
+// data files.
+public class GenomeBrowserDemo {
 	public static URL INDEX_URL;
 	public static URL BED_URL;
 	public static URL BAM_URL;
@@ -60,21 +65,31 @@ public class GenomeBrowserTest {
 
 	public static void main(String[] args) throws IOException {
 		downloadTestData();
-		VisualizationUtils.setNimbusLookAndFeel();
+
+		setNimbusLookAndFeel();
 
 		try {
-			GenomeBrowser genomeBrowser = new GenomeBrowser(
-				new PileLineGenomeIndex(PILELINE_INDEX_FILE)
-			);
-			VisualizationUtils.showComponent(genomeBrowser);
+			// Creation of the GenomeIndex object required by the GenomeBrowser
+			// to work.
+			GenomeIndex genomeIndex = new PileLineGenomeIndex(
+				PILELINE_INDEX_FILE);
 
+			// Instantiation and visualization of the GenomeBrowser, which only
+			// requires a GenomeIndex to be created.
+			GenomeBrowser genomeBrowser = new GenomeBrowser(genomeIndex);
+			showComponent(genomeBrowser);
+
+			// Establishment of the sequence and positions to be shown. They
+			// can also be established manually by the user trough the GUI
+			// component.
 			genomeBrowser.setSequence("22");
 			genomeBrowser.seekPositions(14880570, 18748443);
 
-			Thread.sleep(1000);
+			// Addition of file tracks to the GenomeBrowser programmatically.
+			sleep(1000);
 			genomeBrowser.addTrack(BED_FILE);
 
-			Thread.sleep(1000);
+			sleep(1000);
 			genomeBrowser.addTrack(BAM_FILE);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
