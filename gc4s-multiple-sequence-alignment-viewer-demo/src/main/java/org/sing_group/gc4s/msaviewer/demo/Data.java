@@ -22,8 +22,9 @@
  */
 package org.sing_group.gc4s.msaviewer.demo;
 
+import static java.util.Arrays.asList;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -31,8 +32,8 @@ import org.sing_group.gc4s.msaviewer.Sequence;
 
 public class Data {
 
-	public static final List<String> ALPHABET = Arrays.asList("A", "C", "T", "G", "-"); 
-	
+	public static final List<String> ALPHABET = asList("A", "C", "T", "G", "-"); 
+
 	public static final String getRandomSequence(int length) {
 		StringBuilder sequence = new StringBuilder(length);
 		final Random random = new Random(length);
@@ -71,9 +72,9 @@ public class Data {
 				public String getSequence() {
 					return getRandomSequence(length);
 				}
-			}
-			);
+			});
 		}
+
 		return sequences;
 	}
 }

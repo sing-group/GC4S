@@ -22,6 +22,9 @@
  */
 package org.sing_group.gc4s.msaviewer.demo.adops;
 
+import static java.util.Optional.empty;
+import static java.util.Optional.of;
+
 import java.awt.Color;
 import java.util.Map;
 import java.util.Optional;
@@ -40,9 +43,6 @@ import org.sing_group.gc4s.msaviewer.Track;
  * probabilities or {@code Confidence}s obtained with CodeML. Depending on the
  * values of the two probabilities, a different color is used to highlight the
  * corresponding base.
- * 
- * @author hlfernandez
- *
  */
 public class CodeMlPositiveSelectionSequenceAlignmentRenderer implements SequenceAlignmentRenderer {
 	private Color neb95beb95Background = Color.YELLOW;
@@ -76,28 +76,28 @@ public class CodeMlPositiveSelectionSequenceAlignmentRenderer implements Sequenc
 		int position
 	) {
 		if(!this.alignmentConfidences.containsKey(position)) {
-			return Optional.empty();
+			return empty();
 		}
 		
 		Confidence confidence = this.alignmentConfidences.get(position);
 		
 		if (confidence.getNeb() > 0.95d && confidence.getBeb() > 0.95d) {
-			return Optional.of(NEB95_BEB95);
+			return of(NEB95_BEB95);
 		} else if (confidence.getNeb() > 0.95d && confidence.getBeb() > 0.90d) {
-			return Optional.of(NEB95_BEB9095);
+			return of(NEB95_BEB9095);
 		} else if (confidence.getNeb() > 0.90d && confidence.getBeb() > 0.95d) {
-			return Optional.of(NEB9095_BEB95);
+			return of(NEB9095_BEB95);
 		} else if (confidence.getNeb() > 0.90d && confidence.getBeb() > 0.90d) {
-			return Optional.of(NEB90_BEB9095);
+			return of(NEB90_BEB9095);
 		}
 
-		return Optional.empty();
+		return empty();
 	}
 	
 	@Override
 	public Optional<SequenceBaseRenderingInfo> renderTrack(Track track,
 		int position
 	) {		
-		return Optional.empty();
+		return empty();
 	}
 }

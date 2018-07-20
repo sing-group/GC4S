@@ -1,5 +1,5 @@
 The `gc4s-multiple-sequence-alignment-viewer` module
-====================================================
+=================================
 
 This module provides the `MultipleSequenceAlignmentViewerPanel` component to display multiple sequence alignments. By using this module, it is also possible to use the main `gc4s` components. This module also provides the `MultipleSequenceAlignmentViewerControl` that adds some functionalities to the panel.
 
@@ -8,7 +8,7 @@ The `gc4s-multiple-sequence-alignment-viewer-demo` provides different examples o
 ![MultipleSequenceAlignmentViewerPanel](screenshots/MultipleSequenceAlignmentViewerPanel.png)
 
 Using this module
------------------
+-----------------------
 Add the following repository and dependency declarations to your `pom.xml`:
 ```xml
 	<repositories>
@@ -26,4 +26,67 @@ Add the following repository and dependency declarations to your `pom.xml`:
 			<version>1.2.0</version>
 		</dependency>
 	</dependencies>
+```
+
+A simple example
+----------------------
+The following code (available at `org.sing_group.gc4s.msaviewer.demo.MultipleSequenceAlignmentViewerPanelDemo` of the demo module) shows the minimum code required to create a `MultipleSequenceAlignmentViewerPanel`. The demo module provides more advanced examples that show the usage of renderers and models.
+
+```java
+import static org.sing_group.gc4s.visualization.VisualizationUtils.showComponent;
+
+import java.util.Arrays;
+import java.util.List;
+
+import javax.swing.JFrame;
+
+import org.sing_group.gc4s.msaviewer.MultipleSequenceAlignmentViewerConfiguration;
+import org.sing_group.gc4s.msaviewer.MultipleSequenceAlignmentViewerPanel;
+import org.sing_group.gc4s.msaviewer.Sequence;
+
+public class MinimalMultipleSequenceAlignmentViewerPanelDemo {
+	public static void main(String[] args) {
+		List<Sequence> sequences = Arrays.asList(new Sequence() {
+
+			@Override
+			public String getSequence() {
+				return "ACTGACTGACTGACTGACTGACTGACTGACT-";
+			}
+
+			@Override
+			public String getHeader() {
+				return "Sequence 1";
+			}
+		}, new Sequence() {
+
+			@Override
+			public String getSequence() {
+				return "AC-GAC-GACTGACT-ACTGACTGACTGACTG";
+			}
+
+			@Override
+			public String getHeader() {
+				return "Sequence 2";
+			}
+		});
+
+		MultipleSequenceAlignmentViewerConfiguration configuration = 
+			new MultipleSequenceAlignmentViewerConfiguration(
+				10, 	// The length of the sequence label
+				5,		// The number of tabs after the sequence label
+				10, 	// The length of each block
+				4, 		// The number of blocks per line
+				16, 	// The font size
+				true, 	// Whether position indexes must be shown or not
+				true, 	// Whether upper tracks must be shown or not
+				true 	// Whether bottom tracks must be shown or not
+		);
+
+		MultipleSequenceAlignmentViewerPanel viewerPanel = 
+			new MultipleSequenceAlignmentViewerPanel(sequences, configuration);
+
+		showComponent(viewerPanel, JFrame.MAXIMIZED_BOTH);
+	}
+}
+
 ```
