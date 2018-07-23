@@ -100,6 +100,7 @@ public class JHeatMap extends JPanel {
 	private static final Color 	DEFAULT_LOW_COLOR 	= Color.GREEN;
 	private static final Color 	DEFAULT_HIGH_COLOR 	= Color.RED;
 	private static final int 	DEFAULT_STEPS 		= 100;
+	private static final boolean DEFAULT_MOUSE_ZOOM_ENABLED = true;
 
  	private int 	cellSize 	= DEFAULT_SIZE;
 	private Color 	lowColor 	= DEFAULT_LOW_COLOR;
@@ -123,6 +124,7 @@ public class JHeatMap extends JPanel {
 
 	private double lowValue = Double.NaN;
 	private double highValue = Double.NaN;
+	private boolean mouseZoomEnabled = DEFAULT_MOUSE_ZOOM_ENABLED;
 
 	/**
 	 * Constructs a new {@code JHeatMap} taking {@code model} as data source.
@@ -214,6 +216,10 @@ public class JHeatMap extends JPanel {
 		this.heatmap.setTableHeader(null);
 
 		this.heatmap.addMouseWheelListener(e -> {
+			if(!mouseZoomEnabled) {
+				return;
+			}
+
 			if (e.getWheelRotation() < 0) {
 				zoomIn();
 			} else {
@@ -644,6 +650,15 @@ public class JHeatMap extends JPanel {
 			this.visibleColumns = empty();
 		}
 		updateVisibleColumns();
+	}
+
+	/**
+	 * Sets whether the scroll mouse zoom should be enabled or not.
+	 *
+	 * @param enabled whether the scroll mouse zoom should be enabled or not
+	 */
+	public void setMouseZoomEnabled(boolean enabled) {
+		this.mouseZoomEnabled = enabled;
 	}
 
 	private void updateVisibleColumns() {

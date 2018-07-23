@@ -30,7 +30,6 @@ package org.sing_group.gc4s.visualization.heatmap;
  *
  */
 public class JHeatMapModel {
-
 	private double[][] data;
 	private String[] rowNames;
 	private String[] columnNames;
