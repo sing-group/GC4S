@@ -33,11 +33,13 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.DocumentEvent;
@@ -80,6 +82,7 @@ public class JFileChooserPanel extends JPanel {
 
 	public static final String DEFAULT_FILES_LABEL = "File: ";
 	public static final ImageIcon DEFAULT_ICON_BROWSE = Icons.ICON_BROWSE_16;
+	public static final ImageIcon DEFAULT_ICON_CLEAR = Icons.ICON_TRASH_16;
 	public static final SelectionMode DEFAULT_SELECTION_MODE = 
 		SelectionMode.FILES_DIRECTORIES;
 	public static final boolean DEFAULT_ALLOW_ALL_FILTER = true;
@@ -96,6 +99,7 @@ public class JFileChooserPanel extends JPanel {
 	private File selectedFile = null;
 	private String requiredFileExtension = null;
 	private JFileChooserConfiguration fileChooserConfiguration;
+	private JPopupMenu popupMenu;
 
 	private boolean useSharedLastFileFilter = false;
 	private static FileFilter LAST_FILE_FILTER;
@@ -324,10 +328,33 @@ public class JFileChooserPanel extends JPanel {
 			.withText("")
 			.withTooltip("Browse file")
 			.build();
+		
+		btnBrowse.setComponentPopupMenu(getPopupMenu());
+		fileName.setComponentPopupMenu(getPopupMenu());
 
 		this.add(lblFile, BorderLayout.WEST);
 		this.add(fileName, BorderLayout.CENTER);
 		this.add(btnBrowse, BorderLayout.EAST);
+	}
+
+	private JPopupMenu getPopupMenu() {
+		if (this.popupMenu == null) {
+			this.popupMenu = new JPopupMenu();
+			this.popupMenu.add(getClearSelectionAction());
+		}
+
+		return this.popupMenu;
+	}
+
+	private Action getClearSelectionAction() {
+		return new AbstractAction("Clear selected file", DEFAULT_ICON_CLEAR) {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				clearSelectedFile();
+			}
+		};
 	}
 
 	private void fileNameUpdated() {
