@@ -20,41 +20,9 @@
  * <http://www.gnu.org/licenses/lgpl-3.0.html>.
  * #L%
  */
-package org.sing_group.gc4s.msaviewer;
-
-import java.util.List;
-
 /**
- * An interface for the definition of multiple sequence alignment tracks. Such
- * {@code Track}s contain information that is placed above or below sequences
- * in the {@code MultipleSequenceAlignmentViewerPanel}.
+ * Provides classes related with data representations.
  *
  * @author hlfernandez
- * @author mrjato
- *
- * @see Track
- *
  */
-public interface MultipleSequenceAlignmentTracksModel {
-
-	/**
-	 * Returns the name associated to this model.
-	 *
-	 * @return the name associated to this model
-	 */
-	public String getName();
-
-	/**
-	 * Returns the list of tracks that must be placed above the sequences.
-	 *
-	 * @return the list of tracks that must be placed above the sequences
-	 */
-	public List<Track> getUpperTracks();
-
-	/**
-	 * Returns the list of tracks that must be placed below the sequences.
-	 *
-	 * @return the list of tracks that must be placed below the sequences
-	 */
-	public List<Track> getBottomTracks();
-}
+package org.sing_group.org.gc4s.statistics.data;

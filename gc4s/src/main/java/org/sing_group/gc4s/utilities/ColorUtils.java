@@ -30,7 +30,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Provides functionalitites to deal with colors.
+ * Provides functionalities to deal with colors.
  * 
  * @author hlfernandez
  *

@@ -51,7 +51,7 @@ import org.sing_group.gc4s.dialog.ExportCsvDialog;
 import org.sing_group.gc4s.visualization.table.csv.CsvTransferHandler.Converter;
 
 /**
- * A table to display CSV data.
+ * An extension of {@link JXTable} to display CSV data.
  *
  * @author hlfernandez
  * @author mrjato
