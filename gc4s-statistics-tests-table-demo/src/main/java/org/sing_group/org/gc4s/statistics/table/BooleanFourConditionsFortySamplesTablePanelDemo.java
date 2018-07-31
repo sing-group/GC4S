@@ -1,3 +1,8 @@
+// An example to show the usage of the StatisticsTestTablePanel with a Dataset
+// of booleans with four conditions and forty samples. The statistical test to
+// use is decided by the decideBooleanStatisticTest method of the
+// StatisticsTestsUtils class. This component aggregates the table and a
+// progress bar that shows the progress of the computation of the p-values.
 /*
  * #%L
  * GC4S statistics tests table demo
@@ -44,16 +49,11 @@ import org.sing_group.org.gc4s.statistics.table.ui.ConditionsSeparatorHighlighte
 import org.sing_group.org.gc4s.statistics.table.ui.StatisticsTestTableHeaderRenderer;
 import org.sing_group.org.gc4s.statistics.table.ui.YesNoTableCellRenderer;
 
-// An example to show the usage of the StatisticsTestTablePanel with a Dataset
-// of booleans with four conditions and forty samples. The statistical test to
-// use is decided by the decideBooleanStatisticTest method of the
-// StatisticsTestsUtils class. This component aggregates the table and a
-// progress bar that shows the progress of the computation of the p-values.
 public class BooleanFourConditionsFortySamplesTablePanelDemo {
 	public static void main(String[] args) {
-		// Creation of the data needed to create the a Dataset of booleans
-		// feature names, sample names and conditions and a random matrix of
-		// values.
+		// First, the data structures needed to create a Dataset of booleans are
+		// created. These structures are: feature names, sample names and
+		// conditions and a random matrix of values.
 		int nFeatures = 40;
 		int nSamples = 40;
 		int nConditions = 4;
@@ -69,29 +69,31 @@ public class BooleanFourConditionsFortySamplesTablePanelDemo {
 
 		String[] conditionNames = conditionNames(nSamples, nConditions);
 
-		// Creation of the Dataset of Boolean required by the table using the
-		// data created before.
+		// Then, the Dataset of Boolean required by the table is instantiated
+		// using the data created before.
 		Dataset<Boolean> dataset =
 			new DefaultDataset<>(features, samples, data, conditionNames);
 
-		// Creation of the statistical test of Boolean which is also required by
-		// the table. In this case, the decideBooleanStatisticTest method of the
-		// StatisticsTestsUtils class is used to automatically choose the most
-		// appropriate test for this type of data.
+		// After that, it is created the statistical test of Boolean which is
+		// also required by the table. In this case, the
+		// decideBooleanStatisticTest method of the StatisticsTestsUtils class
+		// is used to automatically choose the most appropriate test for this
+		// type of data.
 		Test<Boolean> test = decideBooleanStatisticTest(dataset);
 		PValuesCorrection correction = new FdrCorrection();
 
-		// Instantiation of the panel itself. Note that the correction object is
-		// optional, if it is not provided, then the q-values column is not
-		// shown.
+		// And now, the table itself is instantiated. Note that the correction
+		// object is optional, if it is not provided, then the q-values column
+		// is not shown.
 		StatisticsTestTablePanel<Boolean> tablePanel =
 			new StatisticsTestTablePanel<>(dataset, test, correction);
 
-		// Retrieval of the table contained in the panel to configure it.
+		// After that, the table contained in the panel is retrieved in order to
+		// configure it.
 		StatisticsTestTable<Boolean> table = tablePanel.getTable();
 
-		// Now, the table is configured to set some options and add renderers
-		// and highlighters.
+		// And finally, the table is configured to set some options and add
+		// renderers and highlighters.
 		table.disableColumVisibilityActions();
 
 		// A ProgressEventListener is added to be notified about the progress of
@@ -119,7 +121,8 @@ public class BooleanFourConditionsFortySamplesTablePanelDemo {
 			new ConditionsSeparatorHighlighter<>(table)
 		);
 
-		// Finally, the panel is shown.
+		// After applying the necessary configurations, the table is shown as a
+		// part of a JScrollPane to make the header visible.
 		showComponent(tablePanel, JFrame.MAXIMIZED_BOTH);
 	}
 }

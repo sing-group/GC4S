@@ -1,3 +1,5 @@
+// This class show a very simple example of the usage of the
+// MultipleSequenceAlignmentViewerPanel component.
 /*
  * #%L
  * GC4S multiple sequence alignment viewer demo
@@ -33,14 +35,11 @@ import org.sing_group.gc4s.msaviewer.MultipleSequenceAlignmentViewerConfiguratio
 import org.sing_group.gc4s.msaviewer.MultipleSequenceAlignmentViewerPanel;
 import org.sing_group.gc4s.msaviewer.Sequence;
 
-// This class show a very simple example of the usage of the
-// MultipleSequenceAlignmentViewerPanel component.
 public class MinimalMultipleSequenceAlignmentViewerPanelDemo {
 	public static void main(String[] args) {
-		
-		// Creation of a list with two Sequence objects that will be viewed with
-		// the MultipleSequenceAlignmentViewerPanel. Note that all sequences
-		// must have the same length.
+		// First, a list with two Sequence objects that will be viewed with
+		// the MultipleSequenceAlignmentViewerPanel is created. Note that all
+		// sequences must have the same length.
 		List<Sequence> sequences = asList(new Sequence() {
 
 			@Override
@@ -65,25 +64,24 @@ public class MinimalMultipleSequenceAlignmentViewerPanelDemo {
 			}
 		});
 
-		// The MultipleSequenceAlignmentViewerConfiguration used to set the
-		// initial configuration of the viewer. This is optional since the
-		// viewer panel can create a configuration with default values if it is
-		// not provided.
+		// Then, a MultipleSequenceAlignmentViewerConfiguration is created to
+		// set the initial configuration of the viewer. This is optional since
+		// the viewer panel can create a configuration with default values if it
+		// is not provided.
 		MultipleSequenceAlignmentViewerConfiguration configuration = 
 			new MultipleSequenceAlignmentViewerConfiguration(
 				10, 	// The length of the sequence label
-				5,		// The number of tabs after the sequence label
+				5,	// The number of tabs after the sequence label
 				10, 	// The length of each block
-				4, 		// The number of blocks per line
+				4, 	// The number of blocks per line
 				16, 	// The font size
 				true, 	// Whether position indexes must be shown or not
 				true, 	// Whether upper tracks must be shown or not
 				true 	// Whether bottom tracks must be shown or not
 		);
-
 		
-		// Instantiation of the MultipleSequenceAlignmentViewerPanel using the
-		// specified list of sequences and initial configuration.
+		// And finally, the MultipleSequenceAlignmentViewerPanel is instantiated
+		// using the specified list of sequences and initial configuration.
 		MultipleSequenceAlignmentViewerPanel viewerPanel = 
 			new MultipleSequenceAlignmentViewerPanel(sequences, configuration);
 

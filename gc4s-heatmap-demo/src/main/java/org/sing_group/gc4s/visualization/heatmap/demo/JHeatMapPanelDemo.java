@@ -1,3 +1,5 @@
+// An example showing the use of link JHeatMap through a JHeatMapPanel, which 
+// adds additional functionalities to the basic heatmap visualization.
 /*
  * #%L
  * GC4S demo
@@ -34,13 +36,10 @@ import org.sing_group.gc4s.visualization.heatmap.JHeatMap;
 import org.sing_group.gc4s.visualization.heatmap.JHeatMapModel;
 import org.sing_group.gc4s.visualization.heatmap.JHeatMapPanel;
 
-// An example showing the use of {@link JHeatMap} trough a
-// {@link JHeatMapPanel}, which adds additional functionalities to the basic
-// heatmap visualization.
 public class JHeatMapPanelDemo {
 	public static void main(String[] args) {
-		// Creation of the data needed to create the JHeatMap: the matrix data
-		// and two arrays with the names of the columns and rows.
+		// First, the data needed to create the JHeatMap are created: the matrix
+		// data and two arrays with the names of the columns and rows.
 		final int size = 5;
 		final int missingValues = 1;
 
@@ -51,33 +50,36 @@ public class JHeatMapPanelDemo {
 			}
 		}
 
-		// Addition of some missing values to the data matrix. Repeated missing
-		// values are not controlled.
+		// Then, some missing values are added to the data matrix to show how
+		// the component represents them. Repeated missing values are not
+		// controlled.
 		Random random = new Random(size * missingValues);
 		for (int i = 0; i < missingValues; i++) {
 			data[random.nextInt(size)][random.nextInt(size)] = NaN;
 		}
 
-		// Creation of a JHeatMapModel with the data created before.
+		// Now, a JHeatMapModel (that will be used to create the JHeatMap
+		// later) with the data created before is created.
 		JHeatMapModel heatmapModel = new JHeatMapModel(
 			data,
 			generateLabels("Row ", data.length),
 			generateLabels("Column ", data[0].length)
 		);
 
-		// Creation of the JHeatMap using the JHeatMapModel created previously.
+		// And the JHeatMap is constructed using the JHeatMapModel created
+		// previously.
 		JHeatMap heatmap = new JHeatMap(heatmapModel);
 
-		// Configuration of the range of values that the heatmap should use to
-		// create the color gradient.
+		// Once the heatmap is created, the range of values that the heatmap
+		// should use to create the color gradient is set.
 		heatmap.setValuesRange(new DoubleRange(0d, size));
 
-		// Configuration of the colors associated with the lowest and highest
-		// values in the data matrix.
+		// Also the colors associated with the lowest and highest values in the
+		// data matrix are established.
 		heatmap.setLowColor(Color.BLUE);
 		heatmap.setHighColor(Color.ORANGE);
 
-		// Finally, the heatmap panel is shown.
+		// And finally, the heatmap panel is shown.
 		showComponent(new JHeatMapPanel(heatmap), "JHeatMapPanel demo");
 	}
 

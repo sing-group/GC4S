@@ -1,3 +1,7 @@
+// An example to show the usage of the StatisticsTestTable with a Dataset of
+// numerical values with three conditions and forty two samples. In this case, a
+// One-way ANOVA test (implemented by the OneWayAnovaTest class) is used to
+// compute the p-values.
 /*
  * #%L
  * GC4S statistics tests table demo
@@ -45,15 +49,11 @@ import org.sing_group.org.gc4s.statistics.table.ui.ConditionsSeparatorHighlighte
 import org.sing_group.org.gc4s.statistics.table.ui.NumberHighlighter;
 import org.sing_group.org.gc4s.statistics.table.ui.StatisticsTestTableHeaderRenderer;
 
-// An example to show the usage of the StatisticsTestTable with a Dataset of
-// numerical values with three conditions and forty two samples. In this case, a
-// One-way ANOVA test (implemented by the OneWayAnovaTest class) is used to
-// compute the p-values.
 public class ThreeConditionsMeasurementsTableDemo {
 	public static void main(String[] args) {
-		// Creation of the data needed to create the a Dataset of Number
-		// feature names, sample names and conditions and a random matrix of
-		// values.
+		// First, the data structures needed to create a Dataset of numbers are
+		// created. These structures are: feature names, sample names and
+		// conditions and a random matrix of values.
 		int nFeatures = 40;
 		int nSamples = 42;
 		int nConditions = 3;
@@ -69,27 +69,27 @@ public class ThreeConditionsMeasurementsTableDemo {
 
 		String[] conditionNames = conditionNames(nSamples, nConditions);
 
-		// Creation of the Dataset of Number required by the table using the
-		// data created before.
+		// Then, the Dataset of Number required by the table is instantiated
+		// using the data created before.
 		Dataset<Number> dataset = new DefaultDataset<Number>(features, samples,
 			data, conditionNames);
 
-		// Creation of the statistical test of Number which is also required by
-		// the table. GC4S provides the One-way ANOVA test for multiple
-		// conditions, but it is possible to provide custom tests by
+		// After that, it is created the statistical test of Number which is
+		// also required by the table. GC4S provides the One-way ANOVA test for
+		// multiple conditions, but it is possible to provide custom tests by
 		// implementing Test<Number> (or Test<Integer>, Test<Double>, and so
 		// on).
 		Test<Number> test = new OneWayAnovaTest();
 		PValuesCorrection correction = new FdrCorrection();
 
-		// Instantiation of the table itself. Note that the correction object is
-		// optional, if it is not provided, then the q-values column is not
-		// shown.
+		// And now, the table itself is instantiated. Note that the correction
+		// object is optional, if it is not provided, then the q-values column
+		// is not shown.
 		StatisticsTestTable<Number> table =
 			new StatisticsTestTable<>(dataset, test, correction);
 
-		// Now, the table is configured to set some options and add renderers
-		// and highlighters.
+		// And finally, the table is configured to set some options and add
+		// renderers and highlighters.
 		table.disableColumVisibilityActions();
 
 		// A ProgressEventListener is added to be notified about the progress of
@@ -115,8 +115,8 @@ public class ThreeConditionsMeasurementsTableDemo {
 			new NumberHighlighter(table, Color.RED, Color.GREEN)
 		);
 
-		// Finally, the table is shown as a part of a JScrollPane to make the
-		// header visible.
+		// After applying the necessary configurations, the table is shown as a
+		// part of a JScrollPane to make the header visible.
 		showComponent(new JScrollPane(table), JFrame.MAXIMIZED_BOTH);
 	}
 }

@@ -1,3 +1,7 @@
+// An example to show the usage of the StatisticsTestTable with a Dataset of
+// booleans with four conditions and forty samples. The statistical test to
+// use is decided by the decideBooleanStatisticTest method of the
+// StatisticsTestsUtils class.
 /*
  * #%L
  * GC4S statistics tests table demo
@@ -45,15 +49,11 @@ import org.sing_group.org.gc4s.statistics.table.ui.ConditionsSeparatorHighlighte
 import org.sing_group.org.gc4s.statistics.table.ui.StatisticsTestTableHeaderRenderer;
 import org.sing_group.org.gc4s.statistics.table.ui.YesNoTableCellRenderer;
 
-// An example to show the usage of the StatisticsTestTable with a Dataset of
-// booleans with four conditions and forty samples. The statistical test to
-// use is decided by the decideBooleanStatisticTest method of the
-// StatisticsTestsUtils class.
 public class BooleanFourConditionsFortySamplesTableDemo {
 	public static void main(String[] args) {
-		// Creation of the data needed to create the a Dataset of booleans
-		// feature names, sample names and conditions and a random matrix of
-		// values.
+		// First, the data structures needed to create a Dataset of booleans are
+		// created. These structures are: feature names, sample names and
+		// conditions and a random matrix of values.
 		int nFeatures = 40;
 		int nSamples = 40;
 		int nConditions = 4;
@@ -69,26 +69,27 @@ public class BooleanFourConditionsFortySamplesTableDemo {
 
 		String[] conditionNames = conditionNames(nSamples, nConditions);
 
-		// Creation of the Dataset of Boolean required by the table using the
-		// data created before.
+		// Then, the Dataset of Boolean required by the table is instantiated
+		// using the data created before.
 		Dataset<Boolean> dataset =
 			new DefaultDataset<>(features, samples, data, conditionNames);
 
-		// Creation of the statistical test of Boolean which is also required by
-		// the table. In this case, the decideBooleanStatisticTest method of the
-		// StatisticsTestsUtils class is used to automatically choose the most
-		// appropriate test for this type of data.
+		// After that, it is created the statistical test of Boolean which is
+		// also required by the table. In this case, the
+		// decideBooleanStatisticTest method of the StatisticsTestsUtils class
+		// is used to automatically choose the most appropriate test for this
+		// type of data.
 		Test<Boolean> test = decideBooleanStatisticTest(dataset);
 		PValuesCorrection correction = new FdrCorrection();
 
-		// Instantiation of the table itself. Note that the correction object is
-		// optional, if it is not provided, then the q-values column is not
-		// shown.
+		// And now, the table itself is instantiated. Note that the correction
+		// object is optional, if it is not provided, then the q-values column
+		// is not shown.
 		StatisticsTestTable<Boolean> table =
 			new StatisticsTestTable<>(dataset, test, correction);
 
-		// Now, the table is configured to set some options and add renderers
-		// and highlighters.
+		// And finally, the table is configured to set some options and add
+		// renderers and highlighters.
 		table.disableColumVisibilityActions();
 
 		// A ProgressEventListener is added to be notified about the progress of
@@ -116,8 +117,8 @@ public class BooleanFourConditionsFortySamplesTableDemo {
 			new ConditionsSeparatorHighlighter<>(table)
 		);
 
-		// Finally, the table is shown as a part of a JScrollPane to make the
-		// header visible.
+		// After applying the necessary configurations, the table is shown as a
+		// part of a JScrollPane to make the header visible.
 		showComponent(new JScrollPane(table), JFrame.MAXIMIZED_BOTH);
 	}
 }

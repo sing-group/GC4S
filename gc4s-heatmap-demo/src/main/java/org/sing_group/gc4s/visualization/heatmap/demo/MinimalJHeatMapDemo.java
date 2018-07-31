@@ -1,3 +1,4 @@
+//An example to show the simplest usage of the JHeatMap.
 /*
  * #%L
  * GC4S heatmap demo
@@ -27,11 +28,10 @@ import static org.sing_group.gc4s.visualization.VisualizationUtils.showComponent
 
 import org.sing_group.gc4s.visualization.heatmap.JHeatMap;
 
-//An example to show the simplest usage of the JHeatMap.
 public class MinimalJHeatMapDemo {
 	public static void main(String[] args) {
-		// Creation of the data needed to create the JHeatMap: the matrix data
-		// and two arrays with the names of the columns and rows.
+		// First, the data needed to create the JHeatMap are created: the matrix
+		// data and two arrays with the names of the columns and rows.
 		double[][] data = {
 			{1, 2, 3, 4, 5},
 			{6, 7, 8, 9, NaN},
@@ -40,12 +40,12 @@ public class MinimalJHeatMapDemo {
 		String[] rowNames = { "R1", "R2", "R3" };
 		String[] columnNames = { "C1", "C2", "C3", "C4", "C5" };
 
-		// Creation of the JHeatMap component using the data created before. It
-		// can also be instantiated with a JHeatMapModel, wich takes the same
-		// data than this constructor.
+		// Then, the JHeatMap component using the data created before is
+		// instantiated. Note that it can also be instantiated with a
+		// JHeatMapModel, which takes the same data than this constructor.
 		JHeatMap heatmap = new JHeatMap(data, rowNames, columnNames);
 
-		// Finally, the heatmap is shown.
+		// And finally, the heatmap panel is shown.
 		showComponent(heatmap, "JHeatMap demo");
 	}
 }

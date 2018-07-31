@@ -1,3 +1,4 @@
+// An example to show the simplest usage of the StatisticsTestTable.
 /*
  * #%L
  * GC4S statistics tests table demo
@@ -38,12 +39,11 @@ import org.sing_group.org.gc4s.statistics.table.ui.ConditionsSeparatorHighlighte
 import org.sing_group.org.gc4s.statistics.table.ui.StatisticsTestTableHeaderRenderer;
 import org.sing_group.org.gc4s.statistics.table.ui.YesNoTableCellRenderer;
 
-// An example to show the simplest usage of the StatisticsTestTable.
 public class MinimalTableDemo {
 	public static void main(String[] args) {
-		// Creation of the data needed to create the a Dataset of booleans
-		// feature names, sample names and conditions and a random matrix of
-		// values.
+		// First, the data structures needed to create a Dataset of booleans are
+		// created. These structures are: feature names, sample names and
+		// conditions and a random matrix of values.
 		String[] features = new String[] { "F1", "F2" };
 		String[] samples = new String[] { "S1", "S2", "S3", "S4" };
 
@@ -54,26 +54,28 @@ public class MinimalTableDemo {
 
 		String[] conditionNames = new String[] { "A", "A", "B", "B" };
 
-		// Creation of the Dataset of Boolean required by the table using the
-		// data created before.
+		// Then, the Dataset of Boolean required by the table is instantiated
+		// using the data created before.
 		Dataset<Boolean> dataset =
 			new DefaultDataset<>(features, samples, data, conditionNames);
 
-		// Creation of the statistical test of Boolean which is also required by
-		// the table. In this case, the decideBooleanStatisticTest method of the
-		// StatisticsTestsUtils class is used to automatically choose the most
-		// appropriate test for this type of data.
+		// After that, it is created the statistical test of Boolean which is
+		// also required by the table. Alternatively, the
+		// decideBooleanStatisticTest method of the StatisticsTestsUtils class 
+		// can be used to automatically choose the most appropriate test for
+		// Boolean data.
 		Test<Boolean> test = new TwoConditionsBooleanFisherTest();
 		PValuesCorrection correction = new FdrCorrection();
 
-		// Instantiation of the table itself. Note that the correction object is
-		// optional, if it is not provided, then the q-values column is not
-		// shown.
+		// And now, the table itself is instantiated. Note that the correction
+		// object is optional, if it is not provided, then the q-values column
+		// is not shown.
 		StatisticsTestTable<Boolean> table =
 			new StatisticsTestTable<>(dataset, test, correction);
-
-		// A YesNoTableCellRenderer is set to show YES or NO instead of true and
-		// false.
+		
+		// And finally, the table is configured to set some options and add
+		// renderers and highlighters. A YesNoTableCellRenderer is set to show
+		// YES or NO instead of true and false.
 		table.setDefaultRenderer(Boolean.class, new YesNoTableCellRenderer());
 
 		// A StatisticsTestTableHeaderRenderer is set in the header in order to
@@ -93,8 +95,8 @@ public class MinimalTableDemo {
 			new ConditionsSeparatorHighlighter<>(table)
 		);
 
-		// Finally, the table is shown as a part of a JScrollPane to make the
-		// header visible.
+		// After applying the necessary configurations, the table is shown as a
+		// part of a JScrollPane to make the header visible.
 		showComponent(new JScrollPane(table), JFrame.MAXIMIZED_BOTH);
 	}
 }

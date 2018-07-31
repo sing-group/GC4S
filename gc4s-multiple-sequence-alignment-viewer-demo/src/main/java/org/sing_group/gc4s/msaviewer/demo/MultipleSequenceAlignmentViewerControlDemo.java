@@ -1,3 +1,5 @@
+// This class show the basic usage of the MultipleSequenceAlignmentViewerControl 
+// component.
 /*
  * #%L
  * GC4S multiple sequence alignment viewer demo
@@ -46,19 +48,20 @@ import org.sing_group.gc4s.msaviewer.SequenceAlignmentRenderer;
 import org.sing_group.gc4s.msaviewer.SequenceBaseRenderingInfo;
 import org.sing_group.gc4s.msaviewer.Track;
 
-// This class show the basic usage of the MultipleSequenceAlignmentViewerControl 
-// component.
 public class MultipleSequenceAlignmentViewerControlDemo {
 	public static void main(String[] args) {
 		int sequenceLength = 120;
 		
+		// First, the list of Sequence objects that will be viewed with the
+		// MultipleSequenceAlignmentViewerControl is created. In this case, an
+		// auxiliary function is used to generate 6 sequences of the defined 
+		// length.
 		List<Sequence> sequences = getRandomSequences(6, sequenceLength);
 
-		// A MultipleSequenceAlignmentTracksModel that is set to the viewer
-		// panel to show only one bottom track that simulates scores (from 0 to
-		// 9) for each position.
-		MultipleSequenceAlignmentTracksModel model1 = 
-			new MultipleSequenceAlignmentTracksModel() {
+		// Then, it is created a MultipleSequenceAlignmentTracksModel that will
+		// be to the viewer panel to show only one bottom track that simulates
+		// scores (from 0 to 9) for each position.
+		MultipleSequenceAlignmentTracksModel model1 = new MultipleSequenceAlignmentTracksModel() {
 		
 				@Override
 				public String getName() {
@@ -87,8 +90,8 @@ public class MultipleSequenceAlignmentViewerControlDemo {
 				}
 		};
 
-		// A SequenceAlignmentRenderer implementation that renders sequence 
-		// position using different colors and styles.
+		// After that, it is created a SequenceAlignmentRenderer implementation
+		// that renders sequence positions using different colors and styles.
 		SequenceAlignmentRenderer model1Renderer = new SequenceAlignmentRenderer() {
 			private SequenceBaseRenderingInfo RED = 
 				new SequenceBaseRenderingInfo(Color.RED, Color.YELLOW, false, false);
@@ -118,9 +121,9 @@ public class MultipleSequenceAlignmentViewerControlDemo {
 			}
 		};
 
-		// Another MultipleSequenceAlignmentTracksModel that is set to
-		// the viewer panel to show only one bottom track that simulates scores
-		// (from 0 to 9) for each position.
+		// Next, it is created another MultipleSequenceAlignmentTracksModel that
+		// will be set to the viewer panel to show only one bottom track that
+		// simulates scores (from 0 to 9) for each position.
 		MultipleSequenceAlignmentTracksModel model2 = 
 			new MultipleSequenceAlignmentTracksModel() {
 				
@@ -151,22 +154,30 @@ public class MultipleSequenceAlignmentViewerControlDemo {
 				}
 			};
 
-		// The following map is used to associate SequenceAlignmentRenderers to
-		// MultipleSequenceAlignmentTracksModel. In this case, a renderer is 
-		// only set to the first model.
+		// Now, a map is created to associate SequenceAlignmentRenderers to
+		// MultipleSequenceAlignmentTracksModel. In this case, a renderer is
+		// only associated to the first model.
 		Map<MultipleSequenceAlignmentTracksModel, SequenceAlignmentRenderer> renderersMap = new HashMap<>();
 		renderersMap.put(model1, model1Renderer);
 
-		// The MultipleSequenceAlignmentViewerConfiguration used to set the
-		// initial configuration of the viewer. This is optional since the
-		// viewer panel can create a configuration with default values if it is
-		// not provided.
+		// Then, a MultipleSequenceAlignmentViewerConfiguration is created to
+		// set the initial configuration of the viewer. This is optional since
+		// the viewer panel can create a configuration with default values if it
+		// is not provided.
 		MultipleSequenceAlignmentViewerConfiguration configuration = 
 			new MultipleSequenceAlignmentViewerConfiguration(
-				10, 5, 10, 4, 16, true, true, true);
+				10, 	// The length of the sequence label
+				5,	// The number of tabs after the sequence label
+				10, 	// The length of each block
+				4, 	// The number of blocks per line
+				16, 	// The font size
+				true, 	// Whether position indexes must be shown or not
+				true, 	// Whether upper tracks must be shown or not
+				true 	// Whether bottom tracks must be shown or not
+		);
 
-		// Instantiation of the MultipleSequenceAlignmentViewerControl using the
-		// data previously created.
+		// And finally, the MultipleSequenceAlignmentViewerControl is
+		// instantiated using the data structures previously created.
 		MultipleSequenceAlignmentViewerControl viewerControl = 
 			new MultipleSequenceAlignmentViewerControl(
 				sequences, asList(model1, model2), renderersMap, configuration);

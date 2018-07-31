@@ -1,3 +1,5 @@
+// This class shows the basic usage of the GenomeBrowser component using real
+// data files.
 /*
  * #%L
  * GC4S genome browser demo
@@ -23,6 +25,7 @@
 package org.sing_group.gc4s.genomebrowser.demo;
 
 import static java.lang.Thread.sleep;
+import static java.nio.file.Files.copy;
 import static org.sing_group.gc4s.visualization.VisualizationUtils.setNimbusLookAndFeel;
 import static org.sing_group.gc4s.visualization.VisualizationUtils.showComponent;
 
@@ -30,7 +33,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 
 import org.sing_group.gc4s.genomebrowser.GenomeBrowser;
@@ -38,8 +40,6 @@ import org.sing_group.gc4s.genomebrowser.GenomeBrowser;
 import es.cnio.bioinfo.pileline.refgenomeindex.GenomeIndex;
 import es.cnio.bioinfo.pileline.refgenomeindex.PileLineGenomeIndex;
 
-// This class shows the basic usage of the GenomeBrowser component using real
-// data files.
 public class GenomeBrowserDemo {
 	public static URL INDEX_URL;
 	public static URL BED_URL;
@@ -69,23 +69,26 @@ public class GenomeBrowserDemo {
 		setNimbusLookAndFeel();
 
 		try {
-			// Creation of the GenomeIndex object required by the GenomeBrowser
-			// to work.
+			// First, the GenomeIndex object required by the GenomeBrowser to
+			// work is created.
 			GenomeIndex genomeIndex = new PileLineGenomeIndex(
 				PILELINE_INDEX_FILE);
 
-			// Instantiation and visualization of the GenomeBrowser, which only
-			// requires a GenomeIndex to be created.
+			// Then, the GenomeBrowser is instantiated and visualized. Note that
+			// it only requires a GenomeIndex to be created.
 			GenomeBrowser genomeBrowser = new GenomeBrowser(genomeIndex);
 			showComponent(genomeBrowser);
 
-			// Establishment of the sequence and positions to be shown. They
-			// can also be established manually by the user trough the GUI
-			// component.
+			// At this moment the GenomeBrowser is being shown and a new
+			// sequence (chromosome) and positions range are set. Note that they
+			// can also be established manually by the user trough the component
+			// controls.
 			genomeBrowser.setSequence("22");
 			genomeBrowser.seekPositions(14880570, 18748443);
 
-			// Addition of file tracks to the GenomeBrowser programmatically.
+			// Finally, two files are programmatically added as tracks to the
+			// GenomeBrowser. Again, note that they can be added by the user
+			// through the component controls.
 			sleep(1000);
 			genomeBrowser.addTrack(BED_FILE);
 
@@ -112,7 +115,7 @@ public class GenomeBrowserDemo {
 		if (!file.exists()) {
 			System.err.print("Downloading file " + file.getName() + " ...");
 			try (InputStream in = url.openStream()) {
-				Files.copy(in, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+				copy(in, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
 			}
 			System.err.println(" [DONE]");
 		}

@@ -1,3 +1,7 @@
+// This class show the usage of the MultipleSequenceAlignmentViewerControl 
+// component to reproduce the aligned sequences viewer used in ADOPS 
+// (http://sing-group.org/ADOPS/) to highlight bases where signals of positive 
+// selection have been identified using CodeML.
 /*
  * #%L
  * GC4S multiple sequence alignment viewer demo
@@ -42,20 +46,21 @@ import org.sing_group.gc4s.msaviewer.Sequence;
 import org.sing_group.gc4s.msaviewer.SequenceAlignmentRenderer;
 import org.sing_group.gc4s.msaviewer.Track;
 
-// This class show the usage of the MultipleSequenceAlignmentViewerControl 
-// component to reproduce the aligned sequences viewer used in ADOPS 
-// (http://sing-group.org/ADOPS/) to highlight bases where signals of positive 
-// selection have been identified using CodeML.
 public class MultipleSequenceAlignmentViewerControlDemo {
 	public static void main(String[] args) {
 		int sequenceLength = 120;
 
+		// First, the list of Sequence objects that will be viewed with the
+		// MultipleSequenceAlignmentViewerControl is created. In this case, an
+		// auxiliary function is used to generate 6 sequences of the defined 
+		// length.
 		List<Sequence> sequences = getRandomSequences(6, sequenceLength);
 		
-		// A MultipleSequenceAlignmentTracksModel that is set to the
-		// viewer panel to show only one bottom track that simulates scores 
-		// (from 0 to 9) for each position. In ADOPS, these scores are obtained
-		// from the aligned.score_ascii file generated using T-COFFEE.
+		// Then, it is created a MultipleSequenceAlignmentTracksModel that will
+		// be set to the viewer panel to show only one bottom track that
+		// simulates scores (from 0 to 9) for each position. In ADOPS, these
+		// scores are obtained from the aligned.score_ascii file generated using
+		// T-COFFEE.
 		MultipleSequenceAlignmentTracksModel model1 = new MultipleSequenceAlignmentTracksModel() {
 
 			@Override
@@ -85,26 +90,29 @@ public class MultipleSequenceAlignmentViewerControlDemo {
 			}
 		};
 
-		// The following map assigns Confidence to some bases. In ADOPS, these
-		// probabilities are calculated using CodeML.
+		// After that, it is created a map that assigns a Confidence object to
+		// some bases (sequence positions) to use later in a
+		// SequenceAlignmentRenderer. In ADOPS, these probabilities are
+		// calculated using CodeML.
 		final Map<Integer, Confidence> confidences1 = new TreeMap<>();
 		confidences1.put(4, new Confidence(0.99d, 0.99d));
 		confidences1.put(14, new Confidence(0.99d, 0.99d));
 		confidences1.put(8, new Confidence(0.99d, 0.92d));
 		confidences1.put(12, new Confidence(0.92d, 0.99d));
 		confidences1.put(16, new Confidence(0.92d, 0.92d));
-		
-		// Then, a CodeMlPositiveSelectionSequenceAlignmentRenderer for the
+
+		// Now, a CodeMlPositiveSelectionSequenceAlignmentRenderer for the
 		// previous map is created. This component highlights the bases with
 		// signals of positive selection with different colors depending on the
 		// values of the probabilities.
 		SequenceAlignmentRenderer renderer1 = 
 			new CodeMlPositiveSelectionSequenceAlignmentRenderer(confidences1);
 		
-		// Another MultipleSequenceAlignmentTracksModel that is set to
-		// the viewer panel to show only one bottom track that simulates scores
-		// (from 0 to 9) for each position. In ADOPS, these scores are obtained
-		// from the aligned.score_ascii file generated using T-COFFEE.
+		// Again, it is created another MultipleSequenceAlignmentTracksModel
+		// that will be set to the viewer panel to show only one bottom track
+		// that simulates scores (from 0 to 9) for each position. In ADOPS,
+		// these scores are obtained from the aligned.score_ascii file generated
+		// using T-COFFEE.
 		MultipleSequenceAlignmentTracksModel model2 = new MultipleSequenceAlignmentTracksModel() {
 
 			@Override
@@ -134,10 +142,9 @@ public class MultipleSequenceAlignmentViewerControlDemo {
 			}
 		};
 
-		// A MultipleSequenceAlignmentTracksModel that is set to the viewer
-		// panel to show only one bottom track that simulates scores (from 0 to
-		// 9) for each position. In ADOPS, these scores are obtained from the
-		// aligned.score_ascii file generated using T-COFFEE.
+		// After that, it is created a map that assigns a Confidence object to
+		// some bases (sequence positions) to use later in a
+		// SequenceAlignmentRenderer.
 		final Map<Integer, Confidence> confidences2 = new TreeMap<>();
 		confidences2.put(5, new Confidence(0.99d, 0.99d));
 		confidences2.put(14, new Confidence(0.99d, 0.99d));
@@ -147,10 +154,8 @@ public class MultipleSequenceAlignmentViewerControlDemo {
 		confidences2.put(17, new Confidence(0.92d, 0.96d));
 		confidences2.put(26, new Confidence(0.92d, 0.92d));
 		
-		// Then, a CodeMlPositiveSelectionSequenceAlignmentRenderer for the
-		// previous map is created. This component highlights the bases with
-		// signals of positive selection with different colors depending on the
-		// values of the probabilities.
+		// Now, another CodeMlPositiveSelectionSequenceAlignmentRenderer for the
+		// previous map is created.
 		SequenceAlignmentRenderer renderer2 = 
 			new CodeMlPositiveSelectionSequenceAlignmentRenderer(confidences2);
 
@@ -160,16 +165,24 @@ public class MultipleSequenceAlignmentViewerControlDemo {
 		renderersMap.put(model1, renderer1);
 		renderersMap.put(model2, renderer2);
 
-		// The MultipleSequenceAlignmentViewerConfiguration used to set the
-		// initial configuration of the viewer. This is optional since the
-		// viewer panel can create a configuration with default values if it is
-		// not provided.
+		// Then, a MultipleSequenceAlignmentViewerConfiguration is created to
+		// set the initial configuration of the viewer. This is optional since
+		// the viewer panel can create a configuration with default values if it
+		// is not provided.
 		MultipleSequenceAlignmentViewerConfiguration configuration = 
 			new MultipleSequenceAlignmentViewerConfiguration(
-				10, 5, 10, 4, 16, true, true, true);
+				10, 	// The length of the sequence label
+				5,	// The number of tabs after the sequence label
+				10, 	// The length of each block
+				4, 	// The number of blocks per line
+				16, 	// The font size
+				true, 	// Whether position indexes must be shown or not
+				true, 	// Whether upper tracks must be shown or not
+				true 	// Whether bottom tracks must be shown or not
+		);
 
-		// Instantiation of the MultipleSequenceAlignmentViewerControl using the
-		// data previously created.
+		// And finally, the MultipleSequenceAlignmentViewerControl is
+		// instantiated using the data structures previously created.
 		MultipleSequenceAlignmentViewerControl viewerControl = 
 			new MultipleSequenceAlignmentViewerControl(
 				sequences, asList(model1, model2), renderersMap, configuration);

@@ -1,3 +1,9 @@
+// A demo of the usage of the JSparklinesBarChartTableCellRendererFactory 
+// provided by this module. This factory provides methods to create
+// JSparkLines bar chart renderers with different configurations. This way
+// is an alternative to the usage of the 
+// JSparklinesBarChartTableCellRendererBuilderFactory that provides builders 
+// for the bar chart renderers.
 /*
  * #%L
  * GC4S JSparkLines factory demo
@@ -37,12 +43,6 @@ import org.sing_group.gc4s.jsparklines.JSparklinesBarChartTableCellRendererFacto
 
 import no.uib.jsparklines.renderers.JSparklinesBarChartTableCellRenderer;
 
-// A demo of the usage of the JSparklinesBarChartTableCellRendererFactory 
-// provided by this module. This factory provides methods to create
-// JSparkLines bar chart renderers with different configurations. This way
-// is an alternative to the usage of the 
-// JSparklinesBarChartTableCellRendererBuilderFactory that provides builders 
-// for the bar chart renderers.
 public class JSparklinesBarChartTableCellRendererFactoryDemo {
 
 	public static void main(String[] args) {
@@ -51,8 +51,10 @@ public class JSparklinesBarChartTableCellRendererFactoryDemo {
 	}
 
 	private static JComponent getDemoTable() {
-		// Creation of the demo JTable with six columns that will be configured
-		// with a different JSparklinesBarChartTableCellRenderer at each column.
+		// First, a demo demo JTable with six columns that will be configured
+		// with a different JSparklinesBarChartTableCellRenderer at each column
+		// is created. Bar chart renderers created using different factory
+		// methods will be established on each column.
 		JTable table = new DemoTable();
 
 		// The method createMaxValueBarChartRenderer is used to set a simple

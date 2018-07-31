@@ -1,3 +1,7 @@
+// An example to show the usage of the StatisticsTestTable with a Dataset of
+// nominal values with two conditions and forty samples. In this case, a
+// Chi-squared test (implemented by the NominalChiSquareTest class) is used to
+// compute the p-values.
 /*
  * #%L
  * GC4S statistics tests table demo
@@ -43,15 +47,11 @@ import org.sing_group.org.gc4s.statistics.data.tests.Test;
 import org.sing_group.org.gc4s.statistics.table.ui.ConditionsSeparatorHighlighter;
 import org.sing_group.org.gc4s.statistics.table.ui.StatisticsTestTableHeaderRenderer;
 
-// An example to show the usage of the StatisticsTestTable with a Dataset of
-// nominal values with two conditions and forty samples. In this case, a
-// Chi-squared test (implemented by the NominalChiSquareTest class) is used to
-// compute the p-values.
 public class NominalTableDemo {
 	public static void main(String[] args) {
-		// Creation of the data needed to create the a Dataset of booleans
-		// feature names, sample names and conditions and a random matrix of
-		// values.
+		// First, the data structures needed to create a Dataset of strings are
+		// created. These structures are: feature names, sample names and
+		// conditions and a random matrix of values.
 		int nFeatures = 40;
 		int nSamples = 20;
 		int nConditions = 4;
@@ -69,24 +69,26 @@ public class NominalTableDemo {
 
 		String[] conditionNames = conditionNames(nSamples, nConditions);
 
-		// Creation of the Dataset of String required by the table using the
-		// data created before.
+		// Then, the Dataset of String required by the table is instantiated
+		// using the data created before.
 		Dataset<String> dataset = new DefaultDataset<>(features,
 			samples, data, conditionNames);
 
-		// Creation of the statistical test of String which is also required by
-		// the table. GC4S provides a Chi-squared test for nominal values, but
-		// it is possible to provide custom tests by implementing Test<String>.
+		// After that, it is created the statistical test of String which is
+		// also required by the table. GC4S provides a Chi-squared test for
+		// nominal values, but it is possible to provide custom tests by
+		// implementing Test<String>.
 		Test<String> test = new NominalChiSquareTest();
 		PValuesCorrection correction = new FdrCorrection();
 
-		// Instantiation of the table itself. Note that the correction object is
-		// optional, if it is not provided, then the q-values column is not
-		// shown.
+		// And now, the table itself is instantiated. Note that the correction
+		// object is optional, if it is not provided, then the q-values column
+		// is not shown.
 		StatisticsTestTable<String> table =
 			new StatisticsTestTable<>(dataset, test, correction);
 
-		// Now, the table is configured to set some options and add a renderer
+		// And finally, the table is configured to set some options and add a
+		// renderer
 		table.disableColumVisibilityActions();
 
 		// A StatisticsTestTableHeaderRenderer is set in the header in order to
@@ -102,8 +104,8 @@ public class NominalTableDemo {
 		// conditions.
 		table.setHighlighters(new ConditionsSeparatorHighlighter<>(table));
 
-		// Finally, the table is shown as a part of a JScrollPane to make the
-		// header visible.
+		// After applying the necessary configurations, the table is shown as a
+		// part of a JScrollPane to make the header visible.
 		showComponent(new JScrollPane(table), JFrame.MAXIMIZED_BOTH);
 	}
 }
