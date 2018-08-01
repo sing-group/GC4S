@@ -27,9 +27,11 @@ import static javax.swing.BorderFactory.createEmptyBorder;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import static javax.swing.JOptionPane.showConfirmDialog;
 import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.SortOrder.ASCENDING;
 import static javax.swing.UIManager.getColor;
 
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,6 +41,7 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JEditorPane;
 import javax.swing.JOptionPane;
+import javax.swing.RowSorter;
 import javax.swing.SwingWorker;
 
 import org.sing_group.gc4s.visualization.table.csv.CsvTable;
@@ -160,6 +163,7 @@ public class StatisticsTestTable<T> extends CsvTable {
 					model.setQvalues(correct(correction, pValues));
 				}
 				model.fireTableDataChanged();
+				statisticalSort();
 			} catch (Exception e) {
 				e.printStackTrace();
 				showConfirmDialog(StatisticsTestTable.this,
@@ -184,6 +188,12 @@ public class StatisticsTestTable<T> extends CsvTable {
 	private void showTestsInfo() {
 		showMessageDialog(
 			this, getTestsInfo(), "Statistical tests info", INFORMATION_MESSAGE);
+	}
+
+	public void statisticalSort() {
+		List<RowSorter.SortKey> list = new ArrayList<>();
+		list.add(new RowSorter.SortKey(correction == null ? 1 : 2, ASCENDING));
+		getRowSorter().setSortKeys(list);
 	}
 
 	private JEditorPane getTestsInfo() {
