@@ -44,15 +44,26 @@ public class MinimalTableDemo {
 		// First, the data structures needed to create a Dataset of booleans are
 		// created. These structures are: feature names, sample names and
 		// conditions and a random matrix of values.
-		String[] features = new String[] { "F1", "F2" };
-		String[] samples = new String[] { "S1", "S2", "S3", "S4" };
+		String[] features = new String[] {
+			"F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10" };
+		String[] samples = new String[] {
+			"S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8", "S9", "S10" };
 
 		final Boolean[][] data = new Boolean[][] {
-			{ true, true, false, false },
-			{ false, false, true, true }
+			{ true, true, true, true, true, false, false, false, false, false },
+			{ true, true, true, true, true, false, false, false, false, false },
+			{ true, true, true, true, true, false, false, false, false, false },
+			{ true, true, true, true, false, false, false, false, false, false },
+			{ true, true, true, true, true, true, false, false, false, false },
+			{ false, false, false, true, false, true, false, false, true, true },
+			{ false, false, false, false, false, true, true, true, true, true },
+			{ false, false, false, false, false, true, true, true, true, true },
+			{ false, false, false, false, false, true, true, true, true, true },
+			{ true, false, false, true, true, true, true, true, true, false }
 		};
 
-		String[] conditionNames = new String[] { "A", "A", "B", "B" };
+		String[] conditionNames = new String[] {
+			"A", "A", "A", "A", "A", "B", "B", "B", "B", "B" };
 
 		// Then, the Dataset of Boolean required by the table is instantiated
 		// using the data created before.
