@@ -156,8 +156,9 @@ public class StatisticsTestTable<T> extends CsvTable {
 			try {
 				final Map<String, Double> pValues = this.get();
 				model.setPvalues(pValues);
-				final Map<String, Double> qValues = correct(correction, pValues);
-				model.setQvalues(qValues);
+				if (correction != null) {
+					model.setQvalues(correct(correction, pValues));
+				}
 				model.fireTableDataChanged();
 			} catch (Exception e) {
 				e.printStackTrace();
