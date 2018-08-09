@@ -208,7 +208,7 @@ RangeInputPanel
 ---------------
 A panel that allows user selecting a range of values using sliders, taking into account that the minimum value should always be lower or equal to the maximum value.
 
-![RadioButtonsPanel](screenshots/RadioButtonsPanelDemo.png)
+![RangeInputPanel](screenshots/RangeInputPanel.png)
 
 RowHeaderExtendedJXTable
 ------------------------

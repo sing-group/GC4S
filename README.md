@@ -38,7 +38,7 @@ Add the following repository and dependency declarations to your `pom.xml` in or
 		<dependency>
 			<groupId>org.sing_group</groupId>
 			<artifactId>gc4s</artifactId>
-			<version>1.2.0</version>
+			<version>1.2.1</version>
 		</dependency>
 	</dependencies>
 ```
@@ -46,7 +46,7 @@ Add the following repository and dependency declarations to your `pom.xml` in or
 Examples of GUI Components
 --------------------------------------
 
-The following image shows `JHeatMap`, a component that shows a heatmap from a given double matrix. It allows zooming, changing gradient's colors and exporting the heatmap as image.
+The following image shows the `JHeatMap` and `JHeatMapPanel` components. The `JHeatMapPanel` component uses a `JHeatMap` to display a heatmap from a given double matrix along with controls to allow zooming, changing gradient's colors and exporting the heatmap as image, among other functions.
 
 ![JHeatMap](gc4s/screenshots/JHeatMap.png)
 
