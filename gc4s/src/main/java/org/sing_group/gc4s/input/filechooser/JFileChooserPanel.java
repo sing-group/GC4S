@@ -48,6 +48,7 @@ import javax.swing.filechooser.FileFilter;
 import org.sing_group.gc4s.event.DocumentAdapter;
 import org.sing_group.gc4s.input.filechooser.event.FileChooserListener;
 import org.sing_group.gc4s.ui.icons.Icons;
+import org.sing_group.gc4s.ui.menu.JPopupMenuActionsVisibility;
 import org.sing_group.gc4s.utilities.FileDrop;
 import org.sing_group.gc4s.utilities.FileDropListener;
 import org.sing_group.gc4s.utilities.builder.JButtonBuilder;
@@ -92,6 +93,7 @@ public class JFileChooserPanel extends JPanel {
 	private JFileChooser filechooser;
 	private Mode mode;
 	private AbstractAction browseAction;
+	private AbstractAction clearSelectionAction;
 	private JButton btnBrowse;
 	private JLabel lblFile;
 	private String lblFileText;
@@ -339,22 +341,26 @@ public class JFileChooserPanel extends JPanel {
 
 	private JPopupMenu getPopupMenu() {
 		if (this.popupMenu == null) {
-			this.popupMenu = new JPopupMenu();
+			this.popupMenu = new JPopupMenuActionsVisibility();
 			this.popupMenu.add(getClearSelectionAction());
 		}
-
 		return this.popupMenu;
 	}
 
 	private Action getClearSelectionAction() {
-		return new AbstractAction("Clear selected file", DEFAULT_ICON_CLEAR) {
-			private static final long serialVersionUID = 1L;
+		if (this.clearSelectionAction == null) {
+			this.clearSelectionAction = new AbstractAction(
+				"Clear selected file", DEFAULT_ICON_CLEAR) {
+				private static final long serialVersionUID = 1L;
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				clearSelectedFile();
-			}
-		};
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					clearSelectedFile();
+				}
+			};
+		}
+
+		return this.clearSelectionAction;
 	}
 
 	private void fileNameUpdated() {
@@ -554,6 +560,17 @@ public class JFileChooserPanel extends JPanel {
 	 */
 	public void setUseSharedLastFileFilter(boolean use) {
 		this.useSharedLastFileFilter = use;
+	}
+	
+	/**
+	 * Establishes whether the clear selected file action should be enabled or
+	 * not.
+	 * 
+	 * @param enabled whether the clear selected file action should be enabled
+	 *        or not.
+	 */
+	public void setClearSelectedFileActionEnabled(boolean enabled) {
+		this.getClearSelectionAction().setEnabled(enabled);
 	}
 
 	/**

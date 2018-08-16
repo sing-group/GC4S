@@ -1,4 +1,4 @@
-GC4S [![Build Status](https://travis-ci.org/sing-group/GC4S.svg?branch=master)](https://travis-ci.org/hlfernandez/GC4S) [![license](https://img.shields.io/badge/LICENSE-LGPLv3-blue.svg)]()
+GC4S [![Build Status](https://travis-ci.org/sing-group/GC4S.svg?branch=master)](https://travis-ci.org/hlfernandez/GC4S) [![license](https://img.shields.io/badge/LICENSE-LGPLv3-blue.svg)]() [![GitHub release](https://img.shields.io/github/release/sing-group/GC4S.svg)](https://github.com/sing-group/GC4S/releases)
 ========================
 
 GC4S is an open-source library that provides a bioinformatics-oriented collection of GUI Components for (Java) Swing.
@@ -38,7 +38,7 @@ Add the following repository and dependency declarations to your `pom.xml` in or
 		<dependency>
 			<groupId>org.sing_group</groupId>
 			<artifactId>gc4s</artifactId>
-			<version>1.2.1</version>
+			<version>1.2.2</version>
 		</dependency>
 	</dependencies>
 ```
