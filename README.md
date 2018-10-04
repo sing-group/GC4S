@@ -1,4 +1,4 @@
-GC4S [![Build Status](https://travis-ci.org/sing-group/GC4S.svg?branch=master)](https://travis-ci.org/hlfernandez/GC4S) [![license](https://img.shields.io/badge/LICENSE-LGPLv3-blue.svg)]() [![GitHub release](https://img.shields.io/github/release/sing-group/GC4S.svg)](https://github.com/sing-group/GC4S/releases)
+GC4S [![Build Status](https://travis-ci.org/sing-group/GC4S.svg?branch=master)](https://travis-ci.org/hlfernandez/GC4S) [![license](https://img.shields.io/badge/LICENSE-LGPLv3-blue.svg)]() [![GitHub release](https://img.shields.io/github/release/sing-group/GC4S.svg)](https://github.com/sing-group/GC4S/releases) [![DOI](https://img.shields.io/badge/DOI-10.1371%2Fjournal.pone.0204474-00b3fe.svg?&longCache=true)](http://doi.org/10.1371/journal.pone.0204474)
 ========================
 
 GC4S is an open-source library that provides a bioinformatics-oriented collection of GUI Components for (Java) Swing.
@@ -38,7 +38,7 @@ Add the following repository and dependency declarations to your `pom.xml` in or
 		<dependency>
 			<groupId>org.sing_group</groupId>
 			<artifactId>gc4s</artifactId>
-			<version>1.2.2</version>
+			<version>1.3.0</version>
 		</dependency>
 	</dependencies>
 ```
@@ -55,3 +55,8 @@ The following image shows `JFileChooserPanel`, a component with a button to sele
 ![JFileChooserPanel](gc4s/screenshots/JFileChooserPanel.png)
 
 These are just two examples of GC4S components. To see more, please, see the [gallery](gc4s/GALLERY.md) section.
+
+Citation
+---------
+To cite GC4S in publications, please use:
+> H. López-Fernández; M. Reboiro-Jato; D. Glez-Peña; R. Laza; R. Pavón; F. Fdez-Riverola (2018) **GC4S: a bioinformatics-oriented Java software library of reusable graphical user interface components**. *PLOS ONE*. Volume 13(9): e0204474. ISSN: 1932-6203 [![DOI](https://img.shields.io/badge/DOI-10.1371%2Fjournal.pone.0204474-00b3fe.svg?&longCache=true)](http://doi.org/10.1371/journal.pone.0204474)
