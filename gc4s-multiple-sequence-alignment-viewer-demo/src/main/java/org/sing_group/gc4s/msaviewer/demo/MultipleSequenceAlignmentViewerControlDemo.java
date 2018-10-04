@@ -40,6 +40,8 @@ import java.util.Optional;
 
 import javax.swing.JFrame;
 
+import org.sing_group.gc4s.msaviewer.BaseColorSequenceAlignmentRenderer;
+import org.sing_group.gc4s.msaviewer.BioSyntaxBaseColorScheme;
 import org.sing_group.gc4s.msaviewer.MultipleSequenceAlignmentTracksModel;
 import org.sing_group.gc4s.msaviewer.MultipleSequenceAlignmentViewerConfiguration;
 import org.sing_group.gc4s.msaviewer.MultipleSequenceAlignmentViewerControl;
@@ -153,12 +155,16 @@ public class MultipleSequenceAlignmentViewerControlDemo {
 					return emptyList();
 				}
 			};
+			
+		// For this second model, a BaseColorSequenceAlignmentRenderer will be created using
+		// a predefined color scheme provided by the BioSyntaxColorScheme.
+		SequenceAlignmentRenderer model2Renderer = new BaseColorSequenceAlignmentRenderer(new BioSyntaxBaseColorScheme());
 
-		// Now, a map is created to associate SequenceAlignmentRenderers to
-		// MultipleSequenceAlignmentTracksModel. In this case, a renderer is
-		// only associated to the first model.
+		// Now, a map is created to associate the SequenceAlignmentRenderer objects to
+		// their corresponding MultipleSequenceAlignmentTracksModel objects.
 		Map<MultipleSequenceAlignmentTracksModel, SequenceAlignmentRenderer> renderersMap = new HashMap<>();
 		renderersMap.put(model1, model1Renderer);
+		renderersMap.put(model2, model2Renderer);
 
 		// Then, a MultipleSequenceAlignmentViewerConfiguration is created to
 		// set the initial configuration of the viewer. This is optional since

@@ -7,6 +7,10 @@ The `gc4s-multiple-sequence-alignment-viewer-demo` provides different examples o
 
 ![MultipleSequenceAlignmentViewerPanel](screenshots/MultipleSequenceAlignmentViewerPanel.png)
 
+This module also provides the [bioSyntax](https://biosyntax.org/) nucleotide colouring scheme for the complete IUPAC ambiguous base set.
+
+![MultipleSequenceAlignmentViewerPanel with bioSyntax colouring scheme](screenshots/MultipleSequenceAlignmentViewerPanel_bioSyntax.png)
+
 Using this module
 -----------------------
 Add the following repository and dependency declarations to your `pom.xml`:
@@ -88,5 +92,4 @@ public class MinimalMultipleSequenceAlignmentViewerPanelDemo {
 		showComponent(viewerPanel, JFrame.MAXIMIZED_BOTH);
 	}
 }
-
 ```
