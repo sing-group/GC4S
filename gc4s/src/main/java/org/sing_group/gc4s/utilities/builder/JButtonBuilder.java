@@ -87,7 +87,7 @@ public class JButtonBuilder {
 	/**
 	 * Sets the button action.
 	 * 
-	 * @param action the buton action.
+	 * @param action the button action.
 	 * @return the {@code JButtonBuilder instance}.
 	 */
 	public JButtonBuilder thatDoes(Action action) {

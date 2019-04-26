@@ -31,6 +31,7 @@ Gallery contents:
   * [JMultipleFileChooserPanel](#jmultiplefilechooserpanel)
   * [JParallelListsPanel](#jparallellistspanel)
   * [JProgressDialog](#jprogressdialog)
+  * [JTreeSelectionPanel](#jtreeselectionpanel)
   * [RadioButtonsPanel](#radiobuttonspanel)
   * [RangeInputPanel](#rangeinputpanel)
   * [RowHeaderExtendedJXTable](#rowheaderextendedjxtable)
@@ -193,10 +194,16 @@ A component that that wraps two `JListPanel` and allows moving elements between 
 ![JParallelListsPanel](screenshots/JParallelLists.gif)
 
 JProgressDialog
----------------
+-----------------
 An extension of `JDialog` to ease the creation of simple progress dialogs based on a task list.
 
 ![JProgressDialog](screenshots/JProgressDialog.gif)
+
+JTreeSelectionPanel
+---------------------
+A component to select an item from a `JTree`. The tree is displayed in a popup menu when the choose button is clicked.
+
+![JTreeSelectionPanel](screenshots/JTreeSelectionPanel.png)
 
 RadioButtonsPanel
 -----------------

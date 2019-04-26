@@ -46,7 +46,7 @@ import org.sing_group.gc4s.utilities.ExtendedAbstractAction;
 
 /**
  * This class encloses a {@code JListPanel<Color>} to provide the ability of
- * adding ({@code Color}) elements to the list-
+ * adding ({@code Color}) elements to the list.
  *
  * @author hlfernandez
  * @see JListPanel
