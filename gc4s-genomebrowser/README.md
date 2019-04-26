@@ -23,7 +23,7 @@ Add the following repository and dependency declarations to your `pom.xml`:
 		<dependency>
 			<groupId>org.sing_group</groupId>
 			<artifactId>gc4s-genomebrowser</artifactId>
-			<version>1.3.0</version>
+			<version>1.4.0</version>
 		</dependency>
 	</dependencies>
 ```
