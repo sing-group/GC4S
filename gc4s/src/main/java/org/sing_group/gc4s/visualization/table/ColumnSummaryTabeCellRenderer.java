@@ -144,12 +144,13 @@ public class ColumnSummaryTabeCellRenderer
 		Component component = defaultRenderer.getTableCellRendererComponent(
 			table, value, isSelected, hasFocus, row, column);
 
-		int columnModel = table.convertColumnIndexToModel(column);
+    int columnModel = table.convertColumnIndexToModel(column);
 
-		if (component instanceof JComponent) {
-			((JComponent) component)
-				.setToolTipText(getTooltip(table, columnModel));
-		}
+    if (component instanceof JComponent) {
+      String tooltip = getTooltip(table, columnModel);
+      ((JComponent) component)
+        .setToolTipText(tooltip.isEmpty() ? null : tooltip);
+    }
 
 		return component;
 	}
