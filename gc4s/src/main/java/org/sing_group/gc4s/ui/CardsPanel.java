@@ -36,89 +36,105 @@ import javax.swing.JPanel;
 
 /**
  * 
- * A {@code JPanel} that displays different components using a
- * {@code CardLayout} and creates a combo box to control which one should be
- * visible.
+ * A {@code JPanel} that displays different components using a {@code CardLayout} and creates a combo box to control
+ * which one should be visible.
  * 
  * @author hlfernandez
  *
  */
 public class CardsPanel extends JPanel {
-	private static final long serialVersionUID = 1L;
-	public static final String PROPERTY_VISIBLE_CARD = "gc4s.cardspanel.visiblecard";
+  private static final long serialVersionUID = 1L;
 
-	private JPanel cards;
-	private Map<Object, Component> cardsMap;
-	private JComboBox<Object> cardSelectionCombo;
-	private String selectionLabel;
-	
-	/**
-	 * Creates a new {@code CardsPanel} with the specified selection label and
-	 * components.
-	 * 
-	 * @param cardsMap a map from labels to cards components 
-	 * @param selectionLabel the combo box label
-	 */
-	public CardsPanel(Map<Object, Component> cardsMap, String selectionLabel) {
-		this.cardsMap = cardsMap;
-		this.selectionLabel = selectionLabel;
+  public static final String PROPERTY_VISIBLE_CARD = "gc4s.cardspanel.visiblecard";
 
-		this.init();
-	}
+  private JPanel cards;
+  private Map<Object, Component> cardsMap;
+  private JComboBox<Object> cardSelectionCombo;
+  private String selectionLabel;
+  private boolean disableSelectionWithOneCard;
 
-	private void init() {
-		this.setLayout(new BorderLayout());
-		this.add(getCardsPanel(), BorderLayout.CENTER);
-		this.add(getSelectionPanel(), BorderLayout.NORTH);
-	}
+  /**
+   * Creates a new {@code CardsPanel} with the specified selection label and components.
+   * 
+   * @param cardsMap a map from labels to cards components
+   * @param selectionLabel the combo box label
+   */
+  public CardsPanel(Map<Object, Component> cardsMap, String selectionLabel) {
+    this(cardsMap, selectionLabel, false);
+  }
 
-	private Component getCardsPanel() {
-		this.cards = new JPanel(new CardLayout());
-		for (Object cardLabel : this.cardsMap.keySet()) {
-			this.cards.add(cardsMap.get(cardLabel), cardLabel.toString());
-		}
-		return this.cards;
-	}
-	
-	private Component getSelectionPanel() {
-		JPanel cardsNorthPanel = new JPanel();
-		cardsNorthPanel.setLayout(new FlowLayout());
-		cardsNorthPanel.add(Box.createHorizontalGlue());
-		cardsNorthPanel.add(new JLabel(this.selectionLabel));
-		cardsNorthPanel.add(getCardSelectionCombo());
+  /**
+   * Creates a new {@code CardsPanel} with the specified selection label and components. This constructor also allows to
+   * specify whether the selection component is disabled when there is only one card or not.
+   * 
+   * @param cardsMap a map from labels to cards components
+   * @param selectionLabel the combo box label
+   * @param disableSelectionWithOneCard whether the selection component is disabled when there is only one card or not.
+   */
+  public CardsPanel(Map<Object, Component> cardsMap, String selectionLabel, boolean disableSelectionWithOneCard) {
+    this.cardsMap = cardsMap;
+    this.selectionLabel = selectionLabel;
+    this.disableSelectionWithOneCard = disableSelectionWithOneCard;
 
-		return cardsNorthPanel;
-	}
+    this.init();
+  }
 
-	private Component getCardSelectionCombo() {
-		this.cardSelectionCombo = new JComboBox<Object>(
-			this.cardsMap.keySet().toArray(new Object[this.cardsMap.size()]));
-		this.cardSelectionCombo.setEditable(false);
-		this.cardSelectionCombo.addItemListener(this::cardItemChanged);
+  private void init() {
+    this.setLayout(new BorderLayout());
+    this.add(getCardsPanel(), BorderLayout.CENTER);
+    this.add(getSelectionPanel(), BorderLayout.NORTH);
+  }
 
-		return this.cardSelectionCombo;
-	}
+  private Component getCardsPanel() {
+    this.cards = new JPanel(new CardLayout());
+    for (Object cardLabel : this.cardsMap.keySet()) {
+      this.cards.add(cardsMap.get(cardLabel), cardLabel.toString());
+    }
+    return this.cards;
+  }
 
-	private void cardItemChanged(ItemEvent evt) {
-		Component oldValue = getSelectedCard();
+  private Component getSelectionPanel() {
+    JPanel cardsNorthPanel = new JPanel();
+    cardsNorthPanel.setLayout(new FlowLayout());
+    cardsNorthPanel.add(Box.createHorizontalGlue());
+    cardsNorthPanel.add(new JLabel(this.selectionLabel));
+    cardsNorthPanel.add(getCardSelectionCombo());
 
-		CardLayout cl = (CardLayout) (cards.getLayout());
-		cl.show(cards, (String) evt.getItem().toString());
-		firePropertyChange(PROPERTY_VISIBLE_CARD, oldValue, getSelectedCard());
-	}
+    return cardsNorthPanel;
+  }
 
-	/**
-	 * Returns the current visible component.
-	 * 
-	 * @return the current visible component
-	 */
-	public Component getSelectedCard() {
-		Component visible = null;
-		for (Component c : this.cardsMap.values()) {
-			if (c.isVisible()) {
-				visible = c;
-			}
-		}
-		return visible;
-	}
+  private Component getCardSelectionCombo() {
+    this.cardSelectionCombo =
+      new JComboBox<Object>(
+        this.cardsMap.keySet().toArray(new Object[this.cardsMap.size()])
+      );
+    this.cardSelectionCombo.setEditable(false);
+    this.cardSelectionCombo.addItemListener(this::cardItemChanged);
+    this.cardSelectionCombo.setEnabled(!(this.disableSelectionWithOneCard && this.cardsMap.size() == 1));
+
+    return this.cardSelectionCombo;
+  }
+
+  private void cardItemChanged(ItemEvent evt) {
+    Component oldValue = getSelectedCard();
+
+    CardLayout cl = (CardLayout) (cards.getLayout());
+    cl.show(cards, (String) evt.getItem().toString());
+    firePropertyChange(PROPERTY_VISIBLE_CARD, oldValue, getSelectedCard());
+  }
+
+  /**
+   * Returns the current visible component.
+   * 
+   * @return the current visible component
+   */
+  public Component getSelectedCard() {
+    Component visible = null;
+    for (Component c : this.cardsMap.values()) {
+      if (c.isVisible()) {
+        visible = c;
+      }
+    }
+    return visible;
+  }
 }

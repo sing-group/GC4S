@@ -37,6 +37,7 @@ import org.sing_group.gc4s.input.filechooser.JFileChooserPanel;
 public class CardsPanelBuilder {
 	private Map<Object, Component> cardsMap = new HashMap<Object, Component>();
 	private String selectionLabel = "Card:";
+	private boolean disableSelectionWithOneCard;
 
 	/**
 	 * Returns a new {@code CardsPanelBuilder} instance to build a
@@ -74,11 +75,23 @@ public class CardsPanelBuilder {
 	}
 
 	/**
+	 * Sets whether the selection component must be disabled when there is only
+	 * one card.
+	 * 
+	 * @param disable whether it is disabled or not
+	 * @return the {@code CardsPanelBuilder} instance
+	 */
+	public CardsPanelBuilder disableSelectionWithOneCard(boolean disable) {
+    this.disableSelectionWithOneCard = disable;
+	  return this;
+	}
+
+	/**
 	 * Builds the {@code CardsPanel} using the introduced configuration.
 	 * 
 	 * @return a new {@code CardsPanel} instance.
 	 */
 	public CardsPanel build() {
-		return new CardsPanel(this.cardsMap, this.selectionLabel);
+		return new CardsPanel(this.cardsMap, this.selectionLabel, this.disableSelectionWithOneCard);
 	}
 }
