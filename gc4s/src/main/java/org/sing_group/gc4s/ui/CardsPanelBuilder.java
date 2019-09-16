@@ -38,6 +38,7 @@ public class CardsPanelBuilder {
 	private Map<Object, Component> cardsMap = new HashMap<Object, Component>();
 	private String selectionLabel = "Card:";
 	private boolean disableSelectionWithOneCard;
+  private String selectedCard = "";
 
 	/**
 	 * Returns a new {@code CardsPanelBuilder} instance to build a
@@ -87,11 +88,22 @@ public class CardsPanelBuilder {
 	}
 
 	/**
-	 * Builds the {@code CardsPanel} using the introduced configuration.
-	 * 
-	 * @return a new {@code CardsPanel} instance.
-	 */
-	public CardsPanel build() {
-		return new CardsPanel(this.cardsMap, this.selectionLabel, this.disableSelectionWithOneCard);
-	}
+   * Sets the name of the card that must be selected by default.
+   * 
+   * @param selectedCard the name of the card that must be selected by default
+   * @return the {@code CardsPanelBuilder} instance
+   */
+  public CardsPanelBuilder withSelectedCard(String selectedCard) {
+    this.selectedCard = selectedCard;
+    return this;
+  }
+
+  /**
+   * Builds the {@code CardsPanel} using the introduced configuration.
+   * 
+   * @return a new {@code CardsPanel} instance.
+   */
+  public CardsPanel build() {
+    return new CardsPanel(this.cardsMap, this.selectionLabel, this.disableSelectionWithOneCard, this.selectedCard);
+  }
 }

@@ -49,6 +49,7 @@ public class CardsPanelDemo {
 				new CenteredJPanel(new JLabel("Card 1 component")))
 			.withCard("Card 2",
 				new CenteredJPanel(new JLabel("Card 2 component")))
+			.withSelectedCard("Card 2")
 			.build();
 	}
 }

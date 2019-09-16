@@ -28,6 +28,7 @@ import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.event.ItemEvent;
 import java.util.Map;
+import java.util.Set;
 
 import javax.swing.Box;
 import javax.swing.JComboBox;
@@ -51,6 +52,7 @@ public class CardsPanel extends JPanel {
   private Map<Object, Component> cardsMap;
   private JComboBox<Object> cardSelectionCombo;
   private String selectionLabel;
+  private String selectedCard;
   private boolean disableSelectionWithOneCard;
 
   /**
@@ -60,29 +62,49 @@ public class CardsPanel extends JPanel {
    * @param selectionLabel the combo box label
    */
   public CardsPanel(Map<Object, Component> cardsMap, String selectionLabel) {
-    this(cardsMap, selectionLabel, false);
+    this(cardsMap, selectionLabel, false, "");
   }
 
   /**
    * Creates a new {@code CardsPanel} with the specified selection label and components. This constructor also allows to
-   * specify whether the selection component is disabled when there is only one card or not.
+   * specify whether the selection component is disabled when there is only one card or not and the name of the card
+   * that must be selected by default.
+   * 
    * 
    * @param cardsMap a map from labels to cards components
    * @param selectionLabel the combo box label
-   * @param disableSelectionWithOneCard whether the selection component is disabled when there is only one card or not.
+   * @param disableSelectionWithOneCard whether the selection component is disabled when there is only one card or not
+   * @param selectedCard the name of the card that must be selected by default
    */
-  public CardsPanel(Map<Object, Component> cardsMap, String selectionLabel, boolean disableSelectionWithOneCard) {
+  public CardsPanel(Map<Object, Component> cardsMap, String selectionLabel, boolean disableSelectionWithOneCard, String selectedCard) {
     this.cardsMap = cardsMap;
     this.selectionLabel = selectionLabel;
     this.disableSelectionWithOneCard = disableSelectionWithOneCard;
+    this.selectedCard = validateSelectedCard(selectedCard, this.cardsMap.keySet());
 
     this.init();
+  }
+
+  private static String validateSelectedCard(String selectedCard, Set<Object> validNames) {
+    if (selectedCard == null) {
+      return "";
+    } else {
+      if (selectedCard.isEmpty() || validNames.contains(selectedCard)) {
+        return selectedCard;
+      } else {
+        throw new IllegalArgumentException("The name of the default card must be in the cards map");
+      }
+    }
   }
 
   private void init() {
     this.setLayout(new BorderLayout());
     this.add(getCardsPanel(), BorderLayout.CENTER);
     this.add(getSelectionPanel(), BorderLayout.NORTH);
+
+    if (this.selectedCard != null) {
+      this.cardSelectionCombo.setSelectedItem(this.selectedCard);
+    }
   }
 
   private Component getCardsPanel() {
