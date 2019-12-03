@@ -1,4 +1,4 @@
-GC4S [![Build Status](https://travis-ci.org/sing-group/GC4S.svg?branch=master)](https://travis-ci.org/hlfernandez/GC4S) [![license](https://img.shields.io/badge/LICENSE-LGPLv3-blue.svg)]() [![GitHub release](https://img.shields.io/github/release/sing-group/GC4S.svg)](https://github.com/sing-group/GC4S/releases) [![DOI](https://img.shields.io/badge/DOI-10.1371%2Fjournal.pone.0204474-00b3fe.svg?&longCache=true)](http://doi.org/10.1371/journal.pone.0204474)
+GC4S [![Build Status](https://travis-ci.org/sing-group/GC4S.svg?branch=master)](https://travis-ci.org/sing-group/GC4S) [![license](https://img.shields.io/badge/LICENSE-LGPLv3-blue.svg)]() [![GitHub release](https://img.shields.io/github/release/sing-group/GC4S.svg)](https://github.com/sing-group/GC4S/releases) [![DOI](https://img.shields.io/badge/DOI-10.1371%2Fjournal.pone.0204474-00b3fe.svg?&longCache=true)](http://doi.org/10.1371/journal.pone.0204474)
 ========================
 
 GC4S is an open-source library that provides a bioinformatics-oriented collection of GUI Components for (Java) Swing.
