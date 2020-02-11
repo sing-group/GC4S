@@ -265,6 +265,46 @@ public class Icons {
 	public static final ImageIcon ICON_PAINT_BRUSH_2_24 = getResource("icons/paint-brush-2-24.png");
 	public static final ImageIcon ICON_PAINT_BRUSH_2_16 = getResource("icons/paint-brush-2-16.png");
 
+	public static final ImageIcon ICON_DOWNLOAD_1_32 = getResource("icons/download-1-32.png");
+	public static final ImageIcon ICON_DOWNLOAD_1_24 = getResource("icons/download-1-24.png");
+	public static final ImageIcon ICON_DOWNLOAD_1_16 = getResource("icons/download-1-16.png");
+
+	public static final ImageIcon ICON_DOWNLOAD_2_32 = getResource("icons/download-2-32.png");
+	public static final ImageIcon ICON_DOWNLOAD_2_24 = getResource("icons/download-2-24.png");
+	public static final ImageIcon ICON_DOWNLOAD_2_16 = getResource("icons/download-2-16.png");
+
+	public static final ImageIcon ICON_DOWNLOAD_3_32 = getResource("icons/download-3-32.png");
+	public static final ImageIcon ICON_DOWNLOAD_3_24 = getResource("icons/download-3-24.png");
+	public static final ImageIcon ICON_DOWNLOAD_3_16 = getResource("icons/download-3-16.png");
+
+	public static final ImageIcon ICON_DOWNLOAD_4_32 = getResource("icons/download-4-32.png");
+	public static final ImageIcon ICON_DOWNLOAD_4_24 = getResource("icons/download-4-24.png");
+	public static final ImageIcon ICON_DOWNLOAD_4_16 = getResource("icons/download-4-16.png");
+
+	public static final ImageIcon ICON_UPLOAD_1_32 = getResource("icons/upload-1-32.png");
+	public static final ImageIcon ICON_UPLOAD_1_24 = getResource("icons/upload-1-24.png");
+	public static final ImageIcon ICON_UPLOAD_1_16 = getResource("icons/upload-1-16.png");
+
+	public static final ImageIcon ICON_UPLOAD_2_32 = getResource("icons/upload-2-32.png");
+	public static final ImageIcon ICON_UPLOAD_2_24 = getResource("icons/upload-2-24.png");
+	public static final ImageIcon ICON_UPLOAD_2_16 = getResource("icons/upload-2-16.png");
+
+	public static final ImageIcon ICON_UPLOAD_3_32 = getResource("icons/upload-3-32.png");
+	public static final ImageIcon ICON_UPLOAD_3_24 = getResource("icons/upload-3-24.png");
+	public static final ImageIcon ICON_UPLOAD_3_16 = getResource("icons/upload-3-16.png");
+
+	public static final ImageIcon ICON_UPLOAD_4_32 = getResource("icons/upload-4-32.png");
+	public static final ImageIcon ICON_UPLOAD_4_24 = getResource("icons/upload-4-24.png");
+	public static final ImageIcon ICON_UPLOAD_4_16 = getResource("icons/upload-4-16.png");
+
+	public static final ImageIcon ICON_CLOUD_DOWNLOAD_32 = getResource("icons/cloud-download-32.png");
+	public static final ImageIcon ICON_CLOUD_DOWNLOAD_24 = getResource("icons/cloud-download-24.png");
+	public static final ImageIcon ICON_CLOUD_DOWNLOAD_16 = getResource("icons/cloud-download-16.png");
+
+	public static final ImageIcon ICON_CLOUD_UPLOAD_32 = getResource("icons/cloud-upload-32.png");
+	public static final ImageIcon ICON_CLOUD_UPLOAD_24 = getResource("icons/cloud-upload-24.png");
+	public static final ImageIcon ICON_CLOUD_UPLOAD_16 = getResource("icons/cloud-upload-16.png");
+
 	private static ImageIcon getResource(String resource) {
 		return new ImageIcon(Icons.class.getResource(resource));
 	}
