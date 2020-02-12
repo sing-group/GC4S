@@ -53,7 +53,7 @@ public class CenteredJPanel extends JPanel {
 		this();
 		this.add(aComponent);
 	}
-	
+
 	@Override
 	public Component add(Component comp) {
 		this.removeAll();

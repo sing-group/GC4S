@@ -27,6 +27,7 @@ import java.awt.Component;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import javax.swing.Box;
@@ -64,22 +65,25 @@ public abstract class ComponentsListPanel<T extends Component> extends JPanel {
 	}
 
 	protected JPanel getNorthComponent() {
-		JPanel northPanel = new JPanel();
-		northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.X_AXIS));
-		northPanel.add(Box.createHorizontalGlue());
-		northPanel.add(getAddComponentButton());
-		northPanel.add(Box.createHorizontalStrut(5));
-		northPanel.add(getRemoveAllComponentsButton());
-		northPanel.add(Box.createHorizontalGlue());
+    JPanel northPanel = new JPanel();
+    northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.X_AXIS));
+    northPanel.add(Box.createHorizontalGlue());
+    northPanel.add(getAddComponentButton());
+    northPanel.add(Box.createHorizontalStrut(5));
+    northPanel.add(getRemoveAllComponentsButton());
+    northPanel.add(Box.createHorizontalGlue());
 
-		return northPanel;
-	}
+    return northPanel;
+  }
 
 	protected JButton getAddComponentButton() {
-		JButton addComponentButton = new JButton(
-			getAddComponentButtonLabel(), Icons.ICON_ADD_16);
+		JButton addComponentButton =
+			new JButton(
+				getAddComponentButtonLabel(), Icons.ICON_ADD_16
+			);
 		addComponentButton.addActionListener(
-			event -> this.addComponentWrapPanelComponent());
+			event -> this.addComponentWrapPanelComponent()
+		);
 
 		return addComponentButton;
 	}
@@ -89,8 +93,10 @@ public abstract class ComponentsListPanel<T extends Component> extends JPanel {
 	}
 
 	protected JButton getRemoveAllComponentsButton() {
-		JButton removeAllComponentsButton = new JButton(
-			getRemoveAllComponentsButtonLabel(), Icons.ICON_TRASH_16);
+		JButton removeAllComponentsButton =
+			new JButton(
+				getRemoveAllComponentsButtonLabel(), Icons.ICON_TRASH_16
+			);
 		removeAllComponentsButton
 			.addActionListener(event -> this.removeAllComponents());
 
@@ -105,7 +111,8 @@ public abstract class ComponentsListPanel<T extends Component> extends JPanel {
 		JPanel centerPanel = new JPanel();
 		this.componentsPanel = new JPanel();
 		this.componentsPanel.setLayout(
-			new BoxLayout(this.componentsPanel, BoxLayout.Y_AXIS));
+			new BoxLayout(this.componentsPanel, BoxLayout.Y_AXIS)
+		);
 		centerPanel.add(componentsPanel);
 
 		for (int i = 0; i < initialComponents; i++) {
@@ -120,12 +127,16 @@ public abstract class ComponentsListPanel<T extends Component> extends JPanel {
 		private T wrappedComponent;
 
 		ComponentWrapPanel() {
-			this.init();
+			this(ComponentsListPanel.this::getGenericComponent);
 		}
 
-		private void init() {
+		ComponentWrapPanel(Supplier<T> wrappedComponentProvider) {
+			this.init(wrappedComponentProvider);
+		}
+
+		private void init(Supplier<T> wrappedComponentProvider) {
 			this.setLayout(new FlowLayout());
-			wrappedComponent = getGenericComponent();
+			wrappedComponent = wrappedComponentProvider.get();
 			this.add(wrappedComponent);
 			this.add(getRemoveButton());
 		}
@@ -133,7 +144,8 @@ public abstract class ComponentsListPanel<T extends Component> extends JPanel {
 		private JButton getRemoveButton() {
 			JButton removeButton = new JButton(Icons.ICON_CANCEL_16);
 			removeButton.addActionListener(
-				event -> removeComponentWrapPanel(this));
+				event -> removeComponentWrapPanel(this)
+			);
 			return removeButton;
 		}
 
@@ -156,9 +168,16 @@ public abstract class ComponentsListPanel<T extends Component> extends JPanel {
 	}
 
 	protected void addComponentWrapPanelComponent() {
-		ComponentWrapPanel newComponent = new ComponentWrapPanel();
-		this.wrapedComponents.add(newComponent);
-		this.componentsPanel.add(newComponent);
+		this.addComponentWrapPanelComponent(new ComponentWrapPanel());
+	}
+
+	protected void addComponentWrapPanelComponent(Supplier<T> supplier) {
+		this.addComponentWrapPanelComponent(new ComponentWrapPanel(supplier));
+	}
+
+	protected void addComponentWrapPanelComponent(ComponentWrapPanel component) {
+		this.wrapedComponents.add(component);
+		this.componentsPanel.add(component);
 		this.updateUI();
 	}
 
@@ -168,7 +187,7 @@ public abstract class ComponentsListPanel<T extends Component> extends JPanel {
 		this.updateUI();
 	}
 
-	protected void removeAllComponents() {
+	public void removeAllComponents() {
 		this.wrapedComponents.clear();
 		this.componentsPanel.removeAll();
 		this.updateUI();
