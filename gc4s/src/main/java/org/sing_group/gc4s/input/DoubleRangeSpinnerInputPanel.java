@@ -215,11 +215,46 @@ public class DoubleRangeSpinnerInputPanel extends JPanel {
 		this.checkRangeValues();
 	}
 
-	public void setStartLabel(String label) {
-		this.startLabel.setText(label);
-	}
+  /**
+   * Sets the range start label.
+   * 
+   * @param label the range start label
+   */
+  public void setStartLabel(String label) {
+    this.startLabel.setText(label);
+  }
 
-	public void setEndLabel(String label) {
-		this.endLabel.setText(label);
-	}
+  /**
+   * Sets the range end label.
+   * 
+   * @param label the range end label
+   */
+  public void setEndLabel(String label) {
+    this.endLabel.setText(label);
+  }
+
+  /**
+   * Sets the specified range in the spinner controls.
+   * 
+   * @param range the {@code DoubleRange}
+   * @throws IllegalArgumentException if the range values are above or bellow the component minimum and maximum.
+   */
+  public void setSelectedRange(DoubleRange range) {
+    this.validateRange(range);
+    this.rangeStartSpinner.setValue(range.getMin());
+    this.rangeEndSpinner.setValue(range.getMax());
+  }
+
+  private void validateRange(DoubleRange range) {
+    if (range.getMax() > this.max) {
+      throw new IllegalArgumentException(
+        "Can't set a range end value higher than the component maximum value (" + this.max + ")"
+      );
+    }
+    if (range.getMin() < this.min) {
+      throw new IllegalArgumentException(
+        "Can't set a range start value higher than the component minimum value (" + this.min + ")"
+      );
+    }
+  }
 }
