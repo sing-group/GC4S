@@ -32,6 +32,7 @@ Gallery contents:
   * [JParallelListsPanel](#jparallellistspanel)
   * [JProgressDialog](#jprogressdialog)
   * [JTreeSelectionPanel](#jtreeselectionpanel)
+  * [MapTableViewer](#maptableviewer)
   * [RadioButtonsPanel](#radiobuttonspanel)
   * [RangeInputPanel](#rangeinputpanel)
   * [RowHeaderExtendedJXTable](#rowheaderextendedjxtable)
@@ -204,6 +205,13 @@ JTreeSelectionPanel
 A component to select an item from a `JTree`. The tree is displayed in a popup menu when the choose button is clicked.
 
 ![JTreeSelectionPanel](screenshots/JTreeSelectionPanel.png)
+
+MapTableViewer
+-------------------
+
+A table that displays the entries of a map using a `MapTableModel`.
+
+![MapTableViewer](screenshots/MapTableViewer.png)
 
 RadioButtonsPanel
 -----------------
