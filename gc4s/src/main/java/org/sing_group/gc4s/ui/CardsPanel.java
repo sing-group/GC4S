@@ -52,18 +52,31 @@ public class CardsPanel extends JPanel {
   private Map<Object, Component> cardsMap;
   private JComboBox<Object> cardSelectionCombo;
   private String selectionLabel;
-  private String selectedCard;
+  private Object selectedCard;
   private boolean disableSelectionWithOneCard;
 
-  /**
-   * Creates a new {@code CardsPanel} with the specified selection label and components.
-   * 
-   * @param cardsMap a map from labels to cards components
-   * @param selectionLabel the combo box label
-   */
-  public CardsPanel(Map<Object, Component> cardsMap, String selectionLabel) {
-    this(cardsMap, selectionLabel, false, "");
-  }
+	/**
+	 * Creates a new {@code CardsPanel} with the specified selection label and components.
+	 * 
+	 * @param cardsMap a map from labels to cards components
+	 * @param selectionLabel the combo box label
+	 */
+	public CardsPanel(Map<Object, Component> cardsMap, String selectionLabel) {
+		this(cardsMap, selectionLabel, false, null);
+	}
+
+	/**
+	 * Creates a new {@code CardsPanel} with the specified selection label and components. This constructor also allows to
+	 * specify whether the selection component is disabled when there is only one card or not.
+	 * 
+	 * 
+	 * @param cardsMap a map from labels to cards components
+	 * @param selectionLabel the combo box label
+	 * @param disableSelectionWithOneCard whether the selection component is disabled when there is only one card or not
+	 */
+	public CardsPanel(Map<Object, Component> cardsMap, String selectionLabel, boolean disableSelectionWithOneCard) {
+		this(cardsMap, selectionLabel, disableSelectionWithOneCard, null);
+	}
 
   /**
    * Creates a new {@code CardsPanel} with the specified selection label and components. This constructor also allows to
@@ -74,9 +87,9 @@ public class CardsPanel extends JPanel {
    * @param cardsMap a map from labels to cards components
    * @param selectionLabel the combo box label
    * @param disableSelectionWithOneCard whether the selection component is disabled when there is only one card or not
-   * @param selectedCard the name of the card that must be selected by default
+   * @param selectedCard the index of the card that must be selected by default
    */
-  public CardsPanel(Map<Object, Component> cardsMap, String selectionLabel, boolean disableSelectionWithOneCard, String selectedCard) {
+  public CardsPanel(Map<Object, Component> cardsMap, String selectionLabel, boolean disableSelectionWithOneCard, Object selectedCard) {
     this.cardsMap = cardsMap;
     this.selectionLabel = selectionLabel;
     this.disableSelectionWithOneCard = disableSelectionWithOneCard;
@@ -85,17 +98,19 @@ public class CardsPanel extends JPanel {
     this.init();
   }
 
-  private static String validateSelectedCard(String selectedCard, Set<Object> validNames) {
-    if (selectedCard == null) {
-      return "";
-    } else {
-      if (selectedCard.isEmpty() || validNames.contains(selectedCard)) {
-        return selectedCard;
-      } else {
-        throw new IllegalArgumentException("The name of the default card must be in the cards map");
-      }
-    }
-  }
+	private static Object validateSelectedCard(
+		Object selectedCard, Set<Object> validCards
+	) {
+		if (selectedCard == null) {
+			return null;
+		} else if (validCards.contains(selectedCard)) {
+			return selectedCard;
+		} else {
+			throw new IllegalArgumentException(
+				"The default card must be a key in the cards map"
+			);
+		}
+	}
 
   private void init() {
     this.setLayout(new BorderLayout());
@@ -159,4 +174,14 @@ public class CardsPanel extends JPanel {
     }
     return visible;
   }
+
+	/**
+	 * Sets the selected card.
+	 * 
+	 * @param cardLabel the object that is used as label of the selected card
+	 */
+	public void setSelectedCard(Object cardLabel) {
+		this.cardSelectionCombo
+			.setSelectedItem(validateSelectedCard(cardLabel, this.cardsMap.keySet()));
+	}
 }

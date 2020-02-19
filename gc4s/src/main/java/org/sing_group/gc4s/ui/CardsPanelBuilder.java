@@ -38,7 +38,7 @@ public class CardsPanelBuilder {
 	private Map<Object, Component> cardsMap = new HashMap<Object, Component>();
 	private String selectionLabel = "Card:";
 	private boolean disableSelectionWithOneCard;
-  private String selectedCard = "";
+  private Object selectedCard;
 
 	/**
 	 * Returns a new {@code CardsPanelBuilder} instance to build a
@@ -98,12 +98,16 @@ public class CardsPanelBuilder {
     return this;
   }
 
-  /**
-   * Builds the {@code CardsPanel} using the introduced configuration.
-   * 
-   * @return a new {@code CardsPanel} instance.
-   */
-  public CardsPanel build() {
-    return new CardsPanel(this.cardsMap, this.selectionLabel, this.disableSelectionWithOneCard, this.selectedCard);
-  }
+	/**
+	 * Builds the {@code CardsPanel} using the introduced configuration.
+	 * 
+	 * @return a new {@code CardsPanel} instance.
+	 */
+	public CardsPanel build() {
+		if (this.selectedCard == null) {
+			return new CardsPanel(this.cardsMap, this.selectionLabel, this.disableSelectionWithOneCard);
+		} else {
+			return new CardsPanel(this.cardsMap, this.selectionLabel, this.disableSelectionWithOneCard, this.selectedCard);
+		}
+	}
 }
