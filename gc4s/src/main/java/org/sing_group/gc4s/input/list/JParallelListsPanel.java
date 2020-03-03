@@ -30,6 +30,7 @@ import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.io.InvalidClassException;
+import java.util.List;
 
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
@@ -245,5 +246,44 @@ public class JParallelListsPanel<E> extends JPanel {
 
 	public JListPanel<E> getRightListPanel() {
 		return right;
+	}
+
+	/**
+	 * Sets the elements that must appear in the right list. If they are already in the right list, they are not added
+	 * again. Note that this method also removes these elements from the left in case they are there.
+	 * 
+	 * @param elements the elements to add to the right list and remove from the left list
+	 */
+	public void setRightListElements(List<E> elements) {
+		this.removeAndAddElements(this.left.getList(), this.right.getList(), elements);
+	}
+	
+	/**
+	 * Sets the elements that must appear in the left list. If they are already in the left list, they are not added
+	 * again. Note that this method also removes these elements from the right in case they are there.
+	 * 
+	 * @param elements the elements to add to the left list and remove from the right list
+	 */
+	public void setLeftListElements(List<E> elements) {
+		this.removeAndAddElements(this.right.getList(), this.left.getList(), elements);
+	}
+
+	private void removeAndAddElements(JList<E> removeFrom, JList<E> addTo, List<E> elements) {
+		FilteredListModel<E> addToModel = (FilteredListModel<E>) addTo.getModel();
+		ExtendedDefaultListModel<E> addToSourceModel = (ExtendedDefaultListModel<E>) addToModel.getSourceListModel();
+
+		for (E element : elements) {
+			if (!addToSourceModel.contains(element)) {
+				addToSourceModel.addElement(element);
+			}
+		}
+
+		FilteredListModel<E> removeFromModel = (FilteredListModel<E>) removeFrom.getModel();
+		ExtendedDefaultListModel<E> removeFromSourceModel =
+			(ExtendedDefaultListModel<E>) removeFromModel.getSourceListModel();
+		removeFromSourceModel.removeElements(elements);
+
+		addTo.updateUI();
+		removeFrom.updateUI();
 	}
 }
