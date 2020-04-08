@@ -305,6 +305,14 @@ public class Icons {
 	public static final ImageIcon ICON_CLOUD_UPLOAD_24 = getResource("icons/cloud-upload-24.png");
 	public static final ImageIcon ICON_CLOUD_UPLOAD_16 = getResource("icons/cloud-upload-16.png");
 
+	public static final ImageIcon ICON_CHARACTER_MAP_32 = getResource("icons/character-map-32.png");
+	public static final ImageIcon ICON_CHARACTER_MAP_24 = getResource("icons/character-map-24.png");
+	public static final ImageIcon ICON_CHARACTER_MAP_16 = getResource("icons/character-map-16.png");
+
+	public static final ImageIcon ICON_SPECIAL_CHARACTER_32 = getResource("icons/special-character-32.png");
+	public static final ImageIcon ICON_SPECIAL_CHARACTER_24 = getResource("icons/special-character-24.png");
+	public static final ImageIcon ICON_SPECIAL_CHARACTER_16 = getResource("icons/special-character-16.png");
+
 	private static ImageIcon getResource(String resource) {
 		return new ImageIcon(Icons.class.getResource(resource));
 	}
