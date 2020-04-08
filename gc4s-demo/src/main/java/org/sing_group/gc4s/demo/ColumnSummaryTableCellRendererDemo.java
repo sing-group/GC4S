@@ -30,16 +30,16 @@ import java.util.Arrays;
 import javax.swing.JScrollPane;
 
 import org.jdesktop.swingx.JXTable;
-import org.sing_group.gc4s.visualization.table.ColumnSummaryTabeCellRenderer;
+import org.sing_group.gc4s.visualization.table.ColumnSummaryTableCellRenderer;
 import org.sing_group.gc4s.visualization.table.ExtendedDefaultTableModel;
 
 /**
- * An example showing the use of {@link ColumnSummaryTabeCellRenderer}.
+ * An example showing the use of {@link ColumnSummaryTableCellRenderer}.
  * 
  * @author hlfernandez
  *
  */
-public class ColumnSummaryTabeCellRendererDemo {
+public class ColumnSummaryTableCellRendererDemo {
 	private static final String COLUMN_NAMES[] = 
 		{ "String", "Double", "Float", "Long", "Integer" , "File"};
 
@@ -57,7 +57,7 @@ public class ColumnSummaryTabeCellRendererDemo {
 			new ExtendedDefaultTableModel(DATA, COLUMN_NAMES)
 		);
 		table.getTableHeader().setDefaultRenderer(
-			new ColumnSummaryTabeCellRenderer(
+			new ColumnSummaryTableCellRenderer(
 				table.getTableHeader().getDefaultRenderer(),
 				Arrays.asList(0, 1, 2, 3, 4, 5),
 				table.getModel()
@@ -65,6 +65,6 @@ public class ColumnSummaryTabeCellRendererDemo {
 		);
 
 		showComponent(new JScrollPane(table),
-			"ColumnSummaryTabeCellRenderer demo dialog");
+			"ColumnSummaryTableCellRenderer demo dialog");
 	}
 }

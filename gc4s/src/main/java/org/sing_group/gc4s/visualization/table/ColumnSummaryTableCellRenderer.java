@@ -61,7 +61,7 @@ import javax.swing.table.TableModel;
  * 
  * <p>
  * To provide support for another classes, method
- * {@link ColumnSummaryTabeCellRenderer#getColumnSummary(TableModel, int)} can
+ * {@link ColumnSummaryTableCellRenderer#getColumnSummary(TableModel, int)} can
  * be override.
  * </p>
  * 
@@ -69,7 +69,7 @@ import javax.swing.table.TableModel;
  * @author hlfernandez
  *
  */
-public class ColumnSummaryTabeCellRenderer
+public class ColumnSummaryTableCellRenderer
 	implements TableCellRenderer, TableModelListener {
 	private TableCellRenderer defaultRenderer;
 	private List<Integer> summaryColumns;
@@ -78,7 +78,7 @@ public class ColumnSummaryTabeCellRenderer
 		Collectors.joining("</li><li>", "<ul><li>", "</li></ul>");
 
 	/**
-	 * Creates a new {@code ColumnSummaryTabeCellRenderer} that uses
+	 * Creates a new {@code ColumnSummaryTableCellRenderer} that uses
 	 * {@code defaultRenderer} to render the component and add the tooltip
 	 * summary for all columns. Also adds the created instance as
 	 * {@code TableModelListener} of {@code model}.
@@ -86,7 +86,7 @@ public class ColumnSummaryTabeCellRenderer
 	 * @param defaultRenderer the default {@code TableCellRenderer}
 	 * @param model a {@code TableModel}.
 	 */
-	public ColumnSummaryTabeCellRenderer(TableCellRenderer defaultRenderer,
+	public ColumnSummaryTableCellRenderer(TableCellRenderer defaultRenderer,
 		TableModel model
 	) {
 		this(defaultRenderer);
@@ -94,18 +94,18 @@ public class ColumnSummaryTabeCellRenderer
 	}
 
 	/**
-	 * Creates a new {@code ColumnSummaryTabeCellRenderer} that uses
+	 * Creates a new {@code ColumnSummaryTableCellRenderer} that uses
 	 * {@code defaultRenderer} to render the component and add the tooltip
 	 * summary for all columns.
 	 * 
 	 * @param defaultRenderer the default {@code TableCellRenderer}
 	 */
-	public ColumnSummaryTabeCellRenderer(TableCellRenderer defaultRenderer) {
+	public ColumnSummaryTableCellRenderer(TableCellRenderer defaultRenderer) {
 		this(defaultRenderer, Collections.emptyList());
 	}
 
 	/**
-	 * Creates a new {@code ColumnSummaryTabeCellRenderer} that uses
+	 * Creates a new {@code ColumnSummaryTableCellRenderer} that uses
 	 * {@code defaultRenderer} to render the component and add the tooltip
 	 * summary for columns in {@code summaryColumns}. Also adds the created
 	 * instance as {@code TableModelListener} of {@code model}.
@@ -114,7 +114,7 @@ public class ColumnSummaryTabeCellRenderer
 	 * @param summaryColumns the columns for which summary should be generated.
 	 * @param model a {@code TableModel}.
 	 */
-	public ColumnSummaryTabeCellRenderer(TableCellRenderer defaultRenderer,
+	public ColumnSummaryTableCellRenderer(TableCellRenderer defaultRenderer,
 		List<Integer> summaryColumns, TableModel model
 	) {
 		this(defaultRenderer, summaryColumns);
@@ -122,14 +122,14 @@ public class ColumnSummaryTabeCellRenderer
 	}
 
 	/**
-	 * Creates a new {@code ColumnSummaryTabeCellRenderer} that uses
+	 * Creates a new {@code ColumnSummaryTableCellRenderer} that uses
 	 * {@code defaultRenderer} to render the component and add the tooltip
 	 * summary for columns in {@code summaryColumns}.
 	 * 
 	 * @param defaultRenderer the default {@code TableCellRenderer}
 	 * @param summaryColumns the columns for which summary should be generated.
 	 */
-	public ColumnSummaryTabeCellRenderer(TableCellRenderer defaultRenderer,
+	public ColumnSummaryTableCellRenderer(TableCellRenderer defaultRenderer,
 		List<Integer> summaryColumns
 	) {
 		this.defaultRenderer = defaultRenderer;

@@ -11,7 +11,7 @@ Gallery contents:
   * [ColorKeyLegend](#colorkeylegend)
   * [ColorLegend](#colorlegend)
   * [ColorsListPanel](#colorslistpanel)
-  * [ColumnSummaryTabeCellRenderer](#columnsummarytabecellrenderer)
+  * [ColumnSummaryTableCellRenderer](#columnsummarytablecellrenderer)
   * [ComponentsListPanel](#componentslistpanel)
   * [CsvPanel](#csvpanel)
   * [DoubleRangeInputPanel](#doublerangeinputpanel)
@@ -76,11 +76,11 @@ A panel that allows the selection of several colors.
 
 ![ColorsListPanel](screenshots/ColorsListPanel.png)
 
-ColumnSummaryTabeCellRenderer
+ColumnSummaryTableCellRenderer
 -----------------------------
 A table cell renderer that displays a column summary.
 
-![ColumnSummaryTabeCellRenderer](screenshots/ColumnSummaryTabeCellRenderer.png)
+![ColumnSummaryTableCellRenderer](screenshots/ColumnSummaryTableCellRenderer.png)
 
 ComponentsListPanel
 -------------------
