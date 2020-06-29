@@ -40,6 +40,15 @@ public class JIntegerTextField extends JFormattedTextField {
 	private static final long serialVersionUID = 1L;
 
 	/**
+	 * Creates a new {@code JIntegerTextField}.
+	 *
+	 */
+	public JIntegerTextField() {
+		this.setFormatter(configureFormatter());
+		this.addFocusListener(new TextFieldSelectionFocusListener());
+	}
+
+	/**
 	 * Creates a new {@code JIntegerTextField} and initializes it with the
 	 * specified value.
 	 *

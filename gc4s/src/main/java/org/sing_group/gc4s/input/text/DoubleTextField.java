@@ -50,6 +50,14 @@ public class DoubleTextField extends JFormattedTextField {
 	}
 
 	/**
+	 * Constructs a new {@code DoubleTextField}.
+	 * 
+	 */
+	public DoubleTextField() {
+		super(formatter);
+	}
+
+	/**
 	 * Constructs a new {@code DoubleTextField} and sets {@code value} as input
 	 * value.
 	 * 
