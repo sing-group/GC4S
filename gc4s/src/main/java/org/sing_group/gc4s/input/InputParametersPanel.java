@@ -92,11 +92,16 @@ public class InputParametersPanel extends JPanel {
 		this.setLayout(groupLayout);
 
 		SequentialGroup horizontalGroup = groupLayout.createSequentialGroup();
-		ParallelGroup first = groupLayout.createParallelGroup(getLabelsAlignment());
+		Alignment labelsAlignment = getLabelsAlignment();
+		ParallelGroup first = groupLayout.createParallelGroup();
 		ParallelGroup second = groupLayout.createParallelGroup();
 		ParallelGroup third = groupLayout.createParallelGroup();
 		parameters.forEach(c -> {
-			first.addComponent(descriptionLabels.get(c));
+			if(c instanceof InputParameterSeparator) {
+				first.addComponent(descriptionLabels.get(c), Alignment.LEADING);
+			} else {
+				first.addComponent(descriptionLabels.get(c), labelsAlignment);
+			}
 			second.addComponent(inputComponents.get(c));
 			third.addComponent(helpLabels.get(c));
 		});
@@ -109,7 +114,11 @@ public class InputParametersPanel extends JPanel {
 		SequentialGroup verticalGroup = groupLayout.createSequentialGroup();
 		parameters.forEach(c -> {
 			ParallelGroup current = groupLayout.createParallelGroup(Alignment.CENTER);
-			current.addComponent(descriptionLabels.get(c));
+			if(c instanceof InputParameterSeparator) {
+				current.addComponent(descriptionLabels.get(c), Alignment.TRAILING);
+			} else {
+				current.addComponent(descriptionLabels.get(c));
+			}
 			current.addComponent(inputComponents.get(c));
 			current.addComponent(helpLabels.get(c));
 			verticalGroup.addGroup(current);
@@ -118,8 +127,13 @@ public class InputParametersPanel extends JPanel {
 	}
 
 	private Alignment getLabelsAlignment() {
-		return 	this.alignment.equals(DescriptionAlignment.RIGHT)
-				? Alignment.TRAILING : Alignment.LEADING;
+		return getAlignment(this.alignment);
+	}
+
+	private static Alignment getAlignment(DescriptionAlignment alignment) {
+		return alignment.equals(DescriptionAlignment.RIGHT)
+			? Alignment.TRAILING
+			: Alignment.LEADING;
 	}
 
 	private void initInputComponents() {
@@ -130,9 +144,14 @@ public class InputParametersPanel extends JPanel {
 			descriptionLabels.put(c, new JLabel(c.getLabel()));
 			inputComponents.put(c, c.getInput());
 
-			JLabel helpLabel = new JLabel(Icons.ICON_INFO_2_16);
-			helpLabel.setToolTipText(c.getHelpLabel());
-			helpLabels.put(c, helpLabel);
+			if(c instanceof InputParameterSeparator) {
+				helpLabels.put(c, new JLabel(""));
+			}
+			else {
+				JLabel helpLabel = new JLabel(Icons.ICON_INFO_2_16);
+				helpLabel.setToolTipText(c.getHelpLabel());
+				helpLabels.put(c, helpLabel);
+			}
 		});
 	}
 
