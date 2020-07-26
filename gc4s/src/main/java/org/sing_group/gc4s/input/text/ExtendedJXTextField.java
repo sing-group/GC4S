@@ -38,7 +38,7 @@ import org.jdesktop.swingx.JXTextField;
 public class ExtendedJXTextField extends JXTextField {
 	private static final long serialVersionUID = 1L;
 
-	private Color emptyColor;
+	protected Color emptyColor;
 	private boolean textChangedDocumenListenerAdded = false;
 	private DocumentListener textChangedDocumentListener = new DocumentListener() {
 
@@ -86,7 +86,7 @@ public class ExtendedJXTextField extends JXTextField {
 	}
 
 	private void textChanged() {
-		if(this.getText().isEmpty()) {
+		if (this.getText().isEmpty()) {
 			this.setBackground(emptyColor);
 		} else {
 			this.setBackground(null);
