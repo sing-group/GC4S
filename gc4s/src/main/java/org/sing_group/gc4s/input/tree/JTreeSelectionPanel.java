@@ -151,7 +151,12 @@ public class JTreeSelectionPanel extends JPanel {
     popupMenu.pack();
   }
 
-  private Component getSelectionLabel() {
+  /**
+   * Returns the selection label component.
+   * 
+   * @return the {@code JLabel} used to display the current selection
+   */
+  public JLabel getSelectionLabel() {
     if (this.selectionLabel == null) {
       this.selectionLabel = new JLabel(getCurrentSelection());
       this.selectionLabel.setMinimumSize(getSelectionLabelMinimumSize());
