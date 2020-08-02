@@ -87,6 +87,7 @@ public class JFileChooserPanel extends JPanel {
 	public static final SelectionMode DEFAULT_SELECTION_MODE = 
 		SelectionMode.FILES_DIRECTORIES;
 	public static final boolean DEFAULT_ALLOW_ALL_FILTER = true;
+	public static final boolean DEFAULT_CLEAR_SELECTED_FILE_ON_SHOW = false;
 	public static final List<FileFilter> DEFAULT_FILE_FILTERS = 
 		Collections.emptyList();
 	
@@ -235,9 +236,11 @@ public class JFileChooserPanel extends JPanel {
 		ImageIcon browseIcon, String labelFileText, 
 		String requiredFileExtension, SelectionMode selectionMode
 	) {
-		this(mode, filechooser, browseIcon, labelFileText,
-			requiredFileExtension, selectionMode, DEFAULT_ALLOW_ALL_FILTER,
-			DEFAULT_FILE_FILTERS);
+		this(
+			mode, filechooser, browseIcon, labelFileText, requiredFileExtension,
+			selectionMode, DEFAULT_ALLOW_ALL_FILTER,
+			DEFAULT_CLEAR_SELECTED_FILE_ON_SHOW, DEFAULT_FILE_FILTERS
+		);
 	}
 
 	/**
@@ -262,13 +265,16 @@ public class JFileChooserPanel extends JPanel {
 	 * @param selectionMode the {@code JFileChooser} selection mode.
 	 * @param allowAll whether the "All files" file filter should be used or 
 	 * 	not.
+	 * @param clearSelectedFileOnShow whether to clear the selected file on 
+	 *  show or not.
 	 * @param fileFilters the list of {@code FileFilter} to use in the file 
 	 * 	chooser.
 	 */	
-	public JFileChooserPanel(Mode mode, JFileChooser filechooser, 
-		ImageIcon browseIcon, String labelFileText, 
+	public JFileChooserPanel(
+		Mode mode, JFileChooser filechooser,
+		ImageIcon browseIcon, String labelFileText,
 		String requiredFileExtension, SelectionMode selectionMode,
-		boolean allowAll, List<FileFilter> fileFilters
+		boolean allowAll, boolean clearSelectedFileOnShow, List<FileFilter> fileFilters
 	) {
 		super();
 		this.filechooser = filechooser;
@@ -277,8 +283,10 @@ public class JFileChooserPanel extends JPanel {
 			this.requiredFileExtension = requiredFileExtension;
 		}
 		this.mode = mode;
-		this.fileChooserConfiguration = new JFileChooserConfiguration(
-			selectionMode.getFileSelectionMode(), fileFilters, allowAll);
+		this.fileChooserConfiguration =
+			new JFileChooserConfiguration(
+				selectionMode.getFileSelectionMode(), fileFilters, allowAll, clearSelectedFileOnShow
+			);
 		initComponent();
 	}
 

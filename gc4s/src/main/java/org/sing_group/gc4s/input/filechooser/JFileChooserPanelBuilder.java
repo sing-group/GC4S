@@ -44,6 +44,7 @@ public class JFileChooserPanelBuilder {
 	private String requiredSaveFileExtension;
 	private SelectionMode selectionMode = JFileChooserPanel.DEFAULT_SELECTION_MODE;
 	private boolean allowAllFilter = JFileChooserPanel.DEFAULT_ALLOW_ALL_FILTER;
+	private boolean clearSelectedFileOnShow = JFileChooserPanel.DEFAULT_CLEAR_SELECTED_FILE_ON_SHOW;
 	private List<FileFilter> fileFilters = JFileChooserPanel.DEFAULT_FILE_FILTERS;
 
 	/**
@@ -145,6 +146,19 @@ public class JFileChooserPanelBuilder {
 	}
 
 	/**
+	 * Sets whether to clear the selected file when the file chooser is shown or 
+	 * not.
+	 * 
+	 * @param clearSelectedFileOnShow whether to clear the selected file on 
+	 *  show or not.
+	 * @return the {@code JFileChooserPanelBuilder} instance.
+	 */
+	public JFileChooserPanelBuilder withClearSelectedFileOnShow(boolean clearSelectedFileOnShow) {
+		this.clearSelectedFileOnShow = clearSelectedFileOnShow;
+		return this;
+	}
+
+	/**
 	 * Sets the list of {@code FileFilter} to use in the file chooser.
 	 * 
 	 * @param fileFilters the list of {@code FileFilter} to use in the file 
@@ -164,8 +178,10 @@ public class JFileChooserPanelBuilder {
 	 * @return a new {@code JFileChooserPanel} instance.
 	 */
 	public JFileChooserPanel build() {
-		return new JFileChooserPanel(this.mode, this.fileChooser,
+		return new JFileChooserPanel(
+			this.mode, this.fileChooser,
 			this.browseIcon, this.labelFileText, this.requiredSaveFileExtension,
-			this.selectionMode, this.allowAllFilter, this.fileFilters);
+			this.selectionMode, this.allowAllFilter, this.clearSelectedFileOnShow, this.fileFilters
+		);
 	}
 }

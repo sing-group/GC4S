@@ -43,6 +43,7 @@ public class JFileChooserConfiguration {
 	private final List<FileFilter> filters;
 	private int selectionMode;
 	private boolean allowAll;
+	private boolean clearSelectedFileOnShow;
 
 	/**
 	 * Creates a new {@code JFileChooserConfiguration} with the specified
@@ -54,7 +55,7 @@ public class JFileChooserConfiguration {
 	 *  {@code JFileChooser#DIRECTORIES_ONLY})
 	 */
 	public JFileChooserConfiguration(int selectionMode) {
-		this(selectionMode, Collections.emptyList(), true);
+		this(selectionMode, Collections.emptyList(), true, false);
 	}
 
 	/**
@@ -68,16 +69,19 @@ public class JFileChooserConfiguration {
 	 *	{@code JFileChooser#DIRECTORIES_ONLY})
 	 * @param filters a list of {@code FileFilter}.
 	 */
-	public JFileChooserConfiguration(int selectionMode,
-		List<FileFilter> filters) {
-		this(selectionMode, filters, true);
+	public JFileChooserConfiguration(
+		int selectionMode, List<FileFilter> filters
+	) {
+		this(selectionMode, filters, true, false);
 	}
 
 	/**
 	 * Creates a new {@code JFileChooserConfiguration} with the specified
 	 * {@code JFileChooser} selection mode. The list of {@code FileFilter} is
-	 * used to configure the {@code JFileChooser} filters and {@code alloAll}
-	 * indicates whether the accept all files filter is used or not.
+	 * used to configure the {@code JFileChooser} filters and {@code allowAll}
+	 * indicates whether the accept all files filter is used or not. Also, the 
+	 * {@code clearSelectedFileOnShow} indicates whether to clear the selected
+	 * file on show or not.
 	 * 
 	 * @param selectionMode the {@code JFileChooser} selection mode
 	 *  ({@code JFileChooser#FILES_AND_DIRECTORIES},
@@ -85,12 +89,15 @@ public class JFileChooserConfiguration {
 	 *	{@code JFileChooser#DIRECTORIES_ONLY})
 	 * @param filters a list of {@code FileFilter}.
 	 * @param allowAll whether the accept all files filter is used or not.
+	 * @param clearSelectedFileOnShow whether to clear the selected file on show or not.
 	 */
-	public JFileChooserConfiguration(int selectionMode,
-		List<FileFilter> filters, boolean allowAll) {
+	public JFileChooserConfiguration(
+		int selectionMode, List<FileFilter> filters, boolean allowAll, boolean clearSelectedFileOnShow
+	) {
 		this.selectionMode = selectionMode;
 		this.filters = filters;
 		this.allowAll = allowAll;
+		this.clearSelectedFileOnShow = clearSelectedFileOnShow;
 	}
 
 	/**
@@ -100,7 +107,6 @@ public class JFileChooserConfiguration {
 	 */
 	public void configure(JFileChooser fileChooser) {
 		final File selectedFile = fileChooser.getSelectedFile();
-		fileChooser.setSelectedFile(null);
 
 		fileChooser.setAcceptAllFileFilterUsed(false);
 		fileChooser.setFileSelectionMode(this.selectionMode);
@@ -111,6 +117,14 @@ public class JFileChooserConfiguration {
 		}
 		fileChooser.setAcceptAllFileFilterUsed(this.allowAll);
 
-		fileChooser.setSelectedFile(selectedFile);
+		if (this.selectionMode == JFileChooser.DIRECTORIES_ONLY) {
+			fileChooser.setCurrentDirectory(selectedFile);
+		} else {
+			if (this.clearSelectedFileOnShow) {
+				fileChooser.setSelectedFile(new File(""));
+			} else {
+				fileChooser.setSelectedFile(selectedFile);
+			}
+		}
 	}
 }

@@ -43,6 +43,7 @@ public class JMultipleFileChooserPanelBuilder {
 	private ImageIcon browseIcon = JMultipleFileChooserPanel.DEFAULT_ICON_BROWSE;
 	private SelectionMode selectionMode = JMultipleFileChooserPanel.DEFAULT_SELECTION_MODE;
 	private boolean allowAllFilter = JMultipleFileChooserPanel.DEFAULT_ALLOW_ALL_FILTER;
+	private boolean clearSelectedFileOnShow = JMultipleFileChooserPanel.DEFAULT_CLEAR_SELECTED_FILE_ON_SHOW;
 	private List<FileFilter> fileFilters = JMultipleFileChooserPanel.DEFAULT_FILE_FILTERS;
 
 	/**
@@ -121,6 +122,19 @@ public class JMultipleFileChooserPanelBuilder {
 	}
 
 	/**
+	 * Sets whether to clear the selected file when the file chooser is shown or 
+	 * not.
+	 * 
+	 * @param clearSelectedFileOnShow whether to clear the selected file on 
+	 *  show or not.
+	 * @return the {@code JFileChooserPanelBuilder} instance.
+	 */
+	public JMultipleFileChooserPanelBuilder withClearSelectedFileOnShow(boolean clearSelectedFileOnShow) {
+		this.clearSelectedFileOnShow = clearSelectedFileOnShow;
+		return this;
+	}
+
+	/**
 	 * Sets the list of {@code FileFilter} to use in the file chooser.
 	 * 
 	 * @param fileFilters the list of {@code FileFilter} to use in the file 
@@ -143,8 +157,8 @@ public class JMultipleFileChooserPanelBuilder {
 	public JMultipleFileChooserPanel build() {
 		return new JMultipleFileChooserPanel(
 			this.mode, this.fileChooser,
-			this.browseIcon, this.selectionMode, 
-			this.allowAllFilter, this.fileFilters
+			this.browseIcon, this.selectionMode,
+			this.allowAllFilter, this.clearSelectedFileOnShow, this.fileFilters
 		);
 	}
 }
