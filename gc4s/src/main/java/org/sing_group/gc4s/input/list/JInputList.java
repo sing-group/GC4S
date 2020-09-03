@@ -220,10 +220,17 @@ public class JInputList extends JPanel {
 		itemsListModel.addElements(Arrays.asList(elements));
 		this.itemsList.updateUI();
 	}
+	
+	/**
+	 * Removes all elements from the input list.
+	 */
+	public void removeAllElements() {
+		itemsListModel.removeAllElements();
+		this.itemsList.updateUI();
+	}
 
-    /**
-	 * Adds a listener to the list that's notified each time a change to the
-	 * data model occurs.
+	/**
+	 * Adds a listener to the list that's notified each time a change to the data model occurs.
 	 *
 	 * @param l the {@code ListDataListener} to be added
 	 */
