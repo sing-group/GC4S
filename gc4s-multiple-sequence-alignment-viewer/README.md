@@ -27,7 +27,7 @@ Add the following repository and dependency declarations to your `pom.xml`:
 		<dependency>
 			<groupId>org.sing_group</groupId>
 			<artifactId>gc4s-multiple-sequence-alignment-viewer</artifactId>
-			<version>1.6.0</version>
+			<version>1.7.0</version>
 		</dependency>
 	</dependencies>
 ```
