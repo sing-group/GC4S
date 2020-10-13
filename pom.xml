@@ -45,7 +45,7 @@
 		<maven-javadoc-plugin.version>3.0.1</maven-javadoc-plugin.version>
 
 		<swingx-all.version>1.6.5-1</swingx-all.version>
-		<junit.version>4.12</junit.version>
+		<junit.version>4.13.1</junit.version>
 		<pileline-tools.version>1.2.1</pileline-tools.version>
 		<sing-math.version>0.1.1</sing-math.version>
 		<jsparklines.version>1.0.9</jsparklines.version>
