@@ -189,14 +189,14 @@ public class JInputList extends JPanel {
 			.setEnabled(this.elementIntroductionEnabled && isValidInput());
 	}
 
-	private boolean isValidInput() {
-		return 		!this.elementTextField.getText().equals("")
+	protected boolean isValidInput() {
+		return 		!this.getElementToAdd().equals("")
 				&&	checkRepetitions();
 	}
 
 	private boolean checkRepetitions() {
 		return 		this.allowRepetitions
-				|| 	!listContains(this.elementTextField.getText());
+				|| 	!listContains(this.getElementToAdd());
 	}
 
 	private boolean listContains(String text) {
@@ -205,10 +205,14 @@ public class JInputList extends JPanel {
 				.findAny().isPresent();
 	}
 
-	private void addElement() {
-		itemsListModel.addElement(this.elementTextField.getText());
+	protected void addElement() {
+		itemsListModel.addElement(this.getElementToAdd());
 		this.elementTextField.setText("");
 		this.itemsList.updateUI();
+	}
+	
+	protected String getElementToAdd() {
+		return this.elementTextField.getText();
 	}
 
 	/**
